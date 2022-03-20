@@ -38,6 +38,14 @@ flutter_lints
 2.12
 file:///C:/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_lints-1.0.4/
 file:///C:/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_lints-1.0.4/lib/
+hexcolor
+2.15
+file:///C:/flutter/.pub-cache/hosted/pub.dartlang.org/hexcolor-2.0.6/
+file:///C:/flutter/.pub-cache/hosted/pub.dartlang.org/hexcolor-2.0.6/lib/
+js
+2.12
+file:///C:/flutter/.pub-cache/hosted/pub.dartlang.org/js-0.6.3/
+file:///C:/flutter/.pub-cache/hosted/pub.dartlang.org/js-0.6.3/lib/
 lints
 2.12
 file:///C:/flutter/.pub-cache/hosted/pub.dartlang.org/lints-1.0.1/
@@ -102,4 +110,8 @@ flutter_test
 2.12
 file:///C:/flutter/packages/flutter_test/
 file:///C:/flutter/packages/flutter_test/lib/
+flutter_web_plugins
+2.12
+file:///C:/flutter/packages/flutter_web_plugins/
+file:///C:/flutter/packages/flutter_web_plugins/lib/
 2

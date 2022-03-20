@@ -68,6 +68,24 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "flutter_web_plugins",
+      "rootUri": "file:///C:/flutter/packages/flutter_web_plugins",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "hexcolor",
+      "rootUri": "file:///C:/flutter/.pub-cache/hosted/pub.dartlang.org/hexcolor-2.0.6",
+      "packageUri": "lib/",
+      "languageVersion": "2.15"
+    },
+    {
+      "name": "js",
+      "rootUri": "file:///C:/flutter/.pub-cache/hosted/pub.dartlang.org/js-0.6.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "lints",
       "rootUri": "file:///C:/flutter/.pub-cache/hosted/pub.dartlang.org/lints-1.0.1",
       "packageUri": "lib/",
@@ -158,7 +176,7 @@
       "languageVersion": "2.16"
     }
   ],
-  "generated": "2022-03-16T01:27:23.495328Z",
+  "generated": "2022-03-20T16:14:47.042624Z",
   "generator": "pub",
   "generatorVersion": "2.16.1"
 }
