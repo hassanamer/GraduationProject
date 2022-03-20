@@ -5,7 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="26a759db-9188-4fbd-af70-e16376d9baa6" name="Default Changelist" comment="App Colors">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/modules/home/sucsses_screen1.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/modules/login/success_screens/sucsses_screen1.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/modules/home/sucsses_screen2.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/modules/login/success_screens/sucsses_screen2.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/modules/login/success_screens/success_screen.dart" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:smarttouristguide/modules/home/sucsses_screen2.dart';
+import 'package:smarttouristguide/modules/login/success_screens/sucsses_screen2.dart';
 
 import 'modules/home/home_screen.dart';
 
