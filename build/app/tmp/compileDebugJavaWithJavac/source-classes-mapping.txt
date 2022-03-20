@@ -1,0 +1,6 @@
+io/flutter/plugins/GeneratedPluginRegistrant.java
+ io.flutter.plugins.GeneratedPluginRegistrant
+com/grad/project/smarttouristguide/BuildConfig.java
+ com.grad.project.smarttouristguide.BuildConfig
+com/grad/project/smarttouristguide/MainActivity.java
+ com.grad.project.smarttouristguide.MainActivity
