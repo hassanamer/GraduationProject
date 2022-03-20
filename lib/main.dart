@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:smarttouristguide/modules/login/success_screens/sucsess.dart';
 
 void main() {
   runApp(const MyApp());
