@@ -17,6 +17,7 @@
       <change beforePath="$PROJECT_DIR$/lib/shared/components/components.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/shared/components/components.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/shared/components/constants.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/shared/components/constants.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/modules/home/home_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/modules/home/home_screen.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

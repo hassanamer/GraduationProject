@@ -80,12 +80,6 @@
       "languageVersion": "2.12"
     },
     {
-      "name": "fluttertoast",
-      "rootUri": "file:///C:/flutter/.pub-cache/hosted/pub.dartlang.org/fluttertoast-8.0.9",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
       "name": "hexcolor",
       "rootUri": "file:///C:/flutter/.pub-cache/hosted/pub.dartlang.org/hexcolor-2.0.6",
       "packageUri": "lib/",
@@ -188,7 +182,7 @@
       "languageVersion": "2.16"
     }
   ],
-  "generated": "2022-03-18T01:46:30.014119Z",
+  "generated": "2022-03-20T16:14:47.042624Z",
   "generator": "pub",
   "generatorVersion": "2.16.1"
 }
