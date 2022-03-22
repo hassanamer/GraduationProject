@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smarttouristguide/modules/login/success_screens/check_mail_success.dart';
+import 'package:smarttouristguide/modules/user/user_screen.dart';
 
 import 'modules/home/home_screen.dart';
 
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home:   SuccessScreen(),
+      home: UserProfile(),
     );
   }
 }
