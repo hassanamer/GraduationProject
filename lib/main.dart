@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smarttouristguide/layout/app_layout.dart';
 import 'package:smarttouristguide/layout/cubit/cubit.dart';
+import 'package:smarttouristguide/shared/styles/colors.dart';
 
 void main() {
   runApp(MyApp());
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Smart Tourist guide',
         theme: ThemeData(
-          primarySwatch: Colors.blue,
+          primarySwatch: Palette.primaryColor,
         ),
         home: AppLayout(),
       ),
