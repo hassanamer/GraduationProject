@@ -22,7 +22,6 @@ class AppCubit extends Cubit<AppStates>
 
   void changeButtom(int index)
   {
-    int? indeex;
     currentIndex = index;
     emit(AppChangeBottomNavState());
   }
