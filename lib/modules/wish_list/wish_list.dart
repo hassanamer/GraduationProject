@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 
-class WishList extends StatelessWidget{
+class WishListScreen extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    throw UnimplementedError();
+    return Center(
+      child: Text(
+        'WishList Screen',
+      ),
+    );
   }
-
 }

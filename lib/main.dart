@@ -1,27 +1,32 @@
 import 'package:flutter/material.dart';
-import 'package:smarttouristguide/modules/login/success_screens/check_mail_success.dart';
-import 'package:smarttouristguide/modules/login/success_screens/password_change_success.dart';
-import 'package:smarttouristguide/modules/user/user_screen.dart';
-import 'modules/home/home_screen.dart';
-import 'modules/login/change_new_password.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:smarttouristguide/layout/app_layout.dart';
+import 'package:smarttouristguide/layout/cubit/cubit.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Smart Tourist guide',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return MultiBlocProvider(
+      providers:
+      [
+        BlocProvider(
+          create: (BuildContext context) => AppCubit(),
+        ),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Smart Tourist guide',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: AppLayout(),
       ),
-      home: ChangePassword(),
     );
   }
 }
