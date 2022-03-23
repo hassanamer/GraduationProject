@@ -33,33 +33,57 @@ class AppLayout extends StatelessWidget {
             ],
           ),
           body: cubit.buttomScreens[cubit.currentIndex],
-          bottomNavigationBar: BottomNavigationBar(
-            currentIndex: cubit.currentIndex,
-            onTap: (index)
-            {
-              cubit.changeButtom(index);
-            },
-            items: [
-              BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.home,
-                ),
-                label: 'Home',
+          bottomNavigationBar: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(20),
+                    topLeft: Radius.circular(20)),
+                boxShadow: [
+                  BoxShadow(
+                      color: Color(0x17000000),
+                      spreadRadius: 5,
+                      blurRadius: 28),
+                ],
               ),
-              BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.apps,
+              child: ClipRRect(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(20.0),
+                  topRight: Radius.circular(20.0),
                 ),
-                label: 'Categories',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.favorite,
+                child: BottomNavigationBar(
+                  showSelectedLabels: false,
+                  showUnselectedLabels: false,
+                  backgroundColor: Colors.white,
+                  elevation: 5.0,
+                  currentIndex: cubit.currentIndex,
+                  onTap: (index) {
+                    cubit.changeButtom(index);
+                  },
+                  items: [
+                    BottomNavigationBarItem(
+                      icon: Icon(
+                        Icons.home,
+                        size: 28.0,
+                      ),
+                      label: 'Home',
+                    ),
+                    BottomNavigationBarItem(
+                      icon: Icon(
+                        Icons.apps,
+                        size: 28.0,
+                      ),
+                      label: 'Categories',
+                    ),
+                    BottomNavigationBarItem(
+                      icon: Icon(
+                        Icons.favorite,
+                        size: 28.0,
+                      ),
+                      label: 'Wish List',
+                    ),
+                  ],
                 ),
-                label: 'Wish List',
-              ),
-            ],
-          ),
+              )),
         );
       },
     );
