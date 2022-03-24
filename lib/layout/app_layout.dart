@@ -5,7 +5,6 @@ import 'package:smarttouristguide/layout/cubit/cubit.dart';
 import 'package:smarttouristguide/layout/cubit/states.dart';
 import 'package:smarttouristguide/modules/search/search_screen.dart';
 import 'package:smarttouristguide/shared/components/components.dart';
-import 'package:smarttouristguide/shared/styles/colors.dart';
 
 class AppLayout extends StatelessWidget {
   @override
@@ -63,23 +62,29 @@ class AppLayout extends StatelessWidget {
                   },
                   items: [
                     BottomNavigationBarItem(
+                      activeIcon: SvgPicture.asset(
+                        'assets/icons/active_home.svg',
+                      ),
                       icon: SvgPicture.asset(
                         'assets/icons/home.svg',
-                        color: AppColors.primaryColor,
                       ),
                       label: 'Home',
                     ),
                     BottomNavigationBarItem(
-                      icon: Icon(
-                        Icons.apps,
-                        size: 28.0,
+                      activeIcon: SvgPicture.asset(
+                        'assets/icons/active_categories.svg',
+                      ),
+                      icon: SvgPicture.asset(
+                        'assets/icons/categories.svg',
                       ),
                       label: 'Categories',
                     ),
                     BottomNavigationBarItem(
-                      icon: Icon(
-                        Icons.favorite,
-                        size: 28.0,
+                      activeIcon: SvgPicture.asset(
+                        'assets/icons/active_wishlist.svg',
+                      ),
+                      icon: SvgPicture.asset(
+                        'assets/icons/wishlist.svg',
                       ),
                       label: 'Wish List',
                     ),
