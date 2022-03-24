@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:smarttouristguide/layout/cubit/cubit.dart';
 import 'package:smarttouristguide/layout/cubit/states.dart';
 import 'package:smarttouristguide/modules/search/search_screen.dart';
 import 'package:smarttouristguide/shared/components/components.dart';
+import 'package:smarttouristguide/shared/styles/colors.dart';
 
 class AppLayout extends StatelessWidget {
   @override
@@ -61,9 +63,9 @@ class AppLayout extends StatelessWidget {
                   },
                   items: [
                     BottomNavigationBarItem(
-                      icon: Icon(
-                        Icons.home,
-                        size: 28.0,
+                      icon: SvgPicture.asset(
+                        'assets/icons/home.svg',
+                        color: AppColors.primaryColor,
                       ),
                       label: 'Home',
                     ),
