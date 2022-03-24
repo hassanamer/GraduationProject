@@ -19,12 +19,6 @@ class AppLayout extends StatelessWidget {
               Icons.menu,
               color: Palette.primaryColor,
             ),
-            title: Text(
-              'Smart Tourist Guide',
-              style: TextStyle(
-                color: Palette.primaryColor,
-              ),
-            ),
             actions: [
               IconButton(
                 onPressed: (){},
