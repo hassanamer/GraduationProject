@@ -21,7 +21,7 @@ class AppLayout extends StatelessWidget {
             ),
             actions: [
               IconButton(
-                onPressed: (){},
+                onPressed: () {},
                 icon: Icon(
                   Icons.account_circle_rounded,
                   color: Palette.primaryColor,

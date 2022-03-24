@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 
-class CategoriesScreen extends StatelessWidget
-{
+class CategoriesScreen extends StatelessWidget {
   @override
-  Widget build(BuildContext context)
-  {
-    return Container(
-      color: Color(0xfff6f6f6),
-      child: Center(
-        child: Text(
-          'Categories Screen',
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Container(
+        child: Center(
+          child: Text(
+            'Categories Screen',
+          ),
         ),
       ),
     );

@@ -3,6 +3,7 @@ import 'package:smarttouristguide/shared/styles/colors.dart';
 
 ThemeData lightTheme = ThemeData(
   primarySwatch: Palette.primaryColor,
+  scaffoldBackgroundColor: Color(0xfff6f6f6),
   appBarTheme: AppBarTheme(
     color: Color(0xfff6f6f6),
     elevation: 0.0,
