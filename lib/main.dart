@@ -25,6 +25,10 @@ class MyApp extends StatelessWidget {
         title: 'Smart Tourist guide',
         theme: ThemeData(
           primarySwatch: Palette.primaryColor,
+          appBarTheme: AppBarTheme(
+            color: Color(0xfff6f6f6),
+            elevation: 0.0,
+          )
         ),
         home: AppLayout(),
       ),

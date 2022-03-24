@@ -3,8 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:smarttouristguide/layout/cubit/cubit.dart';
 import 'package:smarttouristguide/layout/cubit/states.dart';
-import 'package:smarttouristguide/modules/search/search_screen.dart';
-import 'package:smarttouristguide/shared/components/components.dart';
+import 'package:smarttouristguide/shared/styles/colors.dart';
 
 class AppLayout extends StatelessWidget {
   @override
@@ -16,19 +15,22 @@ class AppLayout extends StatelessWidget {
 
         return Scaffold(
           appBar: AppBar(
+            leading: Icon(
+              Icons.menu,
+              color: Palette.primaryColor,
+            ),
             title: Text(
               'Smart Tourist Guide',
+              style: TextStyle(
+                color: Palette.primaryColor,
+              ),
             ),
             actions: [
               IconButton(
-                onPressed: () {
-                  navigateTo(
-                    context: context,
-                    widget: SearchScreen(),
-                  );
-                },
+                onPressed: (){},
                 icon: Icon(
-                  Icons.search,
+                  Icons.account_circle_rounded,
+                  color: Palette.primaryColor,
                 ),
               )
             ],
