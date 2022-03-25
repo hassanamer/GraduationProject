@@ -1,13 +1,33 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:smarttouristguide/layout/app_layout.dart';
 import 'package:smarttouristguide/shared/styles/colors.dart';
 
 class UserProfile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      body:ListView(
+      appBar: AppBar(
+        leading: Icon(
+          Icons.menu,
+          color: Palette.primaryColor,
+        ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => UserProfile()),
+              );
+            },
+            icon: Icon(
+              Icons.account_circle_rounded,
+              color: Palette.primaryColor,
+            ),
+          )
+        ],
+      ),
+      body: ListView(
         children: <Widget>[
           Container(
             height: 250,
@@ -31,8 +51,7 @@ class UserProfile extends StatelessWidget {
                       minRadius: 60.0,
                       child: CircleAvatar(
                         radius: 50.0,
-                        backgroundImage:
-                       AssetImage('assets/testpic.jpg'),
+                        backgroundImage: AssetImage('assets/testpic.jpg'),
                       ),
                     ),
                   ],
@@ -106,90 +125,84 @@ class UserProfile extends StatelessWidget {
             ),
           ),
           Container(
-            child: Column(
-              children: <Widget>[
-                ListTile(
-                  title: Text(
-                    'Email',
-                    style: TextStyle(
-                      color: AppColors.primaryColor,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  subtitle: Text(
-                    'hassanamer281@gmail.com',
-                    style: TextStyle(
-                      fontSize: 18,
-                    ),
+            child: Column(children: <Widget>[
+              ListTile(
+                title: Text(
+                  'Email',
+                  style: TextStyle(
+                    color: AppColors.primaryColor,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
-                Divider(),
-                ListTile(
-                  title: Text(
-                    'Password',
-                    style: TextStyle(
-                      color: AppColors.primaryColor,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  subtitle: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      '**************',
-                      style: TextStyle(
-                        fontSize: 18,
-                      ),
-                    ),
+                subtitle: Text(
+                  'hassanamer281@gmail.com',
+                  style: TextStyle(
+                    fontSize: 18,
                   ),
                 ),
-                Divider(),
-                ListTile(
-                  title: Text(
-                    'Phone Number',
-                    style: TextStyle(
-                      color: AppColors.primaryColor,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  subtitle: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      '01111302839',
-                      style: TextStyle(
-                        fontSize: 18,
-                      ),
-                    ),
+              ),
+              Divider(
+                height: 1.0,
+              ),
+              ListTile(
+                title: Text(
+                  'Password',
+                  style: TextStyle(
+                    color: AppColors.primaryColor,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
-                Divider(),
-                ListTile(
-                  title: Text(
-                    'Country',
-                    style: TextStyle(
-                      color: AppColors.primaryColor,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  subtitle: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      'Egypt',
-                      style: TextStyle(
-                        fontSize: 18,
-                      ),
-                    ),
+                subtitle: Text(
+                  '**************',
+                  style: TextStyle(
+                    fontSize: 18,
                   ),
                 ),
-              ],
+              ),
+            ]),
+          ),
+          Divider(
+            height: 1.0,
+          ),
+          ListTile(
+            title: Text(
+              'Phone Number',
+              style: TextStyle(
+                color: AppColors.primaryColor,
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-          )
+            subtitle: Text(
+              '01111302839',
+              style: TextStyle(
+                fontSize: 18,
+              ),
+            ),
+          ),
+          Divider(
+            height: 1.0,
+          ),
+          ListTile(
+            title: Text(
+              'Country',
+              style: TextStyle(
+                color: AppColors.primaryColor,
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            subtitle: Text(
+              'Egypt',
+              style: TextStyle(
+                fontSize: 18,
+              ),
+            ),
+          ),
         ],
       ),
-
     );
   }
 }

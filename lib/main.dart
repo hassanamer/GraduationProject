@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smarttouristguide/layout/app_layout.dart';
 import 'package:smarttouristguide/layout/cubit/cubit.dart';
+import 'package:smarttouristguide/modules/login/create_new_password.dart';
 import 'package:smarttouristguide/shared/styles/themes.dart';
 
 void main() {

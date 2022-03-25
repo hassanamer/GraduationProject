@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:smarttouristguide/layout/cubit/cubit.dart';
 import 'package:smarttouristguide/layout/cubit/states.dart';
+import 'package:smarttouristguide/modules/user/user_screen.dart';
 import 'package:smarttouristguide/shared/styles/colors.dart';
 
 class AppLayout extends StatelessWidget {
@@ -21,7 +22,8 @@ class AppLayout extends StatelessWidget {
             ),
             actions: [
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => UserProfile()),);},
                 icon: Icon(
                   Icons.account_circle_rounded,
                   color: Palette.primaryColor,
@@ -29,7 +31,7 @@ class AppLayout extends StatelessWidget {
               )
             ],
           ),
-          body: cubit.buttomScreens[cubit.currentIndex],
+          body: cubit.bottomScreens[cubit.currentIndex],
           bottomNavigationBar: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(
@@ -54,7 +56,7 @@ class AppLayout extends StatelessWidget {
                   elevation: 5.0,
                   currentIndex: cubit.currentIndex,
                   onTap: (index) {
-                    cubit.changeButtom(index);
+                    cubit.changeBottom(index);
                   },
                   items: [
                     BottomNavigationBarItem(

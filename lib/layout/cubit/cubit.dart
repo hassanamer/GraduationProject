@@ -13,14 +13,14 @@ class AppCubit extends Cubit<AppStates>
 
   int currentIndex = 0;
 
-  List<Widget> buttomScreens =
+  List<Widget> bottomScreens =
   [
     HomeScreen(),
     CategoriesScreen(),
     WishListScreen(),
   ];
 
-  void changeButtom(int index)
+  void changeBottom(int index)
   {
     currentIndex = index;
     emit(AppChangeBottomNavState());
