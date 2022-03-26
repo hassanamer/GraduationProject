@@ -1,9 +1,22 @@
 import 'package:flutter/material.dart';
+
+import 'package:smarttouristguide/modules/Event&Offer&Places/OfferScreen.dart';
+import 'package:smarttouristguide/modules/Event&Offer&Places/eventScreen.dart';
+import 'package:smarttouristguide/modules/home/MenuDrawerScreen.dart';
+import 'package:smarttouristguide/modules/login/Login&SignUp/welcomScreen.dart';
+import 'package:smarttouristguide/modules/login/success_screens/check_mail_success.dart';
+import 'package:smarttouristguide/modules/login/success_screens/password_change_success.dart';
+import 'package:smarttouristguide/modules/user/user_screen.dart';
+import 'modules/Event&Offer&Places/places/placeScreen.dart';
+import 'modules/home/home_screen.dart';
+import 'modules/login/change_new_password.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smarttouristguide/layout/app_layout.dart';
 import 'package:smarttouristguide/layout/cubit/cubit.dart';
 import 'package:smarttouristguide/modules/login/create_new_password.dart';
 import 'package:smarttouristguide/shared/styles/themes.dart';
+
 
 void main() {
   runApp(MyApp());
@@ -14,6 +27,17 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Smart Tourist guide',
+      theme: ThemeData(
+        primaryColor: Color(0xff005764),
+        colorScheme:ColorScheme.fromSwatch().copyWith(
+          secondary:Color(0xffBEC5D1),//buttonColor
+            inversePrimary: Color(0xff9CA3AF),//textColor ,unSelectedItems
+          background: Color(0xffF6F6F6)
+
     return MultiBlocProvider(
       providers:
       [
@@ -100,13 +124,10 @@ class _MyHomePageState extends State<MyHomePage> {
               style: Theme.of(context).textTheme.headline4,
             ),
           ],
+
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      home: Welcome(),
     );
   }
 }
