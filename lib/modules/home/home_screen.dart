@@ -18,7 +18,7 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
               child: Row(
-                children: [
+                children: const[
                   SizedBox(
                     width: 21.0,
                   ),
@@ -36,7 +36,7 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    width: 107.5,
+                    width: 95.0,
                   ),
                   Icon(
                     Icons.mic,
