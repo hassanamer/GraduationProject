@@ -22,4 +22,18 @@ Widget defaultButton({
       ),
     );
 
+void navigateTo({
+  required widget,
+  required context
+}) => Navigator.push(
+  context,
+  MaterialPageRoute(
+    builder: (context) => widget,
+  ),
+);
 
+void navigateAndFinish(context, widget) => Navigator.pushAndRemoveUntil(
+    context,
+    MaterialPageRoute(builder: (context) => widget),
+        (route) => false
+);
