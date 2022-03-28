@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:smarttouristguide/shared/styles/colors.dart';
 
-import '../user/user_screen.dart';
+import '../../user/user_screen.dart';
 
 class CreateNewPassword extends StatelessWidget {
   @override

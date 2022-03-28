@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:smarttouristguide/modules/login/Login&SignUp/register_container.dart';
+import 'package:smarttouristguide/modules/login/login_and_signup/forget_password.dart';
+import 'package:smarttouristguide/modules/login/login_and_signup/register_container.dart';
 import 'package:smarttouristguide/modules/Event&Offer&Places/textStyle.dart';
+
 class LoginScreen extends StatelessWidget {
 
 
@@ -12,9 +14,12 @@ class LoginScreen extends StatelessWidget {
         children: [
           RegisterContainer('Email Address'),
           RegisterContainer(('Password')),
-          Row(mainAxisAlignment:MainAxisAlignment.end,children: [TextButton(onPressed: (){}, child:textStyle.normal('Forget Password?', 13.5)
-          )
-          ],),
+          Row(mainAxisAlignment: MainAxisAlignment.end,
+            children: [TextButton(onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => ForgetPassword()),);
+            }, child: textStyle.normal('Forget Password?', 13.5)
+            )
+            ],),
           Spacer(),
           Container(
             margin:
@@ -22,7 +27,9 @@ class LoginScreen extends StatelessWidget {
             width: double.infinity,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(16),
-                color: Theme.of(context).primaryColor),
+                color: Theme
+                    .of(context)
+                    .primaryColor),
             child: ElevatedButton(
               style: ButtonStyle(
                   elevation: MaterialStateProperty.all(0),
