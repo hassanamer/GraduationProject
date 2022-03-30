@@ -126,7 +126,7 @@ class ForgetPassword extends StatelessWidget {
                           children: [
                             Center(
                               child: Text(
-                                'Remember the password?',
+                                'Remember the password? ',
                                 style: TextStyle(
                                     fontFamily: 'Tajwal',
                                     color: AppColors.primaryColor,
