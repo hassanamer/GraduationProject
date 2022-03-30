@@ -12,7 +12,7 @@ class AppColors {
 
 class Palette {
   static const MaterialColor primaryColor = const MaterialColor(
-    0xff005764, // 0% comes in here, this will be color picked if no shade is selected when defining a Color property which doesn’t require a swatch.
+    0xff005764,
     const <int, Color>{
       50: const Color(0xffce5641 ),//10%
       100: const Color(0xffb74c3a),//20%
