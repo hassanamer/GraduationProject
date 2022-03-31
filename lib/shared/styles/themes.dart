@@ -5,7 +5,7 @@ ThemeData lightTheme = ThemeData(
   primarySwatch: Palette.primaryColor,
   fontFamily: 'Jannah',
   appBarTheme: AppBarTheme(
-    color: Color(0xfff6f6f6),
+    color: AppColors.backgroundColor,
     elevation: 0.0,
   ),
   colorScheme: ColorScheme.fromSwatch().copyWith(

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:smarttouristguide/modules/event_offer_places/places/placeScreen.dart';
+import 'package:smarttouristguide/shared/components/components.dart';
+import 'package:smarttouristguide/shared/styles/buttons_style.dart';
 import 'package:smarttouristguide/shared/styles/colors.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -46,6 +49,15 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
           ),
+          buttonn(
+            function: () {
+              navigateTo(
+                widget: PlaceScreen(),
+                context: context,
+              );
+            },
+            text: 'places',
+          )
         ],
       ),
     );
