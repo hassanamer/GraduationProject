@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:smarttouristguide/modules/login/Login&SignUp/registerContinarWithSpacer.dart';
-import 'package:smarttouristguide/modules/login/Login&SignUp/register_container.dart';
+import 'package:smarttouristguide/modules/login/login_and_signup/registerContinarWithSpacer.dart';
+import 'package:smarttouristguide/modules/login/login_and_signup/register_container.dart';
 
 class SignUpScreen extends StatelessWidget {
 

@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
-
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smarttouristguide/layout/app_layout.dart';
 import 'package:smarttouristguide/layout/cubit/cubit.dart';
+import 'package:smarttouristguide/modules/login/login_and_signup/login_screen.dart';
+import 'package:smarttouristguide/modules/login/login_and_signup/welcomScreen.dart';
 import 'package:smarttouristguide/shared/styles/themes.dart';
+
+import 'modules/login/login_and_signup/create_new_password.dart';
+import 'modules/login/login_and_signup/forget_password.dart';
 
 
 void main() {
@@ -28,7 +31,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Smart Tourist guide',
         theme: lightTheme,
-        home: AppLayout(),
+        home: CreateNewPassword(),
       ),
     );
   }
