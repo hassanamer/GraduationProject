@@ -38,64 +38,65 @@ void navigateAndFinish(context, widget) => Navigator.pushAndRemoveUntil(
 Widget bottomNavBar(context) {
   var cubit = AppCubit.get(context);
   return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.only(
-          topRight: Radius.circular(20),
-          topLeft: Radius.circular(20),
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.only(
+        topRight: Radius.circular(20),
+        topLeft: Radius.circular(20),
+      ),
+      boxShadow: [
+        BoxShadow(
+          color: Color(
+            0x17000000,
+          ),
+          spreadRadius: 5,
+          blurRadius: 28,
         ),
-        boxShadow: [
-          BoxShadow(
-            color: Color(
-              0x17000000,
+      ],
+    ),
+    child: ClipRRect(
+      borderRadius: BorderRadius.only(
+        topLeft: Radius.circular(20.0),
+        topRight: Radius.circular(20.0),
+      ),
+      child: BottomNavigationBar(
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
+        backgroundColor: Colors.white,
+        elevation: 5.0,
+        currentIndex: cubit.currentIndex,
+        onTap: (index) {
+          cubit.changeBottom(index);
+        },
+        items: [
+          BottomNavigationBarItem(
+            activeIcon: SvgPicture.asset(
+              'assets/icons/active_home.svg',
             ),
-            spreadRadius: 5,
-            blurRadius: 28,
+            icon: SvgPicture.asset(
+              'assets/icons/home.svg',
+            ),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            activeIcon: SvgPicture.asset(
+              'assets/icons/active_categories.svg',
+            ),
+            icon: SvgPicture.asset(
+              'assets/icons/categories.svg',
+            ),
+            label: 'Categories',
+          ),
+          BottomNavigationBarItem(
+            activeIcon: SvgPicture.asset(
+              'assets/icons/wishlist.svg',
+            ),
+            icon: SvgPicture.asset(
+              'assets/icons/wishlist.svg',
+            ),
+            label: 'Wish List',
           ),
         ],
       ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(20.0),
-          topRight: Radius.circular(20.0),
-        ),
-        child: BottomNavigationBar(
-          showSelectedLabels: false,
-          showUnselectedLabels: false,
-          backgroundColor: Colors.white,
-          elevation: 5.0,
-          currentIndex: cubit.currentIndex,
-          onTap: (index) {
-            cubit.changeBottom(index);
-          },
-          items: [
-            BottomNavigationBarItem(
-              activeIcon: SvgPicture.asset(
-                'assets/icons/active_home.svg',
-              ),
-              icon: SvgPicture.asset(
-                'assets/icons/home.svg',
-              ),
-              label: 'Home',
-            ),
-            BottomNavigationBarItem(
-              activeIcon: SvgPicture.asset(
-                'assets/icons/active_categories.svg',
-              ),
-              icon: SvgPicture.asset(
-                'assets/icons/categories.svg',
-              ),
-              label: 'Categories',
-            ),
-            BottomNavigationBarItem(
-              activeIcon: SvgPicture.asset(
-                'assets/icons/wishlist.svg',
-              ),
-              icon: SvgPicture.asset(
-                'assets/icons/wishlist.svg',
-              ),
-              label: 'Wish List',
-            ),
-          ],
-        ),
-      ));
+    ),
+  );
 }
