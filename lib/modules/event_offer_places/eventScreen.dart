@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'ListVievOfEventAndOffer.dart';
-import 'ListVievOfEventAndOffer.dart';
 class EventScreen extends StatefulWidget {
   @override
   State<EventScreen> createState() => _EventScreenState();
