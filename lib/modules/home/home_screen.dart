@@ -18,7 +18,7 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
               child: Row(
-                children: const[
+                children: const [
                   SizedBox(
                     width: 21.0,
                   ),

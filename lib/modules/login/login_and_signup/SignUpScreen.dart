@@ -3,20 +3,19 @@ import 'package:smarttouristguide/modules/login/login_and_signup/registerContina
 import 'package:smarttouristguide/modules/login/login_and_signup/register_container.dart';
 
 class SignUpScreen extends StatelessWidget {
-
-
   @override
   Widget build(BuildContext context) {
-    return Container(color: Colors.white,
+    return Container(
+      color: Colors.white,
       child: Column(
         children: [
-
           Expanded(
             child: Container(
               padding: EdgeInsets.only(top: 12),
               child: ListView(
-                padding: EdgeInsets.symmetric(horizontal: 24,vertical: 10),
-                children: [RegisterContainer('First Name'),SizedBox(width: 24),
+                padding: EdgeInsets.symmetric(horizontal: 24, vertical: 10),
+                children: [
+                  RegisterContainer('First Name'), SizedBox(width: 24),
                   RegisterContainer('Last Name'),
                   RegisterContainer('Email Address'),
                   RegisterContainer(('Password')),
@@ -25,14 +24,9 @@ class SignUpScreen extends StatelessWidget {
                   RegisterContainer('Date of Birth'),
                   registerContinarWithSpacer('Gender'),
                   registerContinarWithSpacer('Country'),
-
-
-
-
                   //  RegisterContainer.icon('Country',),
                   Container(
-                    margin:
-                    EdgeInsets.symmetric(vertical: 8, horizontal: 80),
+                    margin: EdgeInsets.symmetric(vertical: 8, horizontal: 80),
                     width: double.infinity,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(16),
@@ -40,18 +34,18 @@ class SignUpScreen extends StatelessWidget {
                     child: ElevatedButton(
                       style: ButtonStyle(
                           elevation: MaterialStateProperty.all(0),
-                          backgroundColor: MaterialStateProperty.all(
-                              Colors.transparent)),
+                          backgroundColor:
+                              MaterialStateProperty.all(Colors.transparent)),
                       onPressed: () {},
                       child: Text('Submit'),
                     ),
                   )
-                ],),
+                ],
+              ),
             ),
-          )
-          ,   //buttons('submit')
-
+          ), //buttons('submit')
         ],
-      ),);
+      ),
+    );
   }
 }

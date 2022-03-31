@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:smarttouristguide/modules/login/login_and_signup/forget_password.dart';
 import 'package:smarttouristguide/modules/login/login_and_signup/register_container.dart';
-import 'package:smarttouristguide/modules/Event&Offer&Places/textStyle.dart';
+import 'package:smarttouristguide/shared/styles/textStyle.dart';
 
 class LoginScreen extends StatelessWidget {
 
