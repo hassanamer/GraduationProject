@@ -88,7 +88,7 @@ Widget bottomNavBar(context) {
             ),
             BottomNavigationBarItem(
               activeIcon: SvgPicture.asset(
-                'assets/icons/active_wishlist.svg',
+                'assets/icons/wishlist.svg',
               ),
               icon: SvgPicture.asset(
                 'assets/icons/wishlist.svg',
