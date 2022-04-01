@@ -4,6 +4,8 @@ import 'package:smarttouristguide/layout/app_layout.dart';
 import 'package:smarttouristguide/layout/cubit/cubit.dart';
 import 'package:smarttouristguide/shared/styles/themes.dart';
 
+import 'modules/login/login_and_signup/create_new_password.dart';
+
 
 
 void main() {
