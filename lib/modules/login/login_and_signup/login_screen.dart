@@ -3,44 +3,48 @@ import 'package:smarttouristguide/modules/login/login_and_signup/forget_password
 import 'package:smarttouristguide/modules/login/login_and_signup/register_container.dart';
 import 'package:smarttouristguide/modules/Event&Offer&Places/textStyle.dart';
 
+import '../../../shared/styles/colors.dart';
+
 class LoginScreen extends StatelessWidget {
-
-
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(18),
+      padding: const EdgeInsets.all(18),
       child: Column(
         children: [
           RegisterContainer('Email Address'),
           RegisterContainer(('Password')),
-          Row(mainAxisAlignment: MainAxisAlignment.end,
-            children: [TextButton(onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => ForgetPassword()),);
-            }, child: textStyle.normal('Forget Password?', 13.5)
-            )
-            ],),
-          Spacer(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => ForgetPassword()),
+                    );
+                  },
+                  child: textStyle.normal('Forget Password?', 13.5))
+            ],
+          ),
+          const Spacer(),
           Container(
-            margin:
-            EdgeInsets.symmetric(vertical: 8, horizontal: 80),
+            margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 80),
             width: double.infinity,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(16),
-                color: Theme
-                    .of(context)
-                    .primaryColor),
+                color: AppColors.primaryColor),
             child: ElevatedButton(
               style: ButtonStyle(
                   elevation: MaterialStateProperty.all(0),
-                  backgroundColor: MaterialStateProperty.all(
-                      Colors.transparent)),
+                  backgroundColor:
+                      MaterialStateProperty.all(Colors.transparent)),
               onPressed: () {},
-              child: Text('Login'),
+              child: const Text('Login'),
             ),
           )
-        ],),
-    )
-    ;
+        ],
+      ),
+    );
   }
 }

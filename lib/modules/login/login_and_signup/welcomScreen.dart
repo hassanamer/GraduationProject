@@ -4,42 +4,42 @@ import 'LoginButton.dart';
 import 'SignUpButton.dart';
 
 class Welcome extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
-    return   Scaffold(
-      body: Container(
-        child: Center(
-          child: Column(
-            children: [
-              Expanded(
-                flex: 3,
-                child: Container(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset('assets/images/logo2.png'),
-                      Text(
-                        'Welcome',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18,
-                        ),
+    return Scaffold(
+      body: Center(
+        child: Column(
+          children: [
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.15,
+            ),
+            Expanded(
+              flex: 3,
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset('assets/images/logo2.png'),
+                    const Text(
+                      'Welcome',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
                       ),
-                      SizedBox(
-                        height: 15,
-                      ),
-                      Text('We Hope You Find A Destination '),
-                      Text('Make You Happy '),
-                    ],
-                  ),
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    const Text('We Hope You Find A Destination '),
+                    const Text('Make You Happy '),
+                  ],
                 ),
               ),
-              SignUpButton(),
-              LoginButton()
-              // buttons('Login', DoFunction)
-            ],
-          ),
+            ),
+            SignUpButton(),
+            LoginButton()
+            // buttons('Login', DoFunction)
+          ],
         ),
       ),
     );
