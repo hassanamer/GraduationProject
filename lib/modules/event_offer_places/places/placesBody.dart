@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:smarttouristguide/modules/event_offer_places/places/iconOfRate.dart';
+import 'package:smarttouristguide/modules/event_offer_places/places/placeDetailsScreen.dart';
 
 import '../../../shared/styles/textStyle.dart';
 
@@ -50,7 +51,12 @@ class PlacesBody extends StatelessWidget {
               rate(),
               rate(),
               Spacer(),
-              SvgPicture.asset('assets/icons/active_navigate.svg'),
+              InkWell(child: SvgPicture.asset('assets/icons/active_navigate.svg',),onTap: () {
+                {
+                  Navigator.of(context)
+                      .pushNamed(PlaceDetailsScreen.routeName);
+                }
+              },),
               SizedBox(
                 width: 5,
               ),

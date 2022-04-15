@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:smarttouristguide/modules/event_offer_places/places/listViewOfPlaces.dart';
 import 'package:smarttouristguide/shared/styles/colors.dart';
 
+import '../../../shared/components/components.dart';
+
 class PlaceScreen extends StatefulWidget {
   @override
   State<PlaceScreen> createState() => _PlaceScreenState();
@@ -35,8 +37,7 @@ class _PlaceScreenState extends State<PlaceScreen> {
           ),
         ],
       ),
-      body: ListViewOfPlaces(),
-      bottomNavigationBar: Container(
+      body: ListViewOfPlaces(), bottomNavigationBar: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.only(
               topRight: Radius.circular(20), topLeft: Radius.circular(20)),
@@ -52,36 +53,24 @@ class _PlaceScreenState extends State<PlaceScreen> {
           child: BottomNavigationBar(
             backgroundColor: Colors.white,
             currentIndex: currentScreenIndex,
-            onTap: (index) {
+            onTap: (index){
               setState(() {
-                currentScreenIndex = index;
+                currentScreenIndex=index;
               });
             },
             showUnselectedLabels: false,
             showSelectedLabels: true,
-            selectedItemColor: Theme.of(context).primaryColor,
+            selectedItemColor: Theme.of(context).primaryColor ,
             unselectedItemColor: Theme.of(context).colorScheme.inversePrimary,
-            type: BottomNavigationBarType.fixed,
+            type: BottomNavigationBarType.fixed ,
             items: [
-              BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.home,
-                  size: 30,
-                ),
-                label: ('Home'),
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.favorite, size: 30),
-                label: ('favorite'),
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.category, size: 30),
-                label: ('Category'),
-              ),
-            ],
-          ),
-        ),
-      ),
+              BottomNavigationBarItem(icon: Icon(Icons.home,size: 30,),label: ("Home")),
+              BottomNavigationBarItem(icon: Icon(Icons.favorite,size: 30),label: ("favorite")),
+              BottomNavigationBarItem(icon: Icon(Icons.category,size: 30),label: ("Category"))
+            ],),
+
+        ))
+
     );
   }
 }

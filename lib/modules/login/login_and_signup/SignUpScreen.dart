@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:smarttouristguide/modules/login/login_and_signup/registerContinarWithSpacer.dart';
 import 'package:smarttouristguide/modules/login/login_and_signup/register_container.dart';
+import 'package:smarttouristguide/shared/styles/buttons_style.dart';
+
+import '../../home/home_screen.dart';
 
 class SignUpScreen extends StatelessWidget {
   @override
@@ -24,22 +27,9 @@ class SignUpScreen extends StatelessWidget {
                   RegisterContainer('Date of Birth'),
                   registerContinarWithSpacer('Gender'),
                   registerContinarWithSpacer('Country'),
-                  //  RegisterContainer.icon('Country',),
-                  Container(
-                    margin: EdgeInsets.symmetric(vertical: 8, horizontal: 80),
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(16),
-                        color: Theme.of(context).primaryColor),
-                    child: ElevatedButton(
-                      style: ButtonStyle(
-                          elevation: MaterialStateProperty.all(0),
-                          backgroundColor:
-                              MaterialStateProperty.all(Colors.transparent)),
-                      onPressed: () {},
-                      child: Text('Submit'),
-                    ),
-                  )
+                  buttons(function: (){{Navigator.of(context).pushNamed(
+                      HomeScreen.routeName
+                  );}}, text: 'Submit')
                 ],
               ),
             ),

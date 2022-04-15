@@ -1,208 +1,239 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:smarttouristguide/layout/app_layout.dart';
 import 'package:smarttouristguide/shared/styles/colors.dart';
+import 'package:smarttouristguide/shared/styles/textStyle.dart';
 
 class UserProfile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: Icon(
-          Icons.menu,
-          color: Palette.primaryColor,
-        ),
-        actions: [
-          IconButton(
+    return SafeArea(
+        child: WillPopScope(
+      onWillPop: () async {
+        return false;
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          foregroundColor: Colors.black,
+          elevation: 0,
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back_outlined),
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => UserProfile()),
-              );
+              Navigator.of(context).pop();
             },
-            icon: Icon(
-              Icons.account_circle_rounded,
-              color: Palette.primaryColor,
-            ),
-          )
-        ],
-      ),
-      body: ListView(
-        children: <Widget>[
-          Container(
-            height: 250,
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [AppColors.primaryColor, Colors.teal],
-                begin: Alignment.centerLeft,
-                end: Alignment.centerRight,
-                stops: [0.4, 0.9],
-              ),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: <Widget>[
-                    CircleAvatar(
-                      backgroundColor: Colors.white70,
-                      minRadius: 60.0,
-                      child: CircleAvatar(
-                        radius: 50.0,
-                        backgroundImage: AssetImage('assets/testpic.jpg'),
+          ),
+        ),
+        backgroundColor: AppColors.screenBackground,
+        body: SingleChildScrollView(
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Center(
+                      child: Padding(
+                        padding: const EdgeInsets.all(25.0),
+                        child: Container(
+                          height: 168.07,
+                          width: 320.0,
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(15.0)),
+                          child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                CircleAvatar(
+                                  radius: 70.0,
+                                  backgroundImage:
+                                      AssetImage('assets/testpic.jpg'),
+                                ),
+                              ]),
+                        ),
                       ),
                     ),
                   ],
                 ),
-                SizedBox(
-                  height: 10,
-                ),
-                Text(
-                  'Hassan Amer',
-                  style: TextStyle(
-                    fontSize: 35,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Container(
-            child: Row(
-              children: <Widget>[
-                Expanded(
-                  child: Container(
-                    color: Colors.teal,
-                    child: ListTile(
-                      title: Text(
-                        'Male',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 30,
-                          color: Colors.white,
-                        ),
+                Form(
+                  child: Column(
+                    children: [
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                              height: MediaQuery.of(context).size.height / 18,
+                              width: MediaQuery.of(context).size.width - 80.0,
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(15.0),),
+                              child: Row(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Icon(Icons.person_pin, color: AppColors.primaryColor,),
+                                  ), Padding(
+                                    padding: const EdgeInsets.only(left: 40.0),
+                                    child: textStyle('Hassan Mohamed ', 20.0 , FontWeight.bold),
+                                  ),
+                                ],
+                              )),
+                        ],
                       ),
-                      subtitle: Text(
-                        'Gender',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 20,
-                          color: Colors.white70,
-                        ),
+                      SizedBox(height: 12.0),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                              height: MediaQuery.of(context).size.height / 18,
+                              width: MediaQuery.of(context).size.width - 80.0,
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(15.0)),
+                              child: Row(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Icon(Icons.email_rounded, color: AppColors.primaryColor,),
+                                  ), Padding(
+                                    padding: const EdgeInsets.only(left: 10.0),
+                                    child: textStyle('hassanamer281@gmail.com ', 20.0 , FontWeight.bold),
+                                  ),
+                                ],
+                              )),
+                        ],
                       ),
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Container(
-                    color: Colors.teal,
-                    child: ListTile(
-                      title: Text(
-                        '30/4/2000',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 30,
-                          color: Colors.white,
-                        ),
+                      SizedBox(height: 12.0),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                              height: MediaQuery.of(context).size.height / 18,
+                              width: MediaQuery.of(context).size.width - 80.0,
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(15.0)),
+                              child: Row(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Icon(Icons.lock, color: AppColors.primaryColor,),
+                                  ), Padding(
+                                    padding: const EdgeInsets.only(left: 50.0),
+                                    child: textStyle('**************** ', 20.0 , FontWeight.bold),
+                                  ),
+                                ],
+                              )),
+                        ],
                       ),
-                      subtitle: Text(
-                        'Date of Birth',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 20,
-                          color: Colors.white70,
-                        ),
+                      SizedBox(height: 12.0),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                              height: MediaQuery.of(context).size.height / 18,
+                              width: MediaQuery.of(context).size.width - 80.0,
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(15.0)),
+                              child: Row(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Icon(Icons.date_range, color: AppColors.primaryColor,),
+                                  ), Padding(
+                                    padding: const EdgeInsets.only(left: 70.0),
+                                    child: textStyle('30 / 4 / 2022 ', 20.0 , FontWeight.bold),
+                                  ),
+                                ],
+                              )),
+                        ],
                       ),
-                    ),
+                      SizedBox(height: 12.0),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                              height: MediaQuery.of(context).size.height / 18,
+                              width: MediaQuery.of(context).size.width - 80.0,
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(15.0)),
+                              child: Row(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Icon(Icons.language_outlined, color: AppColors.primaryColor,),
+                                  ), Padding(
+                                    padding: const EdgeInsets.only(left: 90.0),
+                                    child: textStyle('Egypt', 20.0 , FontWeight.bold),
+                                  ),
+                                ],
+                              )),
+                        ],
+                      ),
+                      SizedBox(height: 12.0),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                              height: MediaQuery.of(context).size.height / 18,
+                              width: MediaQuery.of(context).size.width - 80.0,
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(15.0)),
+                              child: Row(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Icon(Icons.phone, color: AppColors.primaryColor,),
+                                  ), Padding(
+                                    padding: const EdgeInsets.only(left: 70.0),
+                                    child: textStyle('01111302839', 20.0 , FontWeight.bold),
+                                  ),
+                                ],
+                              )),
+                        ],
+                      ),
+                      SizedBox(height: 12.0),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                              height: MediaQuery.of(context).size.height / 18,
+                              width: MediaQuery.of(context).size.width - 80.0,
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(15.0)),
+                              child: Row(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Icon(Icons.male_outlined, color: AppColors.primaryColor,),
+                                  ), Padding(
+                                    padding: const EdgeInsets.only(left: 90.0),
+                                    child: textStyle('Male', 20.0 , FontWeight.bold),
+                                  ),
+                                ],
+                              )),
+                        ],
+                      ),
+                    ],
                   ),
                 ),
-              ],
-            ),
-          ),
-          Container(
-            child: Column(children: <Widget>[
-              ListTile(
-                title: Text(
-                  'Email',
-                  style: TextStyle(
-                    color: AppColors.primaryColor,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                subtitle: Text(
-                  'hassanamer281@gmail.com',
-                  style: TextStyle(
-                    fontSize: 18,
-                  ),
-                ),
-              ),
-              Divider(
-                height: 1.0,
-              ),
-              ListTile(
-                title: Text(
-                  'Password',
-                  style: TextStyle(
-                    color: AppColors.primaryColor,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                subtitle: Text(
-                  '**************',
-                  style: TextStyle(
-                    fontSize: 18,
-                  ),
-                ),
-              ),
-            ]),
-          ),
-          Divider(
-            height: 1.0,
-          ),
-          ListTile(
-            title: Text(
-              'Phone Number',
-              style: TextStyle(
-                color: AppColors.primaryColor,
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            subtitle: Text(
-              '01111302839',
-              style: TextStyle(
-                fontSize: 18,
-              ),
-            ),
-          ),
-          Divider(
-            height: 1.0,
-          ),
-          ListTile(
-            title: Text(
-              'Country',
-              style: TextStyle(
-                color: AppColors.primaryColor,
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            subtitle: Text(
-              'Egypt',
-              style: TextStyle(
-                fontSize: 18,
-              ),
-            ),
-          ),
-        ],
+
+              ]),
+        ),
       ),
-    );
+    ));
   }
 }

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:smarttouristguide/modules/home/home_screen.dart';
 import 'package:smarttouristguide/modules/login/login_and_signup/forget_password.dart';
 import 'package:smarttouristguide/modules/login/login_and_signup/register_container.dart';
+import 'package:smarttouristguide/shared/styles/buttons_style.dart';
 import 'package:smarttouristguide/shared/styles/textStyle.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -30,14 +32,9 @@ class LoginScreen extends StatelessWidget {
                 color: Theme
                     .of(context)
                     .primaryColor),
-            child: ElevatedButton(
-              style: ButtonStyle(
-                  elevation: MaterialStateProperty.all(0),
-                  backgroundColor: MaterialStateProperty.all(
-                      Colors.transparent)),
-              onPressed: () {},
-              child: Text('Login'),
-            ),
+            child: buttons(function: (){{Navigator.of(context).pushNamed(
+                HomeScreen.routeName
+            );}}, text: 'Login')
           )
         ],),
     )
