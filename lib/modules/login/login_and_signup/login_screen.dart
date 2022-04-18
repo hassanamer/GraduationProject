@@ -32,7 +32,7 @@ class LoginScreen extends StatelessWidget {
                 color: Theme
                     .of(context)
                     .primaryColor),
-            child: buttons(function: (){{Navigator.of(context).pushNamed(
+            child: button(function: (){{Navigator.of(context).pushNamed(
                 HomeScreen.routeName
             );}}, text: 'Login')
           )

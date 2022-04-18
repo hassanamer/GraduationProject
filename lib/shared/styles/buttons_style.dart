@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:smarttouristguide/shared/styles/colors.dart';
 
-Widget buttons({
+Widget button({
   required VoidCallback? function,
   required String text,
   Color color = AppColors.primaryColor,

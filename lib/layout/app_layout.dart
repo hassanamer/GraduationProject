@@ -3,8 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:smarttouristguide/layout/cubit/cubit.dart';
 import 'package:smarttouristguide/layout/cubit/states.dart';
-import 'package:smarttouristguide/modules/home/MenuDrawerScreen.dart';
-import 'package:smarttouristguide/modules/user/user_screen.dart';
 import 'package:smarttouristguide/shared/components/components.dart';
 import 'package:smarttouristguide/shared/styles/colors.dart';
 
@@ -19,25 +17,18 @@ class AppLayout extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(
             leading: IconButton(
-              icon: Icon(
-                Icons.menu,
-                color: AppColors.primaryColor,
-              ),
+              icon: SvgPicture.asset('assets/icons/menu.svg'),
               onPressed: () {
-                navigateTo(
-                  context: (context),
-                  widget: (menuDrawerScreen())
-                );
+                // Here will type function to open menu drawer
               },
             ),
             actions: [
               IconButton(
-                onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => UserProfile()),);},
                 icon: Icon(
                   Icons.account_circle_rounded,
-                  color: Palette.primaryColor,
+                  color: AppColors.primaryColor,
                 ),
+                onPressed: () {},
               )
             ],
           ),

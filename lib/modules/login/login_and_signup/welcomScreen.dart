@@ -8,9 +8,10 @@ import 'login_screen.dart';
 
 class Welcome extends StatelessWidget {
   static const routeName = 'welcom';
+
   @override
   Widget build(BuildContext context) {
-    return   Scaffold(
+    return Scaffold(
       body: Container(
         child: Center(
           child: Column(
@@ -38,37 +39,51 @@ class Welcome extends StatelessWidget {
                   ),
                 ),
               ),
-              buttons(function: (){
-                showModalBottomSheet(
+              button(
+                function: () {
+                  showModalBottomSheet(
                     isDismissible: false,
                     enableDrag: false,
                     backgroundColor: Colors.transparent,
                     context: context,
                     builder: (context) {
                       return Container(
-                          height:double.infinity,decoration: BoxDecoration(
+                        height: double.infinity,
+                        decoration: BoxDecoration(
                           borderRadius: BorderRadius.only(
-                              topRight: Radius.circular(20), topLeft: Radius.circular(20)),
-                          color: Colors.white) ,
-                          child:SignUpScreen());
-                    });
-              }, text: 'Sign Up'),
-             buttons(function: (){{
-               showModalBottomSheet(
-                   isDismissible: false,
-                   enableDrag: false,
-                   backgroundColor: Colors.transparent,
-                   context: context,
-                   builder: (context) {
-                     return Container(
-                         height:double.infinity,decoration: BoxDecoration(
-                         borderRadius: BorderRadius.only(
-                             topRight: Radius.circular(20), topLeft: Radius.circular(20)),
-                         color: Colors.white) ,
-                         child:
-                         LoginScreen());
-                   });
-             }}, text: 'Login')
+                            topRight: Radius.circular(20),
+                            topLeft: Radius.circular(20),
+                          ),
+                          color: Colors.white,
+                        ),
+                        child: SignUpScreen(),
+                      );
+                    },
+                  );
+                },
+                text: 'Sign Up',
+              ),
+              button(
+                  function: () {
+                    {
+                      showModalBottomSheet(
+                          isDismissible: false,
+                          enableDrag: false,
+                          backgroundColor: Colors.transparent,
+                          context: context,
+                          builder: (context) {
+                            return Container(
+                                height: double.infinity,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.only(
+                                        topRight: Radius.circular(20),
+                                        topLeft: Radius.circular(20)),
+                                    color: Colors.white),
+                                child: LoginScreen());
+                          });
+                    }
+                  },
+                  text: 'Login')
               // buttons('Login', DoFunction)
             ],
           ),

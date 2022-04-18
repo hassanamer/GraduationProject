@@ -27,7 +27,7 @@ class SignUpScreen extends StatelessWidget {
                   RegisterContainer('Date of Birth'),
                   registerContinarWithSpacer('Gender'),
                   registerContinarWithSpacer('Country'),
-                  buttons(function: (){{Navigator.of(context).pushNamed(
+                  button(function: (){{Navigator.of(context).pushNamed(
                       HomeScreen.routeName
                   );}}, text: 'Submit')
                 ],
