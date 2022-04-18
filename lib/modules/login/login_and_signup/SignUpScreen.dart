@@ -8,7 +8,7 @@ class SignUpScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.white,
+      color: Colors.transparent,
       child: Column(
         children: [
           Expanded(
@@ -41,14 +41,23 @@ class SignUpScreen extends StatelessWidget {
                           elevation: MaterialStateProperty.all(0),
                           backgroundColor:
                               MaterialStateProperty.all(Colors.transparent)),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            backgroundColor: AppColors.primaryColor,
+                            content: Text('Submit is Successful '),
+                          ),
+                        );
+                      },
                       child: const Text('Submit'),
                     ),
                   )
                 ],
               ),
             ),
-          ), //buttons('submit')
+          ),
+          //buttons('submit')
         ],
       ),
     );

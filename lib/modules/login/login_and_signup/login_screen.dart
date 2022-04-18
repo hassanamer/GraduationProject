@@ -6,6 +6,8 @@ import 'package:smarttouristguide/modules/Event&Offer&Places/textStyle.dart';
 import '../../../shared/styles/colors.dart';
 
 class LoginScreen extends StatelessWidget {
+//   static const String routeName = 'loginScreen';
+
   @override
   Widget build(BuildContext context) {
     return Padding(
