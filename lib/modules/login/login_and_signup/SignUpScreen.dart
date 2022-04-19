@@ -31,6 +31,7 @@ class SignUpScreen extends StatelessWidget {
                   //  RegisterContainer.icon('Country',),
                   Container(
                     margin:
+
                         const EdgeInsets.symmetric(vertical: 8, horizontal: 80),
                     width: double.infinity,
                     decoration: BoxDecoration(
