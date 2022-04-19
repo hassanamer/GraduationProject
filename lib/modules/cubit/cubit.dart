@@ -25,6 +25,7 @@ class ChangeColorCubit extends Cubit<ChangesStates> {
     }
 
     emit(ChangeColorState());
+
     print('$iconColor');
   }
 }

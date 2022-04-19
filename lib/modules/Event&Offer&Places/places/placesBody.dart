@@ -77,6 +77,7 @@ class PlacesBody extends StatelessWidget {
                       child: Icon(
                         Icons.favorite,
                         color: ChangeColorCubit.get(context).x,
+
                         size: 30,
                       ),
                     ),
