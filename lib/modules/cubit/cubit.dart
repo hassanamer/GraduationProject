@@ -14,6 +14,7 @@ class ChangeColorCubit extends Cubit<ChangesStates> {
   static ChangeColorCubit get(context) => BlocProvider.of(context);
   void changeColorIcon() {
     if (iconColor == true) {
+
       x = AppColors.primaryColor;
       emit(ChangeColorState());
       iconColor = false;

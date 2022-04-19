@@ -56,6 +56,7 @@ class _OfferScreenState extends State<OfferScreen> {
                 unselectedItemColor: AppColors.disabledAndHintColor,
                 type: BottomNavigationBarType.fixed,
                 items: const [
+
                   BottomNavigationBarItem(
                       icon: Icon(
                         Icons.home,

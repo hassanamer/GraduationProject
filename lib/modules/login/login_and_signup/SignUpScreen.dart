@@ -31,6 +31,7 @@ class SignUpScreen extends StatelessWidget {
                   //  RegisterContainer.icon('Country',),
                   Container(
                     margin:
+
                         const EdgeInsets.symmetric(vertical: 8, horizontal: 80),
                     width: double.infinity,
                     decoration: BoxDecoration(
@@ -43,6 +44,7 @@ class SignUpScreen extends StatelessWidget {
                               MaterialStateProperty.all(Colors.transparent)),
                       onPressed: () {
                         Navigator.of(context).pop();
+                        print('hi');
 
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(

@@ -79,6 +79,7 @@ class PlacesBody extends StatelessWidget {
                         color: ChangeColorCubit.get(context).x,
                         size: 30,
                       ),
+
                     ),
                     const SizedBox(
                       width: 15,
