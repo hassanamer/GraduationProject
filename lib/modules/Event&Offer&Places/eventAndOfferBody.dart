@@ -41,7 +41,6 @@ class eventAndOfferBody extends StatelessWidget {
             Container(
               margin: const EdgeInsets.all(8),
               child: Image.asset(pathOfImage),
-
             ),
             Row(mainAxisAlignment: MainAxisAlignment.end, children: [
               InkWell(

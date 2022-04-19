@@ -12,7 +12,6 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(18),
-
       child: Column(
         children: [
           RegisterContainer('Email Address'),

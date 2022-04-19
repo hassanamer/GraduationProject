@@ -30,7 +30,6 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (BuildContext context) => AppCubit(),
-
         ),
       ],
       child: MaterialApp(

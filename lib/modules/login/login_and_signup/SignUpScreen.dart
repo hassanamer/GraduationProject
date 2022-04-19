@@ -44,6 +44,7 @@ class SignUpScreen extends StatelessWidget {
                       onPressed: () {
                         Navigator.of(context).pop();
 
+
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
                             backgroundColor: AppColors.primaryColor,
