@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smarttouristguide/shared/styles/buttons_style.dart';
 
-import 'LoginButton.dart';
-import 'SignUpButton.dart';
 import 'SignUpScreen.dart';
 import 'login_screen.dart';
 
