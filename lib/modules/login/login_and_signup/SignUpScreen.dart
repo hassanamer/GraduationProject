@@ -42,6 +42,7 @@ class SignUpScreen extends StatelessWidget {
                           backgroundColor:
                               MaterialStateProperty.all(Colors.transparent)),
                       onPressed: () {
+
                         Navigator.of(context).pop();
                         print('hi');
 
