@@ -6,7 +6,6 @@ import 'SignUpButton.dart';
 class Welcome extends StatelessWidget {
   static const String routeName = 'welcomeScreen';
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

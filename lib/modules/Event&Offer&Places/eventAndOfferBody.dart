@@ -37,7 +37,6 @@ class eventAndOfferBody extends StatelessWidget {
               const SizedBox(
                 width: 40,
               ),
-
             ]),
             Container(
               margin: const EdgeInsets.all(8),
