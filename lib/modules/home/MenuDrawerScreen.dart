@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:smarttouristguide/modules/login/login_and_signup/welcomScreen.dart';
+import 'package:smarttouristguide/shared/styles/buttons_style.dart';
 class menuDrawerScreen extends StatefulWidget {
   @override
   _menuDrawerScreenState createState() => _menuDrawerScreenState();
@@ -51,11 +53,10 @@ class _menuDrawerScreenState extends State<menuDrawerScreen> {
             });} )
         ),
         Spacer(),
-        Container(padding: EdgeInsets.symmetric(horizontal: 16),decoration: BoxDecoration(borderRadius: BorderRadius.circular(12),color: Theme.of(context).primaryColor),
-            child: ElevatedButton( style: ButtonStyle(
-                elevation: MaterialStateProperty.all(0),
-                backgroundColor: MaterialStateProperty.all(
-                    Colors.transparent)),onPressed: (){}, child: Text('Log out'))),
+        Container(padding: EdgeInsets.symmetric(horizontal: 16),
+            child: button(function: (){{Navigator.of(context).pushNamed(
+                Welcome.routeName
+            );}}, text: 'Log Out')),
         SizedBox(height: 12,)
 
       ],
