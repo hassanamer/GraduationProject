@@ -4,9 +4,9 @@ import 'package:smarttouristguide/shared/styles/colors.dart';
 ThemeData lightTheme = ThemeData(
   primarySwatch: Palette.primaryColor,
   fontFamily: 'Jannah',
-  scaffoldBackgroundColor: AppColors.screenBackgroundColor,
+  scaffoldBackgroundColor: AppColors.backgroundColor,
   appBarTheme: AppBarTheme(
-    backgroundColor: AppColors.screenBackgroundColor,
+    backgroundColor: AppColors.backgroundColor,
     elevation: 0.0,
   ),
   colorScheme: ColorScheme.fromSwatch().copyWith(

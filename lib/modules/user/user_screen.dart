@@ -23,7 +23,7 @@ class UserProfile extends StatelessWidget {
             },
           ),
         ),
-        backgroundColor: AppColors.screenBackgroundColor,
+        backgroundColor: AppColors.backgroundColor,
         body: SingleChildScrollView(
           child: Column(
               mainAxisAlignment: MainAxisAlignment.start,

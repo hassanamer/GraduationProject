@@ -17,7 +17,9 @@ class AppLayout extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(
             leading: IconButton(
-              icon: SvgPicture.asset('assets/icons/menu.svg'),
+              icon: SvgPicture.asset(
+                'assets/icons/menu.svg',
+              ),
               onPressed: () {
                 // Here will type function to open menu drawer
               },
@@ -33,7 +35,9 @@ class AppLayout extends StatelessWidget {
             ],
           ),
           body: cubit.bottomScreens[cubit.currentIndex],
-          bottomNavigationBar: bottomNavBar(context),
+          bottomNavigationBar: bottomNavBar(
+            context,
+          ),
         );
       },
     );
