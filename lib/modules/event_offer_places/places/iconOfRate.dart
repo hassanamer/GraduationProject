@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:smarttouristguide/shared/styles/colors.dart';
 
 import '../../cubit/cubit.dart';
 
@@ -14,7 +13,7 @@ class rate extends StatelessWidget {
         child: Icon(
           Icons.star_rate_sharp,
           color: ChangeColorCubit.get(context).x,
-          size: 18,
+          size: 14,
         ),
       ),
     );
