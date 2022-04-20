@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:smarttouristguide/shared/styles/colors.dart';
 
 import '../../layout/cubit/cubit.dart';
+import '../../modules/event_offer_places/places/iconOfRate.dart';
 
 //default button (ex: Registration,Login, Submit)
 Widget defaultButton({
@@ -102,13 +103,12 @@ Widget bottomNavBar(context) {
 }
 
 Widget HomeRow({
-  required double width,
   required String text,
   required String iconPath,
 
 }) => Container(
   height: 39.0,
-  width: width,
+  width: 299,
   decoration: BoxDecoration(
     color: Color(0xffffebc9),
     borderRadius: BorderRadius.circular(19.0,),
@@ -142,5 +142,47 @@ Widget HomeRow({
         ),
       ),
     ],
+  ),
+);
+
+Widget HomeItem() => Container(
+  height: 178.0,
+  width: 148.0,
+  decoration: BoxDecoration(
+    color: Colors.white,
+    borderRadius: BorderRadius.circular(16.0,),
+  ),
+  child: Padding(
+    padding: const EdgeInsets.all(10.0),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children:
+      [
+        Center(
+          child: Image.asset('assets/images/test.jpg',
+              height: 112),
+        ),
+        Text(
+          'Giza Pyramids',
+          style: TextStyle(
+              fontSize: 13.0,
+              fontWeight: FontWeight.w600
+          ),
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children:
+          [
+            rate(),
+            rate(),
+            rate(),
+            rate(),
+            rate(),
+            Spacer(),
+            SvgPicture.asset('assets/icons/goto.svg',)
+          ],
+        ),
+      ],
+    ),
   ),
 );
