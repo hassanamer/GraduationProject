@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../shared/styles/colors.dart';
-import 'ListVievOfEventAndOffer.dart';
-import 'ListVievOfEventAndOffer.dart';
+import '../event_offer_places/ListVievOfEventAndOffer.dart';
 
 class EventScreen extends StatefulWidget {
   @override
