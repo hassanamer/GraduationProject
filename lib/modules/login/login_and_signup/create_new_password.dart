@@ -6,172 +6,157 @@ import '../../user/user_screen.dart';
 class CreateNewPassword extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-      ),
+    return SafeArea(
+      child: WillPopScope(
+        onWillPop: () async {
+          return false;
+        },
         child: Scaffold(
-          resizeToAvoidBottomInset: false,
-          backgroundColor: Colors.transparent,
           appBar: AppBar(
-            leading: Icon(
-              Icons.menu,
-              color: Palette.primaryColor,
+            backgroundColor: Colors.white,
+            foregroundColor: Colors.black,
+            elevation: 0,
+            leading: IconButton(
+              icon: const Icon(Icons.arrow_back_outlined),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
             ),
-            actions: [
-              IconButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => UserProfile()),
-                  );
-                },
-                icon: Icon(
-                  Icons.account_circle_rounded,
-                  color: Palette.primaryColor,
-                ),
-              )
-            ],
           ),
-          body: Stack(
-              children: [
-                Container(
+          backgroundColor: Colors.white,
+          body: SingleChildScrollView(
+            child: Column(children: [
+              Form(
                   child: Padding(
-                    padding: const EdgeInsets.only(
-                      left: 10.0,
-                      top: 110.0,
-                    ),
-                    child: ListTile(
-                      title: Padding(
-                        padding: const EdgeInsets.only(bottom: 5.0),
-                        child: Text(
-                          'Create New Password',
-                          textAlign: TextAlign.start,
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 22,
-                            color: AppColors.primaryColor,
-                          ),
-                        ),
-                      ),
-                      subtitle: Padding(
-                        padding: const EdgeInsets.only(bottom: 10.0),
-                        child: Text(
-                          'Enter your registered email below',
-                          textAlign: TextAlign.start,
-                          style: TextStyle(
-                            fontSize: 18,
-                            color: AppColors.primaryColor,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                Container(
-                  child: Padding(
-                    padding: const EdgeInsets.only(
-                        left: 25.0, top: 210.0, right: 40.0),
+                    padding: const EdgeInsets.all(8.0),
                     child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        TextFormField(
-                          obscureText: true,
-                          style: TextStyle(color: AppColors.primaryColor),
-                          decoration: InputDecoration(
-                              labelText: 'New Password',
-                              suffixIcon: Icon(Icons.remove_red_eye_outlined,
-                                  color: AppColors.primaryColor),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(25.0),
-                                borderSide: BorderSide(
-                                  color: AppColors.primaryColor,
-                                  width: 2.0,
-                                ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 20.0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const SizedBox(
+                                height: 60.0,
                               ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(25.0),
-                                borderSide: BorderSide(
-                                  color: AppColors.primaryColor,
-                                ),
-                              ),
-                              filled: true,
-                              fillColor: Colors.grey.shade100,
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(15.0))),
+                              Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: const [
+                                    Text("Create New Password?",
+                                        style: TextStyle(
+                                            fontSize: 22.0,
+                                            fontFamily: 'Tajwal',
+                                            color: AppColors.primaryColor,
+                                            fontWeight: FontWeight.bold)),
+                                  ]),
+                              const SizedBox(height: 5.0),
+
+                            ],
+                          ),
                         ),
-                        SizedBox(
-                          height: 15.0,
-                        ),
-                        TextFormField(
-                          style: TextStyle(color: AppColors.primaryColor),
-                          obscureText: true,
-                          decoration: InputDecoration(
-                              labelText: 'Confirm Password',
-                              errorStyle: TextStyle(color: Colors.red),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(25.0),
-                                borderSide: BorderSide(
-                                  color: AppColors.primaryColor,
-                                ),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(25.0),
-                                borderSide: BorderSide(
-                                  color: AppColors.primaryColor,
-                                  width: 2.0,
-                                ),
-                              ),
-                              labelStyle:
-                                  TextStyle(color: AppColors.primaryColor),
-                              hintStyle: TextStyle(color: AppColors.primaryColor),
-                              errorBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(color: Colors.red),
-                              ),
-                              filled: true,
-                              suffixIcon: Icon(
-                                Icons.remove_red_eye_outlined,
-                                color: AppColors.primaryColor,
-                              ),
-                              fillColor: Colors.grey.shade100,
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15.0),
-                              )),
-                        ),
-                        SizedBox(
-                          height: 180.0,
-                        ),
+                        const SizedBox(height: 40.0),
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text(
-                              "Reset Password",
-                              style: TextStyle(
-                                  fontSize: 20.0,
-                                  fontWeight: FontWeight.bold,
-                                  color: AppColors.primaryColor),
-                            ),
-                            CircleAvatar(
-                              radius: 25.0,
-                              backgroundColor: AppColors.primaryColor,
-                              child: IconButton(
-                                onPressed: () {},
-                                color: Colors.white,
-                                icon: Icon(
-                                  Icons.arrow_forward_rounded,
-                                  size: 35.0,
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width - 40.0,
+                              child: TextFormField(
+                                style: TextStyle(
+                                    color: AppColors.primaryColor,
+                                    fontSize: 20.0,
+                                    fontWeight: FontWeight.w300),
+                                keyboardType: TextInputType.emailAddress,
+                                decoration: InputDecoration(
+                                    suffixIcon: Icon(
+                                      Icons.remove_red_eye_rounded,
+                                      color: AppColors.primaryColor,
+                                    ),
+                                    hintText: 'Confirm Password',
+                                    contentPadding: const EdgeInsets.fromLTRB(
+                                        20.0, 15.0, 20.0, 15.0),
+                                    border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(16.0),
+                                        borderSide: const BorderSide(
+                                          color: AppColors.primaryColor,
+                                          width: 1.0,
+                                        ))),
+                              ),
+                            )
+                          ],
+                        ),
+                        const SizedBox(height: 25.0),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width - 40.0,
+                              child: TextFormField(
+                                style: TextStyle(
+                                    color: AppColors.primaryColor,
+                                    fontSize: 20.0,
+                                    fontWeight: FontWeight.w300),
+                                keyboardType: TextInputType.emailAddress,
+                                decoration: InputDecoration(
+                                    suffixIcon: Icon(
+                                      Icons.remove_red_eye_rounded,
+                                      color: AppColors.primaryColor,
+                                    ),
+                                    hintText: 'Confirm Password',
+                                    contentPadding: const EdgeInsets.fromLTRB(
+                                        20.0, 15.0, 20.0, 15.0),
+                                    border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(16.0),
+                                        borderSide: const BorderSide(
+                                          color: AppColors.primaryColor,
+                                          width: 1.0,
+                                        ))),
+                              ),
+                            )
+                          ],
+                        ),
+                        const SizedBox(height: 310.0),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              margin: const EdgeInsets.symmetric(
+                                  vertical: 20.0, horizontal: 15),
+                              child: ButtonTheme(
+                                height: 50,
+                                child: TextButton(
+                                  onPressed: () {},
+                                  child: Center(
+                                      child: Text(
+                                        "Submit",
+                                        style: TextStyle(
+                                            fontSize: 20.0,
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold),
+                                      )),
                                 ),
                               ),
+                              decoration: BoxDecoration(
+                                color: AppColors.primaryColor,
+                                borderRadius: BorderRadius.circular(12.0),
+                              ),
+                              width: MediaQuery.of(context).size.width - 80,
                             ),
                           ],
-                        )
+                        ),
                       ],
                     ),
-                  ),
-                ),
-              ],
-            ),
+                  )),
+            ]),
           ),
-
+        ),
+      ),
     );
   }
 }

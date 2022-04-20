@@ -3,8 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:smarttouristguide/layout/cubit/cubit.dart';
 import 'package:smarttouristguide/layout/cubit/states.dart';
-import 'package:smarttouristguide/modules/home/MenuDrawerScreen.dart';
-import 'package:smarttouristguide/modules/user/user_screen.dart';
 import 'package:smarttouristguide/shared/components/components.dart';
 import 'package:smarttouristguide/shared/styles/colors.dart';
 
@@ -19,86 +17,23 @@ class AppLayout extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(
             leading: IconButton(
-              icon: Icon(
-                Icons.menu,
-                color: Palette.primaryColor,
-              ),
+              icon: SvgPicture.asset('assets/icons/menu.svg'),
               onPressed: () {
-                navigateTo(
-                  context: (context),
-                  widget: (menuDrawerScreen())
-                );
+                // Here will type function to open menu drawer
               },
             ),
             actions: [
               IconButton(
-                onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => UserProfile()),);},
                 icon: Icon(
                   Icons.account_circle_rounded,
-                  color: Palette.primaryColor,
+                  color: AppColors.primaryColor,
                 ),
+                onPressed: () {},
               )
             ],
           ),
           body: cubit.bottomScreens[cubit.currentIndex],
-          bottomNavigationBar: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(20),
-                    topLeft: Radius.circular(20)),
-                boxShadow: [
-                  BoxShadow(
-                      color: Color(0x17000000),
-                      spreadRadius: 5,
-                      blurRadius: 28),
-                ],
-              ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(20.0),
-                  topRight: Radius.circular(20.0),
-                ),
-                child: BottomNavigationBar(
-                  showSelectedLabels: false,
-                  showUnselectedLabels: false,
-                  backgroundColor: Colors.white,
-                  elevation: 5.0,
-                  currentIndex: cubit.currentIndex,
-                  onTap: (index) {
-                    cubit.changeBottom(index);
-                  },
-                  items: [
-                    BottomNavigationBarItem(
-                      activeIcon: SvgPicture.asset(
-                        'assets/icons/active_home.svg',
-                      ),
-                      icon: SvgPicture.asset(
-                        'assets/icons/home.svg',
-                      ),
-                      label: 'Home',
-                    ),
-                    BottomNavigationBarItem(
-                      activeIcon: SvgPicture.asset(
-                        'assets/icons/active_categories.svg',
-                      ),
-                      icon: SvgPicture.asset(
-                        'assets/icons/categories.svg',
-                      ),
-                      label: 'Categories',
-                    ),
-                    BottomNavigationBarItem(
-                      activeIcon: SvgPicture.asset(
-                        'assets/icons/active_wishlist.svg',
-                      ),
-                      icon: SvgPicture.asset(
-                        'assets/icons/wishlist.svg',
-                      ),
-                      label: 'Wish List',
-                    ),
-                  ],
-                ),
-              )),
+          bottomNavigationBar: bottomNavBar(context),
         );
       },
     );
