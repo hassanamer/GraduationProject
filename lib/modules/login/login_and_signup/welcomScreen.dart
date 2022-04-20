@@ -1,90 +1,50 @@
 import 'package:flutter/material.dart';
-import 'package:smarttouristguide/shared/styles/buttons_style.dart';
 
-import 'SignUpScreen.dart';
-import 'login_screen.dart';
+import 'LoginButton.dart';
+import 'SignUpButton.dart';
 
 class Welcome extends StatelessWidget {
-  static const routeName = 'welcom';
+  static const String routeName = 'welcomeScreen';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        child: Center(
-          child: Column(
-            children: [
-              Expanded(
-                flex: 3,
-                child: Container(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset('assets/images/logo2.png'),
-                      Text(
-                        'Welcome',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18,
-                        ),
+      body: Center(
+        child: Column(
+          children: [
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.15,
+            ),
+            Expanded(
+              flex: 3,
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset('assets/images/logo2.png'),
+                    const Text(
+                      'Welcome',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
                       ),
-                      SizedBox(
-                        height: 15,
-                      ),
-                      Text('We Hope You Find A Destination '),
-                      Text('Make You Happy '),
-                    ],
-                  ),
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    const Text('We Hope You Find A Destination '),
+                    const Text('Make You Happy '),
+                  ],
                 ),
               ),
-              button(
-                function: () {
-                  showModalBottomSheet(
-                    isDismissible: false,
-                    enableDrag: false,
-                    backgroundColor: Colors.transparent,
-                    context: context,
-                    builder: (context) {
-                      return Container(
-                        height: double.infinity,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.only(
-                            topRight: Radius.circular(20),
-                            topLeft: Radius.circular(20),
-                          ),
-                          color: Colors.white,
-                        ),
-                        child: SignUpScreen(),
-                      );
-                    },
-                  );
-                },
-                text: 'Sign Up',
-              ),
-              button(
-                  function: () {
-                    {
-                      showModalBottomSheet(
-                          isDismissible: false,
-                          enableDrag: false,
-                          backgroundColor: Colors.transparent,
-                          context: context,
-                          builder: (context) {
-                            return Container(
-                                height: double.infinity,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.only(
-                                        topRight: Radius.circular(20),
-                                        topLeft: Radius.circular(20)),
-                                    color: Colors.white),
-                                child: LoginScreen());
-                          });
-                    }
-                  },
-                  text: 'Login')
-              // buttons('Login', DoFunction)
-            ],
-          ),
+            ),
+            SignUpButton(),
+            LoginButton(),
+            SizedBox(
+              height: 60,
+            )
+            // buttons('Login', DoFunction)
+          ],
         ),
       ),
     );

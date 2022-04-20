@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'eventAndOfferBody.dart';
+import 'package:smarttouristguide/modules/Event&Offer&Places/places/placesBody.dart';
 
-class ListVievOfEventAndOffer extends StatelessWidget {
+class ListViewOfPlaces extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
       itemCount: 10,
       itemBuilder: (context, index) {
-        return eventAndOfferBody(
+        return PlacesBody(
             'name of place', 'some details', 'assets/images/img.png');
       },
     );
