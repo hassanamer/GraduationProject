@@ -40,7 +40,7 @@ class Welcome extends StatelessWidget {
             ),
             SignUpButton(),
             LoginButton(),
-            SizedBox(
+            const SizedBox(
               height: 60,
             )
             // buttons('Login', DoFunction)

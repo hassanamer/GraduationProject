@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:smarttouristguide/modules/event_offer_places/places/placeDetailsScreen.dart';
-import 'package:smarttouristguide/shared/styles/colors.dart';
 
 import '../../../shared/styles/textStyle.dart';
 import '../../cubit/cubit.dart';
@@ -51,7 +50,6 @@ class PlacesBody extends StatelessWidget {
                     margin: const EdgeInsets.all(8),
                     child: Image.asset(pathOfImage),
                   ),
-
                   Row(mainAxisAlignment: MainAxisAlignment.end, children: [
                     SizedBox(width: 10),
                     rate(),
@@ -74,7 +72,12 @@ class PlacesBody extends StatelessWidget {
                     const SizedBox(
                       width: 5,
                     ),
-                    textStyle.normal('see Details', 14),
+                    InkWell(
+                        onTap: () {
+                          Navigator.of(context)
+                              .pushNamed(PlaceDetailsScreen.routeName);
+                        },
+                        child: textStyle.normal('see Details', 14)),
                     const SizedBox(
                       width: 15,
                     ),

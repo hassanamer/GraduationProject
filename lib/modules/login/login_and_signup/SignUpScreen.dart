@@ -9,7 +9,7 @@ class SignUpScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.white,
+      color: Colors.transparent,
       child: Column(
         children: [
           Expanded(
@@ -18,7 +18,8 @@ class SignUpScreen extends StatelessWidget {
               child: ListView(
                 padding: EdgeInsets.symmetric(horizontal: 24, vertical: 10),
                 children: [
-                  RegisterContainer('First Name'), SizedBox(width: 24),
+                  RegisterContainer('First Name'),
+                  SizedBox(width: 24),
                   RegisterContainer('Last Name'),
                   RegisterContainer('Email Address'),
                   RegisterContainer(('Password')),
@@ -27,9 +28,13 @@ class SignUpScreen extends StatelessWidget {
                   RegisterContainer('Date of Birth'),
                   registerContinarWithSpacer('Gender'),
                   registerContinarWithSpacer('Country'),
-                  button(function: (){{Navigator.of(context).pushNamed(
-                      HomeScreen.routeName
-                  );}}, text: 'Submit')
+                  button(
+                      function: () {
+                        {
+                          Navigator.of(context).pushNamed(HomeScreen.routeName);
+                        }
+                      },
+                      text: 'Submit')
                 ],
               ),
             ),

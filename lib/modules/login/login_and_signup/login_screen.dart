@@ -6,8 +6,6 @@ import 'package:smarttouristguide/shared/styles/buttons_style.dart';
 import 'package:smarttouristguide/shared/styles/textStyle.dart';
 
 class LoginScreen extends StatelessWidget {
-
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -16,28 +14,36 @@ class LoginScreen extends StatelessWidget {
         children: [
           RegisterContainer('Email Address'),
           RegisterContainer(('Password')),
-          Row(mainAxisAlignment: MainAxisAlignment.end,
-            children: [TextButton(onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => ForgetPassword()),);
-            }, child: textStyle.normal('Forget Password?', 13.5)
-            )
-            ],),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => ForgetPassword()),
+                    );
+                  },
+                  child: textStyle.normal('Forget Password?', 13.5))
+            ],
+          ),
           Spacer(),
           Container(
-            margin:
-            EdgeInsets.symmetric(vertical: 8, horizontal: 80),
-            width: double.infinity,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(16),
-                color: Theme
-                    .of(context)
-                    .primaryColor),
-            child: button(function: (){{Navigator.of(context).pushNamed(
-                HomeScreen.routeName
-            );}}, text: 'Login')
-          )
-        ],),
-    )
-    ;
+              margin: EdgeInsets.symmetric(vertical: 8, horizontal: 70),
+              width: double.infinity,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(16),
+                  color: Theme.of(context).primaryColor),
+              child: button(
+                function: () {
+                  {
+                    Navigator.of(context).pushNamed(HomeScreen.routeName);
+                  }
+                },
+                text: 'Login',
+              ))
+        ],
+      ),
+    );
   }
 }

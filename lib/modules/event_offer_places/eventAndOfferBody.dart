@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-
 import 'package:smarttouristguide/modules/event_offer_places/places/placeDetailsScreen.dart';
-
-import '../../shared/styles/colors.dart';
 import '../../shared/styles/textStyle.dart';
 
 class eventAndOfferBody extends StatelessWidget {
@@ -36,7 +33,12 @@ class eventAndOfferBody extends StatelessWidget {
               ],
             ),
             Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-              textStyle.normal('someDetails', 16),
+              InkWell(
+                  onTap: () {
+                    Navigator.of(context)
+                        .pushNamed(PlaceDetailsScreen.routeName);
+                  },
+                  child: textStyle.normal('someDetails', 16)),
               const SizedBox(
                 width: 40,
               ),
