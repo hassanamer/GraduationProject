@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:smarttouristguide/modules/Event&Offer&Places/places/iconOfRate.dart';
 import 'package:smarttouristguide/shared/styles/colors.dart';
 
 import '../../layout/cubit/cubit.dart';
-import '../../modules/event_offer_places/places/iconOfRate.dart';
 
 //default button (ex: Registration,Login, Submit)
 Widget defaultButton({
@@ -146,7 +146,7 @@ Widget HomeRow({
 );
 
 Widget HomeItem() => Container(
-  height: 178.0,
+  height: 200.0,
   width: 148.0,
   decoration: BoxDecoration(
     color: Colors.white,

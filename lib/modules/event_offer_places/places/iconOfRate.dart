@@ -8,10 +8,12 @@ class rate extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: InkWell(
-        onTap: () {},
-        child: const Icon(
+        onTap: () {
+          ChangeColorCubit.get(context).changeColorIcon();
+        },
+        child: Icon(
           Icons.star_rate_sharp,
-          color: AppColors.primaryColor,
+          color: ChangeColorCubit.get(context).x,
           size: 18,
         ),
       ),
