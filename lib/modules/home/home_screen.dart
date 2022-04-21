@@ -21,40 +21,40 @@ class HomeScreen extends StatelessWidget {
               child: Column(
                 children: [
                   Container(
-                      width: 280,
-                      height: 36,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(
-                          11.0,
-                        ),
-                      ),
-                      child: Row(
-                        children: [
-                          SizedBox(
-                            width: 21.0,
-                          ),
-                          SvgPicture.asset(
-                            'assets/icons/search.svg',
-                          ),
-                          SizedBox(
-                            width: 17.0,
-                          ),
-                          Text(
-                            'Where to go?',
-                            style: TextStyle(
-                              color: AppColors.disabledAndHintColor,
-                            ),
-                          ),
-                          SizedBox(
-                            width: 95.0,
-                          ),
-                          SvgPicture.asset(
-                            'assets/icons/mic.svg',
-                          ),
-                        ],
+                    width: 280,
+                    height: 36,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(
+                        11.0,
                       ),
                     ),
+                    child: Row(
+                      children: [
+                        SizedBox(
+                          width: 21.0,
+                        ),
+                        SvgPicture.asset(
+                          'assets/icons/search.svg',
+                        ),
+                        SizedBox(
+                          width: 17.0,
+                        ),
+                        Text(
+                          'Where to go?',
+                          style: TextStyle(
+                            color: AppColors.disabledAndHintColor,
+                          ),
+                        ),
+                        SizedBox(
+                          width: 95.0,
+                        ),
+                        SvgPicture.asset(
+                          'assets/icons/mic.svg',
+                        ),
+                      ],
+                    ),
+                  ),
                   SizedBox(
                     height: 15.0,
                   ),
@@ -86,7 +86,9 @@ class HomeScreen extends StatelessWidget {
               height: 15.0,
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 18,),
+              padding: const EdgeInsets.only(
+                left: 18,
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -109,36 +111,36 @@ class HomeScreen extends StatelessWidget {
                     width: 148.0,
                     decoration: BoxDecoration(
                       color: Colors.white,
-                      borderRadius: BorderRadius.circular(16.0,),
+                      borderRadius: BorderRadius.circular(
+                        16.0,
+                      ),
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children:
-                        [
+                        children: [
                           Center(
                             child: Image.asset('assets/images/test.jpg',
-                            height: 112),
+                                height: 112),
                           ),
                           Text(
                             'Giza Pyramids',
                             style: TextStyle(
-                              fontSize: 13.0,
-                              fontWeight: FontWeight.w600
-                            ),
+                                fontSize: 13.0, fontWeight: FontWeight.w600),
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
-                            children:
-                            [
+                            children: [
                               rate(),
                               rate(),
                               rate(),
                               rate(),
                               rate(),
                               Spacer(),
-                              SvgPicture.asset('assets/icons/goto.svg',)
+                              SvgPicture.asset(
+                                'assets/icons/goto.svg',
+                              )
                             ],
                           ),
                         ],
