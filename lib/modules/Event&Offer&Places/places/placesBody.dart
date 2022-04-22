@@ -7,6 +7,8 @@ import '../../cubit/cubit.dart';
 import '../../cubit/states.dart';
 import '../textStyle.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class PlacesBody extends StatelessWidget {
   final String hidder;
   final String someDetails;
@@ -66,7 +68,8 @@ class PlacesBody extends StatelessWidget {
                     const SizedBox(
                       width: 5,
                     ),
-                    textStyle.normal('see Details', 14),
+                    textStyle.normal(
+                        AppLocalizations.of(context)!.see_details, 14),
                     const SizedBox(
                       width: 15,
                     ),

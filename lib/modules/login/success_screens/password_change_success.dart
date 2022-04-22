@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smarttouristguide/shared/styles/colors.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SuccessScreentwo extends StatelessWidget {
   @override
@@ -29,7 +30,7 @@ class SuccessScreentwo extends StatelessWidget {
                       height: 8.0,
                     ),
                     Text(
-                      "Success",
+                      AppLocalizations.of(context)!.success,
                       style: TextStyle(
                           fontSize: 26.0, fontWeight: FontWeight.bold),
                     ),
@@ -37,7 +38,8 @@ class SuccessScreentwo extends StatelessWidget {
                       height: 10.0,
                     ),
                     Text(
-                      "Congratulation your password has",
+                      AppLocalizations.of(context)!
+                          .congratulation_your_password_has,
                       style: TextStyle(
                           fontSize: 18.0, fontWeight: FontWeight.normal),
                     ),
@@ -45,7 +47,7 @@ class SuccessScreentwo extends StatelessWidget {
                       height: 5.0,
                     ),
                     Text(
-                      "been changed.",
+                      AppLocalizations.of(context)!.been_changed,
                       style: TextStyle(
                           fontSize: 18.0, fontWeight: FontWeight.normal),
                     ),

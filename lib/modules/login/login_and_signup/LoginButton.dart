@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import '../../../shared/styles/colors.dart';
 import 'login_screen.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class LoginButton extends StatelessWidget {
   // static const String routeName = 'loginButton';
 
@@ -35,7 +37,7 @@ class LoginButton extends StatelessWidget {
                     child: LoginScreen());
               });
         },
-        child: const Text('Login'),
+        child: Text(AppLocalizations.of(context)!.login),
       ),
     );
   }

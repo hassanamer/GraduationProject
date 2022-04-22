@@ -7,6 +7,7 @@ import '../../../shared/styles/textStyle.dart';
 import '../../cubit/cubit.dart';
 import '../../cubit/states.dart';
 import 'iconOfRate.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PlacesBody extends StatelessWidget {
   final String hidder;
@@ -77,7 +78,8 @@ class PlacesBody extends StatelessWidget {
                           Navigator.of(context)
                               .pushNamed(PlaceDetailsScreen.routeName);
                         },
-                        child: textStyle.normal('see Details', 14)),
+                        child: textStyle.normal(
+                            AppLocalizations.of(context)!.see_details, 14)),
                     const SizedBox(
                       width: 15,
                     ),

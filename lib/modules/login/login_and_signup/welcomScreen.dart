@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-
 import 'LoginButton.dart';
 import 'SignUpButton.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class Welcome extends StatelessWidget {
   static const String routeName = 'welcomeScreen';
@@ -22,9 +22,9 @@ class Welcome extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Image.asset('assets/images/logo2.png'),
-                    const Text(
-                      'Welcome',
-                      style: TextStyle(
+                    Text(
+                      AppLocalizations.of(context)!.welcome_text,
+                      style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 18,
                       ),
@@ -32,8 +32,8 @@ class Welcome extends StatelessWidget {
                     const SizedBox(
                       height: 15,
                     ),
-                    const Text('We Hope You Find A Destination '),
-                    const Text('Make You Happy '),
+                    Text(AppLocalizations.of(context)!.welcome_state_one),
+                    Text(AppLocalizations.of(context)!.welcome_state_two),
                   ],
                 ),
               ),

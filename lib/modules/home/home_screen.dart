@@ -5,6 +5,7 @@ import 'package:smarttouristguide/modules/Event&Offer&Places/places/iconOfRate.d
 import 'package:smarttouristguide/shared/styles/colors.dart';
 
 import '../../shared/components/components.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomeScreen extends StatelessWidget {
   static const routeName = 'Home';
@@ -61,21 +62,21 @@ class HomeScreen extends StatelessWidget {
                   MaterialButton(
                     onPressed: () {},
                     child: HomeRow(
-                      text: 'events',
+                      text: AppLocalizations.of(context)!.events,
                       iconPath: 'assets/icons/events.svg',
                     ),
                   ),
                   MaterialButton(
                     onPressed: () {},
                     child: HomeRow(
-                      text: 'offers',
+                      text: AppLocalizations.of(context)!.offers,
                       iconPath: 'assets/icons/offers.svg',
                     ),
                   ),
                   MaterialButton(
                     onPressed: () {},
                     child: HomeRow(
-                      text: 'plan',
+                      text: AppLocalizations.of(context)!.plan,
                       iconPath: 'assets/icons/plan.svg',
                     ),
                   ),
@@ -93,14 +94,14 @@ class HomeScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Popular Places',
+                    AppLocalizations.of(context)!.popular_places,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 21.0,
                     ),
                   ),
                   Text(
-                    'Top popular places in Egypt',
+                    AppLocalizations.of(context)!.popular_places_in_egypt,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 16.0,

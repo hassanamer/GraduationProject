@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:smarttouristguide/modules/login/login_and_signup/welcomScreen.dart';
 import 'package:smarttouristguide/shared/styles/colors.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ForgetPassword extends StatelessWidget {
   @override
@@ -72,10 +73,20 @@ class ForgetPassword extends StatelessWidget {
                               ]),
                           const SizedBox(height: 5.0),
                           Row(
-                            children: const [
+                            children: [
                               Text(
-                                "Don't worry! It happens. Please enter\nthe address associated with your account.",
-                                style: TextStyle(
+                                AppLocalizations.of(context)!
+                                    .forget_password_state_one,
+                                style: const TextStyle(
+                                    fontFamily: 'Tajwal',
+                                    fontSize: 18.0,
+                                    color: AppColors.primaryColor,
+                                    fontWeight: FontWeight.w400),
+                              ),
+                              Text(
+                                AppLocalizations.of(context)!
+                                    .forget_password_state_two,
+                                style: const TextStyle(
                                     fontFamily: 'Tajwal',
                                     fontSize: 18.0,
                                     color: AppColors.primaryColor,
@@ -94,13 +105,13 @@ class ForgetPassword extends StatelessWidget {
                         SizedBox(
                           width: MediaQuery.of(context).size.width - 40.0,
                           child: TextFormField(
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: AppColors.primaryColor,
                                 fontSize: 20.0,
                                 fontWeight: FontWeight.w300),
                             keyboardType: TextInputType.emailAddress,
                             decoration: InputDecoration(
-                                suffixIcon: Icon(
+                                suffixIcon: const Icon(
                                   Icons.check_circle,
                                   color: AppColors.primaryColor,
                                 ),
@@ -126,8 +137,8 @@ class ForgetPassword extends StatelessWidget {
                           children: [
                             Center(
                               child: Text(
-                                'Remember the password? ',
-                                style: TextStyle(
+                                AppLocalizations.of(context)!.remember,
+                                style: const TextStyle(
                                     fontFamily: 'Tajwal',
                                     color: AppColors.primaryColor,
                                     fontSize: 20.0,
@@ -142,7 +153,7 @@ class ForgetPassword extends StatelessWidget {
                                         builder: (context) => Welcome()),
                                   );
                                 },
-                                child: Text('Sign in',
+                                child: const Text('Sign in',
                                     style: TextStyle(
                                         fontFamily: 'Tajwal',
                                         fontSize: 20.0,
@@ -166,7 +177,7 @@ class ForgetPassword extends StatelessWidget {
                               onPressed: () {},
                               child: Center(
                                   child: Text(
-                                "Recover",
+                                AppLocalizations.of(context)!.recover,
                                 style: TextStyle(
                                     fontSize: 20.0,
                                     color: Colors.white,

@@ -4,6 +4,7 @@ import 'package:smarttouristguide/modules/login/login_and_signup/forget_password
 import 'package:smarttouristguide/modules/login/login_and_signup/register_container.dart';
 import 'package:smarttouristguide/shared/styles/buttons_style.dart';
 import 'package:smarttouristguide/shared/styles/textStyle.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LoginScreen extends StatelessWidget {
   @override
@@ -40,7 +41,7 @@ class LoginScreen extends StatelessWidget {
                     Navigator.of(context).pushNamed(HomeScreen.routeName);
                   }
                 },
-                text: 'Login',
+                text: AppLocalizations.of(context)!.login,
               ))
         ],
       ),
