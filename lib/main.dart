@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smarttouristguide/layout/cubit/cubit.dart';
-import 'package:smarttouristguide/modules/Event&Offer&Places/places/placeScreen.dart';
-import 'package:smarttouristguide/modules/home/MenuDrawerScreen.dart';
+import 'package:smarttouristguide/modules/Place%20Details/place_details_screen.dart';
 import 'package:smarttouristguide/modules/home/home_screen.dart';
 import 'package:smarttouristguide/modules/login/login_and_signup/welcomScreen.dart';
 import 'package:smarttouristguide/shared/styles/themes.dart';
@@ -31,8 +30,8 @@ class MyApp extends StatelessWidget {
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
         theme: lightTheme,
-        home: PlaceScreen(),
-        locale: Locale('ar'),
+        home: PlaceDeatilsScreen(),
+        locale: Locale('en'),
         routes: {
           HomeScreen.routeName: (context) => HomeScreen(),
           Welcome.routeName: (context) => Welcome(),

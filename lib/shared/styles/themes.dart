@@ -6,7 +6,7 @@ ThemeData lightTheme = ThemeData(
   fontFamily: 'Jannah',
   scaffoldBackgroundColor: AppColors.backgroundColor,
   appBarTheme: AppBarTheme(
-    backgroundColor: AppColors.backgroundColor,
+    backgroundColor: AppColors.primaryColor,
     elevation: 0.0,
   ),
   colorScheme: ColorScheme.fromSwatch().copyWith(

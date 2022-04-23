@@ -62,6 +62,10 @@ hexcolor
 2.15
 file:///C:/flutter/.pub-cache/hosted/pub.dartlang.org/hexcolor-2.0.6/
 file:///C:/flutter/.pub-cache/hosted/pub.dartlang.org/hexcolor-2.0.6/lib/
+intl
+2.12
+file:///C:/flutter/.pub-cache/hosted/pub.dartlang.org/intl-0.17.0/
+file:///C:/flutter/.pub-cache/hosted/pub.dartlang.org/intl-0.17.0/lib/
 js
 2.12
 file:///C:/flutter/.pub-cache/hosted/pub.dartlang.org/js-0.6.3/
@@ -154,6 +158,10 @@ flutter
 2.12
 file:///C:/flutter/packages/flutter/
 file:///C:/flutter/packages/flutter/lib/
+flutter_localizations
+2.12
+file:///C:/flutter/packages/flutter_localizations/
+file:///C:/flutter/packages/flutter_localizations/lib/
 flutter_test
 2.12
 file:///C:/flutter/packages/flutter_test/

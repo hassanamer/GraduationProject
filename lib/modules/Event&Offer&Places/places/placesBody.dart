@@ -73,15 +73,13 @@ class PlacesBody extends StatelessWidget {
                     const SizedBox(
                       width: 15,
                     ),
-                    InkWell(
-                      onTap: () {
+                    IconButton(
+                      onPressed: ()
+                      {
                         ChangeColorCubit.get(context).changeColorIcon();
                       },
-                      child: Icon(
-                        Icons.favorite,
-                        color: ChangeColorCubit.get(context).x,
-                        size: 30,
-                      ),
+                      icon:Icon(Icons.favorite,size: 30,),
+                      color: ChangeColorCubit.get(context).x,
                     ),
                     const SizedBox(
                       width: 15,
