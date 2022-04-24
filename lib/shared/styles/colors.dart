@@ -7,6 +7,7 @@ class AppColors {
   static const Color textFieldColor = Color(0xffbec5d1);
   static const Color buttonTwoColor = Color(0xffc1d4d6);
   static const Color disabledAndHintColor = Color(0xff9ca3af);
+  static const Color bodyDetailsColor = Color(0xff6b7280);
 }
 
 class Palette {
