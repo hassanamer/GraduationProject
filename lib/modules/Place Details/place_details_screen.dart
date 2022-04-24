@@ -144,6 +144,9 @@ class PlaceDeatilsScreen extends StatelessWidget {
                 ),
               ),
             ),
+            SizedBox(
+              height: 5.0,
+            ),
             Container(
               decoration: BoxDecoration(
                 color: Colors.white,
