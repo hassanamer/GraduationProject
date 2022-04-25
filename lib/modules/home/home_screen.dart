@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:smarttouristguide/modules/event_offer_places/OfferScreen.dart';
-import 'package:smarttouristguide/modules/event_offer_places/OfferScreen.dart';
 import 'package:smarttouristguide/modules/event_offer_places/eventScreen.dart';
 import 'package:smarttouristguide/shared/styles/colors.dart';
 
