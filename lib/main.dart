@@ -11,6 +11,7 @@ import 'modules/event_offer_places/OfferScreen.dart';
 import 'modules/event_offer_places/eventScreen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+
 void main() {
   runApp(MyApp());
 }
@@ -32,7 +33,7 @@ class MyApp extends StatelessWidget {
         supportedLocales: AppLocalizations.supportedLocales,
         //locale: Locale("${changeLanguage()}"),
         theme: lightTheme,
-        home: menuDrawerScreen(),
+        home: PlaceDetailsScreen(),
         routes: {
           HomeScreen.routeName: (context) => HomeScreen(),
           Welcome.routeName: (context) => Welcome(),
