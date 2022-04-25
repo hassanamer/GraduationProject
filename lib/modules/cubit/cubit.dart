@@ -10,6 +10,9 @@ class ChangeColorCubit extends Cubit<ChangesStates> {
 
   bool iconColor = true;
   Color x = AppColors.disabledAndHintColor;
+  bool changeLanguage = false;
+  bool changeMode = false;
+  String? y;
 
   static ChangeColorCubit get(context) => BlocProvider.of(context);
   void changeColorIcon() {
@@ -25,7 +28,31 @@ class ChangeColorCubit extends Cubit<ChangesStates> {
     }
 
     emit(ChangeColorState());
+  }
 
-    print('$iconColor');
+  void togaleLanguage() {
+    if (changeLanguage == true) {
+      y = 'en';
+
+      emit(ChangeLanguage());
+      changeLanguage = false;
+    } else if (changeLanguage == false) {
+      y = 'ar';
+      emit(ChangeLanguage1());
+      changeLanguage = true;
+    }
+    emit(ChangeLanguage());
+    changeLanguage != changeLanguage;
+  }
+
+  void togaleMode() {
+    if (changeMode == true) {
+      emit(ChangeLanguage());
+      changeMode = false;
+    } else if (changeMode == false) {
+      emit(ChangeLanguage1());
+      changeMode = true;
+    }
+    emit(ChangeLanguage());
   }
 }
