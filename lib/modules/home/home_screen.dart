@@ -1,13 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:smarttouristguide/modules/Event&Offer&Places/places/iconOfRate.dart';
+import 'package:smarttouristguide/modules/event_offer_places/eventScreen.dart';
 import 'package:smarttouristguide/shared/styles/colors.dart';
 
 import '../../shared/components/components.dart';
+import '../event_offer_places/OfferScreen.dart';
+import '../event_offer_places/places/iconOfRate.dart';
 
 class HomeScreen extends StatelessWidget {
-  static const routeName = 'Home';
+  static const routeName = 'HomeScreen';
 
   @override
   Widget build(BuildContext context) {
@@ -59,14 +61,14 @@ class HomeScreen extends StatelessWidget {
                     height: 15.0,
                   ),
                   MaterialButton(
-                    onPressed: () {},
+                    onPressed: () {Navigator.of(context).pushNamed(EventScreen.routeName);},
                     child: HomeRow(
                       text: 'events',
                       iconPath: 'assets/icons/events.svg',
                     ),
                   ),
                   MaterialButton(
-                    onPressed: () {},
+                    onPressed: () {Navigator.of(context).pushNamed(OfferScreen.routeName);},
                     child: HomeRow(
                       text: 'offers',
                       iconPath: 'assets/icons/offers.svg',
