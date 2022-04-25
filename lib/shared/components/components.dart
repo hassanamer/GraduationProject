@@ -112,7 +112,7 @@ Widget HomeRow({
   decoration: BoxDecoration(
     color: Color(0xffffebc9),
     borderRadius: BorderRadius.circular(19.0,),
-    boxShadow: [
+    boxShadow: const [
       BoxShadow(
         color: Color(
           0x16000000,
