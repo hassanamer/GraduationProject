@@ -29,20 +29,25 @@ class LoginScreen extends StatelessWidget {
             ],
           ),
           Spacer(),
-          Container(
-              margin: EdgeInsets.symmetric(vertical: 8, horizontal: 70),
-              width: double.infinity,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16),
-                  color: Theme.of(context).primaryColor),
-              child: button(
-                function: () {
-                  {
-                    Navigator.of(context).pushNamed(HomeScreen.routeName);
-                  }
-                },
-                text: AppLocalizations.of(context)!.login,
-              ))
+          InkWell(
+            onTap: () {
+              Navigator.of(context).pushNamed(HomeScreen.routeName);
+            },
+            child: Container(
+                margin: EdgeInsets.symmetric(vertical: 8, horizontal: 70),
+                width: double.infinity,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16),
+                    color: Theme.of(context).primaryColor),
+                child: button(
+                  function: () {
+                    {
+                      Navigator.of(context).pushNamed(HomeScreen.routeName);
+                    }
+                  },
+                  text: AppLocalizations.of(context)!.login,
+                )),
+          )
         ],
       ),
     );

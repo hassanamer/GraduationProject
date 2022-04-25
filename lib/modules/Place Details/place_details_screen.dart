@@ -6,6 +6,8 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 class PlaceDeatilsScreen extends StatelessWidget {
   var mediaController = PageController();
 
+  static const String routeName = 'PlaceDeatilsScreen';
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -158,8 +160,7 @@ class PlaceDeatilsScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(12.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children:
-                  [
+                  children: [
                     Text(
                       'About Dream Park',
                       style: TextStyle(
@@ -180,17 +181,17 @@ class PlaceDeatilsScreen extends StatelessWidget {
                       child: Container(
                         width: 285.0,
                         decoration: BoxDecoration(
-                          color: AppColors.backgroundColor,
-                          borderRadius: BorderRadius.circular(20,)
-                        ),
+                            color: AppColors.backgroundColor,
+                            borderRadius: BorderRadius.circular(
+                              20,
+                            )),
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
                             horizontal: 20.0,
                             vertical: 5.0,
                           ),
                           child: Row(
-                            children:
-                            [
+                            children: [
                               Text(
                                 'Visit Webiste',
                                 style: TextStyle(
@@ -200,7 +201,9 @@ class PlaceDeatilsScreen extends StatelessWidget {
                                 ),
                               ),
                               Spacer(),
-                              SvgPicture.asset('assets/icons/website.svg',),
+                              SvgPicture.asset(
+                                'assets/icons/website.svg',
+                              ),
                             ],
                           ),
                         ),
