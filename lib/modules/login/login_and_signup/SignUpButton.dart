@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../shared/styles/colors.dart';
 import 'SignUpScreen.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SignUpButton extends StatelessWidget {
   @override
@@ -33,7 +34,7 @@ class SignUpButton extends StatelessWidget {
                     child: SignUpScreen());
               });
         },
-        child: const Text('Sign Up'),
+        child: Text(AppLocalizations.of(context)!.sign_up),
       ),
     );
   }

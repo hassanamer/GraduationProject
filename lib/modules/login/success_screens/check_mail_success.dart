@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smarttouristguide/shared/styles/colors.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SuccessScreen extends StatelessWidget {
   @override
@@ -31,7 +32,7 @@ class SuccessScreen extends StatelessWidget {
                             height: 8.0,
                           ),
                           Text(
-                            "Success",
+                            AppLocalizations.of(context)!.success,
                             style: TextStyle(
                                 fontSize: 26.0, fontWeight: FontWeight.bold),
                           ),
@@ -39,7 +40,7 @@ class SuccessScreen extends StatelessWidget {
                             height: 7.0,
                           ),
                           Text(
-                            "Please check your email to create",
+                            AppLocalizations.of(context)!.check_your_email,
                             style: TextStyle(
                                 fontSize: 18.0, fontWeight: FontWeight.normal),
                           ),
@@ -47,7 +48,7 @@ class SuccessScreen extends StatelessWidget {
                             height: 5.0,
                           ),
                           Text(
-                            "A new password",
+                            AppLocalizations.of(context)!.new_password,
                             style: TextStyle(
                                 fontSize: 18.0, fontWeight: FontWeight.normal),
                           ),
@@ -56,7 +57,8 @@ class SuccessScreen extends StatelessWidget {
                             children: [
                               Center(
                                 child: Text(
-                                  'Can\'t Get Email ?',
+                                  AppLocalizations.of(context)!
+                                      .can_not_get_email,
                                   style: TextStyle(
                                       fontSize: 20.0,
                                       fontWeight: FontWeight.bold),
@@ -64,7 +66,8 @@ class SuccessScreen extends StatelessWidget {
                               ),
                               TextButton(
                                   onPressed: () {},
-                                  child: Text('Resubmit',
+                                  child: Text(
+                                      AppLocalizations.of(context)!.resubmit,
                                       style: TextStyle(
                                           fontSize: 20.0,
                                           color: AppColors.primaryColor,
@@ -87,17 +90,17 @@ class SuccessScreen extends StatelessWidget {
                         child: ElevatedButton(
                           onPressed: () {},
                           child: Text(
-                            'Submit',
+                            AppLocalizations.of(context)!.submit,
                             style: TextStyle(fontSize: 18.0),
                           ),
                           style: ButtonStyle(
                               backgroundColor: MaterialStateProperty.all<Color>(
                                   AppColors.primaryColor),
                               shape: MaterialStateProperty.all<
-                                  RoundedRectangleBorder>(
+                                      RoundedRectangleBorder>(
                                   RoundedRectangleBorder(
                                       borderRadius:
-                                      BorderRadius.circular(15.0)))),
+                                          BorderRadius.circular(15.0)))),
                         ),
                       ),
                     )

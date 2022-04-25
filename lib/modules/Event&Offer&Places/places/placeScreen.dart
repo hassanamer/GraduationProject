@@ -38,8 +38,8 @@ class _PlaceScreenState extends State<PlaceScreen> {
             ),
             child: ClipRRect(
               borderRadius: const BorderRadius.only(
-                topLeft: const Radius.circular(20.0),
-                topRight: const Radius.circular(20.0),
+                topLeft:  Radius.circular(20.0),
+                topRight:  Radius.circular(20.0),
               ),
               child: BottomNavigationBar(
                 backgroundColor: Colors.white,

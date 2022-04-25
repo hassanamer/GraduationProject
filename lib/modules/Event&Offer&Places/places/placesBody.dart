@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:smarttouristguide/layout/cubit/states.dart';
 import 'package:smarttouristguide/modules/Event&Offer&Places/places/iconOfRate.dart';
+import 'package:smarttouristguide/modules/Place%20Details/place_details_screen.dart';
 import 'package:smarttouristguide/shared/styles/colors.dart';
 
+import '../../../layout/cubit/cubit.dart';
 import '../../cubit/cubit.dart';
 import '../../cubit/states.dart';
+import '../../event_offer_places/places/placeDetailsScreen.dart';
 import '../textStyle.dart';
+
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PlacesBody extends StatelessWidget {
   final String hidder;
@@ -15,8 +21,8 @@ class PlacesBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (BuildContext context) => ChangeColorCubit(),
-      child: BlocConsumer<ChangeColorCubit, ChangesStates>(
+      create: (BuildContext context) => AppCubit(),
+      child: BlocConsumer<AppCubit, AppStates>(
         listener: (context, state) {},
         builder: (context, state) {
           return Container(
@@ -66,19 +72,26 @@ class PlacesBody extends StatelessWidget {
                     const SizedBox(
                       width: 5,
                     ),
-                    textStyle.normal('see Details', 14),
+                    InkWell(
+                      onTap: () {
+                        Navigator.of(context)
+                            .pushNamed(PlaceDeatilsScreen.routeName);
+                      },
+                      child: textStyle.normal(
+                          AppLocalizations.of(context)!.see_details, 14),
+                    ),
                     const SizedBox(
                       width: 15,
                     ),
-                    InkWell(
-                      onTap: () {
+                    IconButton(
+                      onPressed: () {
                         ChangeColorCubit.get(context).changeColorIcon();
                       },
-                      child: Icon(
+                      icon: const Icon(
                         Icons.favorite,
-                        color: ChangeColorCubit.get(context).x,
                         size: 30,
                       ),
+                      color: ChangeColorCubit.get(context).x,
                     ),
                     const SizedBox(
                       width: 15,

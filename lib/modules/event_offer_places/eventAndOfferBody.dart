@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:smarttouristguide/modules/event_offer_places/places/placeDetailsScreen.dart';
 import '../../shared/styles/textStyle.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class eventAndOfferBody extends StatelessWidget {
   final String hidder;
@@ -62,7 +63,7 @@ class eventAndOfferBody extends StatelessWidget {
               const SizedBox(
                 width: 5,
               ),
-              textStyle.normal('see Details', 14),
+              textStyle.normal(AppLocalizations.of(context)!.see_details, 14),
               const SizedBox(
                 width: 30,
               )

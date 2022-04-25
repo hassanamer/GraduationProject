@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:smarttouristguide/modules/login/login_and_signup/registerContinarWithSpacer.dart';
 import 'package:smarttouristguide/modules/login/login_and_signup/register_container.dart';
 import 'package:smarttouristguide/shared/styles/buttons_style.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../home/home_screen.dart';
 
 class SignUpScreen extends StatelessWidget {
@@ -34,7 +34,7 @@ class SignUpScreen extends StatelessWidget {
                           Navigator.of(context).pushNamed(HomeScreen.routeName);
                         }
                       },
-                      text: 'Submit')
+                      text: AppLocalizations.of(context)!.submit)
                 ],
               ),
             ),

@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:smarttouristguide/layout/app_layout.dart';
-import 'package:smarttouristguide/layout/cubit/cubit.dart';
+import 'package:smarttouristguide/layout/cubit/states.dart';
+import 'package:smarttouristguide/modules/cubit/cubit.dart';
+import 'package:smarttouristguide/modules/home/MenuDrawerScreen.dart';
 import 'package:smarttouristguide/modules/home/home_screen.dart';
 import 'package:smarttouristguide/modules/login/login_and_signup/welcomScreen.dart';
 import 'package:smarttouristguide/shared/styles/themes.dart';
+import 'modules/Place Details/place_details_screen.dart';
 import 'modules/event_offer_places/OfferScreen.dart';
 import 'modules/event_offer_places/eventScreen.dart';
-import 'modules/event_offer_places/places/placeDetailsScreen.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() {
   runApp(MyApp());
@@ -20,20 +22,23 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (BuildContext context) => AppCubit(),
+          create: (BuildContext context) => ChangeColorCubit(),
         ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Smart Tourist guide',
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
+        //locale: Locale("${changeLanguage()}"),
         theme: lightTheme,
-        home: Welcome(),
+        home: menuDrawerScreen(),
         routes: {
           HomeScreen.routeName: (context) => HomeScreen(),
           Welcome.routeName: (context) => Welcome(),
-          PlaceDetailsScreen.routeName: (context) => PlaceDetailsScreen(),
           OfferScreen.routeName: (context) => OfferScreen(),
           EventScreen.routeName: (context) => EventScreen(),
+          PlaceDeatilsScreen.routeName: (context) => PlaceDeatilsScreen(),
         },
       ),
     );

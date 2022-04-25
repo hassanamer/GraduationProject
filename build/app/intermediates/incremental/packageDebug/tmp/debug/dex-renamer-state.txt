@@ -1,4 +1,4 @@
-#Thu Apr 21 00:54:46 EET 2022
+#Sun Apr 24 17:55:41 EET 2022
 base.0=C\:\\Users\\hazem\\StudioProjects\\graduationproject\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
 renamed.0=classes.dex
 path.0=classes.dex
