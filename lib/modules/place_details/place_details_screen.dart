@@ -11,6 +11,7 @@ class PlaceDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: AppColors.primaryColor,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
             bottomLeft: Radius.circular(18),
@@ -119,6 +120,7 @@ class PlaceDetailsScreen extends StatelessWidget {
                           color: AppColors.disabledAndHintColor,
                           size: 20.0,
                         ),
+                        //color(0xff
                         Spacer(),
                         InkWell(
                           onTap: () {},
