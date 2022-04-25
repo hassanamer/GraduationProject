@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-
+import 'package:smarttouristguide/modules/login/login_and_signup/SignUpScreen.dart';
+import 'package:smarttouristguide/modules/login/login_and_signup/login_screen.dart';
 import 'LoginButton.dart';
-import 'SignUpButton.dart';
-
 class Welcome extends StatelessWidget {
   static const String routeName = 'welcomeScreen';
 
@@ -38,8 +37,8 @@ class Welcome extends StatelessWidget {
                 ),
               ),
             ),
-            SignUpButton(),
-            LoginButton(),
+          LoginAndSignUpButton(SignUpScreen(),'SignUp'),
+            LoginAndSignUpButton(LoginScreen(),'Login'),
             const SizedBox(
               height: 60,
             )
