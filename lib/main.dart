@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
         supportedLocales: AppLocalizations.supportedLocales,
         //locale: Locale("${changeLanguage()}"),
         theme: lightTheme,
-        home: PlaceDetailsScreen(),
+        home: Welcome(),
         routes: {
           HomeScreen.routeName: (context) => HomeScreen(),
           Welcome.routeName: (context) => Welcome(),
