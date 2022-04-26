@@ -33,7 +33,7 @@ void navigateTo({required widget, required context}) => Navigator.push(
       ),
     );
 
-void navigateAndFinish(context, widget) => Navigator.pushAndRemoveUntil(
+void navigateAndFinish({required widget, required context}) => Navigator.pushAndRemoveUntil(
     context, MaterialPageRoute(builder: (context) => widget), (route) => false);
 
 Widget bottomNavBar(context) {

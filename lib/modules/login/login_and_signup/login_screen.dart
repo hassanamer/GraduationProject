@@ -47,11 +47,13 @@ class LoginScreen extends StatelessWidget {
               textColor: Colors.white,
               child: const Text(
                 'Login',
-                style: TextStyle(
-                ),
+                style: TextStyle(),
               ),
               onPressed: () {
-                navigateTo(widget: HomeScreen(), context: context);
+                navigateAndFinish(
+                  context: context,
+                  widget: HomeScreen(),
+                );
               },
             ),
           ),
