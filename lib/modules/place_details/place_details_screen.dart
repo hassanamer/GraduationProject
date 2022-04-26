@@ -95,31 +95,11 @@ class PlaceDetailsScreen extends StatelessWidget {
                     ),
                     Row(
                       children: [
-                        const Icon(
-                          Icons.star_rate_rounded,
-                          color: AppColors.primaryColor,
-                          size: 20.0,
-                        ),
-                        const Icon(
-                          Icons.star_rate_rounded,
-                          color: AppColors.primaryColor,
-                          size: 20.0,
-                        ),
-                        const Icon(
-                          Icons.star_rate_rounded,
-                          color: AppColors.primaryColor,
-                          size: 20.0,
-                        ),
-                        const Icon(
-                          Icons.star_rate_rounded,
-                          color: AppColors.primaryColor,
-                          size: 20.0,
-                        ),
-                        const Icon(
-                          Icons.star_rate_rounded,
-                          color: AppColors.disabledAndHintColor,
-                          size: 20.0,
-                        ),
+                        RateIcon(true, 20),
+                        RateIcon(true, 20),
+                        RateIcon(true, 20),
+                        RateIcon(true, 20),
+                        RateIcon(false, 20),
                         //color(0xff
                         Spacer(),
                         InkWell(
@@ -234,3 +214,10 @@ Widget hazem() => Container(
         ),
       ),
     );
+
+Widget RateIcon(bool color, double size) => Icon(
+  Icons.star_rate_rounded,
+  color: color ? AppColors.primaryColor : AppColors.disabledAndHintColor,
+  size: size,
+
+);

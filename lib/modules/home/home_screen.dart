@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:smarttouristguide/modules/event_offer_places/places/iconOfRate.dart';
+import 'package:smarttouristguide/modules/place_details/place_details_screen.dart';
 import 'package:smarttouristguide/shared/styles/colors.dart';
 
 import '../../shared/components/components.dart';
@@ -133,11 +134,11 @@ class HomeScreen extends StatelessWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              rate(),
-                              rate(),
-                              rate(),
-                              rate(),
-                              rate(),
+                              RateIcon(true, 18),
+                              RateIcon(true, 18),
+                              RateIcon(true, 18),
+                              RateIcon(true, 18),
+                              RateIcon(false, 18),
                               Spacer(),
                               SvgPicture.asset(
                                 'assets/icons/goto.svg',
