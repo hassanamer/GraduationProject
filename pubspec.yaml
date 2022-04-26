@@ -28,10 +28,14 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
 
-
-    # switch animation between light and dark theme
   flutter:
     sdk: flutter
+
+  flutter_localizations:
+    sdk: flutter
+  intl: ^0.17.0
+
+  email_validator: '^1.0.6'
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -44,11 +48,10 @@ dependencies:
   flutter_bloc: ^8.0.0
   smooth_page_indicator: ^1.0.0+2
   flutter_svg: ^1.0.3
-  intl: ^0.17.0
+
   dio: ^4.0.4
 
-  flutter_localizations:
-    sdk: flutter
+
 
 dev_dependencies:
   flutter_test:
@@ -66,12 +69,14 @@ dev_dependencies:
 
 # The following section is specific to Flutter.
 flutter:
+  generate: true
+
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
-  generate: true
+
 
   # To add assets to your application, add an assets section, like this:
   assets:

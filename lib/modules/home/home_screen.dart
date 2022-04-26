@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:smarttouristguide/modules/event_offer_places/places/iconOfRate.dart';
 import 'package:smarttouristguide/modules/place_details/place_details_screen.dart';
 import 'package:smarttouristguide/shared/styles/colors.dart';
 
@@ -9,7 +8,7 @@ import '../../shared/components/components.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomeScreen extends StatelessWidget {
-  static const routeName = 'Home';
+  static const routeName = 'HomeScreen';
 
   @override
   Widget build(BuildContext context) {

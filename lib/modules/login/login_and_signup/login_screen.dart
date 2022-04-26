@@ -3,6 +3,7 @@ import 'package:smarttouristguide/modules/home/home_screen.dart';
 import 'package:smarttouristguide/modules/login/login_and_signup/forget_password.dart';
 import 'package:smarttouristguide/modules/login/login_and_signup/register_container.dart';
 import 'package:smarttouristguide/shared/components/components.dart';
+import 'package:smarttouristguide/shared/styles/buttons_style.dart';
 import 'package:smarttouristguide/shared/styles/colors.dart';
 import 'package:smarttouristguide/shared/styles/textStyle.dart';
 
@@ -32,30 +33,7 @@ class LoginScreen extends StatelessWidget {
             ],
           ),
           Spacer(),
-          Container(
-            margin: EdgeInsets.symmetric(
-              vertical: 8,
-              horizontal: 70,
-            ),
-            width: double.infinity,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(16),
-              color: AppColors.primaryColor,
-            ),
-            child: MaterialButton(
-              textColor: Colors.white,
-              child: const Text(
-                'Login',
-                style: TextStyle(),
-              ),
-              onPressed: () {
-                navigateAndFinish(
-                  context: context,
-                  widget: HomeScreen(),
-                );
-              },
-            ),
-          ),
+         button(function: (){Navigator.of(context).pushNamed(HomeScreen.routeName);}, text: 'Login')
         ],
       ),
     );
