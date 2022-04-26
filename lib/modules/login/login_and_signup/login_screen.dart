@@ -3,7 +3,6 @@ import 'package:smarttouristguide/modules/home/home_screen.dart';
 import 'package:smarttouristguide/modules/login/login_and_signup/forget_password.dart';
 import 'package:smarttouristguide/modules/login/login_and_signup/register_container.dart';
 import 'package:smarttouristguide/shared/components/components.dart';
-import 'package:smarttouristguide/shared/styles/buttons_style.dart';
 import 'package:smarttouristguide/shared/styles/colors.dart';
 import 'package:smarttouristguide/shared/styles/textStyle.dart';
 
