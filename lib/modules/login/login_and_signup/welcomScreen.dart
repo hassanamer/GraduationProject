@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'LoginButton.dart';
 import 'SignUpButton.dart';
 

@@ -18,7 +18,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.16.1 <3.0.0"
+  sdk: ">=2.12.0 <3.0.0"
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -29,10 +29,16 @@ environment:
 dependencies:
   hexcolor: ^2.0.6
   fluttertoast: ^8.0.8
-    # switch animation between light and dark theme
+  # switch animation between light and dark theme
   animated_theme_switcher: ^2.0.1-nullsafety.0
   flutter:
     sdk: flutter
+  #Firebase
+  cloud_firestore: ^3.1.13
+  firebase_core: ^1.15.0
+  firebase_auth: ^3.3.15
+  firebase_messaging: ^11.2.14
+
 
 
 
@@ -56,7 +62,7 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^1.0.0
+#  flutter_lints: 2.0.1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -72,13 +78,9 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-
-    - assets/images/
-    - assets/icons/
-  #   - images/a_dot_ham.jpeg
-
-    - assets/icons/
     - assets/
+    - assets/icons/
+    - assets/images/
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -93,26 +95,12 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: Jannah
-      fonts:
-        - asset: assets/fonts/jannah.ttf
-
-    - family: Tajwal
+    - family: Tajawal-ExtraLight
       fonts:
         - asset: assets/fonts/Tajawal-ExtraLight.ttf
-          weight: 200
-        - asset: assets/fonts/Tajawal-Light.ttf
-          weight: 300
-        - asset: assets/fonts/Tajawal-Regular.ttf
-          weight: 400
-        - asset: assets/fonts/Tajawal-Medium.ttf
-          weight: 500
-        - asset: assets/fonts/Tajawal-Bold.ttf
-          weight: 700
-        - asset: assets/fonts/Tajawal-ExtraBold.ttf
-          weight: 800
-        - asset: assets/fonts/Tajawal-Black.ttf
-          weight: 900
+    - family: jannah
+      fonts:
+        - asset: assets/fonts/jannah.ttf
 
   #   - family: Trajan Pro
   #     fonts:

@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:smarttouristguide/modules/Event&Offer&Places/places/iconOfRate.dart';
+import 'package:smarttouristguide/modules/event_offer_places/places/iconOfRate.dart';
 import 'package:smarttouristguide/shared/styles/colors.dart';
 
 import '../../layout/cubit/cubit.dart';
@@ -27,13 +27,13 @@ Widget defaultButton({
     );
 
 void navigateTo({required widget, required context}) => Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => widget,
-      ),
-    );
+  context,
+  MaterialPageRoute(
+    builder: (context) => widget,
+  ),
+);
 
-void navigateAndFinish(context, widget) => Navigator.pushAndRemoveUntil(
+void navigateAndFinish({required widget, required context}) => Navigator.pushAndRemoveUntil(
     context, MaterialPageRoute(builder: (context) => widget), (route) => false);
 
 Widget bottomNavBar(context) {
@@ -112,7 +112,7 @@ Widget HomeRow({
   decoration: BoxDecoration(
     color: Color(0xffffebc9),
     borderRadius: BorderRadius.circular(19.0,),
-    boxShadow: [
+    boxShadow: const [
       BoxShadow(
         color: Color(
           0x16000000,

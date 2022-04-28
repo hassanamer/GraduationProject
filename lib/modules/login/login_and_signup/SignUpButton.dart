@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../../../shared/styles/colors.dart';
 import 'SignUpScreen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -31,7 +30,7 @@ class SignUpButton extends StatelessWidget {
                             topRight: Radius.circular(20),
                             topLeft: Radius.circular(20)),
                         color: Colors.white),
-                    child: SignUpScreen());
+                    child: RegisterScreen());
               });
         },
         child: Text(AppLocalizations.of(context)!.sign_up),
