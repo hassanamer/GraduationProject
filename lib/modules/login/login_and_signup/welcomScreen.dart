@@ -20,7 +20,9 @@ class Welcome extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Image.asset('assets/images/logo2.png'),
+                    Image.asset(
+                      'assets/images/logo2.png',
+                    ),
                     const Text(
                       'Welcome',
                       style: TextStyle(
@@ -31,8 +33,12 @@ class Welcome extends StatelessWidget {
                     const SizedBox(
                       height: 15,
                     ),
-                    const Text('We Hope You Find A Destination '),
-                    const Text('Make You Happy '),
+                    const Text(
+                      'We Hope You Find A Destination ',
+                    ),
+                    const Text(
+                      'Make You Happy ',
+                    ),
                   ],
                 ),
               ),

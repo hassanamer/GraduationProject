@@ -1,12 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:smarttouristguide/modules/event_offer_places/eventScreen.dart';
+import 'package:smarttouristguide/modules/place_details/place_details_screen.dart';
 import 'package:smarttouristguide/shared/styles/colors.dart';
 
 import '../../shared/components/components.dart';
-import '../event_offer_places/OfferScreen.dart';
-import '../event_offer_places/places/iconOfRate.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomeScreen extends StatelessWidget {
   static const routeName = 'HomeScreen';
@@ -61,23 +60,23 @@ class HomeScreen extends StatelessWidget {
                     height: 15.0,
                   ),
                   MaterialButton(
-                    onPressed: () {Navigator.of(context).pushNamed(EventScreen.routeName);},
+                    onPressed: () {},
                     child: HomeRow(
-                      text: 'events',
+                      text: AppLocalizations.of(context)!.events,
                       iconPath: 'assets/icons/events.svg',
                     ),
                   ),
                   MaterialButton(
-                    onPressed: () {Navigator.of(context).pushNamed(OfferScreen.routeName);},
+                    onPressed: () {},
                     child: HomeRow(
-                      text: 'offers',
+                      text: AppLocalizations.of(context)!.offers,
                       iconPath: 'assets/icons/offers.svg',
                     ),
                   ),
                   MaterialButton(
                     onPressed: () {},
                     child: HomeRow(
-                      text: 'plan',
+                      text: AppLocalizations.of(context)!.plan,
                       iconPath: 'assets/icons/plan.svg',
                     ),
                   ),
@@ -95,14 +94,14 @@ class HomeScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Popular Places',
+                    AppLocalizations.of(context)!.popular_places,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 21.0,
                     ),
                   ),
                   Text(
-                    'Top popular places in Egypt',
+                    AppLocalizations.of(context)!.popular_places_in_egypt,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 16.0,
@@ -134,11 +133,11 @@ class HomeScreen extends StatelessWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              rate(),
-                              rate(),
-                              rate(),
-                              rate(),
-                              rate(),
+                              RateIcon(true, 18),
+                              RateIcon(true, 18),
+                              RateIcon(true, 18),
+                              RateIcon(true, 18),
+                              RateIcon(false, 18),
                               Spacer(),
                               SvgPicture.asset(
                                 'assets/icons/goto.svg',
