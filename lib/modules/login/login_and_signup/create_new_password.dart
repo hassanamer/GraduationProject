@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smarttouristguide/shared/styles/colors.dart';
-
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import '../../user/user_screen.dart';
 
 class CreateNewPassword extends StatelessWidget {
