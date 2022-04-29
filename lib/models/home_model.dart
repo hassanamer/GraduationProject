@@ -1,4 +1,4 @@
-class stg_model {
+class StgModel {
   int? cat;
   String? placeName;
   int? rate;
@@ -8,7 +8,7 @@ class stg_model {
   String? comment;
   String? img;
 
-  stg_model(
+  StgModel(
       {this.cat,
         this.placeName,
         this.rate,
@@ -18,7 +18,7 @@ class stg_model {
         this.comment,
         this.img});
 
-  stg_model.fromJson(Map<String, dynamic> json) {
+  StgModel.fromJson(Map<String, dynamic> json) {
     cat = json['cat'];
     placeName = json['place name'];
     rate = json['rate'];

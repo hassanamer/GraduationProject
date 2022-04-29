@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:smarttouristguide/modules/event_offer_places/places/iconOfRate.dart';
+import 'package:smarttouristguide/layout/cubit/cubit.dart';
+import 'package:smarttouristguide/models/home_model.dart';
 import 'package:smarttouristguide/modules/place_details/place_details_screen.dart';
 import 'package:smarttouristguide/shared/styles/colors.dart';
 
@@ -13,6 +14,8 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var cubit = AppCubit.get(context);
+
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -108,47 +111,7 @@ class HomeScreen extends StatelessWidget {
                       fontSize: 16.0,
                     ),
                   ),
-                  Container(
-                    height: 178.0,
-                    width: 148.0,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(
-                        16.0,
-                      ),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Center(
-                            child: Image.asset('assets/images/test.jpg',
-                                height: 112),
-                          ),
-                          Text(
-                            'Giza Pyramids',
-                            style: TextStyle(
-                                fontSize: 13.0, fontWeight: FontWeight.w600),
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              RateIcon(true, 18),
-                              RateIcon(true, 18),
-                              RateIcon(true, 18),
-                              RateIcon(true, 18),
-                              RateIcon(false, 18),
-                              Spacer(),
-                              SvgPicture.asset(
-                                'assets/icons/goto.svg',
-                              )
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
+                  HomeItem(cubit.stgModel),
                 ],
               ),
             ),
@@ -158,3 +121,43 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
+
+Widget HomeItem(StgModel? model) => Container(
+      height: 178.0,
+      width: 148.0,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(
+          16.0,
+        ),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Image(
+              image: NetworkImage('${model?.img}'),
+            ),
+            Text(
+              '${model?.placeName}',
+              style: TextStyle(fontSize: 13.0, fontWeight: FontWeight.w600),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                RateIcon(true, 18),
+                RateIcon(true, 18),
+                RateIcon(true, 18),
+                RateIcon(true, 18),
+                RateIcon(false, 18),
+                Spacer(),
+                SvgPicture.asset(
+                  'assets/icons/goto.svg',
+                )
+              ],
+            ),
+          ],
+        ),
+      ),
+    );

@@ -4,7 +4,6 @@ import 'package:smarttouristguide/layout/cubit/cubit.dart';
 import 'package:smarttouristguide/modules/cubit/cubit.dart';
 import 'package:smarttouristguide/modules/home/home_screen.dart';
 import 'package:smarttouristguide/modules/login/login_and_signup/welcomScreen.dart';
-import 'package:smarttouristguide/modules/place_details/place_details_screen.dart';
 import 'package:smarttouristguide/shared/styles/themes.dart';
 import 'modules/event_offer_places/OfferScreen.dart';
 import 'modules/event_offer_places/eventScreen.dart';
@@ -22,7 +21,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (BuildContext context) => AppCubit(),
+          create: (BuildContext context) => AppCubit()..getData(),
         ),
         BlocProvider(
           create: (BuildContext context) => ChangeColorCubit(),
@@ -35,7 +34,7 @@ class MyApp extends StatelessWidget {
         supportedLocales: AppLocalizations.supportedLocales,
         //locale: Locale("${changeLanguage()}"),
         theme: lightTheme,
-        home: Welcome(),
+        home: HomeScreen(),
         routes: {
           HomeScreen.routeName: (context) => HomeScreen(),
           Welcome.routeName: (context) => Welcome(),

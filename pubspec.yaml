@@ -44,11 +44,13 @@ dependencies:
   flutter_bloc: ^8.0.0
   smooth_page_indicator: ^1.0.0+2
   flutter_svg: ^1.0.3
-  intl: ^0.17.0
-  dio: ^4.0.4
 
-  flutter_localizations:
+  dio: ^4.0.4
+  intl: ^0.17.0
+
+flutter_localizations:
     sdk: flutter
+
 
 dev_dependencies:
   flutter_test:
