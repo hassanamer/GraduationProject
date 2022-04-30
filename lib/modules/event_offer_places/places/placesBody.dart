@@ -8,6 +8,7 @@ import '../../cubit/cubit.dart';
 import '../../cubit/states.dart';
 import 'iconOfRate.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+//test
 
 class PlacesBody extends StatelessWidget {
   final String hidder;

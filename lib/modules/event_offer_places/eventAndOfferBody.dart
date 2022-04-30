@@ -3,7 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:smarttouristguide/modules/event_offer_places/places/placeDetailsScreen.dart';
 import '../../shared/styles/textStyle.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
+//test
 class eventAndOfferBody extends StatelessWidget {
   final String hidder;
   final String someDetails;
