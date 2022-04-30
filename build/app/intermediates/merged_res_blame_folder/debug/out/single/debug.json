@@ -20,11 +20,11 @@
         "source": "C:\\Users\\hazem\\StudioProjects\\graduationproject\\android\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher.png"
     },
     {
-        "merged": "C:\\Users\\hazem\\StudioProjects\\graduationproject\\build\\app\\intermediates\\res\\merged\\debug\\mipmap-mdpi_ic_launcher.png.flat",
-        "source": "C:\\Users\\hazem\\StudioProjects\\graduationproject\\android\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher.png"
-    },
-    {
         "merged": "C:\\Users\\hazem\\StudioProjects\\graduationproject\\build\\app\\intermediates\\res\\merged\\debug\\drawable_launch_background.xml.flat",
         "source": "C:\\Users\\hazem\\StudioProjects\\graduationproject\\android\\app\\src\\main\\res\\drawable\\launch_background.xml"
+    },
+    {
+        "merged": "C:\\Users\\hazem\\StudioProjects\\graduationproject\\build\\app\\intermediates\\res\\merged\\debug\\mipmap-mdpi_ic_launcher.png.flat",
+        "source": "C:\\Users\\hazem\\StudioProjects\\graduationproject\\android\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher.png"
     }
 ]
