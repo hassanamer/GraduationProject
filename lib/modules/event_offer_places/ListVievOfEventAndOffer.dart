@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'eventAndOfferBody.dart';
-//test
 
 class ListVievOfEventAndOffer extends StatelessWidget {
   @override

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:smarttouristguide/shared/styles/textStyle.dart';
-//test
 
 class PlaceDetailsScreen extends StatelessWidget {
   static const routeName = 'PlaceDetailsScreen';

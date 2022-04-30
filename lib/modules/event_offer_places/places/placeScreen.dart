@@ -5,7 +5,6 @@ import 'listViewOfPlaces.dart';
 
 class PlaceScreen extends StatelessWidget {
   static const String routeName = 'PlaceScreen';
-//test
 
   const PlaceScreen({Key? key}) : super(key: key);
   @override

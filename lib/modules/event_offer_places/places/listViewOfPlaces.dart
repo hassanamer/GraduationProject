@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:smarttouristguide/modules/event_offer_places/places/placesBody.dart';
-//test
 
 class ListViewOfPlaces extends StatelessWidget {
   @override
