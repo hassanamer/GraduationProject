@@ -29,6 +29,7 @@ environment:
 dependencies:
   hexcolor: ^2.0.6
   http: ^0.13.4
+  shared_preferences: ^2.0.11
   dio: ^4.0.6
   fluttertoast: ^8.0.8
   # switch animation between light and dark theme

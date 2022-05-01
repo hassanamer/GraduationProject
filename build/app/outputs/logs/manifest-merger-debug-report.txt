@@ -77,6 +77,7 @@ INJECTED from C:\Users\hazem\StudioProjects\graduationproject\android\app\src\ma
 INJECTED from C:\Users\hazem\StudioProjects\graduationproject\android\app\src\main\AndroidManifest.xml:1:1-34:12
 INJECTED from C:\Users\hazem\StudioProjects\graduationproject\android\app\src\main\AndroidManifest.xml:1:1-34:12
 MERGED from C:\Users\hazem\StudioProjects\graduationproject\android\app\src\main\AndroidManifest.xml:1:1-34:12
+MERGED from [:shared_preferences_android] C:\Users\hazem\StudioProjects\graduationproject\build\shared_preferences_android\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
 MERGED from [:firebase_auth] C:\Users\hazem\StudioProjects\graduationproject\build\firebase_auth\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-15:12
 MERGED from [:cloud_firestore] C:\Users\hazem\StudioProjects\graduationproject\build\cloud_firestore\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-15:12
 MERGED from [:firebase_messaging] C:\Users\hazem\StudioProjects\graduationproject\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-46:12
@@ -171,6 +172,8 @@ uses-sdk
 INJECTED from C:\Users\hazem\StudioProjects\graduationproject\android\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Users\hazem\StudioProjects\graduationproject\android\app\src\main\AndroidManifest.xml
 INJECTED from C:\Users\hazem\StudioProjects\graduationproject\android\app\src\main\AndroidManifest.xml
+MERGED from [:shared_preferences_android] C:\Users\hazem\StudioProjects\graduationproject\build\shared_preferences_android\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:shared_preferences_android] C:\Users\hazem\StudioProjects\graduationproject\build\shared_preferences_android\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:firebase_auth] C:\Users\hazem\StudioProjects\graduationproject\build\firebase_auth\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:firebase_auth] C:\Users\hazem\StudioProjects\graduationproject\build\firebase_auth\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:cloud_firestore] C:\Users\hazem\StudioProjects\graduationproject\build\cloud_firestore\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
