@@ -31,7 +31,7 @@ class AppCubit extends Cubit<AppStates> {
   void getData() {
     emit(HomeLoadingHomeDataState());
     DioHelper.getData(
-      url: 'https://gist.githubusercontent.com/amrali500/f6f888bb859d96eb185aceea849cf127/raw/a6d7b1100781bf3d7d08ebb24074ea31c3d6cd20/STGapi.json',
+      url: 'https://egyptturism.herokuapp.com/home/places/',
     ).then((value) {
       stgModel = StgModel.fromJson(value.data);
       emit(HomeGetDataSuccessState());

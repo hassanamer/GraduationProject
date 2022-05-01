@@ -63,6 +63,7 @@ Widget bottomNavBar(context) {
         showSelectedLabels: false,
         showUnselectedLabels: false,
         backgroundColor: Colors.white,
+        selectedItemColor: AppColors.primaryColor,
         elevation: 5.0,
         currentIndex: cubit.currentIndex,
         onTap: (index) {
@@ -88,11 +89,9 @@ Widget bottomNavBar(context) {
             label: 'Categories',
           ),
           BottomNavigationBarItem(
-            activeIcon: SvgPicture.asset(
-              'assets/icons/wishlist.svg',
-            ),
-            icon: SvgPicture.asset(
-              'assets/icons/wishlist.svg',
+            icon: Icon(
+              Icons.favorite,
+              size: 30.0,
             ),
             label: 'Wish List',
           ),
