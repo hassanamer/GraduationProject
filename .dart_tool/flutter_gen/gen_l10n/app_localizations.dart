@@ -130,12 +130,6 @@ abstract class AppLocalizations {
   /// **'Sign up'**
   String get sign_up;
 
-  /// No description provided for @see_details.
-  ///
-  /// In en, this message translates to:
-  /// **'see Details'**
-  String get see_details;
-
   /// No description provided for @submit.
   ///
   /// In en, this message translates to:
@@ -195,6 +189,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Popular Places in Egypt'**
   String get popular_places_in_egypt;
+
+  /// No description provided for @see_details.
+  ///
+  /// In en, this message translates to:
+  /// **'see Details'**
+  String get see_details;
 
   /// No description provided for @mood.
   ///
@@ -267,6 +267,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'been changed.'**
   String get been_changed;
+
+  /// No description provided for @where_to_go.
+  ///
+  /// In en, this message translates to:
+  /// **'Where to go?'**
+  String get where_to_go;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

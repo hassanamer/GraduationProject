@@ -26,17 +26,24 @@ class AppCubit extends Cubit<AppStates> {
     emit(AppChangeBottomNavState());
   }
 
-  StgModel? stgModel;
+  HeoModel? heoModel;
 
   void getData() {
     emit(HomeLoadingHomeDataState());
     DioHelper.getData(
-      url: 'https://egyptturism.herokuapp.com/home/places/',
+      url: 'home/events/',
+      token: 'Token 53b704f45ca09497409820590b3fc8874eaec03e'
     ).then((value) {
-      stgModel = StgModel.fromJson(value.data);
+      heoModel = HeoModel.fromJson(value.data);
+      print('model is \n${value.data}');
       emit(HomeGetDataSuccessState());
     }).catchError((error){
+      print('${error.toString()}');
       emit(HomeGetDataErrorState());
     });
+  }
+
+  void test() {
+    print('hello');
   }
 }

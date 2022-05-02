@@ -5,7 +5,6 @@
 "register": "Register",
 "login": "Login",
 "sign_up": "Sign up",
-"see_details": "seeDetails",
 "submit": "Submit",
 "forget_password_state_one": "Don't worry! it happens. please enter ",
 "forget_password_state_two": "the address associated with your account.",
@@ -28,5 +27,6 @@
 "can_not_get_email": "Can't Get Email ?",
 "resubmit": "Resubmit",
 "congratulation_your_password_has": "Congratulation your password has",
-"been_changed": "been changed."
+"been_changed": "been changed.",
+"where_to_go": "Where to go?"
 }

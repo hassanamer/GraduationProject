@@ -5,7 +5,6 @@
 "register": "إنشاء حساب",
 "login": "تسجيل",
 "sign_up": "إنشاء",
-"see_details": "التفاصيل",
 "submit": "إرسال",
 "forget_password_state_one": "لا تقلق ! يحدث ذلك . الرجاء ",
 "forget_password_state_two": ".إدخال العنوان المرتبط بحسابك",
@@ -28,5 +27,6 @@
 "can_not_get_email": "ألا تسطتيع ان تحصل على بريد إلكتروني ؟",
 "resubmit": "إعادة التقديم",
 "congratulation_your_password_has": "تهانينا لقد تم",
-"been_changed": "تغير كلمة السر."
+"been_changed": "تغير كلمة السر.",
+"where_to_go": "على فين يزميلي"
 }

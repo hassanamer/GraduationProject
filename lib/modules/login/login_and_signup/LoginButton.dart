@@ -14,12 +14,16 @@ class LoginButton extends StatelessWidget {
       ),
       width: double.infinity,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(
+          16,
+        ),
         color: AppColors.primaryColor,
       ),
       child: ElevatedButton(
         style: ButtonStyle(
-          elevation: MaterialStateProperty.all(0),
+          elevation: MaterialStateProperty.all(
+            0,
+          ),
           backgroundColor: MaterialStateProperty.all(
             (Colors.transparent),
           ),
@@ -35,8 +39,12 @@ class LoginButton extends StatelessWidget {
                 height: double.infinity,
                 decoration: const BoxDecoration(
                   borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(20),
-                    topLeft: Radius.circular(20),
+                    topRight: Radius.circular(
+                      20,
+                    ),
+                    topLeft: Radius.circular(
+                      20,
+                    ),
                   ),
                   color: Colors.white,
                 ),

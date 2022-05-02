@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smarttouristguide/layout/app_layout.dart';
+import 'package:smarttouristguide/layout/cubit/bloc_observer.dart';
 import 'package:smarttouristguide/layout/cubit/cubit.dart';
 import 'package:smarttouristguide/modules/cubit/cubit.dart';
 import 'package:smarttouristguide/modules/home/home_screen.dart';
@@ -15,8 +16,14 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   DioHelper.init();
+  BlocOverrides.runZoned(
+        () {
+      // Use cubits...
+    },
+    blocObserver: MyBlocObserver(),
+  );
+
   await CacheHelper.init();
 
   runApp(MyApp());
@@ -29,7 +36,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (BuildContext context) => AppCubit()..getData(),
+          create: (BuildContext context) => AppCubit()..test()..getData(),
         ),
         BlocProvider(
           create: (BuildContext context) => ChangeColorCubit(),
