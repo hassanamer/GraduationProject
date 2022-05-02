@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:smarttouristguide/modules/event_offer_places/places/placeDetailsScreen.dart';
+import 'package:smarttouristguide/modules/place_details/place_details_screen.dart';
+import 'package:smarttouristguide/shared/components/components.dart';
 import '../../shared/styles/textStyle.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -36,8 +37,10 @@ class eventAndOfferBody extends StatelessWidget {
             Row(mainAxisAlignment: MainAxisAlignment.center, children: [
               InkWell(
                   onTap: () {
-                    Navigator.of(context)
-                        .pushNamed(PlaceDetailsScreen.routeName);
+                    navigateTo(
+                      widget: PlaceDetailsScreen(),
+                      context: context,
+                    );
                   },
                   child: textStyle.normal('someDetails', 16)),
               const SizedBox(

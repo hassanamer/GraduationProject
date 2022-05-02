@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:smarttouristguide/modules/event_offer_places/places/placeDetailsScreen.dart';
+import 'package:smarttouristguide/modules/place_details/place_details_screen.dart';
+import 'package:smarttouristguide/shared/components/components.dart';
 
 import '../../../shared/styles/textStyle.dart';
 import '../../cubit/cubit.dart';
@@ -13,7 +14,9 @@ class PlacesBody extends StatelessWidget {
   final String hidder;
   final String someDetails;
   final String pathOfImage;
+
   PlacesBody(this.hidder, this.someDetails, this.pathOfImage);
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -75,8 +78,10 @@ class PlacesBody extends StatelessWidget {
                     ),
                     InkWell(
                         onTap: () {
-                          Navigator.of(context)
-                              .pushNamed(PlaceDetailsScreen.routeName);
+                          navigateTo(
+                            widget: PlaceDetailsScreen(),
+                            context: context,
+                          );
                         },
                         child: textStyle.normal(
                             AppLocalizations.of(context)!.see_details, 14)),

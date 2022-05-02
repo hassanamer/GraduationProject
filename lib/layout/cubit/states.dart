@@ -4,8 +4,8 @@ class AppInitialState extends AppStates {}
 
 class AppChangeBottomNavState extends AppStates {}
 
-class HomeLoadingHomeDataState extends AppStates {}
+class AppLoadingDataState extends AppStates {}
 
-class HomeGetDataSuccessState extends AppStates {}
+class AppGetDataSuccessState extends AppStates {}
 
-class HomeGetDataErrorState extends AppStates {}
+class AppGetDataErrorState extends AppStates {}

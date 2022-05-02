@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smarttouristguide/layout/cubit/states.dart';
+import 'package:smarttouristguide/models/cat_places_model.dart';
 import 'package:smarttouristguide/models/home_model.dart';
 import 'package:smarttouristguide/modules/categories/categories_screen.dart';
 import 'package:smarttouristguide/modules/home/home_screen.dart';
@@ -28,18 +29,35 @@ class AppCubit extends Cubit<AppStates> {
 
   HeoModel? heoModel;
 
-  void getData() {
-    emit(HomeLoadingHomeDataState());
+  void getHomeEventOfferData() {
+    emit(AppLoadingDataState());
     DioHelper.getData(
       url: 'home/events/',
       token: 'Token 53b704f45ca09497409820590b3fc8874eaec03e'
     ).then((value) {
       heoModel = HeoModel.fromJson(value.data);
       print('model is \n${value.data}');
-      emit(HomeGetDataSuccessState());
+      emit(AppGetDataSuccessState());
     }).catchError((error){
       print('${error.toString()}');
-      emit(HomeGetDataErrorState());
+      emit(AppGetDataErrorState());
+    });
+  }
+
+  CpModel? cpModel;
+
+  void getCategoriesPlacesData() {
+    emit(AppLoadingDataState());
+    DioHelper.getData(
+      url: 'home/places/',
+      token: 'Token 53b704f45ca09497409820590b3fc8874eaec03e'
+    ).then((value) {
+      cpModel = CpModel.fromJson(value.data);
+      print('model is \n${value.data}');
+      emit(AppGetDataSuccessState());
+    }).catchError((error){
+      print('${error.toString()}');
+      emit(AppGetDataErrorState());
     });
   }
 

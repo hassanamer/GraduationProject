@@ -6,7 +6,7 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 class PlaceDetailsScreen extends StatelessWidget {
   var mediaController = PageController();
 
-  static const String routeName = 'PlaceDeatilsScreen';
+  static const String routeName = 'PlaceDetailsScreen';
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,8 +14,12 @@ class PlaceDetailsScreen extends StatelessWidget {
         backgroundColor: AppColors.primaryColor,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
-            bottomLeft: Radius.circular(18),
-            bottomRight: Radius.circular(18),
+            bottomLeft: Radius.circular(
+              18,
+            ),
+            bottomRight: Radius.circular(
+              18,
+            ),
           ),
         ),
       ),
@@ -216,8 +220,7 @@ Widget hazem() => Container(
     );
 
 Widget RateIcon(bool color, double size) => Icon(
-  Icons.star_rate_rounded,
-  color: color ? AppColors.primaryColor : AppColors.disabledAndHintColor,
-  size: size,
-
-);
+      Icons.star_rate_rounded,
+      color: color ? AppColors.primaryColor : AppColors.disabledAndHintColor,
+      size: size,
+    );
