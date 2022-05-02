@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:smarttouristguide/modules/login/login_and_signup/login_screen.dart';
-import '../../../models/user/user_model.dart';
+import '../../../models/user_model.dart';
 import '../../../shared/components/components.dart';
 import '../../home/home_screen.dart';
 
