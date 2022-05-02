@@ -26,9 +26,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get sign_up => 'Sign up';
 
   @override
-  String get see_details => 'see Details';
-
-  @override
   String get submit => 'Submit';
 
   @override
@@ -57,6 +54,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get popular_places_in_egypt => 'Popular Places in Egypt';
+
+  @override
+  String get see_details => 'see Details';
 
   @override
   String get mood => 'Mood';
@@ -93,4 +93,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get been_changed => 'been changed.';
+
+  @override
+  String get where_to_go => 'Where to go?';
+
+  @override
+  String get discover_places => 'Discover Places';
 }

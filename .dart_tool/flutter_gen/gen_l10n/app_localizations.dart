@@ -273,6 +273,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Where to go?'**
   String get where_to_go;
+
+  /// No description provided for @discover_places.
+  ///
+  /// In en, this message translates to:
+  /// **'Discover Places'**
+  String get discover_places;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

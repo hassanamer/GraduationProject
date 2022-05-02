@@ -26,9 +26,6 @@ class AppLocalizationsAr extends AppLocalizations {
   String get sign_up => 'إنشاء';
 
   @override
-  String get see_details => 'التفاصيل';
-
-  @override
   String get submit => 'إرسال';
 
   @override
@@ -57,6 +54,9 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get popular_places_in_egypt => 'أماكن أكثر شعبية في مصر';
+
+  @override
+  String get see_details => 'التفاصيل';
 
   @override
   String get mood => 'الوضع';
@@ -93,4 +93,10 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get been_changed => 'تغير كلمة السر.';
+
+  @override
+  String get where_to_go => 'إلى أين وجهتك؟';
+
+  @override
+  String get discover_places => 'اكتشف الاماكن';
 }

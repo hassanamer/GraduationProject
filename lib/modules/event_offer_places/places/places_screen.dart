@@ -3,10 +3,10 @@ import 'package:smarttouristguide/shared/styles/colors.dart';
 
 import 'listViewOfPlaces.dart';
 
-class PlaceScreen extends StatelessWidget {
-  static const String routeName = 'PlaceScreen';
+class PlacesScreen extends StatelessWidget {
+  static const String routeName = 'PlacesScreen';
 
-  const PlaceScreen({Key? key}) : super(key: key);
+  const PlacesScreen({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
