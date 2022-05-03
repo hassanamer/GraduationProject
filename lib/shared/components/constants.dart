@@ -15,4 +15,4 @@ void signOut(context) {
   );
 }
 
-String token = 'Token 53b704f45ca09497409820590b3fc8874eaec03e';
+String token = '';

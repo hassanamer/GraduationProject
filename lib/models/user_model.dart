@@ -1,51 +1,36 @@
-class UserDataModel {
-  UserDataModel({
-    required this.firstname,
-    required this.lastname,
-    required this.email,
-    required this.gender,
-    required this.password,
-    required this.phonenumber,
-    required this.dateofbirth,
-    required this.img,
-    required this.country,
-  });
+class AppLoginModel {
+  bool? status;
+  String? message;
+  Data? data;
 
-  late final String firstname;
-  late final String lastname;
-  late final String gender;
-  late final String email;
-  late final String password;
-  late final String phonenumber;
-  late final String dateofbirth;
-  late final String country;
-  late final dynamic img;
-
-
-  UserDataModel.fromJson(Map<String, dynamic> json) {
-    firstname = json['FirstName'] ?? '';
-    lastname = json['LastName'] ?? '';
-    email = json['Email Address'] ?? '';
-    gender = json['Gender'] ?? '';
-    password = json['Password'] ?? '';
-    dateofbirth = json['Date Of Birth'] ?? '';
-    country = json['Country'] ?? '';
-    phonenumber = json['Phone Number'] ?? '';
-    img = json['img'] ?? '';
-
+  AppLoginModel.fromJson(Map<String, dynamic> json){
+    status = json['status'];
+    message = json['message'];
+    data = Data.fromJson(json['data']);
   }
+}
 
-  Map<String, dynamic> toJson() {
-    return {
-      'FirstName': firstname,
-      'LastName': lastname,
-      'Email Address': email,
-      'Gender': gender,
-      'Password': password,
-      'Date Of Birth': dateofbirth,
-      'Country': country,
-      'Phone Number': phonenumber,
-      'img': img,
-    };
+class Data {
+
+  String? firstName;
+  String? lastName;
+  String? username;
+  String? country;
+  String? dateOfBirth;
+  String? gender;
+  String? email;
+  String? phone;
+  String? token;
+
+  Data.fromJson(Map<String, dynamic> json){
+    firstName = json['first_name'];
+    lastName = json['last_name'];
+    username = json['username'];
+    country = json['country'];
+    dateOfBirth = json['date_of_birth'];
+    gender = json['gender'];
+    email = json['email'];
+    phone = json['phone'];
+    token = json['token'];
   }
 }

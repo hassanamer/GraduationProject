@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smarttouristguide/layout/app_layout.dart';
-import 'package:smarttouristguide/layout/cubit/bloc_observer.dart';
 import 'package:smarttouristguide/layout/cubit/cubit.dart';
 import 'package:smarttouristguide/modules/cubit/cubit.dart';
 import 'package:smarttouristguide/modules/home/home_screen.dart';
 import 'package:smarttouristguide/modules/login/login_and_signup/welcomScreen.dart';
+import 'package:smarttouristguide/modules/on_boarding/on_boarding_screen.dart';
+import 'package:smarttouristguide/shared/components/constants.dart';
 import 'package:smarttouristguide/shared/network/local/cache_helper.dart';
 import 'package:smarttouristguide/shared/network/remote/dio_helper.dart';
 import 'package:smarttouristguide/shared/styles/themes.dart';
@@ -13,30 +14,52 @@ import 'modules/event_offer_places/OfferScreen.dart';
 import 'modules/event_offer_places/eventScreen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  DioHelper.init();
-  BlocOverrides.runZoned(
-        () {
-      // Use cubits...
-    },
-    blocObserver: MyBlocObserver(),
-  );
 
+  DioHelper.init();
   await CacheHelper.init();
 
-  runApp(MyApp());
+  Widget widget;
+
+  dynamic onBoarding = CacheHelper.getData(key: 'OnBoarding');
+
+  token = CacheHelper.getData(key: 'token') ?? '';
+
+  if (onBoarding != null) {
+    if (token != '') {
+      widget = AppLayout();
+    } else {
+      widget = Welcome();
+    }
+  } else {
+    widget = OnBoardingScreen();
+  }
+
+  runApp(
+    MyApp(
+      startWidget: widget,
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
+  final Widget startWidget;
+
+  MyApp({
+    required this.startWidget,
+  });
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (BuildContext context) => AppCubit()..test()..getHomeEventOfferData()..getCategoriesPlacesData(),
+          create: (BuildContext context) => AppCubit()
+            ..test()
+            ..getHomeEventOfferData()
+            ..getCategoriesPlacesData(),
         ),
         BlocProvider(
           create: (BuildContext context) => ChangeColorCubit(),
@@ -49,7 +72,7 @@ class MyApp extends StatelessWidget {
         supportedLocales: AppLocalizations.supportedLocales,
         //locale: Locale("${changeLanguage()}"),
         theme: lightTheme,
-        home: AppLayout(),
+        home: OnBoardingScreen(),
         routes: {
           HomeScreen.routeName: (context) => HomeScreen(),
           Welcome.routeName: (context) => Welcome(),

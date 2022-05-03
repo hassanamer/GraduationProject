@@ -79,11 +79,16 @@ Widget buildCategoryItem(context, Category model, index) => Container(
               children: [
                 Center(
                   child: Container(
-                    child: Image(
-                      fit: BoxFit.cover,
-                      height: 160,
-                      width: double.infinity,
-                      image: NetworkImage('${imgs[index]}'),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(15.0,),
+                      child: Image(
+                        fit: BoxFit.cover,
+                        height: 160,
+                        width: double.infinity,
+                        image: NetworkImage(
+                          '${imgs[index]}',
+                        ),
+                      ),
                     ),
                   ),
                 ),
