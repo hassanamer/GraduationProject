@@ -68,8 +68,10 @@ class PlacesBody extends StatelessWidget {
                       ),
                       onTap: () {
                         {
-                          Navigator.of(context)
-                              .pushNamed(PlaceDetailsScreen.routeName);
+                          navigateTo(
+                            widget: PlaceDetailsScreen(),
+                            context: context,
+                          );
                         }
                       },
                     ),
