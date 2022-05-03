@@ -36,7 +36,7 @@
 23-->[androidx.core:core:1.6.0] C:\Users\hazem\.gradle\caches\transforms-2\files-2.1\e30761457ee22a682aef79e1f6914d8a\core-1.6.0\AndroidManifest.xml:24:18-86
 24        android:debuggable="true"
 25        android:icon="@mipmap/ic_launcher"
-26        android:label="smarttouristguide" >
+26        android:label="Smart Tourist Guide" >
 27        <activity
 28            android:name="com.grad.project.smarttouristguide.MainActivity"
 29            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"

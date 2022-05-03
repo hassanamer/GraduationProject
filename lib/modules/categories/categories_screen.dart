@@ -1,4 +1,9 @@
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:smarttouristguide/layout/cubit/cubit.dart';
+import 'package:smarttouristguide/layout/cubit/states.dart';
+import 'package:smarttouristguide/models/cat_places_model.dart';
 import 'package:smarttouristguide/modules/event_offer_places/places/places_screen.dart';
 import 'package:smarttouristguide/shared/components/components.dart';
 import 'package:smarttouristguide/shared/styles/colors.dart';
@@ -7,7 +12,32 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class CategoriesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
+    var cubit = AppCubit.get(context);
+
+    return BlocConsumer<AppCubit, AppStates>(
+      listener: (context, state) {},
+      builder: (context, state) {
+        return ConditionalBuilder(
+          condition: cubit.cpModel != null,
+          builder: (context) => ListView.separated(
+          itemBuilder: (context, index) => buildCategoryItem(context, cubit.cpModel!.data!.category![index]),
+          separatorBuilder: (context, index) => SizedBox(
+            height: 5.0,
+          ),
+          itemCount: cubit.cpModel!.data!.category!.length,
+        ),
+          fallback: (context) => Center(
+            child: CircularProgressIndicator(
+              color: AppColors.primaryColor,
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
+
+Widget buildCategoryItem(context, Category model) => Container(
       height: 205.0,
       width: double.infinity,
       decoration: BoxDecoration(
@@ -26,7 +56,7 @@ class CategoriesScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              ' Historic Tourism',
+              ' ${model.name}',
               style: TextStyle(
                 fontSize: 18.0,
                 fontWeight: FontWeight.bold,
@@ -83,5 +113,3 @@ class CategoriesScreen extends StatelessWidget {
         ),
       ),
     );
-  }
-}
