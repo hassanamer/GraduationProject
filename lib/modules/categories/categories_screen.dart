@@ -20,12 +20,13 @@ class CategoriesScreen extends StatelessWidget {
         return ConditionalBuilder(
           condition: cubit.cpModel != null,
           builder: (context) => ListView.separated(
-          itemBuilder: (context, index) => buildCategoryItem(context, cubit.cpModel!.data!.category![index]),
-          separatorBuilder: (context, index) => SizedBox(
-            height: 5.0,
+            itemBuilder: (context, index) => buildCategoryItem(
+                context, cubit.cpModel!.data!.category![index], index),
+            separatorBuilder: (context, index) => SizedBox(
+              height: 5.0,
+            ),
+            itemCount: cubit.cpModel!.data!.category!.length,
           ),
-          itemCount: cubit.cpModel!.data!.category!.length,
-        ),
           fallback: (context) => Center(
             child: CircularProgressIndicator(
               color: AppColors.primaryColor,
@@ -37,7 +38,17 @@ class CategoriesScreen extends StatelessWidget {
   }
 }
 
-Widget buildCategoryItem(context, Category model) => Container(
+List<String> imgs = [
+  'https://d3rr2gvhjw0wwy.cloudfront.net/uploads/activity_headers/281608/900x600-1-50-c5a716e2a72b1087ab9bc2e11e52a16e.jpg',
+  'https://www.egypttoday.com/siteimages/Larg/59380.jpg',
+  'https://live.staticflickr.com/1822/28327211697_59fac6f2f9_b.jpg',
+  'https://www.globetrove.com/wp-content/uploads/2018/06/IMG_20180601_134802.jpg',
+  'https://identity-mag.com/wp-content/uploads/2018/11/Singe.jpg',
+  'https://www.touropia.com/gfx/d/best-beaches-in-egypt/mahmya_island.jpg',
+  'https://shehabnews.com/uploads//images/70c8bdae322743745d112a69bb9d0aaf.jpg',
+];
+
+Widget buildCategoryItem(context, Category model, index) => Container(
       height: 205.0,
       width: double.infinity,
       decoration: BoxDecoration(
@@ -67,9 +78,13 @@ Widget buildCategoryItem(context, Category model) => Container(
               alignment: AlignmentDirectional.bottomEnd,
               children: [
                 Center(
-                  child: Image.asset(
-                    'assets/images/ctg.jpg',
-                    height: 160,
+                  child: Container(
+                    child: Image(
+                      fit: BoxFit.cover,
+                      height: 160,
+                      width: double.infinity,
+                      image: NetworkImage('${imgs[index]}'),
+                    ),
                   ),
                 ),
                 Padding(
