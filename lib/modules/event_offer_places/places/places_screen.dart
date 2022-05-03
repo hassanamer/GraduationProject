@@ -109,6 +109,7 @@ Widget buildPlacesItem(context, Places model) => Container(
             ),
             Row(
               children: [
+                // الicons دي لسا هستبدلها بpackage بتهندل الrate بتاخد الrate بdouble ,بترجعه نجوم متلونة ع اد الrate حتى لو 4.5 مثلا بتلون 4 نجوم ونص وهكذا
                 Icon(
                   Icons.star_rate_rounded,
                   size: 19,
