@@ -1,29 +1,10 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:smarttouristguide/modules/login/login_and_signup/login_screen.dart';
 import 'package:smarttouristguide/modules/login/login_and_signup/welcomScreen.dart';
 import 'package:smarttouristguide/shared/styles/colors.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../../../shared/components/auth_service.dart';
-import '../../../shared/components/components.dart';
 
 class ForgetPassword extends StatelessWidget {
-  final TextEditingController _emailController = TextEditingController();
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-
-  resetPassword() async {
-
-    String email = _emailController.text.toString();
-    try {
-      await _firebaseAuth.sendPasswordResetEmail(email: email);
-    }
-    catch (e) {
-      Fluttertoast.showToast(msg: e.toString());
-    }
-  }
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -92,7 +73,6 @@ class ForgetPassword extends StatelessWidget {
                               ]),
                           const SizedBox(height: 5.0),
                           Row(
-
                             children: [
                               Text(
                                 AppLocalizations.of(context)!
@@ -125,7 +105,6 @@ class ForgetPassword extends StatelessWidget {
                         SizedBox(
                           width: MediaQuery.of(context).size.width - 40.0,
                           child: TextFormField(
-                            controller:_emailController,
                             style: const TextStyle(
                                 color: AppColors.primaryColor,
                                 fontSize: 20.0,
@@ -195,15 +174,7 @@ class ForgetPassword extends StatelessWidget {
                           child: ButtonTheme(
                             height: 50,
                             child: TextButton(
-                              onPressed: ()
-                              async {
-                                resetPassword();
-                                navigateAndFinish(
-                                  context: context,
-                                  widget: LoginScreen(),
-                                );
-                              },
-
+                              onPressed: () {},
                               child: Center(
                                   child: Text(
                                 AppLocalizations.of(context)!.recover,
