@@ -3,15 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smarttouristguide/layout/app_layout.dart';
 import 'package:smarttouristguide/layout/cubit/cubit.dart';
 import 'package:smarttouristguide/modules/cubit/cubit.dart';
-import 'package:smarttouristguide/modules/home/home_screen.dart';
-import 'package:smarttouristguide/modules/login/login_and_signup/welcomScreen.dart';
+import 'package:smarttouristguide/modules/login/login_and_signup/welcome_screen.dart';
+import 'package:smarttouristguide/modules/login/login_cubit/cubit.dart';
 import 'package:smarttouristguide/modules/on_boarding/on_boarding_screen.dart';
 import 'package:smarttouristguide/shared/components/constants.dart';
 import 'package:smarttouristguide/shared/network/local/cache_helper.dart';
 import 'package:smarttouristguide/shared/network/remote/dio_helper.dart';
 import 'package:smarttouristguide/shared/styles/themes.dart';
-import 'modules/event_offer_places/OfferScreen.dart';
-import 'modules/event_offer_places/eventScreen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() async {
@@ -30,7 +28,7 @@ void main() async {
     if (token != '') {
       widget = AppLayout();
     } else {
-      widget = Welcome();
+      widget = WelcomeScreen();
     }
   } else {
     widget = OnBoardingScreen();
@@ -56,6 +54,9 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
+          create: (BuildContext context) => AppLoginCubit(),
+        ),
+        BlocProvider(
           create: (BuildContext context) => AppCubit()
             ..test()
             ..getHomeEventOfferData()
@@ -72,13 +73,7 @@ class MyApp extends StatelessWidget {
         supportedLocales: AppLocalizations.supportedLocales,
         //locale: Locale("${changeLanguage()}"),
         theme: lightTheme,
-        home: OnBoardingScreen(),
-        routes: {
-          HomeScreen.routeName: (context) => HomeScreen(),
-          Welcome.routeName: (context) => Welcome(),
-          OfferScreen.routeName: (context) => OfferScreen(),
-          EventScreen.routeName: (context) => EventScreen(),
-        },
+        home: WelcomeScreen(),
       ),
     );
   }

@@ -279,6 +279,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Discover Places'**
   String get discover_places;
+
+  /// No description provided for @forgot_password.
+  ///
+  /// In en, this message translates to:
+  /// **'Forgot password?'**
+  String get forgot_password;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

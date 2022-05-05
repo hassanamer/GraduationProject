@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../shared/styles/colors.dart';
-import 'SignUpScreen.dart';
+import 'register_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SignUpButton extends StatelessWidget {
@@ -19,20 +19,22 @@ class SignUpButton extends StatelessWidget {
             backgroundColor: MaterialStateProperty.all((Colors.transparent))),
         onPressed: () {
           showModalBottomSheet(
-              isDismissible: false,
-              enableDrag: false,
-              backgroundColor: Colors.transparent,
-              context: context,
-              builder: (context) {
-                return Container(
-                    height: double.infinity,
-                    decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                            topRight: Radius.circular(20),
-                            topLeft: Radius.circular(20)),
-                        color: Colors.white),
-                    child: SignUpScreen());
-              });
+            isDismissible: false,
+            enableDrag: false,
+            backgroundColor: Colors.transparent,
+            context: context,
+            builder: (context) {
+              return Container(
+                height: double.infinity,
+                decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(20),
+                        topLeft: Radius.circular(20)),
+                    color: Colors.white),
+                child: RegisterScreen(),
+              );
+            },
+          );
         },
         child: Text(AppLocalizations.of(context)!.sign_up),
       ),

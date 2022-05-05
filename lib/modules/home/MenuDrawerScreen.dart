@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:smarttouristguide/modules/login/login_and_signup/welcomScreen.dart';
+import 'package:smarttouristguide/shared/components/constants.dart';
 
 import '../cubit/cubit.dart';
 import '../cubit/states.dart';
@@ -24,50 +24,54 @@ class menuDrawerScreen extends StatelessWidget {
                           BoxDecoration(color: Theme.of(context).primaryColor),
                       child: Column(
                         children: [
-                          Row(children: [
-                            const SizedBox(width: 110),
-                            Column(
-                              children: [
-                                CircleAvatar(
-                                  radius: 40,
-                                  backgroundColor: Colors.white,
-                                  child: Icon(
-                                    Icons.person,
-                                    color: Theme.of(context).primaryColor,
-                                    size: 50,
-                                  ),
-                                ),
-                                const SizedBox(
-                                  height: 16,
-                                ),
-                                const Text(
-                                  'User name',
-                                  style: TextStyle(
-                                      fontSize: 24, color: Colors.white),
-                                ),
-                                const Text(
-                                  'Email',
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(
-                              width: 30,
-                            ),
-                            SizedBox(
-                              height: MediaQuery.of(context).size.height * 0.2,
-                              child: Column(
+                          Row(
+                            children: [
+                              const SizedBox(width: 110),
+                              Column(
                                 children: [
-                                  IconButton(
+                                  CircleAvatar(
+                                    radius: 40,
+                                    backgroundColor: Colors.white,
+                                    child: Icon(
+                                      Icons.person,
+                                      color: Theme.of(context).primaryColor,
+                                      size: 50,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 16,
+                                  ),
+                                  const Text(
+                                    'User name',
+                                    style: TextStyle(
+                                        fontSize: 24, color: Colors.white),
+                                  ),
+                                  const Text(
+                                    'Email',
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(
+                                width: 30,
+                              ),
+                              SizedBox(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.2,
+                                child: Column(
+                                  children: [
+                                    IconButton(
                                       onPressed: () {},
                                       icon: const Icon(
                                         Icons.edit_outlined,
                                         color: Colors.white,
-                                      )),
-                                ],
-                              ),
-                            )
-                          ]),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
                         ],
                       ),
                     ),
@@ -105,20 +109,21 @@ class menuDrawerScreen extends StatelessWidget {
                           })),
                   const Spacer(),
                   Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
-                          color: Theme.of(context).primaryColor),
-                      child: ElevatedButton(
-                          style: ButtonStyle(
-                              elevation: MaterialStateProperty.all(0),
-                              backgroundColor: MaterialStateProperty.all(
-                                  Colors.transparent)),
-                          onPressed: () {
-                            Navigator.of(context)
-                                .pushReplacementNamed(Welcome.routeName);
-                          },
-                          child: Text(AppLocalizations.of(context)!.log_out))),
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        color: Theme.of(context).primaryColor),
+                    child: ElevatedButton(
+                      style: ButtonStyle(
+                          elevation: MaterialStateProperty.all(0),
+                          backgroundColor:
+                              MaterialStateProperty.all(Colors.transparent)),
+                      onPressed: () {
+                        signOut(context);
+                      },
+                      child: Text(AppLocalizations.of(context)!.log_out),
+                    ),
+                  ),
                   const SizedBox(
                     height: 12,
                   )

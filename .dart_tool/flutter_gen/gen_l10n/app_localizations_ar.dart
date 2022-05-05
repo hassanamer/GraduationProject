@@ -99,4 +99,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get discover_places => 'اكتشف الاماكن';
+
+  @override
+  String get forgot_password => 'نسيت كلمة السر؟';
 }

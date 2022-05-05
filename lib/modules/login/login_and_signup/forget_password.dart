@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:smarttouristguide/modules/login/login_and_signup/welcomScreen.dart';
+import 'package:smarttouristguide/modules/login/login_and_signup/welcome_screen.dart';
 import 'package:smarttouristguide/shared/styles/colors.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -150,7 +150,7 @@ class ForgetPassword extends StatelessWidget {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => Welcome()),
+                                        builder: (context) => WelcomeScreen()),
                                   );
                                 },
                                 child: const Text('Sign in',

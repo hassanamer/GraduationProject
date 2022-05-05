@@ -213,17 +213,9 @@ Widget HomeItem() => Container(
   ),
 );
 
-Widget defaultTextButton({
-  required Text text,
-  required VoidCallback? onPressed,
-}) => TextButton(
-  child: text,
-  onPressed: onPressed,
-);
-
 Widget defaultFormField({
   required TextEditingController controller,
-  required TextInputType type,
+  TextInputType? type,
   ValueChanged? onSubmit,
   ValueChanged? onChanged,
   GestureTapCallback? onTap,
@@ -263,7 +255,7 @@ Widget defaultFormField({
   ),
 );
 void showToast({
-  required String message,
+  required String? message,
   ToastStates? state,
 }) =>
     Fluttertoast.showToast(

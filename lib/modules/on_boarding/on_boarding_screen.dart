@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:smarttouristguide/modules/login/login_and_signup/welcomScreen.dart';
+import 'package:smarttouristguide/modules/login/login_and_signup/welcome_screen.dart';
 import 'package:smarttouristguide/shared/components/components.dart';
 import 'package:smarttouristguide/shared/network/local/cache_helper.dart';
 import 'package:smarttouristguide/shared/styles/colors.dart';
@@ -36,7 +36,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen>
     {
       if (value)
       {
-        navigateAndFinish(context: context, widget: Welcome());
+        navigateAndFinish(context: context, widget: WelcomeScreen());
       }
     });
 
@@ -67,8 +67,8 @@ class _OnBoardingScreenState extends State<OnBoardingScreen>
       appBar: AppBar(
         actions:
         [
-          defaultTextButton(
-            text: Text(
+          TextButton(
+            child: Text(
               'SKIP تخطي',
               style: TextStyle(
                   fontWeight: FontWeight.bold
@@ -77,7 +77,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen>
             onPressed: ()
             {
               submit();
-            }
+            },
           ),
         ],
       ),

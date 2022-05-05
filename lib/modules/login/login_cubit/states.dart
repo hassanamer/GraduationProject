@@ -1,5 +1,5 @@
+import 'package:smarttouristguide/models/login_model.dart';
 
-import 'package:smarttouristguide/models/user_model.dart';
 
 abstract class AppLoginStates {}
 
@@ -22,3 +22,8 @@ class AppLoginErrorState extends AppLoginStates
 }
 
 class AppChangePasswordVisibilityState extends AppLoginStates {}
+
+class AppLoginChangeBottomSheetState extends AppLoginStates {}
+
+
+

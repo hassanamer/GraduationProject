@@ -99,4 +99,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get discover_places => 'Discover Places';
+
+  @override
+  String get forgot_password => 'Forgot password?';
 }
