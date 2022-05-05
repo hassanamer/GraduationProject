@@ -50,7 +50,8 @@ class PlacesScreen extends StatelessWidget {
           body: ConditionalBuilder(
             condition: cubit.cpModel != null,
             builder: (context) => ListView.separated(
-              itemBuilder: (context, index) => buildPlacesItem(context, cubit.cpModel!.data!.category![6].info!.places![index]),
+              itemBuilder: (context, index) => buildPlacesItem(context,
+                  cubit.cpModel!.data!.category![6].info!.places![index]),
               separatorBuilder: (context, index) => SizedBox(
                 height: 10.0,
               ),
@@ -69,7 +70,7 @@ class PlacesScreen extends StatelessWidget {
 }
 
 Widget buildPlacesItem(context, Places model) => Container(
-      height: 241.0,
+      height: MediaQuery.of(context).size.height * 0.4,
       width: double.infinity,
       decoration: BoxDecoration(
         color: Colors.white,
@@ -98,13 +99,11 @@ Widget buildPlacesItem(context, Places model) => Container(
               ),
             ),
             Container(
-              height: 140.0,
+              height: MediaQuery.of(context).size.height * 0.25,
               width: double.infinity,
               child: Image(
                 fit: BoxFit.cover,
-                image: NetworkImage(
-                  '${model.image}'
-                ),
+                image: NetworkImage('${model.image}'),
               ),
             ),
             Row(
@@ -164,38 +163,3 @@ Widget buildPlacesItem(context, Places model) => Container(
         ),
       ),
     );
-
-
-// Widget old() => Scaffold(
-//       backgroundColor: AppColors.backgroundColor,
-//       appBar: AppBar(
-//         shape: const RoundedRectangleBorder(
-//           borderRadius: BorderRadius.only(
-//             bottomLeft: Radius.circular(
-//               16.0,
-//             ),
-//             bottomRight: Radius.circular(
-//               16.0,
-//             ),
-//           ),
-//         ),
-//         systemOverlayStyle: SystemUiOverlayStyle(
-//           statusBarColor: AppColors.primaryColor,
-//           statusBarIconBrightness: Brightness.light,
-//         ),
-//         centerTitle: true,
-//         title: const Text(
-//           'Places',
-//         ),
-//         backgroundColor: AppColors.primaryColor,
-//         actions: [
-//           IconButton(
-//             onPressed: () {},
-//             icon: const Icon(
-//               Icons.search,
-//             ),
-//           ),
-//         ],
-//       ),
-//       body: ListViewOfPlaces(),
-//     );
