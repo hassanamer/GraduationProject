@@ -8,6 +8,8 @@ import 'package:smarttouristguide/shared/styles/colors.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class PlaceDetailsScreen extends StatelessWidget {
+
+
   var mediaController = PageController();
 
   static const String routeName = 'PlaceDetailsScreen';

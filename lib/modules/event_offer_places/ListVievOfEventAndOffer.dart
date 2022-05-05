@@ -8,7 +8,10 @@ class ListVievOfEventAndOffer extends StatelessWidget {
       itemCount: 10,
       itemBuilder: (context, index) {
         return eventAndOfferBody(
-            'name of place', 'some details', 'assets/images/img.png');
+          'name of place',
+          'some details',
+          'assets/images/img.png',
+        );
       },
     );
   }

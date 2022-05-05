@@ -92,10 +92,12 @@ Widget buildPlacesItem(context, Places model) => Container(
               ),
             ),
             Text(
-              'The great pyramids of Giza',
+              '${model.Description}',
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
               style: TextStyle(
                 fontSize: 16.0,
-                color: Colors.blueGrey[700],
+                color: Colors.blueGrey[600],
               ),
             ),
             Container(

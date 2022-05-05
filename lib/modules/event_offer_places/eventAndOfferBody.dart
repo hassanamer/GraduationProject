@@ -6,10 +6,10 @@ import '../../shared/styles/textStyle.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class eventAndOfferBody extends StatelessWidget {
-  final String hidder;
+  final String header;
   final String someDetails;
 
-  eventAndOfferBody(this.hidder, this.someDetails, this.pathOfImage);
+  eventAndOfferBody(this.header, this.someDetails, this.pathOfImage);
 
   final String pathOfImage;
   @override
@@ -28,7 +28,7 @@ class eventAndOfferBody extends StatelessWidget {
                 Align(
                     alignment: Alignment.centerLeft,
                     child: textStyle(
-                      hidder,
+                      header,
                       22,
                       FontWeight.bold,
                     )),

@@ -5,7 +5,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:smarttouristguide/layout/cubit/cubit.dart';
 import 'package:smarttouristguide/layout/cubit/states.dart';
 import 'package:smarttouristguide/models/home_model.dart';
+import 'package:smarttouristguide/modules/event_offer_places/OfferScreen.dart';
+import 'package:smarttouristguide/modules/event_offer_places/eventScreen.dart';
 import 'package:smarttouristguide/modules/place_details/place_details_screen.dart';
+import 'package:smarttouristguide/modules/search/search_screen.dart';
 import 'package:smarttouristguide/shared/styles/colors.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -42,44 +45,53 @@ class HomeScreen extends StatelessWidget {
                               11.0,
                             ),
                           ),
-                          child: Row(
-                            children: [
-                              SizedBox(
-                                width: 21.0,
-                              ),
-                              SvgPicture.asset(
-                                'assets/icons/search.svg',
-                              ),
-                              SizedBox(
-                                width: 17.0,
-                              ),
-                              Text(
-                                AppLocalizations.of(context)!.where_to_go,
-                                style: TextStyle(
-                                  color: AppColors.disabledAndHintColor,
+                          child: InkWell(
+                            onTap: () {
+                              navigateTo(widget: SearchScreen(), context: context,);
+                            },
+                            child: Row(
+                              children: [
+                                SizedBox(
+                                  width: 21.0,
                                 ),
-                              ),
-                              SizedBox(
-                                width: 95.0,
-                              ),
-                              SvgPicture.asset(
-                                'assets/icons/mic.svg',
-                              ),
-                            ],
+                                SvgPicture.asset(
+                                  'assets/icons/search.svg',
+                                ),
+                                SizedBox(
+                                  width: 17.0,
+                                ),
+                                Text(
+                                  AppLocalizations.of(context)!.where_to_go,
+                                  style: TextStyle(
+                                    color: AppColors.disabledAndHintColor,
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 95.0,
+                                ),
+                                SvgPicture.asset(
+                                  'assets/icons/mic.svg',
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                         SizedBox(
                           height: 15.0,
                         ),
                         MaterialButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            navigateTo(widget: EventScreen(), context: context,);
+                          },
                           child: HomeRow(
                             text: AppLocalizations.of(context)!.events,
                             iconPath: 'assets/icons/events.svg',
                           ),
                         ),
                         MaterialButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            navigateTo(widget: OfferScreen(), context: context,);
+                          },
                           child: HomeRow(
                             text: AppLocalizations.of(context)!.offers,
                             iconPath: 'assets/icons/offers.svg',
