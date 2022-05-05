@@ -9,6 +9,7 @@ import 'package:smarttouristguide/modules/event_offer_places/OfferScreen.dart';
 import 'package:smarttouristguide/modules/event_offer_places/eventScreen.dart';
 import 'package:smarttouristguide/modules/place_details/place_details_screen.dart';
 import 'package:smarttouristguide/modules/search/search_screen.dart';
+import 'package:smarttouristguide/modules/search_test/SearchScreen.dart';
 import 'package:smarttouristguide/shared/styles/colors.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 

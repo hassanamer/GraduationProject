@@ -64,4 +64,5 @@ class AppCubit extends Cubit<AppStates> {
   void test() {
     print('hello');
   }
+
 }
