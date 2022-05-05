@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
-  <g id="Group_3120" transform="translate(-75 -90)">
-    <g id="Frame" transform="translate(75 90)">
-      <path id="Vector" d="M0,0H16V16H0Z" fill="none"/>
-      <path id="Vector-2" d="M10.5,5.25A5.25,5.25,0,1,1,5.25,0,5.25,5.25,0,0,1,10.5,5.25Z" transform="translate(2 2)" fill="none" stroke="#9ca3af" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"/>
-      <path id="Vector-3" d="M0,0,3.038,3.038" transform="translate(10.962 10.962)" fill="none" stroke="#9ca3af" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"/>
-    </g>
-  </g>
-</svg>
