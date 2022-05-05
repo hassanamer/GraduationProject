@@ -47,7 +47,10 @@ class HomeScreen extends StatelessWidget {
                           ),
                           child: InkWell(
                             onTap: () {
-                              navigateTo(widget: SearchScreen(), context: context,);
+                              navigateTo(
+                                widget: SearchScreen(),
+                                context: context,
+                              );
                             },
                             child: Row(
                               children: [
@@ -81,7 +84,10 @@ class HomeScreen extends StatelessWidget {
                         ),
                         MaterialButton(
                           onPressed: () {
-                            navigateTo(widget: EventScreen(), context: context,);
+                            navigateTo(
+                              widget: EventScreen(),
+                              context: context,
+                            );
                           },
                           child: HomeRow(
                             text: AppLocalizations.of(context)!.events,
@@ -90,7 +96,10 @@ class HomeScreen extends StatelessWidget {
                         ),
                         MaterialButton(
                           onPressed: () {
-                            navigateTo(widget: OfferScreen(), context: context,);
+                            navigateTo(
+                              widget: OfferScreen(),
+                              context: context,
+                            );
                           },
                           child: HomeRow(
                             text: AppLocalizations.of(context)!.offers,
@@ -141,7 +150,8 @@ class HomeScreen extends StatelessWidget {
                             separatorBuilder: (context, index) => SizedBox(
                               width: 10.0,
                             ),
-                            itemCount: cubit.heoModel!.data!.popularPlaces!.length,
+                            itemCount:
+                                cubit.heoModel!.data!.popularPlaces!.length,
                             scrollDirection: Axis.horizontal,
                           ),
                         ),
@@ -156,7 +166,8 @@ class HomeScreen extends StatelessWidget {
                           height: 178.0,
                           width: double.infinity,
                           child: ListView.separated(
-                            itemBuilder: (context, index) => buildEventItem(cubit.heoModel!.data!.events![index]),
+                            itemBuilder: (context, index) => buildEventItem(
+                                cubit.heoModel!.data!.events![index]),
                             separatorBuilder: (context, index) => SizedBox(
                               width: 10.0,
                             ),
@@ -230,48 +241,48 @@ Widget buildPopularItem(PopularPlaces model) => Container(
     );
 
 Widget buildEventItem(Events model) => Container(
-  height: 178.0,
-  width: 148.0,
-  decoration: BoxDecoration(
-    color: Colors.white,
-    borderRadius: BorderRadius.circular(
-      16.0,
-    ),
-  ),
-  child: Padding(
-    padding: const EdgeInsets.all(10.0),
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Center(
-            child: SizedBox(
+      height: 178.0,
+      width: 148.0,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(
+          16.0,
+        ),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Center(
+                child: SizedBox(
               height: 106.5,
               child: Image(
                 fit: BoxFit.fill,
                 image: NetworkImage('${model.place!.image}'),
               ),
             )),
-        Text(
-          '${model.place!.placeName}',
-          maxLines: 1,
-          style: TextStyle(fontSize: 13.0, fontWeight: FontWeight.w600),
-        ),
-        Spacer(),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            RateIcon(true, 18),
-            RateIcon(true, 18),
-            RateIcon(true, 18),
-            RateIcon(true, 18),
-            RateIcon(false, 18),
+            Text(
+              '${model.place!.placeName}',
+              maxLines: 1,
+              style: TextStyle(fontSize: 13.0, fontWeight: FontWeight.w600),
+            ),
             Spacer(),
-            SvgPicture.asset(
-              'assets/icons/goto.svg',
-            )
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                RateIcon(true, 18),
+                RateIcon(true, 18),
+                RateIcon(true, 18),
+                RateIcon(true, 18),
+                RateIcon(false, 18),
+                Spacer(),
+                SvgPicture.asset(
+                  'assets/icons/goto.svg',
+                )
+              ],
+            ),
           ],
         ),
-      ],
-    ),
-  ),
-);
+      ),
+    );
