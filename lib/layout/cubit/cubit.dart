@@ -3,9 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smarttouristguide/layout/cubit/states.dart';
 import 'package:smarttouristguide/models/cat_places_model.dart';
 import 'package:smarttouristguide/models/home_model.dart';
+import 'package:smarttouristguide/models/place_details_model.dart';
 import 'package:smarttouristguide/modules/categories/categories_screen.dart';
 import 'package:smarttouristguide/modules/home/home_screen.dart';
 import 'package:smarttouristguide/modules/wish_list/wish_list.dart';
+import 'package:smarttouristguide/shared/network/end_points.dart';
 import 'package:smarttouristguide/shared/network/remote/dio_helper.dart';
 
 class AppCubit extends Cubit<AppStates> {
@@ -15,8 +17,7 @@ class AppCubit extends Cubit<AppStates> {
 
   int currentIndex = 0;
 
-  List<Widget> bottomScreens =
-  [
+  List<Widget> bottomScreens = [
     HomeScreen(),
     CategoriesScreen(),
     WishListScreen(),
@@ -32,13 +33,13 @@ class AppCubit extends Cubit<AppStates> {
   void getHomeEventOfferData() {
     emit(AppLoadingDataState());
     DioHelper.getData(
-      url: 'home/events/',
-      token: 'Token 53b704f45ca09497409820590b3fc8874eaec03e'
-    ).then((value) {
+            url: 'home/events/',
+            token: 'Token 53b704f45ca09497409820590b3fc8874eaec03e')
+        .then((value) {
       heoModel = HeoModel.fromJson(value.data);
       print('model is \n${value.data}');
       emit(AppGetDataSuccessState());
-    }).catchError((error){
+    }).catchError((error) {
       print('${error.toString()}');
       emit(AppGetDataErrorState());
     });
@@ -49,13 +50,13 @@ class AppCubit extends Cubit<AppStates> {
   void getCategoriesPlacesData() {
     emit(AppLoadingDataState());
     DioHelper.getData(
-      url: 'home/places/',
-      token: 'Token 53b704f45ca09497409820590b3fc8874eaec03e'
-    ).then((value) {
+            url: 'home/places/',
+            token: 'Token 53b704f45ca09497409820590b3fc8874eaec03e')
+        .then((value) {
       cpModel = CpModel.fromJson(value.data);
       print('model is \n${value.data}');
       emit(AppGetDataSuccessState());
-    }).catchError((error){
+    }).catchError((error) {
       print('${error.toString()}');
       emit(AppGetDataErrorState());
     });
@@ -65,4 +66,20 @@ class AppCubit extends Cubit<AppStates> {
     print('hello');
   }
 
+  PlaceDetailsModel? placeDetailsModel;
+
+  void getPlaceDetails({int? placeId}) {
+    emit(LoadingGetPlaceDetails());
+    DioHelper.postData(
+        url: PLACE_DETAILS,
+        token: 'Token 53b704f45ca09497409820590b3fc8874eaec03e',
+        data: {'place_id': placeId}).then((value) {
+      placeDetailsModel = PlaceDetailsModel.fromJson(value.data);
+      print(value.data);
+      emit(SuccessGetPlaceDetails());
+    }).catchError((error) {
+      print(error.toString());
+      emit(ErrorGetPlaceDetails());
+    });
+  }
 }

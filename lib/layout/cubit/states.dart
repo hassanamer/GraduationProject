@@ -15,3 +15,9 @@ class AppGetSearchLoadingState extends AppStates {}
 class AppGetSearchSuccessState extends AppStates {}
 
 class AppGetSearchErrorState extends AppStates {}
+
+class LoadingGetPlaceDetails extends AppStates {}
+
+class SuccessGetPlaceDetails extends AppStates {}
+
+class ErrorGetPlaceDetails extends AppStates {}

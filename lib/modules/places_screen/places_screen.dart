@@ -139,9 +139,12 @@ Widget buildPlacesItem(context, Places model) => Container(
                 Spacer(),
                 InkWell(
                   onTap: () {
+                    AppCubit.get(context).getPlaceDetails(
+                      placeId: model.id,
+                    );
                     navigateTo(
-                      widget: PlaceDetailsScreen(),
                       context: context,
+                      widget: PlaceDetailsScreen(),
                     );
                   },
                   child: Row(
