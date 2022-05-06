@@ -7,11 +7,7 @@ class ListVievOfEventAndOffer extends StatelessWidget {
     return ListView.builder(
       itemCount: 10,
       itemBuilder: (context, index) {
-        return eventAndOfferBody(
-          'name of place',
-          'some details',
-          'assets/images/img.png',
-        );
+        return eventAndOfferBody();
       },
     );
   }
