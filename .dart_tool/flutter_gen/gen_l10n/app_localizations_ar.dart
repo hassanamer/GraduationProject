@@ -11,10 +11,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get welcome_text => 'مرحبا';
 
   @override
-  String get welcome_state_one => 'نأمل ان تجد المكان المناسب ';
-
-  @override
-  String get welcome_state_two => 'لتكون سعيدا ';
+  String get welcome_state_one => 'نأمل ان تجد المكان المناسب\nلتكون سعيد';
 
   @override
   String get register => 'إنشاء حساب';
@@ -44,13 +41,13 @@ class AppLocalizationsAr extends AppLocalizations {
   String get events => 'الأحداث';
 
   @override
-  String get offers => 'عروض';
+  String get offers => 'العروض';
 
   @override
   String get plan => 'الخطة';
 
   @override
-  String get popular_places => 'أماكن أكثر شعبية';
+  String get special_places => 'أماكن مميزة';
 
   @override
   String get popular_places_in_egypt => 'أماكن أكثر شعبية في مصر';
@@ -102,4 +99,10 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get forgot_password => 'نسيت كلمة السر؟';
+
+  @override
+  String get recommended_places => 'الأماكن الموصى بها';
+
+  @override
+  String get more => 'المزيد';
 }

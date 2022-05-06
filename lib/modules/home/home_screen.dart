@@ -122,7 +122,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(
-                      left: 18,
+                      left: 15,
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -162,7 +162,7 @@ class HomeScreen extends StatelessWidget {
                         Row(
                           children: [
                             Text(
-                              'Recommended Places',
+                              AppLocalizations.of(context)!.recommended_places,
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 16.0,
@@ -177,7 +177,7 @@ class HomeScreen extends StatelessWidget {
                                     color: AppColors.primaryColor,
                                   ),
                                   Text(
-                                    'More',
+                                    AppLocalizations.of(context)!.more,
                                     style: TextStyle(
                                       color: AppColors.primaryColor,
                                     ),

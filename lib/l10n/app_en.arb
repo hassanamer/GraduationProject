@@ -1,7 +1,6 @@
 {
 "welcome_text": "Welcome",
-"welcome_state_one": "We Hope You Find A Destination",
-"welcome_state_two": "Make You Happy",
+"welcome_state_one": "We Hope You Find A Destination\nMake You Happy",
 "register": "Register",
 "login": "Login",
 "sign_up": "Sign up",
@@ -30,5 +29,7 @@
 "been_changed": "been changed.",
 "where_to_go": "Where to go?",
 "discover_places": "Discover Places",
-"forgot_password": "Forgot password?"
+"forgot_password": "Forgot password?",
+"recommended_places": "Recommended Places",
+"more": "more"
 }

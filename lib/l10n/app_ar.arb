@@ -1,7 +1,6 @@
 {
 "welcome_text": "مرحبا",
-"welcome_state_one": "نأمل ان تجد المكان المناسب ",
-"welcome_state_two": "لتكون سعيدا ",
+"welcome_state_one": "نأمل ان تجد المكان المناسب\nلتكون سعيد",
 "register": "إنشاء حساب",
 "login": "تسجيل",
 "sign_up": "إنشاء",
@@ -11,7 +10,7 @@
 "remember": "تذكرت حسابك ؟",
 "recover": "استعادة",
 "events": "الأحداث",
-"offers": "عروض",
+"offers": "العروض",
 "special_places": "أماكن مميزة",
 "see_details": "التفاصيل",
 "plan": "الخطة",
@@ -30,5 +29,8 @@
 "been_changed": "تغير كلمة السر.",
 "where_to_go": "إلى أين وجهتك؟",
 "discover_places": "اكتشف الاماكن",
-"forgot_password": "نسيت كلمة السر؟"
+"forgot_password": "نسيت كلمة السر؟",
+"recommended_places": "الأماكن الموصى بها",
+"more": "المزيد"
+
 }

@@ -11,10 +11,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get welcome_text => 'Welcome';
 
   @override
-  String get welcome_state_one => 'We Hope You Find A Destination';
-
-  @override
-  String get welcome_state_two => 'Make You Happy';
+  String get welcome_state_one => 'We Hope You Find A Destination\nMake You Happy';
 
   @override
   String get register => 'Register';
@@ -50,7 +47,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get plan => 'Plan';
 
   @override
-  String get popular_places => 'Popular Places';
+  String get special_places => 'Special Places';
 
   @override
   String get popular_places_in_egypt => 'Popular Places in Egypt';
@@ -102,4 +99,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get forgot_password => 'Forgot password?';
+
+  @override
+  String get recommended_places => 'Recommended Places';
+
+  @override
+  String get more => 'more';
 }

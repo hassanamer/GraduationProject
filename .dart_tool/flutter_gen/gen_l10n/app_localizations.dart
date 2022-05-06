@@ -103,14 +103,8 @@ abstract class AppLocalizations {
   /// No description provided for @welcome_state_one.
   ///
   /// In en, this message translates to:
-  /// **'We Hope You Find A Destination'**
+  /// **'We Hope You Find A Destination\nMake You Happy'**
   String get welcome_state_one;
-
-  /// No description provided for @welcome_state_two.
-  ///
-  /// In en, this message translates to:
-  /// **'Make You Happy'**
-  String get welcome_state_two;
 
   /// No description provided for @register.
   ///
@@ -285,6 +279,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Forgot password?'**
   String get forgot_password;
+
+  /// No description provided for @recommended_places.
+  ///
+  /// In en, this message translates to:
+  /// **'Recommended Places'**
+  String get recommended_places;
+
+  /// No description provided for @more.
+  ///
+  /// In en, this message translates to:
+  /// **'more'**
+  String get more;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
