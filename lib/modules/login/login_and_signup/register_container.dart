@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class RegisterContainer extends StatelessWidget {
+  static const String routeName = 'EventScreen';
+
   String text;
   late String path;
 

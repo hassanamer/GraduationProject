@@ -7,7 +7,7 @@ void signOut(context) {
     (value) {
       if (value) {
         navigateAndFinish(
-          widget: WelcomeScreen(),
+          widget: Welcome(),
           context: context,
         );
       }

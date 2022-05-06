@@ -5,6 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:smarttouristguide/layout/cubit/cubit.dart';
 import 'package:smarttouristguide/layout/cubit/states.dart';
 import 'package:smarttouristguide/models/cat_places_model.dart';
+import 'package:smarttouristguide/models/home_model.dart';
 import 'package:smarttouristguide/modules/place_details/place_details_screen.dart';
 import 'package:smarttouristguide/shared/components/components.dart';
 import '../../shared/styles/colors.dart';

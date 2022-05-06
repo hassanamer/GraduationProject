@@ -36,7 +36,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen>
     {
       if (value)
       {
-        navigateAndFinish(context: context, widget: WelcomeScreen());
+        navigateAndFinish(context: context, widget: Welcome());
       }
     });
 
