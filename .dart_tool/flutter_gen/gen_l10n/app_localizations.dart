@@ -178,11 +178,11 @@ abstract class AppLocalizations {
   /// **'Plan'**
   String get plan;
 
-  /// No description provided for @popular_places.
+  /// No description provided for @special_places.
   ///
   /// In en, this message translates to:
-  /// **'Popular Places'**
-  String get popular_places;
+  /// **'Special Places'**
+  String get special_places;
 
   /// No description provided for @popular_places_in_egypt.
   ///

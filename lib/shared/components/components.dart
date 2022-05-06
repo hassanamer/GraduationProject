@@ -53,7 +53,7 @@ Widget default_Button({
       ),
     );
 
-void navigateTo({required widget, required context}) => Navigator.push(
+void navigateTo({required context ,required widget, }) => Navigator.push(
   context,
   MaterialPageRoute(
     builder: (context) => widget,

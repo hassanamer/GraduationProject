@@ -1,5 +1,5 @@
-class HeoModel {
 
+class HeoModel {
   bool? status;
   String? message;
   Data? data;
@@ -14,111 +14,102 @@ class HeoModel {
 
 class Data {
   List<PopularPlaces>? popularPlaces;
-  List<Offers>? offers;
+  List<TopRated>? topRated;
+  List<dynamic>? offers;
   List<Events>? events;
 
   Data.fromJson(Map<String, dynamic> json){
     popularPlaces = List.from(json['popular_places']).map((e)=>PopularPlaces.fromJson(e)).toList();
-    offers = List.from(json['offers']).map((e)=>Offers.fromJson(e)).toList();
+    topRated = List.from(json['Top_Rated']).map((e)=>TopRated.fromJson(e)).toList();
+    offers = List.castFrom<dynamic, dynamic>(json['offers']);
     events = List.from(json['events']).map((e)=>Events.fromJson(e)).toList();
   }
 
 }
 
 class PopularPlaces {
-
+  dynamic id;
   String? placeName;
   String? Description;
   String? location;
-  dynamic price;
-  String? comment;
   String? image;
   bool? isActive;
   dynamic rate;
+  bool? inFavourite;
 
   PopularPlaces.fromJson(Map<String, dynamic> json){
+    id = json['id'];
     placeName = json['place_name'];
     Description = json['Description'];
     location = json['location'];
-    price = json['price'];
-    comment = json['comment'];
     image = json['image'];
     isActive = json['is_active'];
     rate = json['rate'];
+    inFavourite = json['in_favourite'];
   }
 
 }
 
 class TopRated {
-
+  dynamic id;
   String? placeName;
   String? Description;
   String? location;
-  int? price;
-  String? comment;
   String? image;
   bool? isActive;
-  int? rate;
+  dynamic rate;
+  bool? inFavourite;
 
   TopRated.fromJson(Map<String, dynamic> json){
+    id = json['id'];
     placeName = json['place_name'];
     Description = json['Description'];
     location = json['location'];
-    price = json['price'];
-    comment = json['comment'];
     image = json['image'];
     isActive = json['is_active'];
     rate = json['rate'];
+    inFavourite = json['in_favourite'];
   }
 }
 
-class Offers {
-  int? id;
-  int? newPrice;
+class Events {
+  String? eventName;
+  String? eventImage;
+  String? dateFrom;
+  String? dateTo;
   Place? place;
+  String? discription;
 
-  Offers.fromJson(Map<String, dynamic> json){
-    id = json['id'];
-    newPrice = json['new_price'];
+  Events.fromJson(Map<String, dynamic> json){
+    eventName = json['event_name'];
+    eventImage = json['event_image'];
+    dateFrom = json['date_from'];
+    dateTo = json['date_to'];
     place = Place.fromJson(json['place']);
+    discription = json['discription'];
   }
 }
 
 class Place {
-
-  int? id;
+  dynamic id;
   String? placeName;
   String? Description;
   String? location;
-  int? price;
-  String? comment;
+  String? priceClass;
   String? image;
   bool? isActive;
   int? type;
+  List<dynamic>? favouritePlace;
 
   Place.fromJson(Map<String, dynamic> json){
     id = json['id'];
     placeName = json['place_name'];
     Description = json['Description'];
     location = json['location'];
-    price = json['price'];
-    comment = json['comment'];
+    priceClass = json['price_class'];
     image = json['image'];
     isActive = json['is_active'];
     type = json['type'];
-  }
-}
-
-class Events {
-  String? dateFrom;
-  String? dateTo;
-  String? discription;
-  Place? place;
-
-  Events.fromJson(Map<String, dynamic> json){
-    dateFrom = json['date_from'];
-    dateTo = json['date_to'];
-    discription = json['discription'];
-    place = Place.fromJson(json['place']);
+    favouritePlace = List.castFrom<dynamic, dynamic>(json['favourite_place']);
   }
 }

@@ -8,8 +8,8 @@ import 'package:smarttouristguide/models/home_model.dart';
 import 'package:smarttouristguide/modules/event_offer_places/OfferScreen.dart';
 import 'package:smarttouristguide/modules/event_offer_places/eventScreen.dart';
 import 'package:smarttouristguide/modules/place_details/place_details_screen.dart';
+import 'package:smarttouristguide/modules/recommendation_screen/recommendation_screen.dart';
 import 'package:smarttouristguide/modules/search/search_screen.dart';
-import 'package:smarttouristguide/modules/search_test/SearchScreen.dart';
 import 'package:smarttouristguide/shared/styles/colors.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -128,7 +128,7 @@ class HomeScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          AppLocalizations.of(context)!.popular_places,
+                          AppLocalizations.of(context)!.special_places,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 21.0,
@@ -156,23 +156,53 @@ class HomeScreen extends StatelessWidget {
                             scrollDirection: Axis.horizontal,
                           ),
                         ),
-                        Text(
-                          'Events',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16.0,
-                          ),
+                        SizedBox(
+                          height: 5,
+                        ),
+                        Row(
+                          children: [
+                            Text(
+                              'Recommended Places',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16.0,
+                              ),
+                            ),
+                            Spacer(),
+                            InkWell(
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    Icons.more_horiz_rounded,
+                                    color: AppColors.primaryColor,
+                                  ),
+                                  Text(
+                                    'More',
+                                    style: TextStyle(
+                                      color: AppColors.primaryColor,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              onTap: () {
+                                navigateTo(
+                                  context: context,
+                                  widget: RecommendationScreen(),
+                                );
+                              },
+                            ),
+                          ],
                         ),
                         Container(
                           height: 178.0,
                           width: double.infinity,
                           child: ListView.separated(
-                            itemBuilder: (context, index) => buildEventItem(
-                                cubit.heoModel!.data!.events![index]),
+                            itemBuilder: (context, index) =>
+                                buildHomeRecommendationItem(),
                             separatorBuilder: (context, index) => SizedBox(
                               width: 10.0,
                             ),
-                            itemCount: cubit.heoModel!.data!.events!.length,
+                            itemCount: 6,
                             scrollDirection: Axis.horizontal,
                           ),
                         ),
@@ -241,7 +271,7 @@ Widget buildPopularItem(PopularPlaces model) => Container(
       ),
     );
 
-Widget buildEventItem(Events model) => Container(
+Widget buildHomeRecommendationItem() => Container(
       height: 178.0,
       width: 148.0,
       decoration: BoxDecoration(
@@ -259,13 +289,14 @@ Widget buildEventItem(Events model) => Container(
                 child: SizedBox(
               height: 106.5,
               child: Image(
-                fit: BoxFit.fill,
-                image: NetworkImage('${model.place!.image}'),
+                fit: BoxFit.cover,
+                image: AssetImage('assets/images/pcimg.jpg'),
               ),
             )),
             Text(
-              '${model.place!.placeName}',
+              'Place Name',
               maxLines: 1,
+              overflow: TextOverflow.ellipsis,
               style: TextStyle(fontSize: 13.0, fontWeight: FontWeight.w600),
             ),
             Spacer(),
