@@ -28,7 +28,7 @@ void main() async {
     if (token != '') {
       widget = AppLayout();
     } else {
-      widget = WelcomeScreen();
+      widget = Welcome();
     }
   } else {
     widget = OnBoardingScreen();
@@ -72,7 +72,7 @@ class MyApp extends StatelessWidget {
         supportedLocales: AppLocalizations.supportedLocales,
         //locale: Locale("${changeLanguage()}"),
         theme: lightTheme,
-        home: startWidget,
+        home: AppLayout(),
       ),
     );
   }

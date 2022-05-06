@@ -150,7 +150,7 @@ class ForgetPassword extends StatelessWidget {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => WelcomeScreen()),
+                                        builder: (context) => Welcome()),
                                   );
                                 },
                                 child: const Text('Sign in',

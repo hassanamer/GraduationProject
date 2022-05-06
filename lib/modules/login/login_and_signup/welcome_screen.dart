@@ -4,7 +4,9 @@ import 'package:smarttouristguide/modules/login/login_cubit/cubit.dart';
 import 'package:smarttouristguide/modules/login/login_cubit/states.dart';
 import 'package:smarttouristguide/shared/styles/colors.dart';
 
-class WelcomeScreen extends StatelessWidget {
+class Welcome extends StatelessWidget {
+  static const String routeName = 'Welcome';
+
   @override
   Widget build(BuildContext context) {
 

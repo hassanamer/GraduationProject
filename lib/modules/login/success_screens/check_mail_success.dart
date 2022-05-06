@@ -85,8 +85,8 @@ class SuccessScreen extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Container(
-                        width: 256.0,
-                        height: 49.0,
+                        width: MediaQuery.of(context).size.width * 0.5,
+                        height: MediaQuery.of(context).size.width * 0.13,
                         child: ElevatedButton(
                           onPressed: () {},
                           child: Text(

@@ -38,8 +38,8 @@ class HomeScreen extends StatelessWidget {
                     child: Column(
                       children: [
                         Container(
-                          width: 280,
-                          height: 36,
+                          width: MediaQuery.of(context).size.width * 0.7,
+                          height: MediaQuery.of(context).size.height * 0.05,
                           decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(
@@ -142,7 +142,7 @@ class HomeScreen extends StatelessWidget {
                           ),
                         ),
                         Container(
-                          height: 178.0,
+                          height: MediaQuery.of(context).size.height * 0.21,
                           width: double.infinity,
                           child: ListView.separated(
                             itemBuilder: (context, index) => buildPopularItem(
@@ -194,7 +194,7 @@ class HomeScreen extends StatelessWidget {
                           ],
                         ),
                         Container(
-                          height: 178.0,
+                          height: MediaQuery.of(context).size.height * 0.21,
                           width: double.infinity,
                           child: ListView.separated(
                             itemBuilder: (context, index) =>
