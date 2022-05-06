@@ -105,4 +105,10 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get more => 'المزيد';
+
+  @override
+  String get login_error => 'برجاء إدخال بيانات صحيحة';
+
+  @override
+  String get login_success => 'تم تسجيل الدخول بنجاح';
 }
