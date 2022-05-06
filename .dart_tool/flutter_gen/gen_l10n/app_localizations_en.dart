@@ -105,4 +105,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get more => 'more';
+
+  @override
+  String get login_error => 'Please enter correct data';
+
+  @override
+  String get login_success => 'login successfully';
 }
