@@ -26,7 +26,10 @@ class menuDrawerScreen extends StatelessWidget {
                         children: [
                           Row(
                             children: [
-                              const SizedBox(width: 110),
+                              Container(
+                                color: Colors.transparent,
+                                width: MediaQuery.of(context).size.width * 0.15,
+                              ),
                               Column(
                                 children: [
                                   CircleAvatar(

@@ -37,8 +37,8 @@ class UserProfile extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.all(25.0),
                         child: Container(
-                          height: 168.07,
-                          width: 320.0,
+                          height: MediaQuery.of(context).size.height * 0.2,
+                          width: MediaQuery.of(context).size.width * 0.9,
                           decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(15.0)),

@@ -7,7 +7,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:smarttouristguide/layout/cubit/cubit.dart';
 import 'package:smarttouristguide/layout/cubit/states.dart';
 import 'package:smarttouristguide/models/place_details_model.dart';
-import 'package:smarttouristguide/shared/components/components.dart';
 import 'package:smarttouristguide/shared/styles/colors.dart';
 
 class PlaceDetailsScreen extends StatelessWidget {
@@ -23,42 +22,36 @@ class PlaceDetailsScreen extends StatelessWidget {
       builder: (context, state) {
         return ConditionalBuilder(
           condition: state is! LoadingGetPlaceDetails,
-          builder: (context) =>
-              PlaceDetailsScreenBuilder(cubit.placeDetailsModel!.data!, context),
-          fallback: (context) =>
-              Container(
-                color: AppColors.backgroundColor,
-                width: double.infinity,
-                height: double.infinity,
-                child: Center(
-                  child: CircularProgressIndicator(
-                    color: AppColors.primaryColor,
-                  ),
-                ),
+          builder: (context) => PlaceDetailsScreenBuilder(
+              cubit.placeDetailsModel!.data!, context),
+          fallback: (context) => Container(
+            color: AppColors.backgroundColor,
+            width: double.infinity,
+            height: double.infinity,
+            child: Center(
+              child: CircularProgressIndicator(
+                color: AppColors.primaryColor,
               ),
+            ),
+          ),
         );
       },
     );
   }
 }
 
-Widget PlaceDetailsScreenBuilder(Data model, context) =>
-    Scaffold(
+Widget PlaceDetailsScreenBuilder(Data model, context) => Scaffold(
       appBar: AppBar(
         systemOverlayStyle: SystemUiOverlayStyle(
-          statusBarIconBrightness: Brightness.dark,
-          statusBarColor: AppColors.backgroundColor
-        ),
+            statusBarIconBrightness: Brightness.dark,
+            statusBarColor: AppColors.backgroundColor),
         toolbarHeight: 0,
         iconTheme: IconThemeData(
           color: AppColors.primaryColor,
         ),
         title: Text(
           'Back To Places',
-          style: TextStyle(
-            color: AppColors.primaryColor,
-            fontSize: 15.0
-          ),
+          style: TextStyle(color: AppColors.primaryColor, fontSize: 15.0),
         ),
       ),
       body: SingleChildScrollView(
@@ -82,7 +75,7 @@ Widget PlaceDetailsScreenBuilder(Data model, context) =>
                         Row(
                           children: [
                             IconButton(
-                              onPressed: (){
+                              onPressed: () {
                                 Navigator.pop(context);
                               },
                               icon: Icon(
@@ -132,21 +125,22 @@ Widget PlaceDetailsScreenBuilder(Data model, context) =>
                         ),
                       ],
                     ),
-                    SizedBox(
-                      height: 179,
-                      child: Container(
-                        height: 179,
-                        width: 333,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(
-                            8,
-                          ),
-                          image: DecorationImage(
-                            image: NetworkImage('${model.image}'),
-                          ),
-                        ),
-                      ),
-                    ),
+                    // SizedBox(
+                    //   height: 179,
+                    //   child: Container(
+                    //     height: 179,
+                    //     width: 333,
+                    //     decoration: BoxDecoration(
+                    //       borderRadius: BorderRadius.circular(
+                    //         8,
+                    //       ),
+                    //       image: DecorationImage(
+                    //         image: NetworkImage('${model.image}'),
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
+                    // mohab: 3mlt comment mfe4 ay 7aga at8yaret eawez afham lzmato eh fe al code 3l4an m4 3aref by3mal run fen dah
                     Row(
                       children: [
                         RateIcon(true, 20),
@@ -273,7 +267,6 @@ Widget PlaceDetailsScreenBuilder(Data model, context) =>
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-
                   ],
                 ),
               ),
@@ -283,8 +276,7 @@ Widget PlaceDetailsScreenBuilder(Data model, context) =>
       ),
     );
 
-Widget buildComment(Data model, index) =>
-    Column(
+Widget buildComment(Data model, index) => Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
@@ -296,34 +288,31 @@ Widget buildComment(Data model, index) =>
       ],
     );
 
-Widget RateIcon(bool color, double size) =>
-    Icon(
+Widget RateIcon(bool color, double size) => Icon(
       Icons.star_rate_rounded,
       color: color ? AppColors.primaryColor : AppColors.disabledAndHintColor,
       size: size,
     );
 
-Widget hteset(Data model, index) =>
-    ListView.separated(
+Widget hteset(Data model, index) => ListView.separated(
       scrollDirection: Axis.vertical,
-      itemBuilder: (context, index) =>
-          Container(
-            width: double.infinity,
-            height: 100,
-            child: Column(
-              children: [
-                Text(
-                  'User: ${model.comments![index]["user"]}',
-                ),
-                Text(
-                  'Comment: ${model.comments![index]["comment"]}',
-                ),
-              ],
+      itemBuilder: (context, index) => Container(
+        width: double.infinity,
+        // height: 100 ,
+        // m4 fahem brdo leeh hana mdelo height
+        child: Column(
+          children: [
+            Text(
+              'User: ${model.comments![index]["user"]}',
             ),
-          ),
-      separatorBuilder: (context, index) =>
-          SizedBox(
-            height: 12,
-          ),
+            Text(
+              'Comment: ${model.comments![index]["comment"]}',
+            ),
+          ],
+        ),
+      ),
+      separatorBuilder: (context, index) => SizedBox(
+        height: 12,
+      ),
       itemCount: model.comments!.length,
     );

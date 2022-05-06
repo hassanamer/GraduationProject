@@ -3,8 +3,6 @@ import 'package:smarttouristguide/shared/styles/colors.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../user/user_screen.dart';
-
 class CreateNewPassword extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
