@@ -79,7 +79,7 @@ class FavoritesScreen extends StatelessWidget
                     IconButton(
                       icon: CircleAvatar(
                         radius: 15.0,
-                        backgroundColor: AppCubit.get(context).favorites[model.product!.id]! ? defaultColor : Colors.grey,
+                        // backgroundColor: AppCubit.get(context).favorites[model.product!.id]! ? defaultColor : Colors.grey,
                         child: const Icon(
                           Icons.favorite_border,
                           size: 14.0,
@@ -88,7 +88,7 @@ class FavoritesScreen extends StatelessWidget
                       ),
                       onPressed: ()
                       {
-                        AppCubit.get(context).changeFavorite(model.product!.id);
+                        // AppCubit.get(context).changeFavorite(model.product!.id);
                       },
                     ),
                   ],

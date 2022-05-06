@@ -99,7 +99,7 @@ class AppCubit extends Cubit<AppStates> {
   //         element.id: element.inFavorites
   //       });
   //     });
-  //     emit(ShopSuccessHomeDataState());
+  //     emit(ShopSuccessHomeDataState());;
   //   }).catchError((error) {
   //     print(error.toString());
   //     emit(ShopErrorHomeDataState());
