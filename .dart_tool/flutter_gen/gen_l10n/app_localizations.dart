@@ -291,6 +291,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'more'**
   String get more;
+
+  /// No description provided for @login_error.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter correct data'**
+  String get login_error;
+
+  /// No description provided for @login_success.
+  ///
+  /// In en, this message translates to:
+  /// **'login successfully'**
+  String get login_success;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

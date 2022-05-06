@@ -31,6 +31,8 @@
 "discover_places": "اكتشف الاماكن",
 "forgot_password": "نسيت كلمة السر؟",
 "recommended_places": "الأماكن الموصى بها",
-"more": "المزيد"
+"more": "المزيد",
+"login_error": "برجاء إدخال بيانات صحيحة",
+"login_success": "تم تسجيل الدخول بنجاح"
 
 }

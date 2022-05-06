@@ -44,10 +44,15 @@ class LoginScreen extends StatelessWidget {
             );
           } else {
             showToast(
-              message: "${state.loginModel!.message!}",
+              message: AppLocalizations.of(context)!.login_success,
               state: ToastStates.ERROR,
             );
           }
+        } else if(state is AppLoginErrorState) {
+          showToast(
+            message: AppLocalizations.of(context)!.login_error,
+            state: ToastStates.ERROR,
+          );
         }
       },
       builder: (context, state) {

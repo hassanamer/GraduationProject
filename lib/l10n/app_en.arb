@@ -31,5 +31,7 @@
 "discover_places": "Discover Places",
 "forgot_password": "Forgot password?",
 "recommended_places": "Recommended Places",
-"more": "more"
+"more": "more",
+"login_error": "Please enter correct data",
+"login_success": "login successfully"
 }

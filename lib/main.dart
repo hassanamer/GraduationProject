@@ -72,7 +72,7 @@ class MyApp extends StatelessWidget {
         supportedLocales: AppLocalizations.supportedLocales,
         //locale: Locale("${changeLanguage()}"),
         theme: lightTheme,
-        home: AppLayout(),
+        home: startWidget,
       ),
     );
   }

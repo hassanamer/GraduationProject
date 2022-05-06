@@ -7,7 +7,6 @@ import 'package:smarttouristguide/shared/styles/colors.dart';
 
 import '../../layout/cubit/cubit.dart';
 
-
 Widget defaultButton({
   double width = double.infinity,
   Color background = Colors.blue,
@@ -15,24 +14,25 @@ Widget defaultButton({
   double radius = 0,
   required String text,
   required VoidCallback function,
-}) => Container(
-  width: width,
-  decoration: BoxDecoration(
-    color: background,
-    borderRadius: BorderRadius.circular(
-      radius,
-    ),
-  ),
-  child: MaterialButton(
-    onPressed: function,
-    child: Text(
-      isUpperCase? text.toUpperCase() : text,
-      style: const TextStyle(
-        color: Colors.white,
+}) =>
+    Container(
+      width: width,
+      decoration: BoxDecoration(
+        color: background,
+        borderRadius: BorderRadius.circular(
+          radius,
+        ),
       ),
-    ),
-  ),
-);
+      child: MaterialButton(
+        onPressed: function,
+        child: Text(
+          isUpperCase ? text.toUpperCase() : text,
+          style: const TextStyle(
+            color: Colors.white,
+          ),
+        ),
+      ),
+    );
 //default button (ex: Registration,Login, Submit)
 Widget default_Button({
   required double width,
@@ -53,15 +53,25 @@ Widget default_Button({
       ),
     );
 
-void navigateTo({required context ,required widget, }) => Navigator.push(
-  context,
-  MaterialPageRoute(
-    builder: (context) => widget,
-  ),
-);
+void navigateTo({
+  required context,
+  required widget,
+}) =>
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => widget,
+      ),
+    );
 
-void navigateAndFinish({required widget, required context}) => Navigator.pushAndRemoveUntil(
-    context, MaterialPageRoute(builder: (context) => widget), (route) => false);
+void navigateAndFinish({required widget, required context}) =>
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(
+        builder: (context) => widget,
+      ),
+      (route) => false,
+    );
 
 Widget bottomNavBar(context) {
   var cubit = AppCubit.get(context);
@@ -131,87 +141,87 @@ Widget bottomNavBar(context) {
 Widget HomeRow({
   required String text,
   required String iconPath,
-
-}) => Container(
-  height: 39.0,
-  width: 299,
-  decoration: BoxDecoration(
-    color: Color(0xffffebc9),
-    borderRadius: BorderRadius.circular(19.0,),
-    boxShadow: const [
-      BoxShadow(
-        color: Color(
-          0x16000000,
+}) =>
+    Container(
+      height: 39.0,
+      width: 299,
+      decoration: BoxDecoration(
+        color: Color(0xffffebc9),
+        borderRadius: BorderRadius.circular(
+          19.0,
         ),
-        spreadRadius: 3,
-        blurRadius: 6,
+        boxShadow: const [
+          BoxShadow(
+            color: Color(
+              0x16000000,
+            ),
+            spreadRadius: 3,
+            blurRadius: 6,
+          ),
+        ],
       ),
-    ],
-  ),
-  child: Row(
-    children: [
-      SizedBox(
-        width: 9.5,
+      child: Row(
+        children: [
+          SizedBox(
+            width: 9.5,
+          ),
+          SvgPicture.asset(
+            iconPath,
+          ),
+          const SizedBox(
+            width: 7.5,
+          ),
+          Text(
+            text.toUpperCase(),
+            style: TextStyle(
+              color: AppColors.primaryColor,
+              fontSize: 17.0,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ],
       ),
-      SvgPicture.asset(
-        iconPath,
-      ),
-      const SizedBox(
-        width: 7.5,
-      ),
-      Text(
-        text.toUpperCase(),
-        style: TextStyle(
-          color: AppColors.primaryColor,
-          fontSize: 17.0,
-          fontWeight: FontWeight.bold,
-        ),
-      ),
-    ],
-  ),
-);
+    );
 
 Widget HomeItem() => Container(
-  height: 200.0,
-  width: 148.0,
-  decoration: BoxDecoration(
-    color: Colors.white,
-    borderRadius: BorderRadius.circular(16.0,),
-  ),
-  child: Padding(
-    padding: const EdgeInsets.all(10.0),
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children:
-      [
-        Center(
-          child: Image.asset('assets/images/test.jpg',
-              height: 112),
+      height: 200.0,
+      width: 148.0,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(
+          16.0,
         ),
-        Text(
-          'Giza Pyramids',
-          style: TextStyle(
-              fontSize: 13.0,
-              fontWeight: FontWeight.w600
-          ),
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children:
-          [
-            rate(),
-            rate(),
-            rate(),
-            rate(),
-            rate(),
-            Spacer(),
-            SvgPicture.asset('assets/icons/goto.svg',)
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Center(
+              child: Image.asset('assets/images/test.jpg', height: 112),
+            ),
+            Text(
+              'Giza Pyramids',
+              style: TextStyle(fontSize: 13.0, fontWeight: FontWeight.w600),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                rate(),
+                rate(),
+                rate(),
+                rate(),
+                rate(),
+                Spacer(),
+                SvgPicture.asset(
+                  'assets/icons/goto.svg',
+                )
+              ],
+            ),
           ],
         ),
-      ],
-    ),
-  ),
-);
+      ),
+    );
 
 Widget defaultFormField({
   required TextEditingController controller,
@@ -227,33 +237,34 @@ Widget defaultFormField({
   bool isPassword = false,
   double radius = 0,
   bool isClickable = true,
-}) => TextFormField(
-  controller: controller,
-  obscureText: isPassword,
-  keyboardType: type,
-  enabled: isClickable,
-  onFieldSubmitted: onSubmit,
-  onChanged: onChanged,
-  validator: validate,
-  onTap: onTap,
-  decoration: InputDecoration(
-    labelText: label,
-    prefixIcon: Icon(
-      prefix,
-    ),
-    suffixIcon: suffix != null ? IconButton(
-      onPressed: suffixPressed,
-      icon: Icon(
-          suffix
-      ),
-    ) : null,
-    border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(
+}) =>
+    TextFormField(
+      controller: controller,
+      obscureText: isPassword,
+      keyboardType: type,
+      enabled: isClickable,
+      onFieldSubmitted: onSubmit,
+      onChanged: onChanged,
+      validator: validate,
+      onTap: onTap,
+      decoration: InputDecoration(
+        labelText: label,
+        prefixIcon: Icon(
+          prefix,
+        ),
+        suffixIcon: suffix != null
+            ? IconButton(
+                onPressed: suffixPressed,
+                icon: Icon(suffix),
+              )
+            : null,
+        border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(
           radius,
-        )
-    ),
-  ),
-);
+        )),
+      ),
+    );
+
 void showToast({
   required String? message,
   ToastStates? state,
@@ -264,7 +275,7 @@ void showToast({
       gravity: ToastGravity.BOTTOM,
       timeInSecForIosWeb: 5,
       backgroundColor:
-      state == null ? AppColors.primaryColor : chooseToastColor(state),
+          state == null ? AppColors.primaryColor : chooseToastColor(state),
       textColor: Colors.white,
       fontSize: 16.0,
     );
@@ -289,12 +300,12 @@ Color? chooseToastColor(ToastStates state) {
 }
 
 Widget divider({double width = double.infinity}) => Padding(
-  padding: const EdgeInsets.symmetric(
-    horizontal: 20.0,
-  ),
-  child: Container(
-    width: width,
-    height: 1.0,
-    color: Colors.grey[300],
-  ),
-);
+      padding: const EdgeInsets.symmetric(
+        horizontal: 20.0,
+      ),
+      child: Container(
+        width: width,
+        height: 1.0,
+        color: Colors.grey[300],
+      ),
+    );

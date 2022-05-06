@@ -28,7 +28,9 @@ class AppLoginCubit extends Cubit<AppLoginStates> {
       },
     ).then((value) {
       print(value.data);
+
       loginModel = AppLoginModel.fromJson(value.data);
+
       emit(AppLoginSuccessState(loginModel));
     }).catchError((error) {
       print('error is = ${error.toString()}');
