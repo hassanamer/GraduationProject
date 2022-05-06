@@ -8,6 +8,8 @@ class WishListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      // al screen deh lsa m4 kamla lma t5las h3mal feha al media
+
       height: 178.0,
       width: 148.0,
       decoration: BoxDecoration(
@@ -23,12 +25,13 @@ class WishListScreen extends StatelessWidget {
           children: [
             Center(
                 child: SizedBox(
-                  height: 106.5,
-                  child: Image(
-                    fit: BoxFit.fill,
-                    image: NetworkImage('https://i.pinimg.com/originals/9e/df/6b/9edf6b06f5699d16b7d04a2741e605f0.jpg'),
-                  ),
-                )),
+              height: 106.5,
+              child: Image(
+                fit: BoxFit.fill,
+                image: NetworkImage(
+                    'https://i.pinimg.com/originals/9e/df/6b/9edf6b06f5699d16b7d04a2741e605f0.jpg'),
+              ),
+            )),
             Text(
               'Hello Test',
               maxLines: 1,
