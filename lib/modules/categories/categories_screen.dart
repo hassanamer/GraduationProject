@@ -100,7 +100,10 @@ Widget buildCategoryItem(context, Category model, index) => Container(
                   child: InkWell(
                     onTap: () {
                       navigateTo(
-                        widget: PlacesScreen(),
+                        widget: PlacesScreen(
+                          catIndex1: index,
+                          catName1: model.name,
+                        ),
                         context: context,
                       );
                     },

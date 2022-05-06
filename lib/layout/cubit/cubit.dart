@@ -5,8 +5,8 @@ import 'package:smarttouristguide/models/cat_places_model.dart';
 import 'package:smarttouristguide/models/home_model.dart';
 import 'package:smarttouristguide/models/place_details_model.dart';
 import 'package:smarttouristguide/modules/categories/categories_screen.dart';
+import 'package:smarttouristguide/modules/favorites_screen/favorites_screen.dart';
 import 'package:smarttouristguide/modules/home/home_screen.dart';
-import 'package:smarttouristguide/modules/wish_list/wish_list.dart';
 import 'package:smarttouristguide/shared/network/end_points.dart';
 import 'package:smarttouristguide/shared/network/remote/dio_helper.dart';
 
@@ -17,10 +17,11 @@ class AppCubit extends Cubit<AppStates> {
 
   int currentIndex = 0;
 
-  List<Widget> bottomScreens = [
+  List<Widget> bottomScreens =
+  [
     HomeScreen(),
     CategoriesScreen(),
-    WishListScreen(),
+    FavoritesScreen(),
   ];
 
   void changeBottom(int index) {
@@ -82,4 +83,26 @@ class AppCubit extends Cubit<AppStates> {
       emit(ErrorGetPlaceDetails());
     });
   }
+
+  Map<int?, bool?> favorites = {};
+
+  // void getHomeData() {
+  //   emit(ShopLoadingHomeDataState());
+  //   DioHelper.getData(
+  //     url: HOME, token: token,
+  //   ).then((value)
+  //   {
+  //     homeModel = HomeModel.fromJson(value.data);
+  //     homeModel!.data!.products.forEach((element)
+  //     {
+  //       favorites.addAll({
+  //         element.id: element.inFavorites
+  //       });
+  //     });
+  //     emit(ShopSuccessHomeDataState());
+  //   }).catchError((error) {
+  //     print(error.toString());
+  //     emit(ShopErrorHomeDataState());
+  //   });
+  // }
 }

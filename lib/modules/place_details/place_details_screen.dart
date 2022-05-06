@@ -1,5 +1,4 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,10 +6,17 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:smarttouristguide/layout/cubit/cubit.dart';
 import 'package:smarttouristguide/layout/cubit/states.dart';
 import 'package:smarttouristguide/models/place_details_model.dart';
-import 'package:smarttouristguide/shared/components/components.dart';
 import 'package:smarttouristguide/shared/styles/colors.dart';
+import 'package:smooth_star_rating_null_safety/smooth_star_rating_null_safety.dart';
 
 class PlaceDetailsScreen extends StatelessWidget {
+  String? catName;
+
+  PlaceDetailsScreen({
+    String? catName1,
+  }) {
+    catName = catName1;
+  }
   var mediaController = PageController();
 
   static const String routeName = 'PlaceDetailsScreen';
@@ -24,7 +30,7 @@ class PlaceDetailsScreen extends StatelessWidget {
         return ConditionalBuilder(
           condition: state is! LoadingGetPlaceDetails,
           builder: (context) =>
-              PlaceDetailsScreenBuilder(cubit.placeDetailsModel!.data!, context),
+              PlaceDetailsScreenBuilder(cubit.placeDetailsModel!.data!, context, catName),
           fallback: (context) =>
               Container(
                 color: AppColors.backgroundColor,
@@ -42,7 +48,7 @@ class PlaceDetailsScreen extends StatelessWidget {
   }
 }
 
-Widget PlaceDetailsScreenBuilder(Data model, context) =>
+Widget PlaceDetailsScreenBuilder(Data model, context, catName) =>
     Scaffold(
       appBar: AppBar(
         systemOverlayStyle: SystemUiOverlayStyle(
@@ -110,7 +116,7 @@ Widget PlaceDetailsScreenBuilder(Data model, context) =>
                       ],
                     ),
                     Row(
-                      children: const [
+                      children: [
                         Icon(
                           Icons.location_on,
                           color: AppColors.primaryColor,
@@ -124,7 +130,7 @@ Widget PlaceDetailsScreenBuilder(Data model, context) =>
                         ),
                         Spacer(),
                         Text(
-                          'Leisure tourism',
+                          '${catName}',
                           style: TextStyle(
                             fontSize: 15.0,
                             color: Colors.grey,
@@ -132,28 +138,26 @@ Widget PlaceDetailsScreenBuilder(Data model, context) =>
                         ),
                       ],
                     ),
-                    SizedBox(
-                      height: 179,
-                      child: Container(
-                        height: 179,
-                        width: 333,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(
-                            8,
-                          ),
-                          image: DecorationImage(
-                            image: NetworkImage('${model.image}'),
-                          ),
+                    Container(
+                      height: 120,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(
+                          8,
+                        ),
+                        image: DecorationImage(
+                          fit: BoxFit.cover,
+                          image: NetworkImage('${model.image}'),
                         ),
                       ),
                     ),
                     Row(
                       children: [
-                        RateIcon(true, 20),
-                        RateIcon(true, 20),
-                        RateIcon(true, 20),
-                        RateIcon(true, 20),
-                        RateIcon(false, 20),
+                        SmoothStarRating(
+                          color: AppColors.primaryColor,
+                          rating: model.rate.toDouble(),
+                          starCount: 5,
+                        ),
                         //color(0xff
                         Spacer(),
                         InkWell(
@@ -283,47 +287,9 @@ Widget PlaceDetailsScreenBuilder(Data model, context) =>
       ),
     );
 
-Widget buildComment(Data model, index) =>
-    Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'User: ${model.comments![index]["user"]}',
-        ),
-        Text(
-          'Comment: ${model.comments![index]["comment"]}',
-        ),
-      ],
-    );
-
 Widget RateIcon(bool color, double size) =>
     Icon(
       Icons.star_rate_rounded,
       color: color ? AppColors.primaryColor : AppColors.disabledAndHintColor,
       size: size,
-    );
-
-Widget hteset(Data model, index) =>
-    ListView.separated(
-      scrollDirection: Axis.vertical,
-      itemBuilder: (context, index) =>
-          Container(
-            width: double.infinity,
-            height: 100,
-            child: Column(
-              children: [
-                Text(
-                  'User: ${model.comments![index]["user"]}',
-                ),
-                Text(
-                  'Comment: ${model.comments![index]["comment"]}',
-                ),
-              ],
-            ),
-          ),
-      separatorBuilder: (context, index) =>
-          SizedBox(
-            height: 12,
-          ),
-      itemCount: model.comments!.length,
     );
