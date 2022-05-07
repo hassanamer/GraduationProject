@@ -2,12 +2,12 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:smarttouristguide/layout/cubit/cubit.dart';
 import 'package:smarttouristguide/layout/cubit/states.dart';
 import 'package:smarttouristguide/models/place_details_model.dart';
 import 'package:smarttouristguide/shared/styles/colors.dart';
-import 'package:smooth_star_rating_null_safety/smooth_star_rating_null_safety.dart';
 
 class PlaceDetailsScreen extends StatelessWidget {
   String? catName;
@@ -17,6 +17,7 @@ class PlaceDetailsScreen extends StatelessWidget {
   }) {
     catName = catName1;
   }
+
   var mediaController = PageController();
 
   static const String routeName = 'PlaceDetailsScreen';
@@ -29,42 +30,36 @@ class PlaceDetailsScreen extends StatelessWidget {
       builder: (context, state) {
         return ConditionalBuilder(
           condition: state is! LoadingGetPlaceDetails,
-          builder: (context) =>
-              PlaceDetailsScreenBuilder(cubit.placeDetailsModel!.data!, context, catName),
-          fallback: (context) =>
-              Container(
-                color: AppColors.backgroundColor,
-                width: double.infinity,
-                height: double.infinity,
-                child: Center(
-                  child: CircularProgressIndicator(
-                    color: AppColors.primaryColor,
-                  ),
-                ),
+          builder: (context) => PlaceDetailsScreenBuilder(
+              cubit.placeDetailsModel!.data!, context, catName),
+          fallback: (context) => Container(
+            color: AppColors.backgroundColor,
+            width: double.infinity,
+            height: double.infinity,
+            child: Center(
+              child: CircularProgressIndicator(
+                color: AppColors.primaryColor,
               ),
+            ),
+          ),
         );
       },
     );
   }
 }
 
-Widget PlaceDetailsScreenBuilder(Data model, context, catName) =>
-    Scaffold(
+Widget PlaceDetailsScreenBuilder(Data model, context, catName) => Scaffold(
       appBar: AppBar(
         systemOverlayStyle: SystemUiOverlayStyle(
-          statusBarIconBrightness: Brightness.dark,
-          statusBarColor: AppColors.backgroundColor
-        ),
+            statusBarIconBrightness: Brightness.dark,
+            statusBarColor: AppColors.backgroundColor),
         toolbarHeight: 0,
         iconTheme: IconThemeData(
           color: AppColors.primaryColor,
         ),
         title: Text(
           'Back To Places',
-          style: TextStyle(
-            color: AppColors.primaryColor,
-            fontSize: 15.0
-          ),
+          style: TextStyle(color: AppColors.primaryColor, fontSize: 15.0),
         ),
       ),
       body: SingleChildScrollView(
@@ -88,7 +83,7 @@ Widget PlaceDetailsScreenBuilder(Data model, context, catName) =>
                         Row(
                           children: [
                             IconButton(
-                              onPressed: (){
+                              onPressed: () {
                                 Navigator.pop(context);
                               },
                               icon: Icon(
@@ -139,48 +134,62 @@ Widget PlaceDetailsScreenBuilder(Data model, context, catName) =>
                       ],
                     ),
                     Container(
-                      height: 120,
+                      height: 180,
                       width: double.infinity,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(
                           8,
                         ),
                         image: DecorationImage(
-                          fit: BoxFit.cover,
+                          fit: BoxFit.fill,
                           image: NetworkImage('${model.image}'),
                         ),
                       ),
                     ),
-                    Row(
-                      children: [
-                        SmoothStarRating(
-                          color: AppColors.primaryColor,
-                          rating: model.rate.toDouble(),
-                          starCount: 5,
-                        ),
-                        //color(0xff
-                        Spacer(),
-                        InkWell(
-                          onTap: () {},
-                          child: Row(
-                            children: [
-                              SvgPicture.asset(
-                                'assets/icons/location.svg',
-                              ),
-                              const SizedBox(
-                                width: 8,
-                              ),
-                              const Text(
-                                'GPS Location',
-                                style: TextStyle(
-                                  fontSize: 12.0,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ],
+                    SizedBox(
+                      height: 5.0,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 7
+                      ),
+                      child: Row(
+                        children: [
+                          RatingBarIndicator(
+                            rating: model.rate.toDouble(),
+                            itemBuilder: (context, index) => Icon(
+                              Icons.star,
+                              color: AppColors.primaryColor,
+                            ),
+                            itemCount: 5,
+                            itemSize: 20.5,
+                            direction: Axis.horizontal,
                           ),
-                        ),
-                      ],
+                          Spacer(),
+                          InkWell(
+                            onTap: () {},
+                            child: Row(
+                              children: [
+                                SvgPicture.asset(
+                                  'assets/icons/location.svg',
+                                  height: 12,
+                                  width: 12,
+                                ),
+                                const SizedBox(
+                                  width: 8,
+                                ),
+                                const Text(
+                                  'GPS Location',
+                                  style: TextStyle(
+                                    fontSize: 12.0,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
@@ -277,7 +286,6 @@ Widget PlaceDetailsScreenBuilder(Data model, context, catName) =>
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-
                   ],
                 ),
               ),
@@ -287,8 +295,7 @@ Widget PlaceDetailsScreenBuilder(Data model, context, catName) =>
       ),
     );
 
-Widget RateIcon(bool color, double size) =>
-    Icon(
+Widget RateIcon(bool color, double size) => Icon(
       Icons.star_rate_rounded,
       color: color ? AppColors.primaryColor : AppColors.disabledAndHintColor,
       size: size,

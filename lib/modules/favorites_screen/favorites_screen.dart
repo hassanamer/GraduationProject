@@ -18,13 +18,13 @@ class FavoritesScreen extends StatelessWidget
       builder: (context, state)
       {
         return ConditionalBuilder(
-          condition: cubit.heoModel != null,
+          condition: cubit.homeModel != null,
           builder: (context) => ListView.separated(
-            itemBuilder: (context, index) => buildFavItem(cubit.heoModel!.data!.popularPlaces![index], context),
+            itemBuilder: (context, index) => buildFavItem(cubit.homeModel!.data.popularPlaces[index], context),
             separatorBuilder: (context, index) => SizedBox(
               height: 5,
             ),
-            itemCount: cubit.heoModel!.data!.popularPlaces!.length,
+            itemCount: cubit.homeModel!.data.popularPlaces.length,
           ),
           fallback: (context) => Center(child: CircularProgressIndicator(),),
         );

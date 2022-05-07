@@ -23,10 +23,10 @@ class RegisterScreen extends StatelessWidget {
     return BlocConsumer<AppLoginCubit, AppLoginStates>(
       listener: (context, state) {
         if (state is AppLoginSuccessState) {
-          if (state.loginModel!.status!) {
+          if (state.loginModel!.status) {
             CacheHelper.saveData(
               key: 'token',
-              value: state.loginModel!.data!.token,
+              value: state.loginModel!.data.token,
             ).then((value) {
               navigateAndFinish(
                 context: context,
@@ -34,7 +34,7 @@ class RegisterScreen extends StatelessWidget {
               );
             });
             Fluttertoast.showToast(
-              msg: "${state.loginModel!.message!}",
+              msg: "${state.loginModel!.message}",
               toastLength: Toast.LENGTH_SHORT,
               gravity: ToastGravity.BOTTOM,
               timeInSecForIosWeb: 5,
@@ -44,7 +44,7 @@ class RegisterScreen extends StatelessWidget {
             );
           } else {
             showToast(
-              message: "${state.loginModel!.message!}",
+              message: "${state.loginModel!.message}",
               state: ToastStates.ERROR,
             );
           }

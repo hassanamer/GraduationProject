@@ -11,15 +11,15 @@ import 'package:smarttouristguide/shared/styles/colors.dart';
 import '../../models/cat_places_model.dart';
 
 class PlacesScreen extends StatelessWidget {
-  int? catIndex;
-  String? catName;
+  late final int catIndex;
+  late final String catName;
 
   PlacesScreen({
     required int? catIndex1,
     required String? catName1,
   }) {
-    catIndex = catIndex1;
-    catName = catName1;
+    catIndex = catIndex1!;
+    catName = catName1!;
   }
 
   @override
@@ -49,7 +49,7 @@ class PlacesScreen extends StatelessWidget {
             ),
             centerTitle: true,
             title: Text(
-              '${catName!} Places',
+              '${catName} Places',
               style: TextStyle(
                 fontSize: 17.5,
               ),
@@ -68,13 +68,13 @@ class PlacesScreen extends StatelessWidget {
             builder: (context) => ListView.separated(
               itemBuilder: (context, index) => buildPlacesItem(
                   context,
-                  cubit.cpModel!.data!.category![catIndex!].info!
-                      .places![index], catName),
+                  cubit.cpModel!.data.category[catIndex].info
+                      .places[index], catName),
               separatorBuilder: (context, index) => SizedBox(
                 height: 10.0,
               ),
               itemCount: cubit
-                  .cpModel!.data!.category![catIndex!].info!.places!.length,
+                  .cpModel!.data.category[catIndex].info.places.length,
             ),
             fallback: (context) => Center(
               child: CircularProgressIndicator(

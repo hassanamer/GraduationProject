@@ -7,14 +7,12 @@ import 'package:smarttouristguide/modules/login/login_cubit/states.dart';
 import 'package:smarttouristguide/shared/network/end_points.dart';
 import 'package:smarttouristguide/shared/network/remote/dio_helper.dart';
 
-import '../../../shared/components/constants.dart';
-
 class AppLoginCubit extends Cubit<AppLoginStates> {
   AppLoginCubit() : super(AppLoginInitialState());
 
   static AppLoginCubit get(context) => BlocProvider.of(context);
 
-  AppLoginModel? loginModel;
+  LoginModel? loginModel;
 
   void userLogin({
     required String email,
@@ -30,7 +28,7 @@ class AppLoginCubit extends Cubit<AppLoginStates> {
       },
     ).then((value) {
       print(value.data);
-      loginModel = AppLoginModel.fromJson(value.data);
+      loginModel = LoginModel.fromJson(value.data);
 
       emit(AppLoginSuccessState(loginModel));
     }).catchError((error) {

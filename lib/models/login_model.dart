@@ -1,9 +1,9 @@
-class AppLoginModel {
-  bool? status;
-  String? message;
-  Data? data;
+class LoginModel {
+  late final bool status;
+  late final String message;
+  late final Data data;
 
-  AppLoginModel.fromJson(Map<String, dynamic> json){
+  LoginModel.fromJson(Map<String, dynamic> json){
     status = json['status'];
     message = json['message'];
     data = Data.fromJson(json['data']);
@@ -11,16 +11,15 @@ class AppLoginModel {
 }
 
 class Data {
-
-  String? firstName;
-  String? lastName;
-  String? username;
-  String? country;
-  String? dateOfBirth;
-  String? gender;
-  String? email;
-  String? phone;
-  String? token;
+  late final String firstName;
+  late final String lastName;
+  late final String username;
+  late final String country;
+  late final String dateOfBirth;
+  late final String gender;
+  late final String email;
+  late final String phone;
+  late final String token;
 
   Data.fromJson(Map<String, dynamic> json){
     firstName = json['first_name'];

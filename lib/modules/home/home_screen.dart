@@ -26,7 +26,7 @@ class HomeScreen extends StatelessWidget {
       listener: (context, state) {},
       builder: (context, state) {
         return ConditionalBuilder(
-          condition: cubit.heoModel != null,
+          condition: cubit.homeModel != null,
           builder: (context) => SingleChildScrollView(
             scrollDirection: Axis.vertical,
             child: Padding(
@@ -38,8 +38,8 @@ class HomeScreen extends StatelessWidget {
                     child: Column(
                       children: [
                         Container(
-                          width: MediaQuery.of(context).size.width * 0.7,
-                          height: MediaQuery.of(context).size.height * 0.05,
+                          width: MediaQuery.of(context).size.width * 0.8,
+                          height: MediaQuery.of(context).size.height * 0.054,
                           decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(
@@ -142,17 +142,17 @@ class HomeScreen extends StatelessWidget {
                           ),
                         ),
                         Container(
-                          height: MediaQuery.of(context).size.height * 0.21,
+                          height: MediaQuery.of(context).size.height * 0.253,
                           width: double.infinity,
                           child: ListView.separated(
                             itemBuilder: (context, index) => buildPopularItem(
-                              cubit.heoModel!.data!.popularPlaces![index],
+                              cubit.homeModel!.data.popularPlaces[index],
                             ),
                             separatorBuilder: (context, index) => SizedBox(
                               width: 10.0,
                             ),
                             itemCount:
-                                cubit.heoModel!.data!.popularPlaces!.length,
+                                cubit.homeModel!.data.popularPlaces.length,
                             scrollDirection: Axis.horizontal,
                           ),
                         ),
@@ -194,7 +194,7 @@ class HomeScreen extends StatelessWidget {
                           ],
                         ),
                         Container(
-                          height: MediaQuery.of(context).size.height * 0.21,
+                          height: MediaQuery.of(context).size.height * 0.253,
                           width: double.infinity,
                           child: ListView.separated(
                             itemBuilder: (context, index) =>

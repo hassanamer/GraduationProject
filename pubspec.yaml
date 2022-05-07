@@ -30,6 +30,7 @@ dependencies:
   hexcolor: ^2.0.6
   http: ^0.13.4
   smooth_star_rating_null_safety: ^1.0.4+2
+  flutter_rating_bar: ^4.0.0
   shared_preferences: ^2.0.11
   conditional_builder_null_safety: ^0.0.6
   dio: ^4.0.6

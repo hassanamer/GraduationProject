@@ -23,10 +23,10 @@ class LoginScreen extends StatelessWidget {
     return BlocConsumer<AppLoginCubit, AppLoginStates>(
       listener: (context, state) {
         if (state is AppLoginSuccessState) {
-          if (state.loginModel!.status!) {
+          if (state.loginModel!.status) {
             CacheHelper.saveData(
               key: 'token',
-              value: state.loginModel!.data!.token,
+              value: state.loginModel!.data.token,
             ).then((value) {
               navigateAndFinish(
                 context: context,
@@ -34,7 +34,7 @@ class LoginScreen extends StatelessWidget {
               );
             });
             Fluttertoast.showToast(
-              msg: "${state.loginModel!.message!}",
+              msg: "${state.loginModel!.message}",
               toastLength: Toast.LENGTH_SHORT,
               gravity: ToastGravity.BOTTOM,
               timeInSecForIosWeb: 5,
@@ -110,6 +110,7 @@ class LoginScreen extends StatelessWidget {
                         if (value!.isEmpty) {
                           return 'Please enter your email address';
                         }
+                        return null;
                       },
                       label: 'Email Address',
                       prefix: Icons.email_outlined,
@@ -126,6 +127,7 @@ class LoginScreen extends StatelessWidget {
                         if (value!.isEmpty) {
                           return 'Please enter your password';
                         }
+                        return null;
                       },
                       label: 'Password',
                       suffix: cubit.suffix,

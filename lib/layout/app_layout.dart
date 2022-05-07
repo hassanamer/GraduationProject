@@ -17,6 +17,9 @@ class AppLayout extends StatelessWidget {
         return Scaffold(
           drawer: menuDrawerScreen(),
           appBar: AppBar(
+            iconTheme: IconThemeData(
+              color: AppColors.primaryColor,
+            ),
             actions: [
               IconButton(
                 icon: Icon(

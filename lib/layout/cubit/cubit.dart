@@ -29,7 +29,7 @@ class AppCubit extends Cubit<AppStates> {
     emit(AppChangeBottomNavState());
   }
 
-  HeoModel? heoModel;
+  HomeModel? homeModel;
 
   void getHomeEventOfferData() {
     emit(AppLoadingDataState());
@@ -37,7 +37,13 @@ class AppCubit extends Cubit<AppStates> {
             url: 'home/events/',
             token: 'Token 53b704f45ca09497409820590b3fc8874eaec03e')
         .then((value) {
-      heoModel = HeoModel.fromJson(value.data);
+      homeModel = HomeModel.fromJson(value.data);
+      homeModel!.data.popularPlaces.forEach((element)
+          {
+            favorites.addAll({
+              element.id: element.inFavourite
+            });
+          });
       print('model is \n${value.data}');
       emit(AppGetDataSuccessState());
     }).catchError((error) {

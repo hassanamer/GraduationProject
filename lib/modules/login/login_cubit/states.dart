@@ -9,7 +9,7 @@ class AppLoginLoadingState extends AppLoginStates {}
 
 class AppLoginSuccessState extends AppLoginStates
 {
-  final AppLoginModel? loginModel;
+  final LoginModel? loginModel;
 
   AppLoginSuccessState(this.loginModel);
 }
