@@ -136,5 +136,5 @@ class AppCubit extends Cubit<AppStates> {
       emit(AppErrorGetPlaceDetails());
     });
   }
-
+//
 }
