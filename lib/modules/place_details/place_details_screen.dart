@@ -29,7 +29,7 @@ class PlaceDetailsScreen extends StatelessWidget {
       listener: (context, state) {},
       builder: (context, state) {
         return ConditionalBuilder(
-          condition: state is! LoadingGetPlaceDetails,
+          condition: state is! AppLoadingGetPlaceDetails,
           builder: (context) => PlaceDetailsScreenBuilder(
               cubit.placeDetailsModel!.data!, context, catName),
           fallback: (context) => Container(

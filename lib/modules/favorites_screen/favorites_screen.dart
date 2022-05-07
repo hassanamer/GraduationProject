@@ -1,10 +1,13 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smarttouristguide/layout/cubit/cubit.dart';
-import 'package:smarttouristguide/layout/cubit/states.dart';
-import 'package:smarttouristguide/models/home_model.dart';
+import 'package:smarttouristguide/models/favorites_data_model.dart';
+import 'package:smarttouristguide/shared/components/components.dart';
 import 'package:smarttouristguide/shared/styles/colors.dart';
+
+import '../../layout/cubit/states.dart';
 
 class FavoritesScreen extends StatelessWidget
 {
@@ -12,19 +15,17 @@ class FavoritesScreen extends StatelessWidget
   Widget build(BuildContext context)
   {
     var cubit = AppCubit.get(context);
-
     return BlocConsumer<AppCubit, AppStates>(
       listener: (context, state) {},
       builder: (context, state)
       {
         return ConditionalBuilder(
-          condition: cubit.homeModel != null,
+          condition: cubit.getFavoritesModel != null,
+
           builder: (context) => ListView.separated(
-            itemBuilder: (context, index) => buildFavItem(cubit.homeModel!.data.popularPlaces[index], context),
-            separatorBuilder: (context, index) => SizedBox(
-              height: 5,
-            ),
-            itemCount: cubit.homeModel!.data.popularPlaces.length,
+            itemBuilder: (context, index) => buildFavItem(cubit.getFavoritesModel!.data.places[index], context),
+            separatorBuilder: (context, index) => divider(),
+            itemCount: cubit.getFavoritesModel!.data.places.length,
           ),
           fallback: (context) => Center(child: CircularProgressIndicator(),),
         );
@@ -32,21 +33,16 @@ class FavoritesScreen extends StatelessWidget
     );
   }
 
-  Widget buildFavItem(PopularPlaces model, context) => Padding(
+  Widget buildFavItem(Places model, context) => Padding(
     padding: const EdgeInsets.all(20.0),
     child: Container(
       height: 120.0,
       child: Row(
         children: [
-          Stack(
-            alignment: AlignmentDirectional.bottomStart,
-            children: [
-              Image(
-                image: NetworkImage('${model.image}'),
-                height: 120.0,
-                width: 120.0,
-              ),
-            ],
+          Image(
+            image: NetworkImage('${model.image}'),
+            height: 120.0,
+            width: 120.0,
           ),
           const SizedBox(
             height: 20.0,
@@ -68,18 +64,17 @@ class FavoritesScreen extends StatelessWidget
                 Row(
                   children: [
                     Text(
-                      '200EGP',
+                      '${model.placeName}',
                       style: const TextStyle(
                         fontSize: 12.0,
                         color: AppColors.primaryColor,
                       ),
                     ),
-                    const SizedBox(width: 5.0,),
                     const Spacer(),
                     IconButton(
                       icon: CircleAvatar(
                         radius: 15.0,
-                        // backgroundColor: AppCubit.get(context).favorites[model.product!.id]! ? defaultColor : Colors.grey,
+                        backgroundColor: Colors.green,
                         child: const Icon(
                           Icons.favorite_border,
                           size: 14.0,
