@@ -3,12 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smarttouristguide/layout/cubit/cubit.dart';
 import 'package:smarttouristguide/layout/cubit/states.dart';
 import 'package:smarttouristguide/modules/home/MenuDrawerScreen.dart';
+import 'package:smarttouristguide/modules/user/user_screen.dart';
 import 'package:smarttouristguide/shared/components/components.dart';
-import 'package:smarttouristguide/shared/components/constants.dart';
 import 'package:smarttouristguide/shared/styles/colors.dart';
 
 class AppLayout extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AppCubit, AppStates>(
@@ -18,9 +17,7 @@ class AppLayout extends StatelessWidget {
         return Scaffold(
           drawer: menuDrawerScreen(),
           appBar: AppBar(
-            iconTheme: IconThemeData(
-              color: AppColors.primaryColor,
-            ),
+            foregroundColor: AppColors.primaryColor,
             actions: [
               IconButton(
                 icon: Icon(
@@ -28,7 +25,10 @@ class AppLayout extends StatelessWidget {
                   color: AppColors.primaryColor,
                 ),
                 onPressed: () {
-                  signOut(context);
+                  navigateTo(
+                    context: context,
+                    widget: UserProfile(),
+                  );
                 },
               )
             ],

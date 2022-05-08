@@ -7,6 +7,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:smarttouristguide/layout/cubit/cubit.dart';
 import 'package:smarttouristguide/layout/cubit/states.dart';
 import 'package:smarttouristguide/models/place_details_model.dart';
+import 'package:smarttouristguide/shared/components/components.dart';
 import 'package:smarttouristguide/shared/styles/colors.dart';
 
 class PlaceDetailsScreen extends StatelessWidget {
@@ -28,7 +29,16 @@ class PlaceDetailsScreen extends StatelessWidget {
     var cubit = AppCubit.get(context);
 
     return BlocConsumer<AppCubit, AppStates>(
-      listener: (context, state) {},
+      listener: (context, state) {
+        if (state is AppSuccessChangeFavoritesState) {
+          if (!state.model.status) {
+            showToast(
+              message: '${state.model.message}',
+              state: ToastStates.ERROR,
+            );
+          }
+        }
+      },
       builder: (context, state) {
         return ConditionalBuilder(
           condition: state is! AppLoadingGetPlaceDetails,
@@ -103,11 +113,15 @@ Widget PlaceDetailsScreenBuilder(Data model, context, catName) => Scaffold(
                         ),
                         Spacer(),
                         IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            AppCubit.get(context).changeFavorite(model.id);
+                          },
                           icon: Icon(
                             Icons.favorite_outlined,
-                            color: AppColors.disabledAndHintColor,
-                            size: 29.0,
+                            color: AppCubit.get(context).favorites[model.id]!
+                                ? AppColors.primaryColor
+                                : AppColors.disabledAndHintColor,
+                            size: 26.0,
                           ),
                         )
                       ],

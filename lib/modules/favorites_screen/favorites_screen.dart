@@ -2,11 +2,10 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smarttouristguide/layout/cubit/cubit.dart';
+import 'package:smarttouristguide/layout/cubit/states.dart';
 import 'package:smarttouristguide/models/favorites_data_model.dart';
 import 'package:smarttouristguide/shared/components/components.dart';
 import 'package:smarttouristguide/shared/styles/colors.dart';
-
-import '../../layout/cubit/states.dart';
 
 class FavoritesScreen extends StatelessWidget
 {
@@ -19,8 +18,7 @@ class FavoritesScreen extends StatelessWidget
       builder: (context, state)
       {
         return ConditionalBuilder(
-          condition: cubit.getFavoritesModel != null,
-
+          condition: cubit.homeModel != null,
           builder: (context) => ListView.separated(
             itemBuilder: (context, index) => buildFavItem(cubit.getFavoritesModel!.data.places[index], context),
             separatorBuilder: (context, index) => divider(),
@@ -38,10 +36,29 @@ class FavoritesScreen extends StatelessWidget
       height: 120.0,
       child: Row(
         children: [
-          Image(
-            image: NetworkImage('${model.image}'),
-            height: 120.0,
-            width: 120.0,
+          Stack(
+            alignment: AlignmentDirectional.bottomStart,
+            children: [
+              Image(
+                image: NetworkImage('${model.image}'),
+                height: 120.0,
+                width: 120.0,
+              ),
+              if(model.inFavourite)
+                Container(
+                  color: Colors.red,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 5.0,
+                  ),
+                  child: const Text(
+                    'FAVORITE',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 8.0,
+                    ),
+                  ),
+                ),
+            ],
           ),
           const SizedBox(
             height: 20.0,
@@ -63,27 +80,32 @@ class FavoritesScreen extends StatelessWidget
                 Row(
                   children: [
                     Text(
-                      '${model.placeName}',
+                      '${model.rate}',
                       style: const TextStyle(
                         fontSize: 12.0,
                         color: AppColors.primaryColor,
                       ),
                     ),
+                    const SizedBox(width: 5.0,),
+                    if(model.inFavourite)
+                      Text(
+                        '${model.rate}',
+                        style: const TextStyle(
+                          fontSize: 10.0,
+                          color: Colors.grey,
+                          decoration: TextDecoration.lineThrough,
+                        ),
+                      ),
                     const Spacer(),
                     IconButton(
-                      icon: CircleAvatar(
-                        radius: 15.0,
-                        backgroundColor: Colors.green,
-                        child: const Icon(
-                          Icons.favorite_border,
-                          size: 14.0,
-                          color: Colors.white,
-                        ),
+                      icon: Icon(
+                        Icons.favorite,
+                        size: 14.0,
+                        color: AppCubit.get(context).favorites[model.id]! ? AppColors.primaryColor : AppColors.disabledAndHintColor,
                       ),
                       onPressed: ()
                       {
                         AppCubit.get(context).changeFavorite(model.id);
-                        print('favorites changed');
                       },
                     ),
                   ],

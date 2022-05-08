@@ -23,7 +23,16 @@ class HomeScreen extends StatelessWidget {
     var cubit = AppCubit.get(context);
 
     return BlocConsumer<AppCubit, AppStates>(
-      listener: (context, state) {},
+      listener: (context, state) {
+        if (state is AppSuccessChangeFavoritesState) {
+          if (!state.model.status) {
+            showToast(
+              message: '${state.model.message}',
+              state: ToastStates.ERROR,
+            );
+          }
+        }
+      },
       builder: (context, state) {
         return ConditionalBuilder(
           condition: cubit.homeModel != null,

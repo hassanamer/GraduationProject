@@ -3,8 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smarttouristguide/layout/app_layout.dart';
 import 'package:smarttouristguide/layout/cubit/cubit.dart';
 import 'package:smarttouristguide/modules/cubit/cubit.dart';
-import 'package:smarttouristguide/modules/event_offer_places/OfferScreen.dart';
-import 'package:smarttouristguide/modules/event_offer_places/eventScreen.dart';
 import 'package:smarttouristguide/modules/login/login_and_signup/welcome_screen.dart';
 import 'package:smarttouristguide/modules/login/login_cubit/cubit.dart';
 import 'package:smarttouristguide/modules/on_boarding/on_boarding_screen.dart';
@@ -62,7 +60,6 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (BuildContext context) => AppRegisterCubit()),
-
         BlocProvider(
           create: (BuildContext context) => AppLoginCubit(),
         ),
@@ -70,7 +67,8 @@ class MyApp extends StatelessWidget {
           create: (BuildContext context) => AppCubit()
             ..getHomeEventOfferData()
             ..getCategoriesPlacesData()
-            ..getFavorites(),
+            ..getFavorites()
+            ..getProfile(),
         ),
         BlocProvider(
           create: (BuildContext context) => ChangeColorCubit(),
@@ -83,12 +81,12 @@ class MyApp extends StatelessWidget {
         supportedLocales: AppLocalizations.supportedLocales,
         //locale: Locale("${changeLanguage()}"),
         theme: lightTheme,
-       home: startWidget,
+        home: startWidget,
         // home: startWidget,
         routes: {
-          Welcome.routeName:(context)=>Welcome(),
-          ForgetPassword.routeName:(context)=>ForgetPassword(),
-          PlaceDetailsScreen.routeName:(context)=>PlaceDetailsScreen(),
+          Welcome.routeName: (context) => Welcome(),
+          ForgetPassword.routeName: (context) => ForgetPassword(),
+          PlaceDetailsScreen.routeName: (context) => PlaceDetailsScreen(),
         },
       ),
     );

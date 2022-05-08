@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smarttouristguide/layout/cubit/states.dart';
 import 'package:smarttouristguide/models/cat_places_model.dart';
 import 'package:smarttouristguide/models/favorites_data_model.dart';
+import 'package:smarttouristguide/models/get_profile_model.dart';
 import 'package:smarttouristguide/models/home_model.dart';
 import 'package:smarttouristguide/models/place_details_model.dart';
 import 'package:smarttouristguide/modules/categories/categories_screen.dart';
@@ -57,12 +58,10 @@ class AppCubit extends Cubit<AppStates> {
       {
         getFavorites();
       }
-
-      emit(AppSuccessChangeFavoritesState());
+      emit(AppSuccessChangeFavoritesState(changeFavoritesModel!));
     }).catchError((error)
     {
       print(error.toString());
-
       favorites[placeId] = !favorites[placeId]!;
       emit(AppErrorChangeFavoritesState());
     }) ;
@@ -87,7 +86,7 @@ class AppCubit extends Cubit<AppStates> {
   }
 
   HomeModel? homeModel;
-  Map<int?, bool?> favorites = {};
+  Map<dynamic, bool?> favorites = {};
 
   void getHomeEventOfferData() {
     emit(AppLoadingDataState());
@@ -134,5 +133,36 @@ class AppCubit extends Cubit<AppStates> {
       emit(AppErrorGetPlaceDetails());
     });
   }
-//
+
+  GetProfileModel? getProfileModel;
+
+  void getProfile() {
+    emit(AppLoadingGetProfileState());
+    DioHelper.getData(
+      url: 'api/profile/',
+      token: 'Token ${token}',
+    ).then((value) {
+      getProfileModel = GetProfileModel.fromJson(value.data);
+      emit(AppGetPorfileSuccessState());
+    }).catchError((error) {
+      emit(AppGetPorfileErrorState());
+    });
+  }
+
+  calculateAge(DateTime birthDate) {
+    DateTime currentDate = DateTime.now();
+    int age = currentDate.year - birthDate.year;
+    int month1 = currentDate.month;
+    int month2 = birthDate.month;
+    if (month2 > month1) {
+      age--;
+    } else if (month1 == month2) {
+      int day1 = currentDate.day;
+      int day2 = birthDate.day;
+      if (day2 > day1) {
+        age--;
+      }
+    }
+    return age;
+  }
 }
