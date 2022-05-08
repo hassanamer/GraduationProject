@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:smarttouristguide/modules/place_details/place_details_screen.dart';
 
 import '../../shared/styles/colors.dart';
 import 'ListVievOfEventAndOffer.dart';
@@ -15,7 +16,7 @@ class OfferScreen extends StatelessWidget {
         centerTitle: true,
         title: const Text('Offers'),
         backgroundColor: AppColors.primaryColor,
-        actions: [IconButton(onPressed: () {}, icon: const Icon(Icons.search))],
+        actions: [IconButton(onPressed: () {  Navigator.pushReplacementNamed(context, PlaceDetailsScreen.routeName);}, icon: const Icon(Icons.search))],
       ),
       body: ListVievOfEventAndOffer(),
     );

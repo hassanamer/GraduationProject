@@ -3,14 +3,20 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smarttouristguide/layout/app_layout.dart';
 import 'package:smarttouristguide/layout/cubit/cubit.dart';
 import 'package:smarttouristguide/modules/cubit/cubit.dart';
+import 'package:smarttouristguide/modules/event_offer_places/OfferScreen.dart';
+import 'package:smarttouristguide/modules/event_offer_places/eventScreen.dart';
 import 'package:smarttouristguide/modules/login/login_and_signup/welcome_screen.dart';
 import 'package:smarttouristguide/modules/login/login_cubit/cubit.dart';
 import 'package:smarttouristguide/modules/on_boarding/on_boarding_screen.dart';
+import 'package:smarttouristguide/modules/place_details/place_details_screen.dart';
 import 'package:smarttouristguide/shared/components/constants.dart';
 import 'package:smarttouristguide/shared/network/local/cache_helper.dart';
 import 'package:smarttouristguide/shared/network/remote/dio_helper.dart';
 import 'package:smarttouristguide/shared/styles/themes.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import 'modules/login/login_and_signup/forget_password.dart';
+import 'modules/login/register_cubit/cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -55,6 +61,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider(create: (BuildContext context) => AppRegisterCubit()),
+
         BlocProvider(
           create: (BuildContext context) => AppLoginCubit(),
         ),
@@ -75,7 +83,13 @@ class MyApp extends StatelessWidget {
         supportedLocales: AppLocalizations.supportedLocales,
         //locale: Locale("${changeLanguage()}"),
         theme: lightTheme,
-        home: startWidget,
+       home: Welcome(),
+        // home: startWidget,
+        routes: {
+          Welcome.routeName:(context)=>Welcome(),
+          ForgetPassword.routeName:(context)=>ForgetPassword(),
+          PlaceDetailsScreen.routeName:(context)=>PlaceDetailsScreen(),
+        },
       ),
     );
   }

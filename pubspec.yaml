@@ -50,6 +50,8 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   intl: ^0.17.0
+  email_validator: ^2.0.1
+
 
 
 dev_dependencies:

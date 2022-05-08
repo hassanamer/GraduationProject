@@ -1,32 +1,43 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:smarttouristguide/layout/app_layout.dart';
-import 'package:smarttouristguide/modules/login/login_and_signup/forget_password.dart';
-import 'package:smarttouristguide/modules/login/login_cubit/cubit.dart';
+
 import 'package:smarttouristguide/modules/login/login_cubit/states.dart';
 import 'package:smarttouristguide/shared/network/local/cache_helper.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:smarttouristguide/shared/styles/colors.dart';
+
 
 import '../../../shared/components/components.dart';
+import '../../../shared/styles/buttons_style.dart';
+import '../register_cubit/cubit.dart';
+import '../register_cubit/states.dart';
 
 class RegisterScreen extends StatelessWidget {
+  bool hidePassword = true;
+
+  final TextEditingController email = TextEditingController(),
+      password = TextEditingController(),
+      firstName = TextEditingController(),
+      lastName=TextEditingController(),
+      ConfirmPassword=TextEditingController(),
+      phoneNumber=TextEditingController(),
+      DateOfBirth =TextEditingController(),
+      Gender=TextEditingController(),
+      Country=TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    var cubit = AppLoginCubit.get(context);
-    var emailController = TextEditingController();
-    var passwordController = TextEditingController();
+    var cubit = AppRegisterCubit.get(context);
 
-    return BlocConsumer<AppLoginCubit, AppLoginStates>(
+    return BlocConsumer<AppRegisterCubit, AppRegisterStates>(
       listener: (context, state) {
-        if (state is AppLoginSuccessState) {
-          if (state.loginModel!.status) {
+        if (state is AppRegisterSuccessState) {
+          if (state.RegisterModel!.status!) {
             CacheHelper.saveData(
-              key: 'token',
-              value: state.loginModel!.data.token,
+                key: 'token',
+                value: state.RegisterModel!.data!
             ).then((value) {
               navigateAndFinish(
                 context: context,
@@ -34,7 +45,7 @@ class RegisterScreen extends StatelessWidget {
               );
             });
             Fluttertoast.showToast(
-              msg: "${state.loginModel!.message}",
+              msg: "${state.RegisterModel!.message!}",
               toastLength: Toast.LENGTH_SHORT,
               gravity: ToastGravity.BOTTOM,
               timeInSecForIosWeb: 5,
@@ -44,145 +55,215 @@ class RegisterScreen extends StatelessWidget {
             );
           } else {
             showToast(
-              message: "${state.loginModel!.message}",
+              message: "${state.RegisterModel!.message!}",
               state: ToastStates.ERROR,
             );
           }
         }
       },
       builder: (context, state) {
-        return Container(
-          decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.only(
-                topRight: Radius.circular(30),
-                topLeft: Radius.circular(30),
-              )),
-          child: Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Form(
-              key: cubit.formKey,
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      TextButton(
-                        child: Text(
-                          'Register',
-                          style: TextStyle(
-                            color: AppColors.primaryColor,
-                            fontSize: 14,
-                            decoration: TextDecoration.underline,
-                          ),
-                        ),
-                        onPressed: () {
-                          cubit.changeBottomSheet();
-                        },
+        return Column(
+            children: [
+              Expanded(
+                child: Container(
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(30),
+                        topLeft: Radius.circular(30),
+                      )),
+                  child: Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Form(
+                      key: cubit.formKey,
+                      child: ListView(
+                          children: [
+                            SizedBox(
+                              height: 15.0,
+                            ),
+                            defaultFormField(
+                              controller: firstName,
+                              type: TextInputType.emailAddress,
+                              validate: (String? value) {
+
+                                if (value != null && value.trim().length >= 3) {
+                                  return null;
+                                } else {
+                                  return "Please enter 3 characters at least.";
+                                }
+                              },
+                              label: 'First Name',
+
+                              radius: 10,
+                            ),
+                            SizedBox(height: 15,),
+                            defaultFormField(
+                              controller: lastName,
+                              type: TextInputType.emailAddress,
+                              validate: (String? value) {
+
+                                if (value != null && value.trim().length >= 3) {
+                                  return null;
+                                } else {
+                                  return "Please enter 3 characters at least.";
+                                }
+                              },
+                              label: 'Last Name',
+
+                              radius: 10,
+                            ),
+                            SizedBox(height: 15,),
+                            defaultFormField(
+                              controller: email,
+                              type: TextInputType.emailAddress,
+                              validate: (String? value) {
+                                if (value != null &&
+                                    value.isNotEmpty &&
+                                    EmailValidator.validate(value)) {
+                                  return null;
+                                } else {
+                                  return "Please enter valid email.";
+                                }
+                              },
+                              label: 'Email Address',
+
+                              radius: 10,
+                            ),
+                            SizedBox(
+                              height: 15.0,
+                            ),
+
+                            defaultFormField(
+                              controller: password,
+                              type: TextInputType.visiblePassword,
+                              isPassword: cubit.isPassword,
+                              validate: (String? value) {
+                                if (value != null && value.trim().length >= 6) {
+                                  return null;
+                                } else {
+                                  return "Please enter 6 characters at least.";
+                                }
+                              },
+                              label: 'Password',
+                              suffix: cubit.suffix,
+                              suffixPressed: () {
+                                cubit.changePasswordVisibility();
+                              },
+                              radius: 10,
+
+                            ),
+                            SizedBox(
+                              height: 15.0,
+                            ),
+                            defaultFormField(
+                              controller: phoneNumber,
+                              type: TextInputType.emailAddress,
+                              validate: (String? value) {
+
+                                if (value != null && value.trim().length == 11) {
+                                  return null;
+                                } else {
+                                  return "Please enter 11 number.";
+                                }
+                              },
+                              label: 'Phone Number',
+
+                              radius: 10,
+                            ),
+                            SizedBox(height: 15,),
+                            defaultFormField(
+                              controller: DateOfBirth,
+                              type: TextInputType.emailAddress,
+                              validate: (String? value) {
+
+                                if (value != null  ) {
+                                  return null;
+                                } else {
+                                  return "Please enter your date of birth . ";
+                                }
+                              },
+                              label: 'Date Of Birth',
+
+                              radius: 10,
+                            ),
+                            SizedBox(height: 15,),
+                            defaultFormField(
+                              controller: Gender,
+                              // type: TextInputType.emailAddress,
+                              validate: (String? value) {
+
+                                if (value != null  ) {
+                                  return null;
+                                } else {
+                                  return "please choice . ";
+                                }
+                              },
+                              label: 'Gender',
+
+                              radius: 10,
+                            ),
+                            SizedBox(height: 15,),
+                            defaultFormField(
+                              controller: Country,
+                              type: TextInputType.text,
+                              validate: (String? value) {
+
+                                if (value != null  ) {
+                                  return null;
+                                } else {
+                                  return "please choice. ";
+                                }
+                              },
+                              label: 'Country',
+                              onSubmit:(value) {
+                                if (cubit.formKey.currentState!.validate()) {
+                                  cubit.userRegister(
+                                      firstname: firstName.text,
+                                      lastName: lastName.text,
+                                      email: email.text,
+                                      password: password.text,
+                                      phoneNumber: phoneNumber.text,
+                                      DateOfBirth: DateOfBirth.text,
+                                      Gender: Gender.text,
+                                      country: Country.text);
+                                }
+                              } ,
+                              radius: 10,
+                            ),
+                            SizedBox(height: 15,),
+                            ConditionalBuilder(
+                              condition: state is! AppLoginLoadingState,
+                              builder: (context) => button(
+
+                                text: 'Submit',
+
+                                function: () {
+                                  if (cubit.formKey.currentState!.validate()) {
+                                    cubit.userRegister(
+                                        firstname: firstName.text,
+                                        lastName: lastName.text,
+                                        email: email.text,
+                                        password: password.text,
+                                        phoneNumber: phoneNumber.text,
+                                        DateOfBirth: DateOfBirth.text,
+                                        Gender: Gender.text,
+                                        country: Country.text);
+
+                                  }
+                                },
+
+
+                              ),
+
+                              fallback: (context) =>
+                                  Center(child: CircularProgressIndicator()),
+                            ),
+                          ]
                       ),
-                      SizedBox(
-                        width: 85.0,
-                      ),
-                      TextButton(
-                        child: Text(
-                          'Login',
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: AppColors.disabledAndHintColor,
-                            decoration: TextDecoration.underline,
-                          ),
-                        ),
-                        onPressed: () {
-                          cubit.changeBottomSheet();
-                        },
-                      ),
-                    ],
-                  ),
-                  defaultFormField(
-                    controller: emailController,
-                    type: TextInputType.emailAddress,
-                    validate: (String? value) {
-                      if (value!.isEmpty) {
-                        return 'Please enter your email address';
-                      }
-                    },
-                    label: 'Email Address',
-                    prefix: Icons.email_outlined,
-                    radius: 10,
-                  ),
-                  SizedBox(
-                    height: 15.0,
-                  ),
-                  defaultFormField(
-                    controller: passwordController,
-                    type: TextInputType.visiblePassword,
-                    isPassword: cubit.isPassword,
-                    validate: (String? value) {
-                      if (value!.isEmpty) {
-                        return 'Please enter your password';
-                      }
-                    },
-                    label: 'Password',
-                    suffix: cubit.suffix,
-                    suffixPressed: () {
-                      cubit.changePasswordVisibility();
-                    },
-                    prefix: Icons.lock_outlined,
-                    radius: 10,
-                    onSubmit: (value) {
-                      if (cubit.formKey.currentState!.validate()) {
-                        cubit.userLogin(
-                          email: emailController.text,
-                          password: passwordController.text,
-                        );
-                      }
-                    },
-                  ),
-                  SizedBox(
-                    height: 15.0,
-                  ),
-                  ConditionalBuilder(
-                    condition: state is! AppLoginLoadingState,
-                    builder: (context) => defaultButton(
-                      background: AppColors.primaryColor,
-                      text: 'login',
-                      isUpperCase: true,
-                      function: () {
-                        if (cubit.formKey.currentState!.validate()) {
-                          cubit.userLogin(
-                            email: emailController.text,
-                            password: passwordController.text,
-                          );
-                        }
-                      },
-                      radius: 10,
                     ),
-                    fallback: (context) =>
-                        Center(child: CircularProgressIndicator()),
                   ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      TextButton(
-                        onPressed: () {
-                          navigateTo(
-                            widget: ForgetPassword(),
-                            context: context,
-                          );
-                        },
-                        child: Text(
-                          AppLocalizations.of(context)!.forgot_password,
-                          style: TextStyle(
-                            color: AppColors.primaryColor,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ),
+                ),
+              )]
         );
       },
     );
@@ -201,49 +282,6 @@ class RegisterScreen extends StatelessWidget {
 
 
 
-// import 'package:flutter/material.dart';
-// import 'package:smarttouristguide/modules/login/login_and_signup/registerContinarWithSpacer.dart';
-// import 'package:smarttouristguide/modules/login/login_and_signup/register_container.dart';
-// import 'package:smarttouristguide/shared/styles/buttons_style.dart';
-// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-// import '../../home/home_screen.dart';
-//
-// class SignUpScreen extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       color: Colors.transparent,
-//       child: Column(
-//         children: [
-//           Expanded(
-//             child: Container(
-//               padding: EdgeInsets.only(top: 12),
-//               child: ListView(
-//                 padding: EdgeInsets.symmetric(horizontal: 24, vertical: 10),
-//                 children: [
-//                   RegisterContainer('First Name'),
-//                   SizedBox(width: 24),
-//                   RegisterContainer('Last Name'),
-//                   RegisterContainer('Email Address'),
-//                   RegisterContainer(('Password')),
-//                   RegisterContainer(('Confirm Password')),
-//                   RegisterContainer('phone number'),
-//                   RegisterContainer('Date of Birth'),
-//                   registerContinarWithSpacer('Gender'),
-//                   registerContinarWithSpacer('Country'),
-//                   button(
-//                       function: () {
-//                         {
-//                           Navigator.of(context).pushNamed(HomeScreen.routeName);
-//                         }
-//                       },
-//                       text: AppLocalizations.of(context)!.submit)
-//                 ],
-//               ),
-//             ),
-//           ), //buttons('submit')
-//         ],
-//       ),
-//     );
-//   }
-// }
+
+
+

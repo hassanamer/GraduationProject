@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../shared/styles/colors.dart';
+import '../place_details/place_details_screen.dart';
 import 'ListVievOfEventAndOffer.dart';
 class EventScreen extends StatelessWidget {
   static const String routeName = 'EventScreen';
@@ -13,7 +14,7 @@ class EventScreen extends StatelessWidget {
         centerTitle: true,
         title: const Text('Event'),
         backgroundColor: AppColors.primaryColor,
-        actions: [IconButton(onPressed: () {}, icon: const Icon(Icons.search))],
+        actions: [IconButton(onPressed: () {Navigator.pushReplacementNamed(context, PlaceDetailsScreen.routeName);}, icon: const Icon(Icons.search))],
       ),
       body: ListVievOfEventAndOffer(),
     );

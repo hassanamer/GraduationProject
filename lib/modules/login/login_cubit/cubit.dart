@@ -56,22 +56,12 @@ class AppLoginCubit extends Cubit<AppLoginStates> {
 
   var formKey = GlobalKey<FormState>();
 
-  void bottomSheet(context, widget) {
-    showModalBottomSheet(
-      context: context,
-      backgroundColor: Colors.transparent,
-      builder: (context) => widget,
-    );
-  }
+  // void bottomSheet(context, widget) {
+  //   showModalBottomSheet(
+  //     context: context,
+  //     backgroundColor: Colors.transparent,
+  //     builder: (context) => widget,
+  //   );
+  // }
 
-  bool isLogin = true;
-  Widget BmSheet = LoginScreen();
-
-  void changeBottomSheet() {
-    isLogin = !isLogin;
-    BmSheet = isLogin ? LoginScreen() : RegisterScreen();
-    print(isLogin);
-    print(BmSheet.toString());
-    emit(AppLoginChangeBottomSheetState());
-  }
 }

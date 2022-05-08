@@ -10,6 +10,8 @@ import 'package:smarttouristguide/models/place_details_model.dart';
 import 'package:smarttouristguide/shared/styles/colors.dart';
 
 class PlaceDetailsScreen extends StatelessWidget {
+
+
   String? catName;
 
   PlaceDetailsScreen({
