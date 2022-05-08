@@ -4,7 +4,9 @@ import 'package:smarttouristguide/models/login_model.dart';
 import 'package:smarttouristguide/modules/login/login_and_signup/login_screen.dart';
 import 'package:smarttouristguide/modules/login/login_and_signup/register_screen.dart';
 import 'package:smarttouristguide/modules/login/login_cubit/states.dart';
+import 'package:smarttouristguide/shared/components/constants.dart';
 import 'package:smarttouristguide/shared/network/end_points.dart';
+import 'package:smarttouristguide/shared/network/local/cache_helper.dart';
 import 'package:smarttouristguide/shared/network/remote/dio_helper.dart';
 
 class AppLoginCubit extends Cubit<AppLoginStates> {
@@ -12,7 +14,13 @@ class AppLoginCubit extends Cubit<AppLoginStates> {
 
   static AppLoginCubit get(context) => BlocProvider.of(context);
 
-  AppLoginModel? loginModel;
+  void getToken()
+  {
+    token = CacheHelper.getData(key: 'token') ?? '';
+    emit(AppGetTokenDoneState());
+  }
+
+  LoginModel? loginModel;
 
   void userLogin({
     required String email,
@@ -28,9 +36,7 @@ class AppLoginCubit extends Cubit<AppLoginStates> {
       },
     ).then((value) {
       print(value.data);
-
-      loginModel = AppLoginModel.fromJson(value.data);
-
+      loginModel = LoginModel.fromJson(value.data);
       emit(AppLoginSuccessState(loginModel));
     }).catchError((error) {
       print('error is = ${error.toString()}');
@@ -44,7 +50,7 @@ class AppLoginCubit extends Cubit<AppLoginStates> {
   void changePasswordVisibility() {
     isPassword = !isPassword;
     suffix =
-        isPassword ? Icons.visibility_outlined : Icons.visibility_off_outlined;
+    isPassword ? Icons.visibility_outlined : Icons.visibility_off_outlined;
     emit(AppChangePasswordVisibilityState());
   }
 
@@ -64,7 +70,7 @@ class AppLoginCubit extends Cubit<AppLoginStates> {
   void changeBottomSheet() {
     isLogin = !isLogin;
     BmSheet = isLogin ? LoginScreen() : RegisterScreen();
-    print (isLogin);
+    print(isLogin);
     print(BmSheet.toString());
     emit(AppLoginChangeBottomSheetState());
   }

@@ -18,7 +18,7 @@ class Data {
   String? location;
   String? image;
   bool? isActive;
-  dynamic rate;
+  late final dynamic rate;
   bool? inFavourite;
   List<dynamic>? comments;
 

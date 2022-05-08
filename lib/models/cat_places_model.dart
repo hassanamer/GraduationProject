@@ -1,7 +1,7 @@
 class CpModel {
- bool? status;
- String? message;
- Data? data;
+  late final bool status;
+  late final String message;
+  late final Data data;
 
   CpModel.fromJson(Map<String, dynamic> json){
     status = json['status'];
@@ -11,7 +11,7 @@ class CpModel {
 }
 
 class Data {
- List<Category>? category;
+  late final List<Category> category;
 
   Data.fromJson(Map<String, dynamic> json){
     category = List.from(json['category']).map((e)=>Category.fromJson(e)).toList();
@@ -19,8 +19,8 @@ class Data {
 }
 
 class Category {
- String? name;
- Info? info;
+  late final String name;
+  late final Info info;
 
   Category.fromJson(Map<String, dynamic> json){
     name = json['name'];
@@ -29,22 +29,24 @@ class Category {
 }
 
 class Info {
- List<Places>? places;
+  late final List<Places> places;
 
   Info.fromJson(Map<String, dynamic> json){
-    places = List.from(json['places']).map((e)=>Places.fromJson(e)).toList();
+    places = List.from(json['places']).map((e) => Places.fromJson(e)).toList();
   }
+
 }
 
 class Places {
- dynamic id;
- String? placeName;
- String? Description;
- String? location;
- String? image;
- bool? isActive;
- dynamic rate;
- bool? inFavourite;
+  late final dynamic id;
+  late final String placeName;
+  late final String Description;
+  late final String location;
+
+  late final String image;
+  late final bool isActive;
+  late final dynamic rate;
+  late final bool inFavourite;
 
   Places.fromJson(Map<String, dynamic> json){
     id = json['id'];
@@ -56,5 +58,4 @@ class Places {
     rate = json['rate'];
     inFavourite = json['in_favourite'];
   }
-
 }

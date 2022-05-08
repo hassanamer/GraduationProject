@@ -1,7 +1,6 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:smarttouristguide/layout/app_layout.dart';
 import 'package:smarttouristguide/modules/login/login_and_signup/forget_password.dart';
 import 'package:smarttouristguide/modules/login/login_cubit/cubit.dart';
@@ -9,7 +8,6 @@ import 'package:smarttouristguide/modules/login/login_cubit/states.dart';
 import 'package:smarttouristguide/shared/network/local/cache_helper.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:smarttouristguide/shared/styles/colors.dart';
-
 import '../../../shared/components/components.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -22,31 +20,26 @@ class LoginScreen extends StatelessWidget {
 
     return BlocConsumer<AppLoginCubit, AppLoginStates>(
       listener: (context, state) {
-        if (state is AppLoginSuccessState) {
-          if (state.loginModel!.status!) {
+        if (state is AppLoginSuccessState)
+        {
+          if (state.loginModel!.status)
+          {
             CacheHelper.saveData(
               key: 'token',
-              value: state.loginModel!.data!.token,
+              value: state.loginModel!.data.token,
             ).then((value) {
+              cubit.getToken();
+
               navigateAndFinish(
                 context: context,
                 widget: AppLayout(),
               );
             });
-            Fluttertoast.showToast(
-              msg: "${state.loginModel!.message!}",
-              toastLength: Toast.LENGTH_SHORT,
-              gravity: ToastGravity.BOTTOM,
-              timeInSecForIosWeb: 5,
-              backgroundColor: Colors.green,
-              textColor: Colors.white,
-              fontSize: 16.0,
-            );
-          } else {
             showToast(
               message: AppLocalizations.of(context)!.login_success,
-              state: ToastStates.ERROR,
+              state: ToastStates.SUCCESS,
             );
+          } else {
           }
         } else if(state is AppLoginErrorState) {
           showToast(
@@ -56,7 +49,8 @@ class LoginScreen extends StatelessWidget {
         }
       },
       builder: (context, state) {
-        return Container(
+        return SingleChildScrollView(
+          child: Container(
             decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
@@ -110,6 +104,7 @@ class LoginScreen extends StatelessWidget {
                         if (value!.isEmpty) {
                           return 'Please enter your email address';
                         }
+                        return null;
                       },
                       label: 'Email Address',
                       prefix: Icons.email_outlined,
@@ -126,6 +121,7 @@ class LoginScreen extends StatelessWidget {
                         if (value!.isEmpty) {
                           return 'Please enter your password';
                         }
+                        return null;
                       },
                       label: 'Password',
                       suffix: cubit.suffix,
@@ -188,7 +184,8 @@ class LoginScreen extends StatelessWidget {
                 ),
               ),
             ),
-          );
+          ),
+        );
       },
     );
   }

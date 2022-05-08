@@ -5,6 +5,7 @@ import 'package:smarttouristguide/shared/styles/colors.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ForgetPassword extends StatelessWidget {
+  static const String routeName = 'ForgetPassword';
   @override
   Widget build(BuildContext context) {
     return SafeArea(

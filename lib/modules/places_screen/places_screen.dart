@@ -11,8 +11,21 @@ import 'package:smarttouristguide/shared/styles/colors.dart';
 import '../../models/cat_places_model.dart';
 
 class PlacesScreen extends StatelessWidget {
+  late final int catIndex;
+  late final String catName;
+
+  PlacesScreen({
+    required int? catIndex1,
+    required String? catName1,
+  }) {
+    catIndex = catIndex1!;
+    catName = catName1!;
+  }
+
   @override
   Widget build(BuildContext context) {
+    var catIndex = this.catIndex;
+    var catName = this.catName;
     var cubit = AppCubit.get(context);
 
     return BlocConsumer<AppCubit, AppStates>(
@@ -35,8 +48,11 @@ class PlacesScreen extends StatelessWidget {
               ),
             ),
             centerTitle: true,
-            title: const Text(
-              'Places',
+            title: Text(
+              '${catName} Places',
+              style: TextStyle(
+                fontSize: 17.5,
+              ),
             ),
             actions: [
               IconButton(
@@ -50,12 +66,15 @@ class PlacesScreen extends StatelessWidget {
           body: ConditionalBuilder(
             condition: cubit.cpModel != null,
             builder: (context) => ListView.separated(
-              itemBuilder: (context, index) => buildPlacesItem(context,
-                  cubit.cpModel!.data!.category![6].info!.places![index]),
+              itemBuilder: (context, index) => buildPlacesItem(
+                  context,
+                  cubit.cpModel!.data.category[catIndex].info
+                      .places[index], catName),
               separatorBuilder: (context, index) => SizedBox(
                 height: 10.0,
               ),
-              itemCount: cubit.cpModel!.data!.category![6].info!.places!.length,
+              itemCount: cubit
+                  .cpModel!.data.category[catIndex].info.places.length,
             ),
             fallback: (context) => Center(
               child: CircularProgressIndicator(
@@ -69,7 +88,7 @@ class PlacesScreen extends StatelessWidget {
   }
 }
 
-Widget buildPlacesItem(context, Places model) => Container(
+Widget buildPlacesItem(context, Places model, catName) => Container(
       height: MediaQuery.of(context).size.height * 0.4,
       width: double.infinity,
       decoration: BoxDecoration(
@@ -144,7 +163,9 @@ Widget buildPlacesItem(context, Places model) => Container(
                     );
                     navigateTo(
                       context: context,
-                      widget: PlaceDetailsScreen(),
+                      widget: PlaceDetailsScreen(
+                        catName1: catName,
+                      ),
                     );
                   },
                   child: Row(

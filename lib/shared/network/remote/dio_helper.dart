@@ -32,6 +32,10 @@ class DioHelper {
     required Map<String, dynamic> data,
     String? token,
   }) async {
+
+    dio!.options.headers = {
+      'Authorization': token ?? '',
+    };
     return await dio!.post(
       url,
       data: data,

@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smarttouristguide/modules/login/login_cubit/cubit.dart';
 import 'package:smarttouristguide/modules/login/login_cubit/states.dart';
-import 'package:smarttouristguide/shared/styles/colors.dart';
+
+import 'LoginAndSignUpButton.dart';
+import 'login_screen.dart';
+import 'register_screen.dart';
 
 class Welcome extends StatelessWidget {
   static const String routeName = 'Welcome';
@@ -38,26 +41,9 @@ class Welcome extends StatelessWidget {
                 'We Hope You Find A Destination\nMake You Happy',
                 textAlign: TextAlign.center,
               ),
-              MaterialButton(
-                color: AppColors.buttonTwoColor,
-                height: 49,
-                minWidth: 160,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                child: Text(
-                  'Login',
-                ),
-                textColor: AppColors.primaryColor,
-                onPressed: () {
-                  showModalBottomSheet(
-                    context: context,
-                    backgroundColor: Colors.transparent,
-                    builder: (context) => cubit.BmSheet,
-                  );
-                },
-              ),
-              // buttons('Login', DoFunction)
+              LoginAndSignUpButton(RegisterScreen(),'SignUp'),
+              LoginAndSignUpButton(LoginScreen(),'Login'),
+
             ],
           ),
         );

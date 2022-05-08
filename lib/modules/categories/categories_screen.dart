@@ -21,11 +21,11 @@ class CategoriesScreen extends StatelessWidget {
           condition: cubit.cpModel != null,
           builder: (context) => ListView.separated(
             itemBuilder: (context, index) => buildCategoryItem(
-                context, cubit.cpModel!.data!.category![index], index),
+                context, cubit.cpModel!.data.category[index], index),
             separatorBuilder: (context, index) => SizedBox(
               height: 5.0,
             ),
-            itemCount: cubit.cpModel!.data!.category!.length,
+            itemCount: cubit.cpModel!.data.category.length,
           ),
           fallback: (context) => Center(
             child: CircularProgressIndicator(
@@ -100,7 +100,10 @@ Widget buildCategoryItem(context, Category model, index) => Container(
                   child: InkWell(
                     onTap: () {
                       navigateTo(
-                        widget: PlacesScreen(),
+                        widget: PlacesScreen(
+                          catIndex1: index,
+                          catName1: model.name,
+                        ),
                         context: context,
                       );
                     },

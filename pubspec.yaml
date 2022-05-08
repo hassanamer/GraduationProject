@@ -30,7 +30,10 @@ dependencies:
   hexcolor: ^2.0.6
   http: ^0.13.4
   smooth_star_rating_null_safety: ^1.0.4+2
+  flutter_rating_bar: ^4.0.0
   shared_preferences: ^2.0.11
+  flutter_ipfs: ^0.0.2
+  email_validator: ^2.0.1
   conditional_builder_null_safety: ^0.0.6
   dio: ^4.0.6
   fluttertoast: ^8.0.8
@@ -47,10 +50,12 @@ dependencies:
   flutter_bloc: ^8.0.0
   smooth_page_indicator: ^1.0.0+2
   flutter_svg: ^1.0.3
+
+
   flutter_localizations:
     sdk: flutter
-  intl: ^0.17.0
 
+  intl: ^0.17.0
 
 dev_dependencies:
   flutter_test:

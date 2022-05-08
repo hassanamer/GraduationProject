@@ -29,11 +29,11 @@ class eventAndOfferBody extends StatelessWidget {
                   padding: const EdgeInsets.all(18),
                   child: ListView.separated(
                     itemBuilder: (context, index) => buildOfferItem(
-                        context, cubit.cpModel!.data!.category![index]),
+                        context, cubit.cpModel!.data.category[index]),
                     separatorBuilder: (context, index) => SizedBox(
                       height: 12,
                     ),
-                    itemCount: cubit.cpModel!.data!.category!.length,
+                    itemCount: cubit.cpModel!.data.category.length,
                   ),
                 ),
               ),
@@ -58,7 +58,7 @@ Widget buildOfferItem(BuildContext context, Category model) => Column(
             Align(
                 alignment: Alignment.centerLeft,
                 child: textStyle(
-                  model.name!,
+                  model.name,
                   22,
                   FontWeight.bold,
                 )),

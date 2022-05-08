@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:smarttouristguide/layout/cubit/cubit.dart';
 import 'package:smarttouristguide/layout/cubit/states.dart';
@@ -88,31 +89,15 @@ Widget buildRecommendationItem(context) => Container(
             ),
             Row(
               children: [
-                // الicons دي لسا هستبدلها بpackage بتهندل الrate بتاخد الrate بdouble ,بترجعه نجوم متلونة ع اد الrate حتى لو 4.5 مثلا بتلون 4 نجوم ونص وهكذا
-                Icon(
-                  Icons.star_rate_rounded,
-                  size: 19,
-                  color: AppColors.primaryColor,
-                ),
-                Icon(
-                  Icons.star_rate_rounded,
-                  size: 19,
-                  color: AppColors.primaryColor,
-                ),
-                Icon(
-                  Icons.star_rate_rounded,
-                  size: 19,
-                  color: AppColors.primaryColor,
-                ),
-                Icon(
-                  Icons.star_rate_rounded,
-                  size: 19,
-                  color: AppColors.primaryColor,
-                ),
-                Icon(
-                  Icons.star_rate_rounded,
-                  size: 19,
-                  color: AppColors.disabledAndHintColor,
+                RatingBarIndicator(
+                  rating: 4.0,
+                  itemBuilder: (context, index) => Icon(
+                    Icons.star,
+                    color: AppColors.primaryColor,
+                  ),
+                  itemCount: 5,
+                  itemSize: 20.5,
+                  direction: Axis.horizontal,
                 ),
                 Spacer(),
                 InkWell(

@@ -1,15 +1,26 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:smarttouristguide/layout/cubit/cubit.dart';
 import 'package:smarttouristguide/layout/cubit/states.dart';
 import 'package:smarttouristguide/models/place_details_model.dart';
+import 'package:smarttouristguide/shared/components/components.dart';
 import 'package:smarttouristguide/shared/styles/colors.dart';
 
 class PlaceDetailsScreen extends StatelessWidget {
+
+
+  String? catName;
+
+  PlaceDetailsScreen({
+    String? catName1,
+  }) {
+    catName = catName1;
+  }
+
   var mediaController = PageController();
 
   static const String routeName = 'PlaceDetailsScreen';
@@ -18,12 +29,21 @@ class PlaceDetailsScreen extends StatelessWidget {
     var cubit = AppCubit.get(context);
 
     return BlocConsumer<AppCubit, AppStates>(
-      listener: (context, state) {},
+      listener: (context, state) {
+        if (state is AppSuccessChangeFavoritesState) {
+          if (!state.model.status) {
+            showToast(
+              message: '${state.model.message}',
+              state: ToastStates.ERROR,
+            );
+          }
+        }
+      },
       builder: (context, state) {
         return ConditionalBuilder(
-          condition: state is! LoadingGetPlaceDetails,
+          condition: state is! AppLoadingGetPlaceDetails,
           builder: (context) => PlaceDetailsScreenBuilder(
-              cubit.placeDetailsModel!.data!, context),
+              cubit.placeDetailsModel!.data!, context, catName),
           fallback: (context) => Container(
             color: AppColors.backgroundColor,
             width: double.infinity,
@@ -40,7 +60,7 @@ class PlaceDetailsScreen extends StatelessWidget {
   }
 }
 
-Widget PlaceDetailsScreenBuilder(Data model, context) => Scaffold(
+Widget PlaceDetailsScreenBuilder(Data model, context, catName) => Scaffold(
       appBar: AppBar(
         systemOverlayStyle: SystemUiOverlayStyle(
             statusBarIconBrightness: Brightness.dark,
@@ -93,17 +113,21 @@ Widget PlaceDetailsScreenBuilder(Data model, context) => Scaffold(
                         ),
                         Spacer(),
                         IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            AppCubit.get(context).changeFavorite(model.id);
+                          },
                           icon: Icon(
                             Icons.favorite_outlined,
-                            color: AppColors.disabledAndHintColor,
-                            size: 29.0,
+                            color: AppCubit.get(context).favorites[model.id]!
+                                ? AppColors.primaryColor
+                                : AppColors.disabledAndHintColor,
+                            size: 26.0,
                           ),
                         )
                       ],
                     ),
                     Row(
-                      children: const [
+                      children: [
                         Icon(
                           Icons.location_on,
                           color: AppColors.primaryColor,
@@ -117,7 +141,7 @@ Widget PlaceDetailsScreenBuilder(Data model, context) => Scaffold(
                         ),
                         Spacer(),
                         Text(
-                          'Leisure tourism',
+                          '${catName}',
                           style: TextStyle(
                             fontSize: 15.0,
                             color: Colors.grey,
@@ -125,52 +149,63 @@ Widget PlaceDetailsScreenBuilder(Data model, context) => Scaffold(
                         ),
                       ],
                     ),
-                    // SizedBox(
-                    //   height: 179,
-                    //   child: Container(
-                    //     height: 179,
-                    //     width: 333,
-                    //     decoration: BoxDecoration(
-                    //       borderRadius: BorderRadius.circular(
-                    //         8,
-                    //       ),
-                    //       image: DecorationImage(
-                    //         image: NetworkImage('${model.image}'),
-                    //       ),
-                    //     ),
-                    //   ),
-                    // ),
-                    // mohab: 3mlt comment mfe4 ay 7aga at8yaret eawez afham lzmato eh fe al code 3l4an m4 3aref by3mal run fen dah
-                    Row(
-                      children: [
-                        RateIcon(true, 20),
-                        RateIcon(true, 20),
-                        RateIcon(true, 20),
-                        RateIcon(true, 20),
-                        RateIcon(false, 20),
-                        //color(0xff
-                        Spacer(),
-                        InkWell(
-                          onTap: () {},
-                          child: Row(
-                            children: [
-                              SvgPicture.asset(
-                                'assets/icons/location.svg',
-                              ),
-                              const SizedBox(
-                                width: 8,
-                              ),
-                              const Text(
-                                'GPS Location',
-                                style: TextStyle(
-                                  fontSize: 12.0,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ],
-                          ),
+                    Container(
+                      height: 180,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(
+                          8,
                         ),
-                      ],
+                        image: DecorationImage(
+                          fit: BoxFit.fill,
+                          image: NetworkImage('${model.image}'),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 5.0,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 7
+                      ),
+                      child: Row(
+                        children: [
+                          RatingBarIndicator(
+                            rating: model.rate.toDouble(),
+                            itemBuilder: (context, index) => Icon(
+                              Icons.star,
+                              color: AppColors.primaryColor,
+                            ),
+                            itemCount: 5,
+                            itemSize: 20.5,
+                            direction: Axis.horizontal,
+                          ),
+                          Spacer(),
+                          InkWell(
+                            onTap: () {},
+                            child: Row(
+                              children: [
+                                SvgPicture.asset(
+                                  'assets/icons/location.svg',
+                                  height: 12,
+                                  width: 12,
+                                ),
+                                const SizedBox(
+                                  width: 8,
+                                ),
+                                const Text(
+                                  'GPS Location',
+                                  style: TextStyle(
+                                    fontSize: 12.0,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
@@ -276,43 +311,8 @@ Widget PlaceDetailsScreenBuilder(Data model, context) => Scaffold(
       ),
     );
 
-Widget buildComment(Data model, index) => Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'User: ${model.comments![index]["user"]}',
-        ),
-        Text(
-          'Comment: ${model.comments![index]["comment"]}',
-        ),
-      ],
-    );
-
 Widget RateIcon(bool color, double size) => Icon(
       Icons.star_rate_rounded,
       color: color ? AppColors.primaryColor : AppColors.disabledAndHintColor,
       size: size,
-    );
-
-Widget hteset(Data model, index) => ListView.separated(
-      scrollDirection: Axis.vertical,
-      itemBuilder: (context, index) => Container(
-        width: double.infinity,
-        // height: 100 ,
-        // m4 fahem brdo leeh hana mdelo height
-        child: Column(
-          children: [
-            Text(
-              'User: ${model.comments![index]["user"]}',
-            ),
-            Text(
-              'Comment: ${model.comments![index]["comment"]}',
-            ),
-          ],
-        ),
-      ),
-      separatorBuilder: (context, index) => SizedBox(
-        height: 12,
-      ),
-      itemCount: model.comments!.length,
     );
