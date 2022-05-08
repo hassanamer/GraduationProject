@@ -8,20 +8,20 @@ import 'package:smarttouristguide/models/place_details_model.dart';
 import 'package:smarttouristguide/modules/categories/categories_screen.dart';
 import 'package:smarttouristguide/modules/favorites_screen/favorites_screen.dart';
 import 'package:smarttouristguide/modules/home/home_screen.dart';
+import 'package:smarttouristguide/shared/components/constants.dart';
 import 'package:smarttouristguide/shared/network/end_points.dart';
+import 'package:smarttouristguide/shared/network/local/cache_helper.dart';
 import 'package:smarttouristguide/shared/network/remote/dio_helper.dart';
-
-import '../../shared/components/constants.dart';
 
 class AppCubit extends Cubit<AppStates> {
   AppCubit() : super(AppInitialState());
 
   static AppCubit get(context) => BlocProvider.of(context);
 
+
   int currentIndex = 0;
 
-  List<Widget> bottomScreens =
-  [
+  List<Widget> bottomScreens = [
     HomeScreen(),
     CategoriesScreen(),
     FavoritesScreen(),
@@ -68,13 +68,12 @@ class AppCubit extends Cubit<AppStates> {
 
   GetFavoritesModel? getFavoritesModel;
 
-  void getFavorites()
-  {
+  void getFavorites() {
     emit(AppLoadingGetFavoritesState());
 
     DioHelper.getData(
       url: 'home/favouriteplace/',
-      token: 'Token 53b704f45ca09497409820590b3fc8874eaec03e',
+      token: 'Token ${token}',
     ).then((value) {
       getFavoritesModel = GetFavoritesModel.fromJson(value.data);
       print(value.data);
@@ -91,15 +90,12 @@ class AppCubit extends Cubit<AppStates> {
   void getHomeEventOfferData() {
     emit(AppLoadingDataState());
     DioHelper.getData(
-            url: 'home/events/',
-            token: 'Token 53b704f45ca09497409820590b3fc8874eaec03e')
-        .then((value) {
+      url: 'home/events/',
+      token: 'Token ${token}',
+    ).then((value) {
       homeModel = HomeModel.fromJson(value.data);
-      homeModel!.data.places.forEach((element)
-      {
-        favorites.addAll({
-          element.id: element.inFavourite
-        });
+      homeModel!.data.places.forEach((element) {
+        favorites.addAll({element.id: element.inFavourite});
       });
       emit(AppGetDataSuccessState());
     }).catchError((error) {
@@ -112,9 +108,9 @@ class AppCubit extends Cubit<AppStates> {
   void getCategoriesPlacesData() {
     emit(AppLoadingDataState());
     DioHelper.getData(
-            url: 'home/places/',
-            token: token)
-        .then((value) {
+      url: 'home/places/',
+      token: 'Token ${token}',
+    ).then((value) {
       cpModel = CpModel.fromJson(value.data);
       emit(AppGetDataSuccessState());
     }).catchError((error) {
@@ -128,7 +124,7 @@ class AppCubit extends Cubit<AppStates> {
     emit(AppLoadingGetPlaceDetails());
     DioHelper.postData(
         url: PLACE_DETAILS,
-        token: token,
+        token: 'Token 53b704f45ca09497409820590b3fc8874eaec03e',
         data: {'place_id': placeId}).then((value) {
       placeDetailsModel = PlaceDetailsModel.fromJson(value.data);
       emit(AppSuccessGetPlaceDetails());

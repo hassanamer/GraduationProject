@@ -57,13 +57,10 @@ class Welcome extends StatelessWidget {
                   );
                 },
               ),
-              // buttons('Login', DoFunction)
             ],
           ),
         );
       },
     );
   }
-
-
 }

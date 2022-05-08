@@ -24,6 +24,8 @@ void main() async {
 
   token = CacheHelper.getData(key: 'token') ?? '';
 
+  print(token);
+
   if (onBoarding != null) {
     if (token != '') {
       widget = AppLayout();
@@ -73,7 +75,7 @@ class MyApp extends StatelessWidget {
         supportedLocales: AppLocalizations.supportedLocales,
         //locale: Locale("${changeLanguage()}"),
         theme: lightTheme,
-        home: AppLayout(),
+        home: startWidget,
       ),
     );
   }

@@ -22,12 +22,16 @@ class LoginScreen extends StatelessWidget {
 
     return BlocConsumer<AppLoginCubit, AppLoginStates>(
       listener: (context, state) {
-        if (state is AppLoginSuccessState) {
-          if (state.loginModel!.status) {
+        if (state is AppLoginSuccessState)
+        {
+          if (state.loginModel!.status)
+          {
             CacheHelper.saveData(
               key: 'token',
               value: state.loginModel!.data.token,
             ).then((value) {
+              cubit.getToken();
+
               navigateAndFinish(
                 context: context,
                 widget: AppLayout(),
@@ -56,105 +60,88 @@ class LoginScreen extends StatelessWidget {
         }
       },
       builder: (context, state) {
-        return Container(
-            decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(30),
-                  topLeft: Radius.circular(30),
-                )),
-            child: Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Form(
-                key: cubit.formKey,
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        TextButton(
-                          child: Text(
-                            'Register',
-                            style: TextStyle(
-                              color: AppColors.disabledAndHintColor,
-                              fontSize: 14,
-                              decoration: TextDecoration.underline,
+        return SingleChildScrollView(
+          child: Container(
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(30),
+                    topLeft: Radius.circular(30),
+                  )),
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Form(
+                  key: cubit.formKey,
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          TextButton(
+                            child: Text(
+                              'Register',
+                              style: TextStyle(
+                                color: AppColors.disabledAndHintColor,
+                                fontSize: 14,
+                                decoration: TextDecoration.underline,
+                              ),
                             ),
+                            onPressed: () {
+                              cubit.changeBottomSheet();
+                            },
                           ),
-                          onPressed: () {
-                            cubit.changeBottomSheet();
-                          },
-                        ),
-                        SizedBox(
-                          width: 85.0,
-                        ),
-                        TextButton(
-                          child: Text(
-                            'Login',
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: AppColors.primaryColor,
-                              decoration: TextDecoration.underline,
+                          SizedBox(
+                            width: 85.0,
+                          ),
+                          TextButton(
+                            child: Text(
+                              'Login',
+                              style: TextStyle(
+                                fontSize: 14,
+                                color: AppColors.primaryColor,
+                                decoration: TextDecoration.underline,
+                              ),
                             ),
+                            onPressed: () {
+                              cubit.changeBottomSheet();
+                            },
                           ),
-                          onPressed: () {
-                            cubit.changeBottomSheet();
-                          },
-                        ),
-                      ],
-                    ),
-                    defaultFormField(
-                      controller: emailController,
-                      type: TextInputType.emailAddress,
-                      validate: (String? value) {
-                        if (value!.isEmpty) {
-                          return 'Please enter your email address';
-                        }
-                        return null;
-                      },
-                      label: 'Email Address',
-                      prefix: Icons.email_outlined,
-                      radius: 10,
-                    ),
-                    SizedBox(
-                      height: 15.0,
-                    ),
-                    defaultFormField(
-                      controller: passwordController,
-                      type: TextInputType.visiblePassword,
-                      isPassword: cubit.isPassword,
-                      validate: (String? value) {
-                        if (value!.isEmpty) {
-                          return 'Please enter your password';
-                        }
-                        return null;
-                      },
-                      label: 'Password',
-                      suffix: cubit.suffix,
-                      suffixPressed: () {
-                        cubit.changePasswordVisibility();
-                      },
-                      prefix: Icons.lock_outlined,
-                      radius: 10,
-                      onSubmit: (value) {
-                        if (cubit.formKey.currentState!.validate()) {
-                          cubit.userLogin(
-                            email: emailController.text,
-                            password: passwordController.text,
-                          );
-                        }
-                      },
-                    ),
-                    SizedBox(
-                      height: 15.0,
-                    ),
-                    ConditionalBuilder(
-                      condition: state is! AppLoginLoadingState,
-                      builder: (context) => defaultButton(
-                        background: AppColors.primaryColor,
-                        text: 'login',
-                        isUpperCase: true,
-                        function: () {
+                        ],
+                      ),
+                      defaultFormField(
+                        controller: emailController,
+                        type: TextInputType.emailAddress,
+                        validate: (String? value) {
+                          if (value!.isEmpty) {
+                            return 'Please enter your email address';
+                          }
+                          return null;
+                        },
+                        label: 'Email Address',
+                        prefix: Icons.email_outlined,
+                        radius: 10,
+                      ),
+                      SizedBox(
+                        height: 15.0,
+                      ),
+                      defaultFormField(
+                        controller: passwordController,
+                        type: TextInputType.visiblePassword,
+                        isPassword: cubit.isPassword,
+                        validate: (String? value) {
+                          if (value!.isEmpty) {
+                            return 'Please enter your password';
+                          }
+                          return null;
+                        },
+                        label: 'Password',
+                        suffix: cubit.suffix,
+                        suffixPressed: () {
+                          cubit.changePasswordVisibility();
+                        },
+                        prefix: Icons.lock_outlined,
+                        radius: 10,
+                        onSubmit: (value) {
                           if (cubit.formKey.currentState!.validate()) {
                             cubit.userLogin(
                               email: emailController.text,
@@ -162,35 +149,54 @@ class LoginScreen extends StatelessWidget {
                             );
                           }
                         },
-                        radius: 10,
                       ),
-                      fallback: (context) =>
-                          Center(child: CircularProgressIndicator()),
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        TextButton(
-                          onPressed: () {
-                            navigateTo(
-                              widget: ForgetPassword(),
-                              context: context,
-                            );
+                      SizedBox(
+                        height: 15.0,
+                      ),
+                      ConditionalBuilder(
+                        condition: state is! AppLoginLoadingState,
+                        builder: (context) => defaultButton(
+                          background: AppColors.primaryColor,
+                          text: 'login',
+                          isUpperCase: true,
+                          function: () {
+                            if (cubit.formKey.currentState!.validate()) {
+                              cubit.userLogin(
+                                email: emailController.text,
+                                password: passwordController.text,
+                              );
+                            }
                           },
-                          child: Text(
-                            AppLocalizations.of(context)!.forgot_password,
-                            style: TextStyle(
-                              color: AppColors.primaryColor,
+                          radius: 10,
+                        ),
+                        fallback: (context) =>
+                            Center(child: CircularProgressIndicator()),
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          TextButton(
+                            onPressed: () {
+                              navigateTo(
+                                widget: ForgetPassword(),
+                                context: context,
+                              );
+                            },
+                            child: Text(
+                              AppLocalizations.of(context)!.forgot_password,
+                              style: TextStyle(
+                                color: AppColors.primaryColor,
+                              ),
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                  ],
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
-          );
+        );
       },
     );
   }

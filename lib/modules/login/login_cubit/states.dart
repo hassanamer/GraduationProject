@@ -25,5 +25,7 @@ class AppChangePasswordVisibilityState extends AppLoginStates {}
 
 class AppLoginChangeBottomSheetState extends AppLoginStates {}
 
+class AppGetTokenDoneState extends AppLoginStates {}
+
 
 

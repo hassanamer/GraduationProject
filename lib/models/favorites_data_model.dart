@@ -20,13 +20,13 @@ class Data {
 }
 
 class Places {
-  late final int id;
+  late final dynamic id;
   late final String placeName;
   late final String Description;
   late final String location;
   late final String image;
   late final bool isActive;
-  late final int rate;
+  late final dynamic rate;
   late final bool inFavourite;
 
   Places.fromJson(Map<String, dynamic> json){
