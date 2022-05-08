@@ -10,14 +10,14 @@ import 'package:smarttouristguide/modules/favorites_screen/favorites_screen.dart
 import 'package:smarttouristguide/modules/home/home_screen.dart';
 import 'package:smarttouristguide/shared/components/constants.dart';
 import 'package:smarttouristguide/shared/network/end_points.dart';
-import 'package:smarttouristguide/shared/network/local/cache_helper.dart';
 import 'package:smarttouristguide/shared/network/remote/dio_helper.dart';
+
+import '../../models/change_favorites_model.dart';
 
 class AppCubit extends Cubit<AppStates> {
   AppCubit() : super(AppInitialState());
 
   static AppCubit get(context) => BlocProvider.of(context);
-
 
   int currentIndex = 0;
 
@@ -32,39 +32,41 @@ class AppCubit extends Cubit<AppStates> {
     emit(AppChangeBottomNavState());
   }
 
-  // ChangeFavoritesModel? changeFavoritesModel;
-  //
-  // void changeFavorite(int? productId)
-  // {
-  //   favorites[productId] = !favorites[productId]!;
-  //   emit(AppChangeFavoritesState());
-  //
-  //   DioHelper.postData(
-  //     url: 'home/favouriteplace/',
-  //     data: {
-  //       'product_id' : productId,
-  //     },
-  //     token: token,
-  //   ).then((value)
-  //   {
-  //     changeFavoritesModel = ChangeFavoritesModel.fromJson(value.data);
-  //     print(value.data);
-  //
-  //     if(!changeFavoritesModel!.status)
-  //     {
-  //       favorites[productId] = !favorites[productId]!;
-  //     } else
-  //     {
-  //       getFavorites();
-  //     }
-  //
-  //     emit(AppSuccessChangeFavoritesState());
-  //   }).catchError((error)
-  //   {
-  //     favorites[productId] = !favorites[productId]!;
-  //     emit(AppErrorChangeFavoritesState());
-  //   }) ;
-  // }
+  ChangeFavoritesModel? changeFavoritesModel;
+
+  void changeFavorite(dynamic placeId)
+  {
+    favorites[placeId] = !favorites[placeId]!;
+    emit(AppChangeFavoritesState());
+
+    DioHelper.postData(
+      url: 'home/favouriteplace/',
+      data: {
+        'place_id' : placeId,
+      },
+      token: 'Token ${token}',
+    ).then((value)
+    {
+      changeFavoritesModel = ChangeFavoritesModel.fromJson(value.data);
+      print(value.data);
+
+      if(!changeFavoritesModel!.status)
+      {
+        favorites[placeId] = !favorites[placeId]!;
+      } else
+      {
+        getFavorites();
+      }
+
+      emit(AppSuccessChangeFavoritesState());
+    }).catchError((error)
+    {
+      print(error.toString());
+
+      favorites[placeId] = !favorites[placeId]!;
+      emit(AppErrorChangeFavoritesState());
+    }) ;
+  }
 
   GetFavoritesModel? getFavoritesModel;
 

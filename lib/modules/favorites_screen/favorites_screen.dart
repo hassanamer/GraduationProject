@@ -82,7 +82,8 @@ class FavoritesScreen extends StatelessWidget
                       ),
                       onPressed: ()
                       {
-                        // AppCubit.get(context).changeFavorite(model.product!.id);
+                        AppCubit.get(context).changeFavorite(model.id);
+                        print('favorites changed');
                       },
                     ),
                   ],

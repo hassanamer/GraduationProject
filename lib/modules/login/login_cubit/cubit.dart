@@ -50,18 +50,28 @@ class AppLoginCubit extends Cubit<AppLoginStates> {
   void changePasswordVisibility() {
     isPassword = !isPassword;
     suffix =
-        isPassword ? Icons.visibility_outlined : Icons.visibility_off_outlined;
+    isPassword ? Icons.visibility_outlined : Icons.visibility_off_outlined;
     emit(AppChangePasswordVisibilityState());
   }
 
   var formKey = GlobalKey<FormState>();
 
-  // void bottomSheet(context, widget) {
-  //   showModalBottomSheet(
-  //     context: context,
-  //     backgroundColor: Colors.transparent,
-  //     builder: (context) => widget,
-  //   );
-  // }
+  void bottomSheet(context, widget) {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      builder: (context) => widget,
+    );
+  }
 
+  bool isLogin = true;
+  Widget BmSheet = LoginScreen();
+
+  void changeBottomSheet() {
+    isLogin = !isLogin;
+    BmSheet = isLogin ? LoginScreen() : RegisterScreen();
+    print(isLogin);
+    print(BmSheet.toString());
+    emit(AppLoginChangeBottomSheetState());
+  }
 }

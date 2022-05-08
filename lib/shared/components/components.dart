@@ -69,7 +69,7 @@ void navigateAndFinish({required widget, required context}) =>
       MaterialPageRoute(
         builder: (context) => widget,
       ),
-      (route) => false,
+          (route) => false,
     );
 
 Widget bottomNavBar(context) {
@@ -183,44 +183,44 @@ Widget HomeRow({
     );
 
 Widget HomeItem() => Container(
-      height: 200.0,
-      width: 148.0,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(
-          16.0,
+  height: 200.0,
+  width: 148.0,
+  decoration: BoxDecoration(
+    color: Colors.white,
+    borderRadius: BorderRadius.circular(
+      16.0,
+    ),
+  ),
+  child: Padding(
+    padding: const EdgeInsets.all(10.0),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Center(
+          child: Image.asset('assets/images/test.jpg', height: 112),
         ),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        Text(
+          'Giza Pyramids',
+          style: TextStyle(fontSize: 13.0, fontWeight: FontWeight.w600),
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Center(
-              child: Image.asset('assets/images/test.jpg', height: 112),
-            ),
-            Text(
-              'Giza Pyramids',
-              style: TextStyle(fontSize: 13.0, fontWeight: FontWeight.w600),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                rate(),
-                rate(),
-                rate(),
-                rate(),
-                rate(),
-                Spacer(),
-                SvgPicture.asset(
-                  'assets/icons/goto.svg',
-                )
-              ],
-            ),
+            rate(),
+            rate(),
+            rate(),
+            rate(),
+            rate(),
+            Spacer(),
+            SvgPicture.asset(
+              'assets/icons/goto.svg',
+            )
           ],
         ),
-      ),
-    );
+      ],
+    ),
+  ),
+);
 
 Widget defaultFormField({
   required TextEditingController controller,
@@ -230,7 +230,7 @@ Widget defaultFormField({
   GestureTapCallback? onTap,
   required FormFieldValidator<String>? validate,
   required String label,
-
+  IconData? prefix,
   IconData? suffix,
   VoidCallback? suffixPressed,
   bool isPassword = false,
@@ -248,7 +248,9 @@ Widget defaultFormField({
       onTap: onTap,
       decoration: InputDecoration(
         labelText: label,
-
+        prefixIcon: Icon(
+          prefix,
+        ),
         suffixIcon: suffix != null
             ? IconButton(
           onPressed: suffixPressed,
@@ -272,7 +274,7 @@ void showToast({
       gravity: ToastGravity.BOTTOM,
       timeInSecForIosWeb: 5,
       backgroundColor:
-          state == null ? AppColors.primaryColor : chooseToastColor(state),
+      state == null ? AppColors.primaryColor : chooseToastColor(state),
       textColor: Colors.white,
       fontSize: 16.0,
     );
@@ -297,12 +299,12 @@ Color? chooseToastColor(ToastStates state) {
 }
 
 Widget divider({double width = double.infinity}) => Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 20.0,
-      ),
-      child: Container(
-        width: width,
-        height: 1.0,
-        color: Colors.grey[300],
-      ),
-    );
+  padding: const EdgeInsets.symmetric(
+    horizontal: 20.0,
+  ),
+  child: Container(
+    width: width,
+    height: 1.0,
+    color: Colors.grey[300],
+  ),
+);

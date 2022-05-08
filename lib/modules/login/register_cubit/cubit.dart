@@ -36,7 +36,6 @@ class AppRegisterCubit extends Cubit<AppRegisterStates> {
         'Gender':Gender,
         'DateOfBirth':DateOfBirth,
         'country':country,
-
       },
     ).then((value) {
       print(value.data);

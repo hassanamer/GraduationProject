@@ -248,13 +248,9 @@ class RegisterScreen extends StatelessWidget {
                                         DateOfBirth: DateOfBirth.text,
                                         Gender: Gender.text,
                                         country: Country.text);
-
                                   }
                                 },
-
-
                               ),
-
                               fallback: (context) =>
                                   Center(child: CircularProgressIndicator()),
                             ),
