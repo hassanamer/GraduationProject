@@ -29,11 +29,11 @@ class EventBody extends StatelessWidget {
                   padding: const EdgeInsets.all(18),
                   child: ListView.separated(
                     itemBuilder: (context, index) => buildOfferItem(
-                        context, cubit.homeModel!.data.places[index]),
+                        context, cubit.homeModel!.data.events[index]),
                     separatorBuilder: (context, index) => SizedBox(
                       height: 12,
                     ),
-                    itemCount: cubit.homeModel!.data.places.length,
+                    itemCount: cubit.homeModel!.data.events.length,
                   ),
                 ),
               ),
@@ -48,7 +48,7 @@ class EventBody extends StatelessWidget {
   }
 }
 
-Widget buildOfferItem(BuildContext context, Places model) => Column(
+Widget buildOfferItem(BuildContext context, Events model) => Column(
       children: [
         Row(
           children: [
@@ -58,7 +58,7 @@ Widget buildOfferItem(BuildContext context, Places model) => Column(
             Align(
               alignment: Alignment.centerLeft,
               child: textStyle(
-                model.placeName,
+                model.place.placeName,
                 22,
                 FontWeight.bold,
               ),
@@ -68,7 +68,9 @@ Widget buildOfferItem(BuildContext context, Places model) => Column(
         Container(
           height: MediaQuery.of(context).size.height * 0.08,
           child: SingleChildScrollView(
-            child: textStyle.normal(model.Description, 16),
+            child: textStyle.normal(
+                "this event is available from ${model.dateFrom} to ${model.dateTo}",
+                16),
           ),
         ),
         const SizedBox(
@@ -78,7 +80,7 @@ Widget buildOfferItem(BuildContext context, Places model) => Column(
           margin: const EdgeInsets.all(8),
           child: Image(
             fit: BoxFit.fill,
-            image: NetworkImage('${model.image}'),
+            image: NetworkImage('${model.eventImage}'),
           ),
         ),
         Row(mainAxisAlignment: MainAxisAlignment.end, children: [

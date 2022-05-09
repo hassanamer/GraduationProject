@@ -7,6 +7,7 @@ import 'package:smarttouristguide/layout/cubit/states.dart';
 import 'package:smarttouristguide/models/home_model.dart';
 import 'package:smarttouristguide/modules/place_details/place_details_screen.dart';
 import '../../models/home_model.dart';
+import '../../models/home_model.dart';
 import '../../shared/styles/colors.dart';
 import '../../shared/styles/textStyle.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -29,11 +30,11 @@ class OfferBody extends StatelessWidget {
                   padding: const EdgeInsets.all(18),
                   child: ListView.separated(
                     itemBuilder: (context, index) => buildOfferItem(
-                        context, cubit.homeModel!.data.places[index]),
+                        context, cubit.homeModel!.data.offers[index]),
                     separatorBuilder: (context, index) => SizedBox(
                       height: 12,
                     ),
-                    itemCount: cubit.homeModel!.data.places.length,
+                    itemCount: cubit.homeModel!.data.offers.length,
                   ),
                 ),
               ),
@@ -48,7 +49,7 @@ class OfferBody extends StatelessWidget {
   }
 }
 
-Widget buildOfferItem(BuildContext context, Places model) => Column(
+Widget buildOfferItem(BuildContext context, Offers model) => Column(
       children: [
         Row(
           children: [
@@ -58,18 +59,25 @@ Widget buildOfferItem(BuildContext context, Places model) => Column(
             Align(
               alignment: Alignment.centerLeft,
               child: textStyle(
-                model.placeName,
+                model.place.placeName,
                 22,
                 FontWeight.bold,
               ),
             ),
           ],
         ),
-        Container(
-          height: MediaQuery.of(context).size.height * 0.08,
-          child: SingleChildScrollView(
-            child: textStyle.normal(model.Description, 16),
-          ),
+        Row(
+          children: [
+            Container(
+              height: MediaQuery.of(context).size.height * 0.08,
+              width: MediaQuery.of(context).size.width * 0.9,
+              child: SingleChildScrollView(
+                child: textStyle.normal(
+                    "the old price is ${model.oldPrice} LE for you we can make it ${model.newPrice} LE",
+                    16),
+              ),
+            ),
+          ],
         ),
         const SizedBox(
           width: 40,
@@ -78,7 +86,7 @@ Widget buildOfferItem(BuildContext context, Places model) => Column(
           margin: const EdgeInsets.all(8),
           child: Image(
             fit: BoxFit.fill,
-            image: NetworkImage('${model.image}'),
+            image: NetworkImage('${model.place.image}'),
           ),
         ),
         Row(mainAxisAlignment: MainAxisAlignment.end, children: [
