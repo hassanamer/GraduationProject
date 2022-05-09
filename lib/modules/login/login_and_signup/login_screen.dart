@@ -2,6 +2,7 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smarttouristguide/layout/app_layout.dart';
+import 'package:smarttouristguide/layout/cubit/cubit.dart';
 import 'package:smarttouristguide/modules/login/login_and_signup/forget_password.dart';
 import 'package:smarttouristguide/modules/login/login_cubit/cubit.dart';
 import 'package:smarttouristguide/modules/login/login_cubit/states.dart';
@@ -136,6 +137,8 @@ class LoginScreen extends StatelessWidget {
                             email: emailController.text,
                             password: passwordController.text,
                           );
+                          AppCubit.get(context).getFavorites();
+                          AppCubit.get(context).getProfile();
                         }
                       },
                     ),
@@ -154,6 +157,8 @@ class LoginScreen extends StatelessWidget {
                               email: emailController.text,
                               password: passwordController.text,
                             );
+                            AppCubit.get(context).getFavorites();
+                            AppCubit.get(context).getProfile();
                           }
                         },
                         radius: 10,
