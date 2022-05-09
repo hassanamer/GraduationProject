@@ -165,8 +165,4 @@ class AppCubit extends Cubit<AppStates> {
     }
     return age;
   }
-
-  Future refreshh() {
-    return Future.delayed(Duration(seconds: 0));
-  }
 }
