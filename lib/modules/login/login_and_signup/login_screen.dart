@@ -78,9 +78,7 @@ class LoginScreen extends StatelessWidget {
                     controller: emailController,
                     type: TextInputType.emailAddress,
                     validate: (String? value) {
-                      if (value != null &&
-                          value.isNotEmpty &&
-                          EmailValidator.validate(value)) {
+                      if (value != null && value.isNotEmpty) {
                         return null;
                       } else {
                         return "Please enter valid email.";

@@ -22,20 +22,22 @@ class AppRegisterCubit extends Cubit<AppRegisterStates> {
     required String DateOfBirth,
     required String Gender,
     required String country,
+    required String userName,
   }) {
     emit(AppRegisterLoadingState());
 
     DioHelper.postData(
       url: REGISTER,
       data: {
-        'firstName':firstname,
-        'lastName':lastName,
+        "username": userName,
+        'firstName': firstname,
+        'lastName': lastName,
         'email': email,
         'password': password,
-        'phoneNumber':phoneNumber,
-        'Gender':Gender,
-        'DateOfBirth':DateOfBirth,
-        'country':country,
+        'phone': phoneNumber,
+        'gender': Gender,
+        'date_of_birth': DateOfBirth,
+        'country': country,
       },
     ).then((value) {
       print(value.data);
@@ -55,7 +57,7 @@ class AppRegisterCubit extends Cubit<AppRegisterStates> {
   void changePasswordVisibility() {
     isPassword = !isPassword;
     suffix =
-    isPassword ? Icons.visibility_outlined : Icons.visibility_off_outlined;
+        isPassword ? Icons.visibility_outlined : Icons.visibility_off_outlined;
     emit(AppChangePasswordVisibilityState());
   }
 

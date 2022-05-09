@@ -24,7 +24,8 @@ class RegisterScreen extends StatelessWidget {
       phoneNumber = TextEditingController(),
       DateOfBirth = TextEditingController(),
       Gender = TextEditingController(),
-      Country = TextEditingController();
+      Country = TextEditingController(),
+      userName = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -104,6 +105,22 @@ class RegisterScreen extends StatelessWidget {
                         }
                       },
                       label: 'Last Name',
+                      radius: 10,
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    defaultFormField(
+                      controller: userName,
+                      type: TextInputType.emailAddress,
+                      validate: (String? value) {
+                        if (value != null && value.trim().length >= 3) {
+                          return null;
+                        } else {
+                          return "Please enter 3 characters at least.";
+                        }
+                      },
+                      label: 'User Name',
                       radius: 10,
                     ),
                     SizedBox(
@@ -211,6 +228,7 @@ class RegisterScreen extends StatelessWidget {
                       onSubmit: (value) {
                         if (cubit.formKey.currentState!.validate()) {
                           cubit.userRegister(
+                              userName: userName.text,
                               firstname: firstName.text,
                               lastName: lastName.text,
                               email: email.text,
@@ -233,6 +251,7 @@ class RegisterScreen extends StatelessWidget {
                         function: () {
                           if (cubit.formKey.currentState!.validate()) {
                             cubit.userRegister(
+                                userName: userName.text,
                                 firstname: firstName.text,
                                 lastName: lastName.text,
                                 email: email.text,
