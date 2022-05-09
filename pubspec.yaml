@@ -32,7 +32,7 @@ dependencies:
   smooth_star_rating_null_safety: ^1.0.4+2
   flutter_rating_bar: ^4.0.0
   shared_preferences: ^2.0.11
-  flutter_ipfs: ^0.0.2
+  # flutter_ipfs: ^0.0.2
   email_validator: ^2.0.1
   conditional_builder_null_safety: ^0.0.6
   dio: ^4.0.6

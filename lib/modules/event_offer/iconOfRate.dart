@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:smarttouristguide/shared/styles/colors.dart';
 
-import '../../cubit/cubit.dart';
+import '../cubit/cubit.dart';
 
 class rate extends StatelessWidget {
   @override
