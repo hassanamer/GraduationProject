@@ -29,6 +29,7 @@ class LoginScreen extends StatelessWidget {
               key: 'token',
               value: state.loginModel!.data.token,
             ).then((value) {
+              cubit.getToken();
               navigateAndFinish(
                 context: context,
                 widget: AppLayout(),
