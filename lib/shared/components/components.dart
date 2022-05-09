@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:smarttouristguide/modules/event_offer_places/places/iconOfRate.dart';
 import 'package:smarttouristguide/shared/styles/colors.dart';
 
 import '../../layout/cubit/cubit.dart';
+import '../../modules/event_offer/iconOfRate.dart';
 
 Widget defaultButton({
   double width = double.infinity,
@@ -69,7 +69,7 @@ void navigateAndFinish({required widget, required context}) =>
       MaterialPageRoute(
         builder: (context) => widget,
       ),
-          (route) => false,
+      (route) => false,
     );
 
 Widget bottomNavBar(context) {
@@ -183,44 +183,44 @@ Widget HomeRow({
     );
 
 Widget HomeItem() => Container(
-  height: 200.0,
-  width: 148.0,
-  decoration: BoxDecoration(
-    color: Colors.white,
-    borderRadius: BorderRadius.circular(
-      16.0,
-    ),
-  ),
-  child: Padding(
-    padding: const EdgeInsets.all(10.0),
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Center(
-          child: Image.asset('assets/images/test.jpg', height: 112),
+      height: 200.0,
+      width: 148.0,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(
+          16.0,
         ),
-        Text(
-          'Giza Pyramids',
-          style: TextStyle(fontSize: 13.0, fontWeight: FontWeight.w600),
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.start,
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            rate(),
-            rate(),
-            rate(),
-            rate(),
-            rate(),
-            Spacer(),
-            SvgPicture.asset(
-              'assets/icons/goto.svg',
-            )
+            Center(
+              child: Image.asset('assets/images/test.jpg', height: 112),
+            ),
+            Text(
+              'Giza Pyramids',
+              style: TextStyle(fontSize: 13.0, fontWeight: FontWeight.w600),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                rate(),
+                rate(),
+                rate(),
+                rate(),
+                rate(),
+                Spacer(),
+                SvgPicture.asset(
+                  'assets/icons/goto.svg',
+                )
+              ],
+            ),
           ],
         ),
-      ],
-    ),
-  ),
-);
+      ),
+    );
 
 Widget defaultFormField({
   required TextEditingController controller,
@@ -253,14 +253,14 @@ Widget defaultFormField({
         ),
         suffixIcon: suffix != null
             ? IconButton(
-          onPressed: suffixPressed,
-          icon: Icon(suffix),
-        )
+                onPressed: suffixPressed,
+                icon: Icon(suffix),
+              )
             : null,
         border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(
-              radius,
-            )),
+          radius,
+        )),
       ),
     );
 
@@ -274,7 +274,7 @@ void showToast({
       gravity: ToastGravity.BOTTOM,
       timeInSecForIosWeb: 5,
       backgroundColor:
-      state == null ? AppColors.primaryColor : chooseToastColor(state),
+          state == null ? AppColors.primaryColor : chooseToastColor(state),
       textColor: Colors.white,
       fontSize: 16.0,
     );
@@ -299,12 +299,12 @@ Color? chooseToastColor(ToastStates state) {
 }
 
 Widget divider({double width = double.infinity}) => Padding(
-  padding: const EdgeInsets.symmetric(
-    horizontal: 20.0,
-  ),
-  child: Container(
-    width: width,
-    height: 1.0,
-    color: Colors.grey[300],
-  ),
-);
+      padding: const EdgeInsets.symmetric(
+        horizontal: 20.0,
+      ),
+      child: Container(
+        width: width,
+        height: 1.0,
+        color: Colors.grey[300],
+      ),
+    );
