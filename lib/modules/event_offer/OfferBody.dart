@@ -100,7 +100,13 @@ Widget buildOfferItem(BuildContext context, Offers model) => Column(
           const SizedBox(
             width: 5,
           ),
-          textStyle.normal(AppLocalizations.of(context)!.see_details, 14),
+          InkWell(
+            child:
+                textStyle.normal(AppLocalizations.of(context)!.see_details, 14),
+            onTap: () {
+              Navigator.of(context).pushNamed(PlaceDetailsScreen.routeName);
+            },
+          ),
           const SizedBox(
             width: 30,
           )

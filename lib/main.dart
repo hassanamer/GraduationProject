@@ -7,6 +7,7 @@ import 'package:smarttouristguide/modules/login/login_and_signup/welcome_screen.
 import 'package:smarttouristguide/modules/login/login_cubit/cubit.dart';
 import 'package:smarttouristguide/modules/on_boarding/on_boarding_screen.dart';
 import 'package:smarttouristguide/modules/place_details/place_details_screen.dart';
+import 'package:smarttouristguide/modules/user/user_screen.dart';
 import 'package:smarttouristguide/shared/components/constants.dart';
 import 'package:smarttouristguide/shared/network/local/cache_helper.dart';
 import 'package:smarttouristguide/shared/network/remote/dio_helper.dart';
@@ -85,6 +86,7 @@ class MyApp extends StatelessWidget {
         // home: startWidget,
         routes: {
           Welcome.routeName: (context) => Welcome(),
+          UserProfile.routeName: (context) => UserProfile(),
           ForgetPassword.routeName: (context) => ForgetPassword(),
           PlaceDetailsScreen.routeName: (context) => PlaceDetailsScreen(),
         },

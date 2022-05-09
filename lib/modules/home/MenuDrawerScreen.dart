@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:smarttouristguide/modules/user/user_screen.dart';
 import 'package:smarttouristguide/shared/components/constants.dart';
 
 import '../cubit/cubit.dart';
@@ -64,7 +65,10 @@ class menuDrawerScreen extends StatelessWidget {
                                 child: Column(
                                   children: [
                                     IconButton(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        Navigator.of(context)
+                                            .pushNamed(UserProfile.routeName);
+                                      },
                                       icon: const Icon(
                                         Icons.edit_outlined,
                                         color: Colors.white,
@@ -80,20 +84,22 @@ class menuDrawerScreen extends StatelessWidget {
                     ),
                   ),
                   ListTile(
-                      title: Text(
-                        AppLocalizations.of(context)!.mood,
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Theme.of(context).primaryColor,
-                            fontSize: 18),
-                      ),
-                      horizontalTitleGap: 80,
-                      leading: Switch(
-                          activeColor: Theme.of(context).primaryColor,
-                          value: ChangeColorCubit.get(context).changeMode,
-                          onChanged: (value) {
-                            ChangeColorCubit.get(context).togaleMode();
-                          })),
+                    title: Text(
+                      AppLocalizations.of(context)!.mood,
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Theme.of(context).primaryColor,
+                          fontSize: 18),
+                    ),
+                    horizontalTitleGap: 80,
+                    leading: Switch(
+                      activeColor: Theme.of(context).primaryColor,
+                      value: ChangeColorCubit.get(context).changeMode,
+                      onChanged: (value) {
+                        ChangeColorCubit.get(context).togaleMode();
+                      },
+                    ),
+                  ),
                   ListTile(
                       title: Text(
                         AppLocalizations.of(context)!.language,
