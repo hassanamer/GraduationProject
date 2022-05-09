@@ -36,32 +36,15 @@ class FavoritesScreen extends StatelessWidget
       height: 120.0,
       child: Row(
         children: [
-          Stack(
-            alignment: AlignmentDirectional.bottomStart,
-            children: [
-              Image(
-                image: NetworkImage('${model.image}'),
-                height: 120.0,
-                width: 120.0,
-              ),
-              if(model.inFavourite)
-                Container(
-                  color: Colors.red,
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 5.0,
-                  ),
-                  child: const Text(
-                    'FAVORITE',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 8.0,
-                    ),
-                  ),
-                ),
-            ],
+          Container(
+            width: 150,
+            child: Image(
+              image: NetworkImage('${model.image}'),
+              fit: BoxFit.fill,
+            ),
           ),
           const SizedBox(
-            height: 20.0,
+            width: 20.0,
           ),
           Expanded(
             child: Column(

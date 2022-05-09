@@ -5,13 +5,16 @@ import 'package:smarttouristguide/layout/cubit/cubit.dart';
 import 'package:smarttouristguide/modules/cubit/cubit.dart';
 import 'package:smarttouristguide/modules/login/login_and_signup/welcome_screen.dart';
 import 'package:smarttouristguide/modules/login/login_cubit/cubit.dart';
-import 'package:smarttouristguide/modules/login/register_cubit/cubit.dart';
 import 'package:smarttouristguide/modules/on_boarding/on_boarding_screen.dart';
+import 'package:smarttouristguide/modules/place_details/place_details_screen.dart';
 import 'package:smarttouristguide/shared/components/constants.dart';
 import 'package:smarttouristguide/shared/network/local/cache_helper.dart';
 import 'package:smarttouristguide/shared/network/remote/dio_helper.dart';
 import 'package:smarttouristguide/shared/styles/themes.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import 'modules/login/login_and_signup/forget_password.dart';
+import 'modules/login/register_cubit/cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,6 +27,8 @@ void main() async {
   dynamic onBoarding = CacheHelper.getData(key: 'OnBoarding');
 
   token = CacheHelper.getData(key: 'token') ?? '';
+
+  print(token);
 
   if (onBoarding != null) {
     if (token != '') {
@@ -61,7 +66,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (BuildContext context) => AppCubit()
             ..getHomeEventOfferData()
-            ..getCategoriesPlacesData(),
+            ..getCategoriesPlacesData()
+            ..getFavorites()
+            ..getProfile(),
         ),
         BlocProvider(
           create: (BuildContext context) => ChangeColorCubit(),
@@ -75,6 +82,12 @@ class MyApp extends StatelessWidget {
         //locale: Locale("${changeLanguage()}"),
         theme: lightTheme,
         home: startWidget,
+        // home: startWidget,
+        routes: {
+          Welcome.routeName: (context) => Welcome(),
+          ForgetPassword.routeName: (context) => ForgetPassword(),
+          PlaceDetailsScreen.routeName: (context) => PlaceDetailsScreen(),
+        },
       ),
     );
   }
