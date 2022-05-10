@@ -13,14 +13,11 @@ import '../../../shared/styles/buttons_style.dart';
 import '../register_cubit/cubit.dart';
 import '../register_cubit/states.dart';
 
-class RegisterScreen extends StatelessWidget
-{
+class RegisterScreen extends StatelessWidget {
   bool hidePassword = true;
 
   @override
-  Widget build(BuildContext context)
-  {
-
+  Widget build(BuildContext context) {
     final TextEditingController email = TextEditingController(),
         password = TextEditingController(),
         firstName = TextEditingController(),
@@ -159,6 +156,27 @@ class RegisterScreen extends StatelessWidget
                         }
                       },
                       label: 'Password',
+                      suffix: cubit.suffix,
+                      suffixPressed: () {
+                        cubit.changePasswordVisibility();
+                      },
+                      radius: 10,
+                    ),
+                    SizedBox(
+                      height: 15.0,
+                    ),
+                    defaultFormField(
+                      controller: ConfirmPassword,
+                      type: TextInputType.visiblePassword,
+                      isPassword: cubit.isPassword,
+                      validate: (String? value) {
+                        if (value != null && value.trim().length >= 6) {
+                          return null;
+                        } else {
+                          return "Please enter 6 characters at least.";
+                        }
+                      },
+                      label: 'Confirm Password',
                       suffix: cubit.suffix,
                       suffixPressed: () {
                         cubit.changePasswordVisibility();

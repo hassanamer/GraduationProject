@@ -73,27 +73,30 @@ class ForgetPassword extends StatelessWidget {
                                         fontWeight: FontWeight.bold)),
                               ]),
                           const SizedBox(height: 5.0),
-                          Row(
-                            children: [
-                              Text(
-                                AppLocalizations.of(context)!
-                                    .forget_password_state_one,
-                                style: const TextStyle(
-                                    fontFamily: 'Tajwal',
-                                    fontSize: 18.0,
-                                    color: AppColors.primaryColor,
-                                    fontWeight: FontWeight.w400),
-                              ),
-                              Text(
-                                AppLocalizations.of(context)!
-                                    .forget_password_state_two,
-                                style: const TextStyle(
-                                    fontFamily: 'Tajwal',
-                                    fontSize: 18.0,
-                                    color: AppColors.primaryColor,
-                                    fontWeight: FontWeight.w400),
-                              ),
-                            ],
+                          SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Column(
+                              children: [
+                                Text(
+                                  AppLocalizations.of(context)!
+                                      .forget_password_state_one,
+                                  style: const TextStyle(
+                                      fontFamily: 'Tajwal',
+                                      fontSize: 18.0,
+                                      color: AppColors.primaryColor,
+                                      fontWeight: FontWeight.w400),
+                                ),
+                                Text(
+                                  AppLocalizations.of(context)!
+                                      .forget_password_state_two,
+                                  style: const TextStyle(
+                                      fontFamily: 'Tajwal',
+                                      fontSize: 18.0,
+                                      color: AppColors.primaryColor,
+                                      fontWeight: FontWeight.w400),
+                                ),
+                              ],
+                            ),
                           )
                         ],
                       ),
