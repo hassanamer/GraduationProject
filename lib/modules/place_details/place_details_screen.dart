@@ -11,8 +11,6 @@ import 'package:smarttouristguide/shared/components/components.dart';
 import 'package:smarttouristguide/shared/styles/colors.dart';
 
 class PlaceDetailsScreen extends StatelessWidget {
-
-
   String? catName;
 
   PlaceDetailsScreen({
@@ -42,8 +40,13 @@ class PlaceDetailsScreen extends StatelessWidget {
       builder: (context, state) {
         return ConditionalBuilder(
           condition: state is! AppLoadingGetPlaceDetails,
-          builder: (context) => PlaceDetailsScreenBuilder(
-              cubit.placeDetailsModel!.data!, context, catName),
+          builder: (context) => RefreshIndicator(
+            onRefresh: () => cubit.getPlaceDetails(placeId: cubit.placeDetailsModel!.data.id),
+            child: PlaceDetailsScreenBuilder(
+                cubit.placeDetailsModel!.data, context, catName),
+            color: AppColors.primaryColor,
+            backgroundColor: AppColors.backgroundColor,
+          ),
           fallback: (context) => Container(
             color: AppColors.backgroundColor,
             width: double.infinity,
@@ -102,11 +105,14 @@ Widget PlaceDetailsScreenBuilder(Data model, context, catName) => Scaffold(
                                 Icons.arrow_back_ios_rounded,
                               ),
                             ),
-                            Text(
-                              '${model.placeName}',
-                              style: TextStyle(
-                                fontSize: 25.0,
-                                fontWeight: FontWeight.bold,
+                            SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Text(
+                                '${model.placeName}',
+                                style: TextStyle(
+                                  fontSize: 25.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                             ),
                           ],
@@ -166,9 +172,7 @@ Widget PlaceDetailsScreenBuilder(Data model, context, catName) => Scaffold(
                       height: 5.0,
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 7
-                      ),
+                      padding: const EdgeInsets.symmetric(horizontal: 7),
                       child: Row(
                         children: [
                           RatingBarIndicator(
@@ -302,12 +306,38 @@ Widget PlaceDetailsScreenBuilder(Data model, context, catName) => Scaffold(
                         fontWeight: FontWeight.bold,
                       ),
                     ),
+                    ListView.separated(
+                      itemBuilder: (context, index) => commentBuilder(model.comments[index]),
+                      separatorBuilder: (context, index) => divider(),
+                      itemCount: model.comments.length,
+                      shrinkWrap: true,
+                    ),
                   ],
                 ),
               ),
             ),
           ],
         ),
+      ),
+    );
+
+Widget commentBuilder(Comments commentModel) => Container(
+      color: Colors.white,
+      width: double.infinity,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            '@${commentModel.user}',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 16.0,
+            ),
+          ),
+          Text(
+            '${commentModel.comment}',
+          )
+        ],
       ),
     );
 

@@ -13,22 +13,25 @@ import '../../../shared/styles/buttons_style.dart';
 import '../register_cubit/cubit.dart';
 import '../register_cubit/states.dart';
 
-class RegisterScreen extends StatelessWidget {
+class RegisterScreen extends StatelessWidget
+{
   bool hidePassword = true;
 
-  final TextEditingController email = TextEditingController(),
-      password = TextEditingController(),
-      firstName = TextEditingController(),
-      lastName = TextEditingController(),
-      ConfirmPassword = TextEditingController(),
-      phoneNumber = TextEditingController(),
-      DateOfBirth = TextEditingController(),
-      Gender = TextEditingController(),
-      Country = TextEditingController(),
-      userName = TextEditingController();
-
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context)
+  {
+
+    final TextEditingController email = TextEditingController(),
+        password = TextEditingController(),
+        firstName = TextEditingController(),
+        lastName = TextEditingController(),
+        ConfirmPassword = TextEditingController(),
+        phoneNumber = TextEditingController(),
+        DateOfBirth = TextEditingController(),
+        Gender = TextEditingController(),
+        Country = TextEditingController(),
+        userName = TextEditingController();
+
     var cubit = AppRegisterCubit.get(context);
 
     return BlocConsumer<AppRegisterCubit, AppRegisterStates>(

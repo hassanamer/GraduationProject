@@ -58,7 +58,7 @@ Widget buildOfferItem(BuildContext context, Events model) => Column(
             Align(
               alignment: Alignment.centerLeft,
               child: textStyle(
-                model.place.placeName,
+                model.eventName,
                 22,
                 FontWeight.bold,
               ),

@@ -121,15 +121,17 @@ class AppCubit extends Cubit<AppStates> {
 
   PlaceDetailsModel? placeDetailsModel;
 
-  void getPlaceDetails({int? placeId}) {
+  Future getPlaceDetails({int? placeId}) async {
     emit(AppLoadingGetPlaceDetails());
     DioHelper.postData(
         url: PLACE_DETAILS,
         token: 'Token 53b704f45ca09497409820590b3fc8874eaec03e',
         data: {'place_id': placeId}).then((value) {
       placeDetailsModel = PlaceDetailsModel.fromJson(value.data);
+      print(value.data);
       emit(AppSuccessGetPlaceDetails());
     }).catchError((error) {
+      print('place details error is\n ${error.toString()}');
       emit(AppErrorGetPlaceDetails());
     });
   }

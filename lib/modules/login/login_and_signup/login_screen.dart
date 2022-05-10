@@ -17,6 +17,7 @@ import '../../../shared/styles/buttons_style.dart';
 class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+
     var cubit = AppLoginCubit.get(context);
     var emailController = TextEditingController();
     var passwordController = TextEditingController();
