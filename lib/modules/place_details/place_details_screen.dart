@@ -23,6 +23,22 @@ class PlaceDetailsScreen extends StatelessWidget {
 
   static const String routeName = 'PlaceDetailsScreen';
 
+  createAlertDialog(context) {
+    TextEditingController commentController = TextEditingController();
+
+    return AlertDialog(
+      title: Text('Your Comment'),
+      content: TextField(
+        controller: commentController,
+      ),
+      actions: <Widget>[
+        MaterialButton(onPressed: () {
+          print('ok');
+        })
+      ],
+    );
+  }
+
   Widget build(BuildContext context) {
     var cubit = AppCubit.get(context);
 
@@ -41,7 +57,8 @@ class PlaceDetailsScreen extends StatelessWidget {
         return ConditionalBuilder(
           condition: state is! AppLoadingGetPlaceDetails,
           builder: (context) => RefreshIndicator(
-            onRefresh: () => cubit.getPlaceDetails(placeId: cubit.placeDetailsModel!.data.id),
+            onRefresh: () => cubit.getPlaceDetails(
+                placeId: cubit.placeDetailsModel!.data.id),
             child: PlaceDetailsScreenBuilder(
                 cubit.placeDetailsModel!.data, context, catName),
             color: AppColors.primaryColor,
@@ -306,8 +323,14 @@ Widget PlaceDetailsScreenBuilder(Data model, context, catName) => Scaffold(
                         fontWeight: FontWeight.bold,
                       ),
                     ),
+                    Text('There\'s no comments for this place'),
+                    TextButton(
+                      child: Text('Add Comment'),
+                      onPressed: () {},
+                    ),
                     ListView.separated(
-                      itemBuilder: (context, index) => commentBuilder(model.comments[index]),
+                      itemBuilder: (context, index) =>
+                          commentBuilder(model.comments[index]),
                       separatorBuilder: (context, index) => divider(),
                       itemCount: model.comments.length,
                       shrinkWrap: true,

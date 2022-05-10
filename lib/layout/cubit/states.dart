@@ -46,3 +46,7 @@ class AppLoadingGetProfileState extends AppStates {}
 class AppGetPorfileSuccessState extends AppStates {}
 
 class AppGetPorfileErrorState extends AppStates {}
+
+class LoadState extends AppStates {}
+
+class DoneState extends AppStates {}
