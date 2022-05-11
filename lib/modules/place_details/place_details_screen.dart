@@ -163,13 +163,13 @@ Widget PlaceDetailsScreenBuilder(Data model, context, catName) => Scaffold(
                           ),
                         ),
                         Spacer(),
-                        Text(
+                        catName != null ? Text(
                           '${catName}',
                           style: TextStyle(
                             fontSize: 15.0,
                             color: Colors.grey,
                           ),
-                        ),
+                        ): Text(''),
                       ],
                     ),
                     Container(

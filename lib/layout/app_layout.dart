@@ -8,21 +8,6 @@ import 'package:smarttouristguide/shared/components/components.dart';
 import 'package:smarttouristguide/shared/styles/colors.dart';
 
 class AppLayout extends StatelessWidget {
-  createAlertDialog(context) {
-    TextEditingController commentController = TextEditingController();
-
-    return AlertDialog(
-      title: Text('Your Comment'),
-      content: TextField(
-        controller: commentController,
-      ),
-      actions: <Widget>[
-        MaterialButton(onPressed: () {
-          print('ok');
-        })
-      ],
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
