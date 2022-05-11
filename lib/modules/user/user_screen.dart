@@ -7,10 +7,10 @@ import 'package:smarttouristguide/layout/cubit/states.dart';
 import 'package:smarttouristguide/models/get_profile_model.dart';
 import 'package:smarttouristguide/shared/components/extensions.dart';
 import 'package:smarttouristguide/shared/styles/colors.dart';
-import 'package:smarttouristguide/shared/styles/textStyle.dart';
 
 class UserProfile extends StatelessWidget {
   static const String routeName = 'UserProfile';
+
   @override
   Widget build(BuildContext context) {
     var cubit = AppCubit.get(context);
@@ -78,7 +78,13 @@ Widget currentt(context, Data user) => Scaffold(
                     children: [
                       CircleAvatar(
                         radius: 55.0,
-                        backgroundImage: AssetImage('assets/testpic.jpg'),
+                        backgroundImage: user.gender == 'male'
+                            ? AssetImage(
+                                'assets/images/male.png',
+                              )
+                            : AssetImage(
+                                'assets/images/female.png',
+                              ),
                       ),
                       SizedBox(
                         height: 5.0,
