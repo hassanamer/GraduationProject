@@ -42,6 +42,7 @@ dependencies:
   animated_theme_switcher: ^2.0.1-nullsafety.0
   flutter:
     sdk: flutter
+  firebase_auth: ^3.3.17
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -73,12 +74,12 @@ dev_dependencies:
 
 # The following section is specific to Flutter.
 flutter:
-  generate: true
+
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
-
+  generate: true
 
   # To add assets to your application, add an assets section, like this:
   assets:
