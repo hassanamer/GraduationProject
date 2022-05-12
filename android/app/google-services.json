@@ -1,41 +1,70 @@
 {
   "project_info": {
-    "project_number": "784497138490",
-    "project_id": "stg-01-f2069",
-    "storage_bucket": "stg-01-f2069.appspot.com"
+    "project_number": "850111016285",
+    "project_id": "stg01-e04c6",
+    "storage_bucket": "stg01-e04c6.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:784497138490:android:c1854b6321d44f0fabce03",
+        "mobilesdk_app_id": "1:850111016285:android:ad1ef2c43c26234de94cb4",
         "android_client_info": {
-          "package_name": "com.STG.project.STG01"
+          "package_name": "com.STG.project.STG001"
         }
       },
       "oauth_client": [
         {
-          "client_id": "784497138490-uj5bblovpinjq9bjcaldmb6smj0oevmr.apps.googleusercontent.com",
+          "client_id": "850111016285-pthojimvn82cac05ivibu3cujmbrsat6.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.STG.project.STG01",
+            "package_name": "com.STG.project.STG001",
             "certificate_hash": "50812f82a2cb860a84ff3420297d56f31378f7b7"
           }
         },
         {
-          "client_id": "784497138490-7p186b1719qiib00puo810i3be1q654d.apps.googleusercontent.com",
+          "client_id": "850111016285-77qh0mesq86ka5ivenouml7mti09o987.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDinIEgw2TRyqbbf-4FwNV6a-vYb1V2De4"
+          "current_key": "AIzaSyBu_gq7svXmdFmhwfkiuHeg2ZSBc7vJBrQ"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "784497138490-7p186b1719qiib00puo810i3be1q654d.apps.googleusercontent.com",
+              "client_id": "850111016285-77qh0mesq86ka5ivenouml7mti09o987.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:850111016285:android:b2f46d3990972416e94cb4",
+        "android_client_info": {
+          "package_name": "com.STG.project.STG01"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "850111016285-77qh0mesq86ka5ivenouml7mti09o987.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBu_gq7svXmdFmhwfkiuHeg2ZSBc7vJBrQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "850111016285-77qh0mesq86ka5ivenouml7mti09o987.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

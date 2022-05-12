@@ -9,7 +9,6 @@ class CpModel {
     data = Data.fromJson(json['data']);
   }
 }
-
 class Data {
   late final List<Category> category;
 
