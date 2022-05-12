@@ -277,13 +277,9 @@ Widget RateIconButton({
     IconButton(
       icon: Icon(
         Icons.star_rate_rounded,
+        color: color,
       ),
       iconSize: 42.0,
       padding: EdgeInsetsDirectional.all(0),
-      onPressed: () {
-        AppCubit.get(context).addUpdateRate(
-          placeId: placeId,
-          rate: rate,
-        );
-      },
+      onPressed: onPressed,
     );

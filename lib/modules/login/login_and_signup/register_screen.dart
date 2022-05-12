@@ -249,15 +249,16 @@ class RegisterScreen extends StatelessWidget {
                       onSubmit: (value) {
                         if (cubit.formKey.currentState!.validate()) {
                           cubit.userRegister(
-                              userName: userName.text,
-                              firstname: firstName.text,
-                              lastName: lastName.text,
-                              email: email.text,
-                              password: password.text,
-                              phoneNumber: phoneNumber.text,
-                              DateOfBirth: DateOfBirth.text,
-                              Gender: Gender.text,
-                              country: Country.text);
+                            userName: userName.text,
+                            firstname: firstName.text,
+                            lastName: lastName.text,
+                            email: email.text,
+                            password: password.text,
+                            phoneNumber: phoneNumber.text,
+                            DateOfBirth: DateOfBirth.text,
+                            Gender: Gender.text,
+                            country: Country.text,
+                          );
                         }
                       },
                       radius: 10,

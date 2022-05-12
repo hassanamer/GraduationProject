@@ -15,7 +15,7 @@ class AppRegisterCubit extends Cubit<AppRegisterStates> {
 
   void userRegister({
     required String email,
-    required var password,
+    required String password,
     required String firstname,
     required String lastName,
     required String phoneNumber,
@@ -30,8 +30,8 @@ class AppRegisterCubit extends Cubit<AppRegisterStates> {
       url: REGISTER,
       data: {
         "username": userName,
-        'firstName': firstname,
-        'lastName': lastName,
+        'first_name': firstname,
+        'last_name': lastName,
         'email': email,
         'password': password,
         'phone': phoneNumber,
@@ -62,13 +62,5 @@ class AppRegisterCubit extends Cubit<AppRegisterStates> {
   }
 
   var formKey = GlobalKey<FormState>();
-
-  // void bottomSheet(context, widget) {
-  //   showModalBottomSheet(
-  //     context: context,
-  //     backgroundColor: Colors.transparent,
-  //     builder: (context) => widget,
-  //   );
-  // }
 
 }

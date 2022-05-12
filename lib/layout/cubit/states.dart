@@ -56,3 +56,9 @@ class AppRateLoading extends AppStates {}
 class AppRateSuccess extends AppStates {}
 
 class AppRateError extends AppStates {}
+
+class LightState extends AppStates {}
+
+class LightLoadingState extends AppStates {}
+
+class AppChangePasswordVisibilityState extends AppStates {}

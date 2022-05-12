@@ -6,5 +6,5 @@ const PLACE_DETAILS = 'home/details/';
 
 const ADD_UPDATE_RATE = 'home/rate/';
 
-const GET_FAVORITES = 'favouriteplace/';
+const FAVORITES = 'home/favouriteplace/';
 

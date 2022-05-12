@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:smarttouristguide/layout/cubit/states.dart';
 import 'package:smarttouristguide/models/cat_places_model.dart';
 import 'package:smarttouristguide/models/favorites_data_model.dart';
@@ -11,10 +12,10 @@ import 'package:smarttouristguide/models/rate_model.dart';
 import 'package:smarttouristguide/modules/categories/categories_screen.dart';
 import 'package:smarttouristguide/modules/favorites_screen/favorites_screen.dart';
 import 'package:smarttouristguide/modules/home/home_screen.dart';
-import 'package:smarttouristguide/shared/components/components.dart';
 import 'package:smarttouristguide/shared/components/constants.dart';
 import 'package:smarttouristguide/shared/network/end_points.dart';
 import 'package:smarttouristguide/shared/network/remote/dio_helper.dart';
+import 'package:smarttouristguide/shared/styles/colors.dart';
 
 import '../../models/change_favorites_model.dart';
 
@@ -43,7 +44,7 @@ class AppCubit extends Cubit<AppStates> {
     emit(AppChangeFavoritesState());
 
     DioHelper.postData(
-      url: 'home/favouriteplace/',
+      url: FAVORITES,
       data: {
         'place_id': placeId,
       },
@@ -71,7 +72,7 @@ class AppCubit extends Cubit<AppStates> {
     emit(AppLoadingGetFavoritesState());
 
     DioHelper.getData(
-      url: 'home/favouriteplace/',
+      url: FAVORITES,
       token: 'Token ${token}',
     ).then((value) {
       getFavoritesModel = GetFavoritesModel.fromJson(value.data);
@@ -86,7 +87,7 @@ class AppCubit extends Cubit<AppStates> {
   HomeModel? homeModel;
   Map<dynamic, bool?> favorites = {};
 
-  void getHomeEventOfferData() {
+  Future getHomeEventOfferData() async{
     emit(AppLoadingDataState());
     DioHelper.getData(
       url: 'home/events/',
@@ -164,40 +165,53 @@ class AppCubit extends Cubit<AppStates> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
+                'Your experience helps us to analyze data and recommend the best places for you. ♥',
+              ),
+              Text(
                 'Rate ${placeName}',
-                style: TextStyle(fontSize: 16.0),
+                style: TextStyle(
+                  fontSize: 18.0,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.primaryColor,
+                ),
               ),
               Center(
-                child: Row(
-                  children: [
-                    RateIconButton(
-                      context: context,
-                      placeId: placeId,
-                      rate: 1,
-                      onPressed: () {},
+                child: Container(
+                  child: Row(
+                    children: [
+                      RatingBar.builder(
+                        itemBuilder: (context, _) => Icon(
+                          Icons.star_rate_rounded,
+                          color: AppColors.primaryColor,
+                        ),
+                        glow: false,
+                        unratedColor: AppColors.disabledAndHintColor,
+                        onRatingUpdate: (rating) {
+                          print(rating.toInt());
+                          addUpdateRate(
+                            placeId: placeId,
+                            rate: rating,
+                          );
+                        },
+                        itemCount: 5,
+                        minRating: 1.0,
+                        maxRating: 5.0,
+                        itemSize: 45.0,
+                        direction: Axis.horizontal,
+                      )
+                    ],
+                    mainAxisAlignment: MainAxisAlignment.center,
+                  ),
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Color(0x5F005764),
+                      width: 1.5,
                     ),
-                    RateIconButton(
-                      context: context,
-                      placeId: placeId,
-                      rate: 2,
-                    ),
-                    RateIconButton(
-                      context: context,
-                      placeId: placeId,
-                      rate: 3,
-                    ),
-                    RateIconButton(
-                      context: context,
-                      placeId: placeId,
-                      rate: 4,
-                    ),
-                    RateIconButton(
-                      context: context,
-                      placeId: placeId,
-                      rate: 5,
-                    ),
-                  ],
-                  mainAxisAlignment: MainAxisAlignment.center,
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  padding: EdgeInsets.all(0),
+                  margin: EdgeInsets.all(0),
+                  width: 250,
                 ),
               ),
             ],
@@ -227,12 +241,4 @@ class AppCubit extends Cubit<AppStates> {
     });
   }
 
-// Future openDialog(context) => showDialog(
-//       context: context,
-//       builder: (BuildContext context) => AlertDialog(
-//         title: Text(
-//           'Add Comment',
-//         ),
-//       ),
-//     );
 }

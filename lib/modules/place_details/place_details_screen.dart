@@ -57,8 +57,10 @@ class PlaceDetailsScreen extends StatelessWidget {
         return ConditionalBuilder(
           condition: state is! AppLoadingGetPlaceDetails,
           builder: (context) => RefreshIndicator(
-            onRefresh: () => cubit.getPlaceDetails(
-                placeId: cubit.placeDetailsModel!.data.id),
+            onRefresh: () {
+              return cubit.getPlaceDetails(
+                  placeId: cubit.placeDetailsModel!.data.id);
+            },
             child: PlaceDetailsScreenBuilder(
                 cubit.placeDetailsModel!.data, context, catName),
             color: AppColors.primaryColor,
@@ -84,15 +86,8 @@ Widget PlaceDetailsScreenBuilder(Data model, context, catName) => Scaffold(
       appBar: AppBar(
         systemOverlayStyle: SystemUiOverlayStyle(
             statusBarIconBrightness: Brightness.dark,
-            statusBarColor: AppColors.backgroundColor),
+            statusBarColor: Colors.white),
         toolbarHeight: 0,
-        iconTheme: IconThemeData(
-          color: AppColors.primaryColor,
-        ),
-        title: Text(
-          'Back To Places',
-          style: TextStyle(color: AppColors.primaryColor, fontSize: 15.0),
-        ),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -112,42 +107,27 @@ Widget PlaceDetailsScreenBuilder(Data model, context, catName) => Scaffold(
                   children: [
                     Row(
                       children: [
-                        Row(
-                          children: [
-                            IconButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                              icon: Icon(
-                                Icons.arrow_back_ios_rounded,
-                              ),
-                            ),
-                            SingleChildScrollView(
-                              scrollDirection: Axis.horizontal,
-                              child: Text(
-                                '${model.placeName}',
-                                style: TextStyle(
-                                  fontSize: 25.0,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Spacer(),
-                        IconButton(
-                          onPressed: () {
-                            AppCubit.get(context).changeFavorite(model.id);
+                        InkWell(
+                          onTap: () {
+                            Navigator.pop(context);
                           },
-                          icon: Icon(
-                            Icons.favorite_outlined,
-                            color: AppCubit.get(context).favorites[model.id]!
-                                ? AppColors.primaryColor
-                                : AppColors.disabledAndHintColor,
-                            size: 26.0,
+                          child: Icon(
+                            Icons.arrow_back_ios_rounded,
+                            color: AppColors.primaryColor,
                           ),
-                        )
+                        ),
+                        SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Text(
+                            ' ${model.placeName}',
+                            style: TextStyle(
+                              fontSize: 25.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
                       ],
+                      mainAxisAlignment: MainAxisAlignment.start,
                     ),
                     Row(
                       children: [
@@ -230,6 +210,32 @@ Widget PlaceDetailsScreenBuilder(Data model, context, catName) => Scaffold(
                         ],
                       ),
                     ),
+                    Row(
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            AppCubit.get(context).changeFavorite(model.id);
+                          },
+                          padding: EdgeInsets.all(0),
+                          iconSize: 26.0,
+                          icon: Icon(
+                            Icons.favorite_outlined,
+                            color: AppCubit.get(context).favorites[model.id]!
+                                ? AppColors.primaryColor
+                                : AppColors.disabledAndHintColor,
+                          ),
+                        ),
+                        Text(
+                          AppCubit.get(context).favorites[model.id]!
+                              ? 'It\'s in your favorites list!'
+                              : 'Add this to your favorites list',
+                          style: TextStyle(
+                            fontSize: 15.5,
+                            color: Color(0xCA000000),
+                          ),
+                        )
+                      ],
+                    )
                   ],
                 ),
               ),
@@ -325,9 +331,13 @@ Widget PlaceDetailsScreenBuilder(Data model, context, catName) => Scaffold(
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    Text('There\'s no comments for this place'),
+                    Text(
+                      'There\'s no comments for this place',
+                    ),
                     TextButton(
-                      child: Text('Add Comment'),
+                      child: Text(
+                        'Add Comment',
+                      ),
                       onPressed: () {
                         showModalBottomSheet(
                           context: context,
@@ -352,6 +362,8 @@ Widget PlaceDetailsScreenBuilder(Data model, context, catName) => Scaffold(
         ),
       ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: AppColors.primaryColor,
+        child: Icon(Icons.reviews_rounded),
         onPressed: () => AppCubit.get(context).showReviewBottomSheet(
           context: context,
           placeName: model.placeName,
@@ -379,4 +391,16 @@ Widget commentBuilder(Comments commentModel) => Container(
           )
         ],
       ),
+    );
+
+Widget gfgfg(context) => IconButton(
+      onPressed: () {
+        Navigator.pop(context);
+      },
+      color: AppColors.primaryColor,
+      icon: Icon(
+        Icons.arrow_back_ios_rounded,
+      ),
+      padding: EdgeInsets.all(0),
+      alignment: AlignmentDirectional.centerStart,
     );
