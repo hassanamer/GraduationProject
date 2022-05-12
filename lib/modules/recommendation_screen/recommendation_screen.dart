@@ -10,6 +10,7 @@ import 'package:smarttouristguide/shared/components/components.dart';
 import 'package:smarttouristguide/shared/styles/colors.dart';
 
 class RecommendationScreen extends StatelessWidget {
+  
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AppCubit, AppStates>(
@@ -48,6 +49,9 @@ class RecommendationScreen extends StatelessWidget {
   }
 }
 
+
+
+
 Widget buildRecommendationItem(context) => Container(
       height: MediaQuery.of(context).size.height * 0.4,
       width: double.infinity,
@@ -62,6 +66,7 @@ Widget buildRecommendationItem(context) => Container(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+
             Text(
               'Place Name',
               style: TextStyle(
