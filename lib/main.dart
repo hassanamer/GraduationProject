@@ -80,7 +80,7 @@ class MyApp extends StatelessWidget {
         supportedLocales: AppLocalizations.supportedLocales,
         // locale: Locale("${changeLanguage()}"),
         theme: lightTheme,
-        home: Welcome(),
+        home: startWidget,
         // home: startWidget,
         routes: {
           Welcome.routeName: (context) => Welcome(),

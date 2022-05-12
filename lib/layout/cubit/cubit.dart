@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smarttouristguide/layout/cubit/states.dart';
@@ -6,9 +7,11 @@ import 'package:smarttouristguide/models/favorites_data_model.dart';
 import 'package:smarttouristguide/models/get_profile_model.dart';
 import 'package:smarttouristguide/models/home_model.dart';
 import 'package:smarttouristguide/models/place_details_model.dart';
+import 'package:smarttouristguide/models/rate_model.dart';
 import 'package:smarttouristguide/modules/categories/categories_screen.dart';
 import 'package:smarttouristguide/modules/favorites_screen/favorites_screen.dart';
 import 'package:smarttouristguide/modules/home/home_screen.dart';
+import 'package:smarttouristguide/shared/components/components.dart';
 import 'package:smarttouristguide/shared/components/constants.dart';
 import 'package:smarttouristguide/shared/network/end_points.dart';
 import 'package:smarttouristguide/shared/network/remote/dio_helper.dart';
@@ -120,7 +123,7 @@ class AppCubit extends Cubit<AppStates> {
     emit(AppLoadingGetPlaceDetails());
     DioHelper.postData(
         url: PLACE_DETAILS,
-        token: 'Token 53b704f45ca09497409820590b3fc8874eaec03e',
+        token: 'Token ${token}',
         data: {'place_id': placeId}).then((value) {
       placeDetailsModel = PlaceDetailsModel.fromJson(value.data);
       print(value.data);
@@ -146,29 +149,90 @@ class AppCubit extends Cubit<AppStates> {
     });
   }
 
-  calculateAge(DateTime birthDate) {
-    DateTime currentDate = DateTime.now();
-    int age = currentDate.year - birthDate.year;
-    int month1 = currentDate.month;
-    int month2 = birthDate.month;
-    if (month2 > month1) {
-      age--;
-    } else if (month1 == month2) {
-      int day1 = currentDate.day;
-      int day2 = birthDate.day;
-      if (day2 > day1) {
-        age--;
-      }
-    }
-    return age;
+  showReviewBottomSheet({
+    required context,
+    required String placeName,
+    required placeId,
+    required rate,
+  }) {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) => (Container(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: (Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Rate ${placeName}',
+                style: TextStyle(fontSize: 16.0),
+              ),
+              Center(
+                child: Row(
+                  children: [
+                    RateIconButton(
+                      context: context,
+                      placeId: placeId,
+                      rate: 1,
+                      onPressed: () {},
+                    ),
+                    RateIconButton(
+                      context: context,
+                      placeId: placeId,
+                      rate: 2,
+                    ),
+                    RateIconButton(
+                      context: context,
+                      placeId: placeId,
+                      rate: 3,
+                    ),
+                    RateIconButton(
+                      context: context,
+                      placeId: placeId,
+                      rate: 4,
+                    ),
+                    RateIconButton(
+                      context: context,
+                      placeId: placeId,
+                      rate: 5,
+                    ),
+                  ],
+                  mainAxisAlignment: MainAxisAlignment.center,
+                ),
+              ),
+            ],
+          )),
+        ),
+      )),
+    );
   }
 
-  // Future openDialog(context) => showDialog(
-  //       context: context,
-  //       builder: (BuildContext context) => AlertDialog(
-  //         title: Text(
-  //           'Add Comment',
-  //         ),
-  //       ),
-  //     );
+  RateModel? rateModel;
+
+  Future addUpdateRate({
+    int? placeId,
+    dynamic rate,
+  }) async {
+    emit(AppRateLoading());
+    DioHelper.postData(url: ADD_UPDATE_RATE, token: 'Token ${token}', data: {
+      'place_id': placeId,
+      'rate': rate,
+    }).then((value) {
+      rateModel = RateModel.fromJson(value.data);
+      print(value.data);
+      emit(AppRateSuccess());
+    }).catchError((error) {
+      print('error when adding updating rate \n ${error.toString()}');
+      emit(AppRateError());
+    });
+  }
+
+// Future openDialog(context) => showDialog(
+//       context: context,
+//       builder: (BuildContext context) => AlertDialog(
+//         title: Text(
+//           'Add Comment',
+//         ),
+//       ),
+//     );
 }

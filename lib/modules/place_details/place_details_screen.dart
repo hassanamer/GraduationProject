@@ -331,7 +331,7 @@ Widget PlaceDetailsScreenBuilder(Data model, context, catName) => Scaffold(
                       onPressed: () {
                         showModalBottomSheet(
                           context: context,
-                          builder: (context)=> Container(
+                          builder: (context) => Container(
                             child: Column(),
                           ),
                         );
@@ -349,6 +349,14 @@ Widget PlaceDetailsScreenBuilder(Data model, context, catName) => Scaffold(
               ),
             ),
           ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => AppCubit.get(context).showReviewBottomSheet(
+          context: context,
+          placeName: model.placeName,
+          placeId: model.id,
+          rate: model.rate,
         ),
       ),
     );
@@ -371,10 +379,4 @@ Widget commentBuilder(Comments commentModel) => Container(
           )
         ],
       ),
-    );
-
-Widget RateIcon(bool color, double size) => Icon(
-      Icons.star_rate_rounded,
-      color: color ? AppColors.primaryColor : AppColors.disabledAndHintColor,
-      size: size,
     );

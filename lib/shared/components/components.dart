@@ -266,3 +266,24 @@ Widget divider({double width = double.infinity}) => Padding(
         color: Colors.grey[300],
       ),
     );
+
+Widget RateIconButton({
+  context,
+  VoidCallback? onPressed,
+  placeId,
+  rate,
+  color,
+}) =>
+    IconButton(
+      icon: Icon(
+        Icons.star_rate_rounded,
+      ),
+      iconSize: 42.0,
+      padding: EdgeInsetsDirectional.all(0),
+      onPressed: () {
+        AppCubit.get(context).addUpdateRate(
+          placeId: placeId,
+          rate: rate,
+        );
+      },
+    );
