@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:smarttouristguide/shared/styles/colors.dart';
-
 import '../../layout/cubit/cubit.dart';
-import '../../modules/event_offer/iconOfRate.dart';
 
 Widget defaultButton({
   double width = double.infinity,
@@ -179,46 +177,6 @@ Widget HomeRow({
             ),
           ),
         ],
-      ),
-    );
-
-Widget HomeItem() => Container(
-      height: 200.0,
-      width: 148.0,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(
-          16.0,
-        ),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Center(
-              child: Image.asset('assets/images/test.jpg', height: 112),
-            ),
-            Text(
-              'Giza Pyramids',
-              style: TextStyle(fontSize: 13.0, fontWeight: FontWeight.w600),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                rate(),
-                rate(),
-                rate(),
-                rate(),
-                rate(),
-                Spacer(),
-                SvgPicture.asset(
-                  'assets/icons/goto.svg',
-                )
-              ],
-            ),
-          ],
-        ),
       ),
     );
 

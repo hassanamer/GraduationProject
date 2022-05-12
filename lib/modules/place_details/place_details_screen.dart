@@ -163,13 +163,15 @@ Widget PlaceDetailsScreenBuilder(Data model, context, catName) => Scaffold(
                           ),
                         ),
                         Spacer(),
-                        Text(
-                          '${catName}',
-                          style: TextStyle(
-                            fontSize: 15.0,
-                            color: Colors.grey,
-                          ),
-                        ),
+                        catName != null
+                            ? Text(
+                                '${catName}',
+                                style: TextStyle(
+                                  fontSize: 15.0,
+                                  color: Colors.grey,
+                                ),
+                              )
+                            : Text(''),
                       ],
                     ),
                     Container(
@@ -326,7 +328,14 @@ Widget PlaceDetailsScreenBuilder(Data model, context, catName) => Scaffold(
                     Text('There\'s no comments for this place'),
                     TextButton(
                       child: Text('Add Comment'),
-                      onPressed: () {},
+                      onPressed: () {
+                        showModalBottomSheet(
+                          context: context,
+                          builder: (context)=> Container(
+                            child: Column(),
+                          ),
+                        );
+                      },
                     ),
                     ListView.separated(
                       itemBuilder: (context, index) =>

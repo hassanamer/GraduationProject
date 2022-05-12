@@ -23,7 +23,7 @@ class menuDrawerScreen extends StatelessWidget {
             return ConditionalBuilder(
               condition: cubit.getProfileModel != null,
               builder: (context) =>
-                  currentt(context, cubit.getProfileModel!.data),
+                  currentt(context, cubit.getProfileModel!.data,),
               fallback: (context) => Center(
                 child: CircularProgressIndicator(
                   color: AppColors.primaryColor,
@@ -41,7 +41,7 @@ Widget currentt(context, Data user) => Drawer(
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.35,
             child: DrawerHeader(
-              decoration: BoxDecoration(color: Theme.of(context).primaryColor),
+              decoration: BoxDecoration(color: AppColors.primaryColor),
               child: Column(
                 children: [
                   Row(
@@ -57,10 +57,15 @@ Widget currentt(context, Data user) => Drawer(
                             CircleAvatar(
                               radius: 40,
                               backgroundColor: Colors.white,
-                              child: Icon(
-                                Icons.person,
-                                color: Theme.of(context).primaryColor,
-                                size: 50,
+                              child: CircleAvatar(
+                                radius: 55.0,
+                                backgroundImage: user.gender == 'male'
+                                    ? AssetImage(
+                                  'assets/images/male.png',
+                                )
+                                    : AssetImage(
+                                  'assets/images/female.png',
+                                ),
                               ),
                             ),
                             const SizedBox(
@@ -106,12 +111,12 @@ Widget currentt(context, Data user) => Drawer(
               AppLocalizations.of(context)!.mood,
               style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  color: Theme.of(context).primaryColor,
+                  color: AppColors.primaryColor,
                   fontSize: 18),
             ),
             horizontalTitleGap: 80,
             leading: Switch(
-              activeColor: Theme.of(context).primaryColor,
+              activeColor: AppColors.primaryColor,
               value: ChangeColorCubit.get(context).changeMode,
               onChanged: (value) {
                 ChangeColorCubit.get(context).togaleMode();
@@ -123,12 +128,12 @@ Widget currentt(context, Data user) => Drawer(
                 AppLocalizations.of(context)!.language,
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    color: Theme.of(context).primaryColor,
+                    color: AppColors.primaryColor,
                     fontSize: 18),
               ),
               horizontalTitleGap: 80,
               leading: Switch(
-                  activeColor: Theme.of(context).primaryColor,
+                  activeColor: AppColors.primaryColor,
                   value: ChangeColorCubit.get(context).changeLanguage,
                   onChanged: (value) {
                     ChangeColorCubit.get(context).togaleLanguage();
@@ -139,7 +144,7 @@ Widget currentt(context, Data user) => Drawer(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12),
-                color: Theme.of(context).primaryColor),
+                color: AppColors.primaryColor),
             child: ElevatedButton(
               style: ButtonStyle(
                   elevation: MaterialStateProperty.all(0),
