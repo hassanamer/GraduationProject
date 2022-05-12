@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'colors.dart';
+
 class textStyle extends StatelessWidget {
   late String text;
   late double textSize;
@@ -17,7 +19,7 @@ class textStyle extends StatelessWidget {
         text,
         style: TextStyle(
           fontSize: textSize,
-          color: Theme.of(context).primaryColor,
+          color: AppColors.primaryColor,
           fontWeight: fontWeight,
         ),
       ),

@@ -3,9 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smarttouristguide/modules/login/login_cubit/cubit.dart';
 import 'package:smarttouristguide/modules/login/login_cubit/states.dart';
 
-import 'LoginAndSignUpButton.dart';
-import 'login_screen.dart';
-import 'register_screen.dart';
+import '../login/login_and_signup/LoginAndSignUpButton.dart';
+import '../login/login_and_signup/login_screen.dart';
+import '../login/login_and_signup/register_screen.dart';
 
 class Welcome extends StatelessWidget {
   static const String routeName = 'Welcome';
@@ -16,7 +16,6 @@ class Welcome extends StatelessWidget {
     return BlocConsumer<AppLoginCubit, AppLoginStates>(
       listener: (context, state) {},
       builder: (context, state) {
-        var cubit = AppLoginCubit.get(context);
 
         return Scaffold(
           body: Column(

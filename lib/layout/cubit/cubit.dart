@@ -35,36 +35,31 @@ class AppCubit extends Cubit<AppStates> {
 
   ChangeFavoritesModel? changeFavoritesModel;
 
-  void changeFavorite(dynamic placeId)
-  {
+  void changeFavorite(dynamic placeId) {
     favorites[placeId] = !favorites[placeId]!;
     emit(AppChangeFavoritesState());
 
     DioHelper.postData(
       url: 'home/favouriteplace/',
       data: {
-        'place_id' : placeId,
+        'place_id': placeId,
       },
       token: 'Token ${token}',
-    ).then((value)
-    {
+    ).then((value) {
       changeFavoritesModel = ChangeFavoritesModel.fromJson(value.data);
       print(value.data);
 
-      if(!changeFavoritesModel!.status)
-      {
+      if (!changeFavoritesModel!.status) {
         favorites[placeId] = !favorites[placeId]!;
-      } else
-      {
+      } else {
         getFavorites();
       }
       emit(AppSuccessChangeFavoritesState(changeFavoritesModel!));
-    }).catchError((error)
-    {
+    }).catchError((error) {
       print(error.toString());
       favorites[placeId] = !favorites[placeId]!;
       emit(AppErrorChangeFavoritesState());
-    }) ;
+    });
   }
 
   GetFavoritesModel? getFavoritesModel;
@@ -167,4 +162,13 @@ class AppCubit extends Cubit<AppStates> {
     }
     return age;
   }
+
+  // Future openDialog(context) => showDialog(
+  //       context: context,
+  //       builder: (BuildContext context) => AlertDialog(
+  //         title: Text(
+  //           'Add Comment',
+  //         ),
+  //       ),
+  //     );
 }
