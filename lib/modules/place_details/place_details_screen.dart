@@ -19,25 +19,7 @@ class PlaceDetailsScreen extends StatelessWidget {
     catName = catName1;
   }
 
-  var mediaController = PageController();
-
   static const String routeName = 'PlaceDetailsScreen';
-
-  createAlertDialog(context) {
-    TextEditingController commentController = TextEditingController();
-
-    return AlertDialog(
-      title: Text('Your Comment'),
-      content: TextField(
-        controller: commentController,
-      ),
-      actions: <Widget>[
-        MaterialButton(onPressed: () {
-          print('ok');
-        })
-      ],
-    );
-  }
 
   Widget build(BuildContext context) {
     var cubit = AppCubit.get(context);
@@ -70,9 +52,30 @@ class PlaceDetailsScreen extends StatelessWidget {
             color: AppColors.backgroundColor,
             width: double.infinity,
             height: double.infinity,
-            child: Center(
-              child: CircularProgressIndicator(
-                color: AppColors.primaryColor,
+            child: Container(
+              height: double.infinity,
+              width: double.infinity,
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      '',
+                      style: TextStyle(
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.primaryColor,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10.0,
+                    ),
+                    LinearProgressIndicator(
+                      color: AppColors.primaryColor,
+                      backgroundColor: Color(0xffffebc9),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
@@ -391,16 +394,4 @@ Widget commentBuilder(Comments commentModel) => Container(
           )
         ],
       ),
-    );
-
-Widget gfgfg(context) => IconButton(
-      onPressed: () {
-        Navigator.pop(context);
-      },
-      color: AppColors.primaryColor,
-      icon: Icon(
-        Icons.arrow_back_ios_rounded,
-      ),
-      padding: EdgeInsets.all(0),
-      alignment: AlignmentDirectional.centerStart,
     );

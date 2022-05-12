@@ -56,7 +56,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get see_details => 'see Details';
 
   @override
-  String get mood => 'Mood';
+  String get mood => 'Mode';
 
   @override
   String get language => 'language';

@@ -193,7 +193,7 @@ abstract class AppLocalizations {
   /// No description provided for @mood.
   ///
   /// In en, this message translates to:
-  /// **'Mood'**
+  /// **'Mode'**
   String get mood;
 
   /// No description provided for @language.

@@ -22,8 +22,10 @@ class menuDrawerScreen extends StatelessWidget {
           builder: (context, state) {
             return ConditionalBuilder(
               condition: cubit.getProfileModel != null,
-              builder: (context) =>
-                  currentt(context, cubit.getProfileModel!.data,),
+              builder: (context) => currentt(
+                context,
+                cubit.getProfileModel!.data,
+              ),
               fallback: (context) => Center(
                 child: CircularProgressIndicator(
                   color: AppColors.primaryColor,
@@ -41,7 +43,9 @@ Widget currentt(context, Data user) => Drawer(
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.35,
             child: DrawerHeader(
-              decoration: BoxDecoration(color: AppColors.primaryColor),
+              decoration: BoxDecoration(
+                color: AppColors.primaryColor,
+              ),
               child: Column(
                 children: [
                   Row(
@@ -61,11 +65,11 @@ Widget currentt(context, Data user) => Drawer(
                                 radius: 55.0,
                                 backgroundImage: user.gender == 'male'
                                     ? AssetImage(
-                                  'assets/images/male.png',
-                                )
+                                        'assets/images/male.png',
+                                      )
                                     : AssetImage(
-                                  'assets/images/female.png',
-                                ),
+                                        'assets/images/female.png',
+                                      ),
                               ),
                             ),
                             const SizedBox(

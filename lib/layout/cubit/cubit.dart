@@ -214,6 +214,16 @@ class AppCubit extends Cubit<AppStates> {
                   width: 250,
                 ),
               ),
+              SizedBox(
+                child: Text(
+                  'Add Comment on ${placeName}',
+                  style: TextStyle(
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.primaryColor,
+                  ),
+                ),
+              ),
             ],
           )),
         ),
@@ -239,6 +249,10 @@ class AppCubit extends Cubit<AppStates> {
       print('error when adding updating rate \n ${error.toString()}');
       emit(AppRateError());
     });
+  }
+
+  void test() {
+    print('test hi from home');
   }
 
 }
