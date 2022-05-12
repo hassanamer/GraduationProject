@@ -86,7 +86,6 @@ class LoginScreen extends StatelessWidget {
                     },
                     label: 'Email Address',
                     radius: 10,
-                    prefix: Icons.email_rounded,
                   ),
                   SizedBox(
                     height: 15.0,
@@ -108,7 +107,6 @@ class LoginScreen extends StatelessWidget {
                       cubit.changePasswordVisibility();
                     },
                     radius: 10,
-                    prefix: Icons.lock_rounded,
                     onSubmit: (value) {
                       if (cubit.formKey.currentState!.validate()) {
                         cubit.userLogin(

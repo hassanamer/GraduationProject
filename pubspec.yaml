@@ -42,12 +42,6 @@ dependencies:
   animated_theme_switcher: ^2.0.1-nullsafety.0
   flutter:
     sdk: flutter
-  firebase_auth: ^3.3.17
-  firebase_core: ^1.10.5
-  cloud_firestore: ^3.1.14
-  firebase_messaging: ^11.3.0
-  firebase_ml_model_downloader: ^0.1.0+12
-  firebase_database: ^9.0.13
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
