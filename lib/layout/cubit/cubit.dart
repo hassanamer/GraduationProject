@@ -377,7 +377,7 @@ class AppCubit extends Cubit<AppStates> {
           placeComments.add(commentMap.comment);
         }
         if(placeComments.length >0) {
-          print('hello comments ${placeComments}');
+          print('${placeComments}');
           String sentimentText= placeComments.join(' ');
           if(Sentiment.analysis(sentimentText).words.good.length > Sentiment.analysis(sentimentText).words.bad.length && place.rate > 3.7) {
             if(recommended.contains(place)) {

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:sentiment_dart/sentiment_dart.dart';
 import 'package:smarttouristguide/layout/cubit/cubit.dart';
 import 'package:smarttouristguide/layout/cubit/states.dart';
 import 'package:smarttouristguide/models/home_model.dart';
@@ -145,7 +146,11 @@ class HomeScreen extends StatelessWidget {
                                 ),
                                 MaterialButton(
                                   onPressed: () {
-                                    cubit.recommendation();
+                                    print(
+                                      Sentiment.analysis(
+                                        'you are amazing but you are stupid so this is good person',
+                                      ),
+                                    );
                                   },
                                   child: HomeRow(
                                     text: AppLocalizations.of(context)!.plan,
@@ -243,12 +248,15 @@ class HomeScreen extends StatelessWidget {
                                   ],
                                 ),
                                 Container(
-                                  height: MediaQuery.of(context).size.height * 0.253,
+                                  height: MediaQuery.of(context).size.height *
+                                      0.253,
                                   width: double.infinity,
                                   child: ListView.separated(
                                     itemBuilder: (context, index) =>
-                                        buildHomeRecommendationItem(cubit.recommended[index]),
-                                    separatorBuilder: (context, index) => SizedBox(
+                                        buildHomeRecommendationItem(
+                                            cubit.recommended[index], context),
+                                    separatorBuilder: (context, index) =>
+                                        SizedBox(
                                       width: 10.0,
                                     ),
                                     itemCount: cubit.recommended.length,
@@ -439,60 +447,75 @@ Widget buildHomeTopRatedItem(TopRated model, context) => InkWell(
       ),
     );
 
-Widget buildHomeRecommendationItem(home_place model) => Container(
-      height: 178.0,
-      width: 148.0,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(
-          16.0,
+Widget buildHomeRecommendationItem(home_place model, context) => InkWell(
+      onTap: () {
+        AppCubit.get(context).getPlaceDetails(
+          placeId: model.id,
+        );
+        navigateTo(
+          context: context,
+          widget: PlaceDetailsScreen(),
+        );
+      },
+      child: Container(
+        height: 178.0,
+        width: 148.0,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(
+            16.0,
+          ),
         ),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Center(
-                child: SizedBox(
-              height: 106.5,
-              child: Image(
-                fit: BoxFit.cover,
-                image: NetworkImage('${model.image}'),
-              ),
-            )),
-            Text(
-              '${model.placeName}',
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(fontSize: 13.0, fontWeight: FontWeight.w600),
-            ),
-            Spacer(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                RatingBarIndicator(
-                  rating: model.rate.toDouble(),
-                  itemBuilder: (context, index) => Icon(
-                    Icons.star,
-                    color: AppColors.primaryColor,
-                  ),
-                  itemCount: 5,
-                  itemSize: 18,
-                  direction: Axis.horizontal,
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Center(
+                  child: SizedBox(
+                height: 106.5,
+                child: Image(
+                  fit: BoxFit.cover,
+                  image: NetworkImage('${model.image}'),
                 ),
-                Spacer(),
-                SvgPicture.asset(
-                  'assets/icons/goto.svg',
-                )
-              ],
-            ),
-          ],
+              )),
+              Text(
+                '${model.placeName}',
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(fontSize: 13.0, fontWeight: FontWeight.w600),
+              ),
+              Spacer(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  RatingBarIndicator(
+                    rating: model.rate.toDouble(),
+                    itemBuilder: (context, index) => Icon(
+                      Icons.star,
+                      color: AppColors.primaryColor,
+                    ),
+                    itemCount: 5,
+                    itemSize: 18,
+                    direction: Axis.horizontal,
+                  ),
+                  Spacer(),
+                  SvgPicture.asset(
+                    'assets/icons/goto.svg',
+                  )
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
 
-Widget HomeRow({required String text, required String iconPath,}) => Container(
+Widget HomeRow({
+  required String text,
+  required String iconPath,
+}) =>
+    Container(
       height: 39.0,
       width: 299,
       decoration: BoxDecoration(
