@@ -14,9 +14,9 @@ import 'package:smarttouristguide/shared/components/constants.dart';
 import 'package:smarttouristguide/shared/network/local/cache_helper.dart';
 import 'package:smarttouristguide/shared/network/remote/dio_helper.dart';
 import 'package:smarttouristguide/shared/styles/themes.dart';
-import 'models/get_data_screen.dart';
-import 'modules/login/login_and_signup/forget_password.dart';
-import 'modules/login/register_cubit/cubit.dart';
+import 'modules/get_data_screen.dart';
+import 'modules/login/forget_password.dart';
+import 'modules/register/register_cubit/cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

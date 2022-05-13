@@ -4,10 +4,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:smarttouristguide/modules/login/login_and_signup/login_screen.dart';
 import '../../../models/register_model.dart';
 import '../../../shared/components/components.dart';
-import '../../home/home_screen.dart';
+import '../login/login_screen.dart';
 
 
 class RegisterScreen extends StatefulWidget {

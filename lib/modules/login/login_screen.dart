@@ -2,9 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:smarttouristguide/modules/login/login_and_signup/forget_password.dart';
 import '../../../shared/components/components.dart';
-import '../../home/home_screen.dart';
+import '../home/home_screen.dart';
+import 'forget_password.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);

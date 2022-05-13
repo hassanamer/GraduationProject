@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:smarttouristguide/modules/login/login_and_signup/register_screen.dart';
 import '../../../shared/styles/colors.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
-import 'login_screen.dart';
+import '../../register/register_screen.dart';
+import '../login_screen.dart';
 
 class SignUpButton extends StatelessWidget {
   @override
