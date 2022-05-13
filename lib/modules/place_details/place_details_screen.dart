@@ -146,7 +146,7 @@ Widget PlaceDetailsScreenBuilder(Data model, context, catName) => Scaffold(
                           size: 22,
                         ),
                         Text(
-                          'Giza, 6 of October',
+                          '${model.city}',
                           style: TextStyle(
                             fontSize: 15.0,
                           ),
