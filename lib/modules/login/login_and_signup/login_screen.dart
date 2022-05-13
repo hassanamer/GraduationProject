@@ -1,165 +1,241 @@
-import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:smarttouristguide/layout/app_layout.dart';
 import 'package:smarttouristguide/modules/login/login_and_signup/forget_password.dart';
-import 'package:smarttouristguide/modules/login/login_cubit/cubit.dart';
-import 'package:smarttouristguide/modules/login/login_cubit/states.dart';
-import 'package:smarttouristguide/shared/network/local/cache_helper.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:smarttouristguide/shared/styles/textStyle.dart';
-
 import '../../../shared/components/components.dart';
-import '../../../shared/styles/buttons_style.dart';
+import '../../home/home_screen.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({Key? key}) : super(key: key);
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  final formKey = GlobalKey<FormState>();
+
+  bool isVisible = true;
+  bool isClicked = false;
+
   @override
   Widget build(BuildContext context) {
-
-    var cubit = AppLoginCubit.get(context);
-    var emailController = TextEditingController();
-    var passwordController = TextEditingController();
-
-    return BlocConsumer<AppLoginCubit, AppLoginStates>(
-      listener: (context, state) {
-        if (state is AppLoginSuccessState) {
-          if (state.loginModel!.status) {
-            CacheHelper.saveData(
-              key: 'token',
-              value: state.loginModel!.data.token,
-            ).then((value) {
-              cubit.getToken();
-              navigateAndFinish(
-                context: context,
-                widget: AppLayout(),
-              );
-            });
-            Fluttertoast.showToast(
-              msg: "${state.loginModel!.message}",
-              toastLength: Toast.LENGTH_SHORT,
-              gravity: ToastGravity.BOTTOM,
-              timeInSecForIosWeb: 5,
-              backgroundColor: Colors.green,
-              textColor: Colors.white,
-              fontSize: 16.0,
-            );
-          } else {
-            showToast(
-              message: AppLocalizations.of(context)!.login_success,
-              state: ToastStates.ERROR,
-            );
-          }
-        } else if (state is AppLoginErrorState) {
-          showToast(
-            message: AppLocalizations.of(context)!.login_error,
-            state: ToastStates.ERROR,
-          );
-        }
-      },
-      builder: (context, state) {
-        return Container(
-          decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.only(
-                topRight: Radius.circular(30),
-                topLeft: Radius.circular(30),
-              )),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          'Login',
+        ),
+      ),
+      body: Center(
+        child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(20.0),
             child: Form(
-              key: cubit.formKey,
+              key: formKey,
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SizedBox(
-                    height: 15.0,
-                  ),
-                  defaultFormField(
-                    controller: emailController,
-                    type: TextInputType.emailAddress,
-                    validate: (String? value) {
-                      if (value != null && value.isNotEmpty) {
-                        return null;
-                      } else {
-                        return "Please enter valid email.";
-                      }
-                    },
-                    label: 'Email Address',
-                    radius: 10,
-                    prefix: Icons.email_rounded,
-                  ),
-                  SizedBox(
-                    height: 15.0,
-                  ),
-                  defaultFormField(
-                    controller: passwordController,
-                    type: TextInputType.visiblePassword,
-                    isPassword: cubit.isPassword,
-                    validate: (String? value) {
-                      if (value != null && value.trim().length >= 3) {
-                        return null;
-                      } else {
-                        return "Please enter 3 characters at least.";
-                      }
-                    },
-                    label: 'Password',
-                    suffix: cubit.suffix,
-                    suffixPressed: () {
-                      cubit.changePasswordVisibility();
-                    },
-                    radius: 10,
-                    prefix: Icons.lock_rounded,
-                    onSubmit: (value) {
-                      if (cubit.formKey.currentState!.validate()) {
-                        cubit.userLogin(
-                          email: emailController.text,
-                          password: passwordController.text,
-                        );
-                      }
-                    },
-                  ),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Spacer(),
-                      TextButton(
-                          onPressed: () {
-                            Navigator.pushReplacementNamed(
-                                context, ForgetPassword.routeName);
-                          },
-                          child: textStyle.normal('Forget Password?', 13.5)
-                          // child: Text(
-                          //   AppLocalizations.of(context)!.forgot_password,
-                          //   style: TextStyle(
-                          //     color: AppColors.primaryColor,
-                          //   ),
-                          // ),
-                          ),
-                    ],
-                  ),
-                  Spacer(),
-                  ConditionalBuilder(
-                    condition: state is! AppLoginLoadingState,
-                    builder: (context) => button(
-                      text: 'login',
-                      function: () {
-                        if (cubit.formKey.currentState!.validate()) {
-                          cubit.userLogin(
-                            email: emailController.text,
-                            password: passwordController.text,
-                          );
-                        }
-                      },
+                  Align(
+                    alignment: Alignment.center,
+                    child: Image.asset(
+                      'assets/images/png_welcome_54270.png',
+                      width: MediaQuery.of(context).size.width / 3,
                     ),
-                    fallback: (context) =>
-                        Center(child: CircularProgressIndicator()),
+                  ),
+                  const SizedBox(
+                    height: 40.0,
+                  ),
+                  const Text(
+                    'Login to explore',
+                    style: TextStyle(
+                      fontSize: 24.0,
+                      fontWeight: FontWeight.w900,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 40.0,
+                  ),
+                  TextFormField(
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'email address must not be empty';
+                      }
+
+                      return null;
+                    },
+                    controller: emailController,
+                    keyboardType: TextInputType.emailAddress,
+                    decoration: InputDecoration(
+                      isDense: false,
+                      contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 20.0,
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(
+                          15.0,
+                        ),
+                      ),
+                      label: const Text(
+                        'email address',
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20.0,
+                  ),
+                  TextFormField(
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'password is too short';
+                      }
+
+                      return null;
+                    },
+                    controller: passwordController,
+                    decoration: InputDecoration(
+                      isDense: false,
+                      contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 20.0,
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(
+                          15.0,
+                        ),
+                      ),
+                      label: const Text(
+                        'password',
+                      ),
+                      suffixIcon: IconButton(
+                        onPressed: () {
+                          setState(() {
+                            isVisible = !isVisible;
+                          });
+                        },
+                        icon: Icon(
+                          isVisible ? Icons.visibility : Icons.visibility_off,
+                        ),
+                      ),
+                    ),
+                    obscureText: isVisible,
+                    keyboardType: TextInputType.visiblePassword,
+                  ),
+                  const SizedBox(
+                    height: 40.0,
+                  ),
+                  // Firebase
+                  Column(
+                      children:
+                      [
+                        Container(
+                          height: 42.0,
+                          width: double.infinity,
+                          clipBehavior: Clip.antiAliasWithSaveLayer,
+                          decoration: BoxDecoration(
+                            color: Colors.teal,
+                            borderRadius: BorderRadius.circular(
+                              15.0,
+                            ),
+                          ),
+                          child: MaterialButton(
+                            height: 42.0,
+                            onPressed: () {
+                              if(formKey.currentState!.validate()) {
+                                setState(() {
+                                  isClicked = true;
+                                });
+
+                                FirebaseAuth.instance
+                                    .signInWithEmailAndPassword(
+                                    email: emailController.text,
+                                    password: passwordController.text)
+                                    .then((value) {
+                                  setState(() {
+                                    isClicked = false;
+                                  });
+
+                                  var userConst = value.user;
+
+
+                                  navigateAndFinish(
+                                    context: context,
+                                    widget: HomeScreen(),
+                                  );
+                                })
+                                    .catchError((error) {
+                                  setState(() {
+                                    isClicked = false;
+                                  });
+
+                                  Fluttertoast.showToast(
+                                    msg: error.toString().split(']').last,
+                                  );
+                                });
+                              }
+                            },
+                            child: isClicked
+                                ? const CupertinoActivityIndicator(
+                              color: Colors.white,
+                            ) : const Text(
+                              'Login',
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+
+                        ),
+                        const SizedBox(
+                          height: 10.0,
+                        ),
+                        Container(
+                          height: 42.0,
+                          width: double.infinity,
+                          clipBehavior: Clip.antiAliasWithSaveLayer,
+                          decoration: BoxDecoration(
+                            color: Colors.teal,
+                            borderRadius: BorderRadius.circular(
+                              15.0,
+                            ),
+                          ),
+                          child: MaterialButton(
+                            height: 42.0,
+                            onPressed: ()
+                            {
+                              setState(() {
+                                isClicked = false;
+                              });
+                              navigateAndFinish(
+                                context: context,
+                                widget: ForgetPassword(),
+                              );
+
+                            },
+                            child: isClicked
+                                ? const CupertinoActivityIndicator(
+                              color: Colors.white,
+                            ) : const Text(
+                              'ForgetPassword?',
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ]
+                  ),
+                  const SizedBox(
+                    height: 10.0,
                   ),
                 ],
               ),
             ),
           ),
-        );
-      },
+        ),
+      ),
     );
   }
 }
