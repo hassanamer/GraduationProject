@@ -9,6 +9,7 @@ class CpModel {
     data = Data.fromJson(json['data']);
   }
 }
+
 class Data {
   late final List<Category> category;
 
@@ -31,17 +32,16 @@ class Info {
   late final List<Places> places;
 
   Info.fromJson(Map<String, dynamic> json){
-    places = List.from(json['places']).map((e) => Places.fromJson(e)).toList();
+    places = List.from(json['places']).map((e)=>Places.fromJson(e)).toList();
   }
-
 }
 
 class Places {
   late final dynamic id;
   late final String placeName;
   late final String Description;
+  late final dynamic city;
   late final String location;
-
   late final String image;
   late final bool isActive;
   late final dynamic rate;
@@ -51,6 +51,7 @@ class Places {
     id = json['id'];
     placeName = json['place_name'];
     Description = json['Description'];
+    city = json['city'];
     location = json['location'];
     image = json['image'];
     isActive = json['is_active'];

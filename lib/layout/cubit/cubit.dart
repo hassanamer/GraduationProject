@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -119,6 +118,7 @@ class AppCubit extends Cubit<AppStates> {
   }
 
   PlaceDetailsModel? placeDetailsModel;
+  List<String> commentss = [];
 
   Future getPlaceDetails({int? placeId}) async {
     emit(AppLoadingGetPlaceDetails());
@@ -127,7 +127,9 @@ class AppCubit extends Cubit<AppStates> {
         token: 'Token ${token}',
         data: {'place_id': placeId}).then((value) {
       placeDetailsModel = PlaceDetailsModel.fromJson(value.data);
-      print(value.data);
+      for (int c=0; c< placeDetailsModel!.data.comments.length; c++) {
+        print(placeDetailsModel!.data.comments[c].comment);
+      }
       emit(AppSuccessGetPlaceDetails());
     }).catchError((error) {
       print('place details error is\n ${error.toString()}');

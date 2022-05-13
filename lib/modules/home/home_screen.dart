@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:sentiment_dart/sentiment_dart.dart';
 import 'package:smarttouristguide/layout/cubit/cubit.dart';
 import 'package:smarttouristguide/layout/cubit/states.dart';
 import 'package:smarttouristguide/models/home_model.dart';
@@ -40,194 +41,216 @@ class HomeScreen extends StatelessWidget {
             onRefresh: () {
               return cubit.getHomeEventOfferData();
             },
-            child: state is AppLoadingDataState? Container(
-              height: double.infinity,
-              width: double.infinity,
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Updating Home Data',
-                      style: TextStyle(
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.bold,
-                        color: AppColors.primaryColor,
+            child: state is AppLoadingDataState
+                ? Container(
+                    height: double.infinity,
+                    width: double.infinity,
+                    child: Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Updating Home Data',
+                            style: TextStyle(
+                              fontSize: 20.0,
+                              fontWeight: FontWeight.bold,
+                              color: AppColors.primaryColor,
+                            ),
+                          ),
+                          LinearProgressIndicator(
+                            color: AppColors.primaryColor,
+                            backgroundColor: Color(0xffffebc9),
+                          ),
+                        ],
                       ),
                     ),
-                    LinearProgressIndicator(
-                      color: AppColors.primaryColor,
-                      backgroundColor: Color(0xffffebc9),
-                    ),
-                  ],
-                ),
-              ),
-            ) : SingleChildScrollView(
-              scrollDirection: Axis.vertical,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Center(
+                  )
+                : SingleChildScrollView(
+                    scrollDirection: Axis.vertical,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Container(
-                            width: MediaQuery.of(context).size.width * 0.8,
-                            height: MediaQuery.of(context).size.height * 0.054,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(
-                                11.0,
-                              ),
-                            ),
-                            child: InkWell(
-                              onTap: () {
-                                navigateTo(
-                                  widget: SearchScreen(),
-                                  context: context,
-                                );
-                              },
-                              child: Row(
-                                children: [
-                                  SizedBox(
-                                    width: 21.0,
-                                  ),
-                                  SvgPicture.asset(
-                                    'assets/icons/search.svg',
-                                  ),
-                                  SizedBox(
-                                    width: 17.0,
-                                  ),
-                                  Text(
-                                    AppLocalizations.of(context)!.where_to_go,
-                                    style: TextStyle(
-                                      color: AppColors.disabledAndHintColor,
+                          Center(
+                            child: Column(
+                              children: [
+                                Container(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.8,
+                                  height: MediaQuery.of(context).size.height *
+                                      0.054,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(
+                                      11.0,
                                     ),
                                   ),
-                                ],
-                              ),
+                                  child: InkWell(
+                                    onTap: () {
+                                      navigateTo(
+                                        widget: SearchScreen(),
+                                        context: context,
+                                      );
+                                    },
+                                    child: Row(
+                                      children: [
+                                        SizedBox(
+                                          width: 21.0,
+                                        ),
+                                        SvgPicture.asset(
+                                          'assets/icons/search.svg',
+                                        ),
+                                        SizedBox(
+                                          width: 17.0,
+                                        ),
+                                        Text(
+                                          AppLocalizations.of(context)!
+                                              .where_to_go,
+                                          style: TextStyle(
+                                            color:
+                                                AppColors.disabledAndHintColor,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 15.0,
+                                ),
+                                MaterialButton(
+                                  onPressed: () {
+                                    navigateTo(
+                                      widget: EventsScreen(),
+                                      context: context,
+                                    );
+                                  },
+                                  child: HomeRow(
+                                    text: AppLocalizations.of(context)!.events,
+                                    iconPath: 'assets/icons/events.svg',
+                                  ),
+                                ),
+                                MaterialButton(
+                                  onPressed: () {
+                                    navigateTo(
+                                      widget: OffersScreen(),
+                                      context: context,
+                                    );
+                                  },
+                                  child: HomeRow(
+                                    text: AppLocalizations.of(context)!.offers,
+                                    iconPath: 'assets/icons/offers.svg',
+                                  ),
+                                ),
+                                MaterialButton(
+                                  onPressed: ()
+                                  async {
+                                    // print(Sentiment.analysis('i hate you piece of shit 💩',emoji: true).words.good.length);
+                                    await cubit.getHomeEventOfferData();
+                                    for (int i=0; i< cubit.homeModel!.data.places.length; i++)
+                                    {
+                                      // print(Sentiment.analysis('${cubit.homeModel!.data.places[i].Description}'));
+                                      cubit.getPlaceDetails(placeId: cubit.homeModel!.data.places[i].id);
+                                    }
+                                  },
+                                  child: HomeRow(
+                                    text: AppLocalizations.of(context)!.plan,
+                                    iconPath: 'assets/icons/plan.svg',
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                           SizedBox(
                             height: 15.0,
                           ),
-                          MaterialButton(
-                            onPressed: () {
-                              navigateTo(
-                                widget: EventsScreen(),
-                                context: context,
-                              );
-                            },
-                            child: HomeRow(
-                              text: AppLocalizations.of(context)!.events,
-                              iconPath: 'assets/icons/events.svg',
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              left: 15,
                             ),
-                          ),
-                          MaterialButton(
-                            onPressed: () {
-                              navigateTo(
-                                widget: OffersScreen(),
-                                context: context,
-                              );
-                            },
-                            child: HomeRow(
-                              text: AppLocalizations.of(context)!.offers,
-                              iconPath: 'assets/icons/offers.svg',
-                            ),
-                          ),
-                          MaterialButton(
-                            onPressed: () {},
-                            child: HomeRow(
-                              text: AppLocalizations.of(context)!.plan,
-                              iconPath: 'assets/icons/plan.svg',
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      height: 15.0,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                        left: 15,
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Special Places',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 21.0,
-                            ),
-                          ),
-                          SizedBox(
-                            height: 8.0,
-                          ),
-                          Text(
-                            'Popular Places in Egypt',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16.0,
-                            ),
-                          ),
-                          SizedBox(
-                            height: 5.0,
-                          ),
-                          Container(
-                            height: MediaQuery.of(context).size.height * 0.253,
-                            width: double.infinity,
-                            child: ListView.separated(
-                              itemBuilder: (context, index) =>
-                                  buildHomePopularItem(
-                                cubit.homeModel!.data.popularPlaces[index],
-                                context,
-                              ),
-                              separatorBuilder: (context, index) => SizedBox(
-                                width: 10.0,
-                              ),
-                              itemCount:
-                                  cubit.homeModel!.data.popularPlaces.length,
-                              scrollDirection: Axis.horizontal,
-                            ),
-                          ),
-                          SizedBox(
-                            height: 8,
-                          ),
-                          Text(
-                            'Top Rated Places',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16.0,
-                            ),
-                          ),
-                          SizedBox(
-                            height: 5.0,
-                          ),
-                          Container(
-                            height: MediaQuery.of(context).size.height * 0.253,
-                            width: double.infinity,
-                            child: ListView.separated(
-                              itemBuilder: (context, index) =>
-                                  buildHomeTopRatedItem(
-                                      cubit.homeModel!.data.topRated[index],
-                                      context),
-                              separatorBuilder: (context, index) => SizedBox(
-                                width: 10.0,
-                              ),
-                              itemCount: cubit.homeModel!.data.topRated.length,
-                              scrollDirection: Axis.horizontal,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Special Places',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 21.0,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 8.0,
+                                ),
+                                Text(
+                                  'Popular Places in Egypt',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16.0,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 5.0,
+                                ),
+                                Container(
+                                  height: MediaQuery.of(context).size.height *
+                                      0.253,
+                                  width: double.infinity,
+                                  child: ListView.separated(
+                                    itemBuilder: (context, index) =>
+                                        buildHomePopularItem(
+                                      cubit
+                                          .homeModel!.data.popularPlaces[index],
+                                      context,
+                                    ),
+                                    separatorBuilder: (context, index) =>
+                                        SizedBox(
+                                      width: 10.0,
+                                    ),
+                                    itemCount: cubit
+                                        .homeModel!.data.popularPlaces.length,
+                                    scrollDirection: Axis.horizontal,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 8,
+                                ),
+                                Text(
+                                  'Top Rated Places',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16.0,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 5.0,
+                                ),
+                                Container(
+                                  height: MediaQuery.of(context).size.height *
+                                      0.253,
+                                  width: double.infinity,
+                                  child: ListView.separated(
+                                    itemBuilder: (context, index) =>
+                                        buildHomeTopRatedItem(
+                                            cubit.homeModel!.data
+                                                .topRated[index],
+                                            context),
+                                    separatorBuilder: (context, index) =>
+                                        SizedBox(
+                                      width: 10.0,
+                                    ),
+                                    itemCount:
+                                        cubit.homeModel!.data.topRated.length,
+                                    scrollDirection: Axis.horizontal,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         ],
                       ),
                     ),
-                  ],
-                ),
-              ),
-            ),
+                  ),
           ),
           fallback: (context) => Center(
             child: CircularProgressIndicator(

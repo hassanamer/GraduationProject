@@ -364,6 +364,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "6.0.2"
+  remove_emoji:
+    dependency: transitive
+    description:
+      name: remove_emoji
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.7"
   responsive_framework:
     dependency: "direct main"
     description:
@@ -378,6 +385,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.27.3"
+  sentiment_dart:
+    dependency: "direct main"
+    description:
+      name: sentiment_dart
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.5"
   shared_preferences:
     dependency: "direct main"
     description:

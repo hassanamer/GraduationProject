@@ -16,13 +16,13 @@ class Data {
   Data.fromJson(Map<String, dynamic> json){
     places = List.from(json['places']).map((e)=>Places.fromJson(e)).toList();
   }
-
 }
 
 class Places {
   late final dynamic id;
   late final String placeName;
   late final String Description;
+  late final dynamic city;
   late final String location;
   late final String image;
   late final bool isActive;
@@ -33,11 +33,11 @@ class Places {
     id = json['id'];
     placeName = json['place_name'];
     Description = json['Description'];
+    city = json['city'];
     location = json['location'];
     image = json['image'];
     isActive = json['is_active'];
     rate = json['rate'];
     inFavourite = json['in_favourite'];
   }
-
 }
