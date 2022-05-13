@@ -14,6 +14,7 @@ class Data {
   late final dynamic id;
   late final String placeName;
   late final String Description;
+  late final dynamic city;
   late final String location;
   late final String image;
   late final bool isActive;
@@ -25,6 +26,7 @@ class Data {
     id = json['id'];
     placeName = json['place_name'];
     Description = json['Description'];
+    city = json['city'];
     location = json['location'];
     image = json['image'];
     isActive = json['is_active'];

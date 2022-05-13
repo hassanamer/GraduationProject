@@ -1,4 +1,5 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
+import 'package:draggable_fab/draggable_fab.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,25 +20,7 @@ class PlaceDetailsScreen extends StatelessWidget {
     catName = catName1;
   }
 
-  var mediaController = PageController();
-
   static const String routeName = 'PlaceDetailsScreen';
-
-  createAlertDialog(context) {
-    TextEditingController commentController = TextEditingController();
-
-    return AlertDialog(
-      title: Text('Your Comment'),
-      content: TextField(
-        controller: commentController,
-      ),
-      actions: <Widget>[
-        MaterialButton(onPressed: () {
-          print('ok');
-        })
-      ],
-    );
-  }
 
   Widget build(BuildContext context) {
     var cubit = AppCubit.get(context);
@@ -57,8 +40,10 @@ class PlaceDetailsScreen extends StatelessWidget {
         return ConditionalBuilder(
           condition: state is! AppLoadingGetPlaceDetails,
           builder: (context) => RefreshIndicator(
-            onRefresh: () => cubit.getPlaceDetails(
-                placeId: cubit.placeDetailsModel!.data.id),
+            onRefresh: () {
+              return cubit.getPlaceDetails(
+                  placeId: cubit.placeDetailsModel!.data.id);
+            },
             child: PlaceDetailsScreenBuilder(
                 cubit.placeDetailsModel!.data, context, catName),
             color: AppColors.primaryColor,
@@ -68,9 +53,30 @@ class PlaceDetailsScreen extends StatelessWidget {
             color: AppColors.backgroundColor,
             width: double.infinity,
             height: double.infinity,
-            child: Center(
-              child: CircularProgressIndicator(
-                color: AppColors.primaryColor,
+            child: Container(
+              height: double.infinity,
+              width: double.infinity,
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      '',
+                      style: TextStyle(
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.primaryColor,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10.0,
+                    ),
+                    LinearProgressIndicator(
+                      color: AppColors.primaryColor,
+                      backgroundColor: Color(0xffffebc9),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
@@ -84,15 +90,8 @@ Widget PlaceDetailsScreenBuilder(Data model, context, catName) => Scaffold(
       appBar: AppBar(
         systemOverlayStyle: SystemUiOverlayStyle(
             statusBarIconBrightness: Brightness.dark,
-            statusBarColor: AppColors.backgroundColor),
+            statusBarColor: Colors.white),
         toolbarHeight: 0,
-        iconTheme: IconThemeData(
-          color: AppColors.primaryColor,
-        ),
-        title: Text(
-          'Back To Places',
-          style: TextStyle(color: AppColors.primaryColor, fontSize: 15.0),
-        ),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -110,44 +109,35 @@ Widget PlaceDetailsScreenBuilder(Data model, context, catName) => Scaffold(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    SizedBox(
+                      height: 20.0,
+                    ),
                     Row(
                       children: [
-                        Row(
-                          children: [
-                            IconButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                              icon: Icon(
-                                Icons.arrow_back_ios_rounded,
-                              ),
-                            ),
-                            SingleChildScrollView(
-                              scrollDirection: Axis.horizontal,
-                              child: Text(
-                                '${model.placeName}',
-                                style: TextStyle(
-                                  fontSize: 25.0,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Spacer(),
-                        IconButton(
-                          onPressed: () {
-                            AppCubit.get(context).changeFavorite(model.id);
+                        InkWell(
+                          onTap: () {
+                            Navigator.pop(context);
                           },
-                          icon: Icon(
-                            Icons.favorite_outlined,
-                            color: AppCubit.get(context).favorites[model.id]!
-                                ? AppColors.primaryColor
-                                : AppColors.disabledAndHintColor,
-                            size: 26.0,
+                          child: Icon(
+                            Icons.arrow_back_ios_rounded,
+                            color: AppColors.primaryColor,
                           ),
-                        )
+                        ),
+                        SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Text(
+                            ' ${model.placeName}',
+                            style: TextStyle(
+                              fontSize: 25.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
                       ],
+                      mainAxisAlignment: MainAxisAlignment.start,
+                    ),
+                    SizedBox(
+                      height: 7.0,
                     ),
                     Row(
                       children: [
@@ -157,7 +147,7 @@ Widget PlaceDetailsScreenBuilder(Data model, context, catName) => Scaffold(
                           size: 22,
                         ),
                         Text(
-                          'Giza, 6 of October',
+                          '${model.city}',
                           style: TextStyle(
                             fontSize: 15.0,
                           ),
@@ -173,6 +163,9 @@ Widget PlaceDetailsScreenBuilder(Data model, context, catName) => Scaffold(
                               )
                             : Text(''),
                       ],
+                    ),
+                    SizedBox(
+                      height: 4.0,
                     ),
                     Container(
                       height: 180,
@@ -191,7 +184,7 @@ Widget PlaceDetailsScreenBuilder(Data model, context, catName) => Scaffold(
                       height: 5.0,
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 7),
+                      padding: const EdgeInsets.symmetric(horizontal: 1),
                       child: Row(
                         children: [
                           RatingBarIndicator(
@@ -230,6 +223,34 @@ Widget PlaceDetailsScreenBuilder(Data model, context, catName) => Scaffold(
                         ],
                       ),
                     ),
+                    SizedBox(
+                      height: 8.0,
+                    ),
+                    Row(
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            AppCubit.get(context).changeFavorite(model.id);
+                          },
+                          child: Icon(
+                            Icons.favorite_outlined,
+                            color: AppCubit.get(context).favorites[model.id]!
+                                ? AppColors.primaryColor
+                                : AppColors.disabledAndHintColor,
+                            size: 26.0,
+                          ),
+                        ),
+                        Text(
+                          AppCubit.get(context).favorites[model.id]!
+                              ? '  It\'s in your favorites list!'
+                              : '  Add this to your favorites list',
+                          style: TextStyle(
+                            fontSize: 15.5,
+                            color: Color(0xCA000000),
+                          ),
+                        )
+                      ],
+                    )
                   ],
                 ),
               ),
@@ -264,39 +285,7 @@ Widget PlaceDetailsScreenBuilder(Data model, context, catName) => Scaffold(
                       ),
                     ),
                     SizedBox(
-                      height: 20.0,
-                    ),
-                    Center(
-                      child: Container(
-                        width: 285.0,
-                        decoration: BoxDecoration(
-                            color: AppColors.backgroundColor,
-                            borderRadius: BorderRadius.circular(
-                              20,
-                            )),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 20.0,
-                            vertical: 5.0,
-                          ),
-                          child: Row(
-                            children: [
-                              Text(
-                                'Visit Webiste',
-                                style: TextStyle(
-                                  color: AppColors.primaryColor,
-                                  fontSize: 20.0,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              Spacer(),
-                              SvgPicture.asset(
-                                'assets/icons/website.svg',
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
+                      height: 5.0,
                     ),
                   ],
                 ),
@@ -325,22 +314,25 @@ Widget PlaceDetailsScreenBuilder(Data model, context, catName) => Scaffold(
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    Text('There\'s no comments for this place'),
-                    TextButton(
-                      child: Text('Add Comment'),
-                      onPressed: () {
-                        showModalBottomSheet(
-                          context: context,
-                          builder: (context)=> Container(
-                            child: Column(),
-                          ),
-                        );
-                      },
-                    ),
+                    model.comments.length == 0
+                        ? Text(
+                            'There\'s no comments for this place',
+                          )
+                        : Text(''),
                     ListView.separated(
                       itemBuilder: (context, index) =>
                           commentBuilder(model.comments[index]),
-                      separatorBuilder: (context, index) => divider(),
+                      separatorBuilder: (context, index) => Column(
+                        children: [
+                          SizedBox(
+                            height: 5.0,
+                          ),
+                          divider(),
+                          SizedBox(
+                            height: 5.0,
+                          ),
+                        ],
+                      ),
                       itemCount: model.comments.length,
                       shrinkWrap: true,
                     ),
@@ -349,6 +341,18 @@ Widget PlaceDetailsScreenBuilder(Data model, context, catName) => Scaffold(
               ),
             ),
           ],
+        ),
+      ),
+      floatingActionButton: DraggableFab(
+        child: FloatingActionButton(
+          backgroundColor: AppColors.primaryColor,
+          child: Icon(Icons.reviews_rounded),
+          onPressed: () => AppCubit.get(context).showReviewBottomSheet(
+            context: context,
+            placeName: model.placeName,
+            placeId: model.id,
+            rate: model.rate,
+          ),
         ),
       ),
     );
@@ -362,19 +366,14 @@ Widget commentBuilder(Comments commentModel) => Container(
           Text(
             '@${commentModel.user}',
             style: TextStyle(
+              color: AppColors.primaryColor,
               fontWeight: FontWeight.bold,
               fontSize: 16.0,
             ),
           ),
           Text(
             '${commentModel.comment}',
-          )
+          ),
         ],
       ),
-    );
-
-Widget RateIcon(bool color, double size) => Icon(
-      Icons.star_rate_rounded,
-      color: color ? AppColors.primaryColor : AppColors.disabledAndHintColor,
-      size: size,
     );

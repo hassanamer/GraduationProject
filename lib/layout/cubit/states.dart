@@ -50,3 +50,21 @@ class AppGetPorfileErrorState extends AppStates {}
 class LoadState extends AppStates {}
 
 class DoneState extends AppStates {}
+
+class AppRateLoading extends AppStates {}
+
+class AppRateSuccess extends AppStates {}
+
+class AppRateError extends AppStates {}
+
+class AppCommentLoading extends AppStates {}
+
+class AppCommentSuccess extends AppStates {}
+
+class AppCommentError extends AppStates {}
+
+class LightState extends AppStates {}
+
+class LightLoadingState extends AppStates {}
+
+class AppChangePasswordVisibilityState extends AppStates {}

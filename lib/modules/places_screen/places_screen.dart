@@ -128,9 +128,9 @@ Widget buildPlacesItem(context, Places model, catName) => Container(
                 image: NetworkImage('${model.image}'),
               ),
             ),
+            SizedBox(height: 7.0,),
             Row(
               children: [
-                // الicons دي لسا هستبدلها بpackage بتهندل الrate بتاخد الrate بdouble ,بترجعه نجوم متلونة ع اد الrate حتى لو 4.5 مثلا بتلون 4 نجوم ونص وهكذا
                 RatingBarIndicator(
                   rating: model.rate.toDouble(),
                   itemBuilder: (context, index) => Icon(

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smarttouristguide/models/login_model.dart';
-import 'package:smarttouristguide/modules/login/login_and_signup/login_screen.dart';
-import 'package:smarttouristguide/modules/login/login_and_signup/register_screen.dart';
+import 'package:smarttouristguide/modules/login/login_screen.dart';
+import 'package:smarttouristguide/modules/register/register_screen.dart';
 import 'package:smarttouristguide/modules/login/login_cubit/states.dart';
 import 'package:smarttouristguide/shared/components/constants.dart';
 import 'package:smarttouristguide/shared/network/end_points.dart';

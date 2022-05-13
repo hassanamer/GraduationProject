@@ -40,12 +40,13 @@ class CategoriesScreen extends StatelessWidget {
 
 List<String> imgs = [
   'https://d3rr2gvhjw0wwy.cloudfront.net/uploads/activity_headers/281608/900x600-1-50-c5a716e2a72b1087ab9bc2e11e52a16e.jpg',
-  'https://www.egypttoday.com/siteimages/Larg/59380.jpg',
+  'https://invest-gate.me/wp-content/uploads/2016/08/egypt_siwa_adrere_amellal.jpg',
   'https://live.staticflickr.com/1822/28327211697_59fac6f2f9_b.jpg',
   'https://www.globetrove.com/wp-content/uploads/2018/06/IMG_20180601_134802.jpg',
   'https://identity-mag.com/wp-content/uploads/2018/11/Singe.jpg',
   'https://www.touropia.com/gfx/d/best-beaches-in-egypt/mahmya_island.jpg',
-  'https://shehabnews.com/uploads//images/70c8bdae322743745d112a69bb9d0aaf.jpg',
+  'https://en.amwalalghad.com/wp-content/uploads/2018/05/Amusement-park.jpg',
+  'https://cdn.statically.io/img/egyptunitedtours.com/f=auto%2Cq=50/wp-content/uploads/2021/02/springs3.jpg',
 ];
 
 Widget buildCategoryItem(context, Category model, index) => Container(
@@ -80,7 +81,9 @@ Widget buildCategoryItem(context, Category model, index) => Container(
                 Center(
                   child: Container(
                     child: ClipRRect(
-                      borderRadius: BorderRadius.circular(15.0,),
+                      borderRadius: BorderRadius.circular(
+                        15.0,
+                      ),
                       child: Image(
                         fit: BoxFit.cover,
                         height: 160,
@@ -119,12 +122,13 @@ Widget buildCategoryItem(context, Category model, index) => Container(
                         ),
                       ),
                       child: Text(
-                        AppLocalizations.of(context)!.discover_places,
+                        'Discover Places',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           color: AppColors.primaryColor,
                           fontSize: 16.0,
                           fontWeight: FontWeight.bold,
+                           height: 1.72
                         ),
                       ),
                     ),
