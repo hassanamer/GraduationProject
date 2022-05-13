@@ -80,7 +80,9 @@ Widget buildCategoryItem(context, Category model, index) => Container(
                 Center(
                   child: Container(
                     child: ClipRRect(
-                      borderRadius: BorderRadius.circular(15.0,),
+                      borderRadius: BorderRadius.circular(
+                        15.0,
+                      ),
                       child: Image(
                         fit: BoxFit.cover,
                         height: 160,
@@ -97,35 +99,25 @@ Widget buildCategoryItem(context, Category model, index) => Container(
                     vertical: 8.0,
                     horizontal: 13.0,
                   ),
-                  child: InkWell(
-                    onTap: () {
-                      navigateTo(
-                        widget: PlacesScreen(
-                          catIndex1: index,
-                          catName1: model.name,
-                        ),
-                        context: context,
-                      );
-                    },
-                    child: Container(
-                      height: 30,
-                      width: 120,
-                      decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(
-                          0.78,
-                        ),
-                        borderRadius: BorderRadius.circular(
-                          8,
-                        ),
+                  child: Container(
+                    height: 30,
+                    width: 120,
+                    decoration: BoxDecoration(
+                      color: Colors.white.withOpacity(
+                        0.78,
                       ),
-                      child: Text(
-                        AppLocalizations.of(context)!.discover_places,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: AppColors.primaryColor,
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.bold,
-                        ),
+                      borderRadius: BorderRadius.circular(
+                        8,
+                      ),
+                    ),
+                    child: Text(
+                      'Discover Places',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: AppColors.primaryColor,
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.bold,
+                         height: 1.72
                       ),
                     ),
                   ),

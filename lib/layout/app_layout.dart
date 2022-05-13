@@ -39,6 +39,10 @@ class AppLayout extends StatelessWidget {
             context,
           ),
           floatingActionButton: FloatingActionButton(
+            backgroundColor: AppColors.primaryColor,
+            child: Icon(
+              Icons.contact_page_rounded,
+            ),
             onPressed: () {
               navigateTo(
                 context: context,

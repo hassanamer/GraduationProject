@@ -157,18 +157,24 @@ class HomeScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            AppLocalizations.of(context)!.special_places,
+                            'Special Places',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 21.0,
                             ),
                           ),
+                          SizedBox(
+                            height: 8.0,
+                          ),
                           Text(
-                            AppLocalizations.of(context)!.popular_places_in_egypt,
+                            'Popular Places in Egypt',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 16.0,
                             ),
+                          ),
+                          SizedBox(
+                            height: 5.0,
                           ),
                           Container(
                             height: MediaQuery.of(context).size.height * 0.253,
@@ -188,18 +194,17 @@ class HomeScreen extends StatelessWidget {
                             ),
                           ),
                           SizedBox(
-                            height: 5,
+                            height: 8,
                           ),
-                          Row(
-                            children: [
-                              Text(
-                                'Top Rated Places',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 16.0,
-                                ),
-                              ),
-                            ],
+                          Text(
+                            'Top Rated Places',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16.0,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 5.0,
                           ),
                           Container(
                             height: MediaQuery.of(context).size.height * 0.253,
@@ -267,6 +272,9 @@ Widget buildHomePopularItem(PopularPlaces model, context) => InkWell(
                   image: NetworkImage('${model.image}'),
                 ),
               )),
+              SizedBox(
+                height: 5.0,
+              ),
               Text(
                 '${model.placeName}',
                 maxLines: 1,
@@ -330,6 +338,9 @@ Widget buildHomeTopRatedItem(TopRated model, context) => InkWell(
                   image: NetworkImage('${model.image}'),
                 ),
               )),
+              SizedBox(
+                height: 5.0,
+              ),
               Text(
                 '${model.placeName}',
                 maxLines: 1,
