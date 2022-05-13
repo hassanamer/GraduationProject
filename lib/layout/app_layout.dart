@@ -1,3 +1,4 @@
+import 'package:draggable_fab/draggable_fab.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smarttouristguide/layout/cubit/cubit.dart';
@@ -38,17 +39,19 @@ class AppLayout extends StatelessWidget {
           bottomNavigationBar: bottomNavBar(
             context,
           ),
-          floatingActionButton: FloatingActionButton(
-            backgroundColor: AppColors.primaryColor,
-            child: Icon(
-              Icons.contact_page_rounded,
+          floatingActionButton: DraggableFab(
+            child: FloatingActionButton(
+              backgroundColor: AppColors.primaryColor,
+              child: Icon(
+                Icons.contact_page_rounded,
+              ),
+              onPressed: () {
+                navigateTo(
+                  context: context,
+                  widget: ChatBot(),
+                );
+              },
             ),
-            onPressed: () {
-              navigateTo(
-                context: context,
-                widget: ChatBot(),
-              );
-            },
           ),
         );
       },

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:sentiment_dart/sentiment_dart.dart';
 import 'package:smarttouristguide/layout/cubit/states.dart';
 import 'package:smarttouristguide/models/cat_places_model.dart';
 import 'package:smarttouristguide/models/comment_model.dart';
@@ -88,16 +89,17 @@ class AppCubit extends Cubit<AppStates> {
   HomeModel? homeModel;
   Map<dynamic, bool?> favorites = {};
 
-  Future getHomeEventOfferData() async {
+  Future getHomeData() async {
     emit(AppLoadingDataState());
     DioHelper.getData(
       url: 'home/events/',
       token: 'Token ${token}',
     ).then((value) {
       homeModel = HomeModel.fromJson(value.data);
-      homeModel!.data.places.forEach((element) {
+      homeModel!.data.home_places.forEach((element) {
         favorites.addAll({element.id: element.inFavourite});
       });
+      recommendation();
       emit(AppGetDataSuccessState());
     }).catchError((error) {
       emit(AppGetDataErrorState());
@@ -120,7 +122,6 @@ class AppCubit extends Cubit<AppStates> {
   }
 
   PlaceDetailsModel? placeDetailsModel;
-  List<String> commentss = [];
 
   Future getPlaceDetails({int? placeId}) async {
     emit(AppLoadingGetPlaceDetails());
@@ -129,10 +130,6 @@ class AppCubit extends Cubit<AppStates> {
         token: 'Token ${token}',
         data: {'place_id': placeId}).then((value) {
       placeDetailsModel = PlaceDetailsModel.fromJson(value.data);
-
-      for (int c = 0; c < placeDetailsModel!.data.comments.length; c++) {
-        print(placeDetailsModel!.data.comments[c].comment);
-      }
       emit(AppSuccessGetPlaceDetails());
     }).catchError((error) {
       print('place details error is\n ${error.toString()}');
@@ -366,6 +363,48 @@ class AppCubit extends Cubit<AppStates> {
     );
   }
 
+  List<home_place> recommended = [];
+  List<String> placeComments = [];
 
+  void recommendation() {
+    {
+      recommended = [];
+
+      int placeIndex= 0;
+      for (var place in homeModel!.data.home_places) {
+        for(var commentMap in homeModel!.data.home_places[placeIndex].comments)
+        {
+          placeComments.add(commentMap.comment);
+        }
+        if(placeComments.length >0) {
+          print('hello comments ${placeComments}');
+          String sentimentText= placeComments.join(' ');
+          if(Sentiment.analysis(sentimentText).words.good.length > Sentiment.analysis(sentimentText).words.bad.length && place.rate > 3.7) {
+            if(recommended.contains(place)) {
+              print('already recommended');
+            } else {
+              recommended.add(place);
+              print('recommended');
+            }
+          } else {
+            print('not recommended');
+          }
+        }
+        placeComments = [];
+        placeIndex++;
+      }
+      for (var i in recommended) {
+        print(i.placeName);
+      }
+    }
+  }
 
 }
+
+// int placeIndex = 0;
+// for (var place in homeModel!.data.places[0].) {
+//   int commentIndex= 0;
+//   for (var comment in place.comments) {
+//     placeComments.add(comment.comment);
+//     print(placeComments);
+//   }

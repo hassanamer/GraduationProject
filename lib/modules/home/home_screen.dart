@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:sentiment_dart/sentiment_dart.dart';
 import 'package:smarttouristguide/layout/cubit/cubit.dart';
 import 'package:smarttouristguide/layout/cubit/states.dart';
 import 'package:smarttouristguide/models/home_model.dart';
@@ -15,6 +14,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../shared/components/components.dart';
 import '../events/events_screen.dart';
 import '../offers/offer_screen.dart';
+import '../recommendation_screen/recommendation_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   static const routeName = 'Home';
@@ -39,7 +39,7 @@ class HomeScreen extends StatelessWidget {
           condition: cubit.homeModel != null,
           builder: (context) => RefreshIndicator(
             onRefresh: () {
-              return cubit.getHomeEventOfferData();
+              return cubit.getHomeData();
             },
             child: state is AppLoadingDataState
                 ? Container(
@@ -144,15 +144,8 @@ class HomeScreen extends StatelessWidget {
                                   ),
                                 ),
                                 MaterialButton(
-                                  onPressed: ()
-                                  async {
-                                    // print(Sentiment.analysis('i hate you piece of shit 💩',emoji: true).words.good.length);
-                                    await cubit.getHomeEventOfferData();
-                                    for (int i=0; i< cubit.homeModel!.data.places.length; i++)
-                                    {
-                                      // print(Sentiment.analysis('${cubit.homeModel!.data.places[i].Description}'));
-                                      cubit.getPlaceDetails(placeId: cubit.homeModel!.data.places[i].id);
-                                    }
+                                  onPressed: () {
+                                    cubit.recommendation();
                                   },
                                   child: HomeRow(
                                     text: AppLocalizations.of(context)!.plan,
@@ -209,6 +202,56 @@ class HomeScreen extends StatelessWidget {
                                     ),
                                     itemCount: cubit
                                         .homeModel!.data.popularPlaces.length,
+                                    scrollDirection: Axis.horizontal,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 8,
+                                ),
+                                Row(
+                                  children: [
+                                    Text(
+                                      'Recommended by users',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16.0,
+                                      ),
+                                    ),
+                                    Spacer(),
+                                    InkWell(
+                                      child: Row(
+                                        children: [
+                                          Icon(
+                                            Icons.more_horiz_rounded,
+                                            color: AppColors.primaryColor,
+                                          ),
+                                          Text(
+                                            AppLocalizations.of(context)!.more,
+                                            style: TextStyle(
+                                              color: AppColors.primaryColor,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      onTap: () {
+                                        navigateTo(
+                                          context: context,
+                                          widget: RecommendationScreen(),
+                                        );
+                                      },
+                                    ),
+                                  ],
+                                ),
+                                Container(
+                                  height: MediaQuery.of(context).size.height * 0.253,
+                                  width: double.infinity,
+                                  child: ListView.separated(
+                                    itemBuilder: (context, index) =>
+                                        buildHomeRecommendationItem(cubit.recommended[index]),
+                                    separatorBuilder: (context, index) => SizedBox(
+                                      width: 10.0,
+                                    ),
+                                    itemCount: cubit.recommended.length,
                                     scrollDirection: Axis.horizontal,
                                   ),
                                 ),
@@ -396,11 +439,60 @@ Widget buildHomeTopRatedItem(TopRated model, context) => InkWell(
       ),
     );
 
-Widget HomeRow({
-  required String text,
-  required String iconPath,
-}) =>
-    Container(
+Widget buildHomeRecommendationItem(home_place model) => Container(
+      height: 178.0,
+      width: 148.0,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(
+          16.0,
+        ),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Center(
+                child: SizedBox(
+              height: 106.5,
+              child: Image(
+                fit: BoxFit.cover,
+                image: NetworkImage('${model.image}'),
+              ),
+            )),
+            Text(
+              '${model.placeName}',
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(fontSize: 13.0, fontWeight: FontWeight.w600),
+            ),
+            Spacer(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                RatingBarIndicator(
+                  rating: model.rate.toDouble(),
+                  itemBuilder: (context, index) => Icon(
+                    Icons.star,
+                    color: AppColors.primaryColor,
+                  ),
+                  itemCount: 5,
+                  itemSize: 18,
+                  direction: Axis.horizontal,
+                ),
+                Spacer(),
+                SvgPicture.asset(
+                  'assets/icons/goto.svg',
+                )
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+
+Widget HomeRow({required String text, required String iconPath,}) => Container(
       height: 39.0,
       width: 299,
       decoration: BoxDecoration(
