@@ -1,4 +1,5 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
+import 'package:draggable_fab/draggable_fab.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -284,39 +285,7 @@ Widget PlaceDetailsScreenBuilder(Data model, context, catName) => Scaffold(
                       ),
                     ),
                     SizedBox(
-                      height: 20.0,
-                    ),
-                    Center(
-                      child: Container(
-                        width: 285.0,
-                        decoration: BoxDecoration(
-                            color: AppColors.backgroundColor,
-                            borderRadius: BorderRadius.circular(
-                              20,
-                            )),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 20.0,
-                            vertical: 5.0,
-                          ),
-                          child: Row(
-                            children: [
-                              Text(
-                                'Visit Webiste',
-                                style: TextStyle(
-                                  color: AppColors.primaryColor,
-                                  fontSize: 20.0,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              Spacer(),
-                              SvgPicture.asset(
-                                'assets/icons/website.svg',
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
+                      height: 5.0,
                     ),
                   ],
                 ),
@@ -345,26 +314,25 @@ Widget PlaceDetailsScreenBuilder(Data model, context, catName) => Scaffold(
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    Text(
-                      'There\'s no comments for this place',
-                    ),
-                    TextButton(
-                      child: Text(
-                        'Add Comment',
-                      ),
-                      onPressed: () {
-                        showModalBottomSheet(
-                          context: context,
-                          builder: (context) => Container(
-                            child: Column(),
-                          ),
-                        );
-                      },
-                    ),
+                    model.comments.length == 0
+                        ? Text(
+                            'There\'s no comments for this place',
+                          )
+                        : Text(''),
                     ListView.separated(
                       itemBuilder: (context, index) =>
                           commentBuilder(model.comments[index]),
-                      separatorBuilder: (context, index) => divider(),
+                      separatorBuilder: (context, index) => Column(
+                        children: [
+                          SizedBox(
+                            height: 5.0,
+                          ),
+                          divider(),
+                          SizedBox(
+                            height: 5.0,
+                          ),
+                        ],
+                      ),
                       itemCount: model.comments.length,
                       shrinkWrap: true,
                     ),
@@ -375,14 +343,16 @@ Widget PlaceDetailsScreenBuilder(Data model, context, catName) => Scaffold(
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: AppColors.primaryColor,
-        child: Icon(Icons.reviews_rounded),
-        onPressed: () => AppCubit.get(context).showReviewBottomSheet(
-          context: context,
-          placeName: model.placeName,
-          placeId: model.id,
-          rate: model.rate,
+      floatingActionButton: DraggableFab(
+        child: FloatingActionButton(
+          backgroundColor: AppColors.primaryColor,
+          child: Icon(Icons.reviews_rounded),
+          onPressed: () => AppCubit.get(context).showReviewBottomSheet(
+            context: context,
+            placeName: model.placeName,
+            placeId: model.id,
+            rate: model.rate,
+          ),
         ),
       ),
     );
@@ -396,13 +366,14 @@ Widget commentBuilder(Comments commentModel) => Container(
           Text(
             '@${commentModel.user}',
             style: TextStyle(
+              color: AppColors.primaryColor,
               fontWeight: FontWeight.bold,
               fontSize: 16.0,
             ),
           ),
           Text(
             '${commentModel.comment}',
-          )
+          ),
         ],
       ),
     );

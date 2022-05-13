@@ -167,50 +167,7 @@ Widget bottomNavBar(context) {
   );
 }
 
-Widget HomeRow({
-  required String text,
-  required String iconPath,
-}) =>
-    Container(
-      height: 39.0,
-      width: 299,
-      decoration: BoxDecoration(
-        color: Color(0xffffebc9),
-        borderRadius: BorderRadius.circular(
-          19.0,
-        ),
-        boxShadow: const [
-          BoxShadow(
-            color: Color(
-              0x16000000,
-            ),
-            spreadRadius: 3,
-            blurRadius: 6,
-          ),
-        ],
-      ),
-      child: Row(
-        children: [
-          SizedBox(
-            width: 9.5,
-          ),
-          SvgPicture.asset(
-            iconPath,
-          ),
-          const SizedBox(
-            width: 7.5,
-          ),
-          Text(
-            text.toUpperCase(),
-            style: TextStyle(
-              color: AppColors.primaryColor,
-              fontSize: 17.0,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ],
-      ),
-    );
+
 
 Widget defaultFormField({
   required TextEditingController controller,

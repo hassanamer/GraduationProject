@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:smarttouristguide/layout/cubit/states.dart';
 import 'package:smarttouristguide/models/cat_places_model.dart';
+import 'package:smarttouristguide/models/comment_model.dart';
 import 'package:smarttouristguide/models/favorites_data_model.dart';
 import 'package:smarttouristguide/models/get_profile_model.dart';
 import 'package:smarttouristguide/models/home_model.dart';
@@ -11,6 +12,7 @@ import 'package:smarttouristguide/models/rate_model.dart';
 import 'package:smarttouristguide/modules/categories/categories_screen.dart';
 import 'package:smarttouristguide/modules/favorites_screen/favorites_screen.dart';
 import 'package:smarttouristguide/modules/home/home_screen.dart';
+import 'package:smarttouristguide/shared/components/components.dart';
 import 'package:smarttouristguide/shared/components/constants.dart';
 import 'package:smarttouristguide/shared/network/end_points.dart';
 import 'package:smarttouristguide/shared/network/remote/dio_helper.dart';
@@ -86,7 +88,7 @@ class AppCubit extends Cubit<AppStates> {
   HomeModel? homeModel;
   Map<dynamic, bool?> favorites = {};
 
-  Future getHomeEventOfferData() async{
+  Future getHomeEventOfferData() async {
     emit(AppLoadingDataState());
     DioHelper.getData(
       url: 'home/events/',
@@ -127,7 +129,8 @@ class AppCubit extends Cubit<AppStates> {
         token: 'Token ${token}',
         data: {'place_id': placeId}).then((value) {
       placeDetailsModel = PlaceDetailsModel.fromJson(value.data);
-      for (int c=0; c< placeDetailsModel!.data.comments.length; c++) {
+
+      for (int c = 0; c < placeDetailsModel!.data.comments.length; c++) {
         print(placeDetailsModel!.data.comments[c].comment);
       }
       emit(AppSuccessGetPlaceDetails());
@@ -138,6 +141,14 @@ class AppCubit extends Cubit<AppStates> {
   }
 
   GetProfileModel? getProfileModel;
+  TextEditingController? emailController;
+  TextEditingController? firstNameController;
+  TextEditingController? lastNameController;
+  TextEditingController? phoneController;
+  TextEditingController? dateOfBirthController;
+  TextEditingController? genderController;
+  TextEditingController? countryController;
+  var editProfileKey = GlobalKey<FormState>();
 
   void getProfile() {
     emit(AppLoadingGetProfileState());
@@ -146,11 +157,66 @@ class AppCubit extends Cubit<AppStates> {
       token: 'Token ${token}',
     ).then((value) {
       getProfileModel = GetProfileModel.fromJson(value.data);
+
+      emailController!.text = getProfileModel!.data.email;
+      firstNameController!.text = getProfileModel!.data.firstName;
+      lastNameController!.text = getProfileModel!.data.lastName;
+      phoneController!.text = getProfileModel!.data.phone;
+      dateOfBirthController!.text = getProfileModel!.data.dateOfBirth;
+      genderController!.text = getProfileModel!.data.gender;
+      countryController!.text = getProfileModel!.data.country;
       emit(AppGetPorfileSuccessState());
     }).catchError((error) {
       emit(AppGetPorfileErrorState());
     });
   }
+
+  RateModel? rateModel;
+
+  Future addUpdateRate({
+    int? placeId,
+    dynamic rate,
+  }) async {
+    emit(AppRateLoading());
+    DioHelper.postData(url: ADD_UPDATE_RATE, token: 'Token ${token}', data: {
+      'place_id': placeId,
+      'rate': rate,
+    }).then((value) {
+      rateModel = RateModel.fromJson(value.data);
+      print(value.data);
+      emit(AppRateSuccess());
+    }).catchError((error) {
+      print('error when adding updating rate \n ${error.toString()}');
+      emit(AppRateError());
+    });
+  }
+
+  CommentModel? commentModel;
+
+  Future addComment({
+    int? placeId,
+    dynamic comment,
+  }) async {
+    emit(AppCommentLoading());
+    DioHelper.postData(
+      url: ADD_COMMENT,
+      token: 'Token ${token}',
+      data: {
+        'place_id': placeId,
+        'comment': comment,
+      },
+    ).then((value) {
+      commentModel = CommentModel.fromJson(value.data);
+      showToast(message: commentModel!.message);
+      emit(AppCommentSuccess());
+    }).catchError((error) {
+      print('error when adding updating rate \n ${error.toString()}');
+      emit(AppCommentError());
+    });
+  }
+
+  var commentmKey = GlobalKey<FormState>();
+  var commentController = TextEditingController();
 
   showReviewBottomSheet({
     required context,
@@ -166,8 +232,13 @@ class AppCubit extends Cubit<AppStates> {
           child: (Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'Your experience helps us to analyze data and recommend the best places for you. ♥',
+              SizedBox(
+                child: Text(
+                  'Your experience helps us to analyze data and recommend the best places for you. ♥',
+                ),
+              ),
+              SizedBox(
+                height: 15.0,
               ),
               Text(
                 'Rate ${placeName}',
@@ -176,6 +247,9 @@ class AppCubit extends Cubit<AppStates> {
                   fontWeight: FontWeight.bold,
                   color: AppColors.primaryColor,
                 ),
+              ),
+              SizedBox(
+                height: 5.0,
               ),
               Center(
                 child: Container(
@@ -217,12 +291,71 @@ class AppCubit extends Cubit<AppStates> {
                 ),
               ),
               SizedBox(
+                height: 15.0,
+              ),
+              SizedBox(
                 child: Text(
                   'Add Comment on ${placeName}',
                   style: TextStyle(
                     fontSize: 18.0,
                     fontWeight: FontWeight.bold,
                     color: AppColors.primaryColor,
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 5.0,
+              ),
+              Center(
+                child: Container(
+                  width: 250,
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Color(0x5F005764),
+                      width: 1.5,
+                    ),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Form(
+                    key: commentmKey,
+                    child: TextField(
+                      controller: commentController,
+                      minLines: 4,
+                      maxLines: 7,
+                      decoration: InputDecoration(
+                        hintText: 'Type your comment here',
+                        hintStyle: TextStyle(
+                          fontSize: 15.0,
+                        ),
+                        contentPadding: EdgeInsets.all(11),
+                        border: InputBorder.none,
+                      ),
+                      onSubmitted: (value) {
+                        addComment(
+                          placeId: placeId,
+                          comment: commentController.text,
+                        ).then((value) {
+                          commentController.clear();
+                        });
+                      },
+                    ),
+                  ),
+                ),
+              ),
+              InkWell(
+                onTap: () {
+                  if (commentmKey.currentState!.validate()) {
+                    addComment(
+                      placeId: placeId,
+                      comment: commentController.text,
+                    ).then((value) {
+                      commentController.clear();
+                    });
+                  }
+                },
+                child: Container(
+                  child: Text(
+                    'Add Comment',
                   ),
                 ),
               ),
@@ -233,28 +366,6 @@ class AppCubit extends Cubit<AppStates> {
     );
   }
 
-  RateModel? rateModel;
 
-  Future addUpdateRate({
-    int? placeId,
-    dynamic rate,
-  }) async {
-    emit(AppRateLoading());
-    DioHelper.postData(url: ADD_UPDATE_RATE, token: 'Token ${token}', data: {
-      'place_id': placeId,
-      'rate': rate,
-    }).then((value) {
-      rateModel = RateModel.fromJson(value.data);
-      print(value.data);
-      emit(AppRateSuccess());
-    }).catchError((error) {
-      print('error when adding updating rate \n ${error.toString()}');
-      emit(AppRateError());
-    });
-  }
-
-  void test() {
-    print('test hi from home');
-  }
 
 }

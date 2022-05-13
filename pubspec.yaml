@@ -29,6 +29,7 @@ environment:
 dependencies:
   hexcolor: ^2.0.6
   http: ^0.13.4
+  draggable_fab: ^0.1.1
   sentiment_dart: ^0.0.5
   responsive_framework: ^0.1.8
   smooth_star_rating_null_safety: ^1.0.4+2
