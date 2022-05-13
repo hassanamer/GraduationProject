@@ -50,93 +50,93 @@ List<String> imgs = [
 ];
 
 Widget buildCategoryItem(context, Category model, index) => Container(
-      height: 205.0,
-      width: double.infinity,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(
-          20.0,
+  height: 205.0,
+  width: double.infinity,
+  decoration: BoxDecoration(
+    color: Colors.white,
+    borderRadius: BorderRadius.circular(
+      20.0,
+    ),
+  ),
+  child: Padding(
+    padding: const EdgeInsets.only(
+      bottom: 10.0,
+      left: 10,
+      right: 10,
+    ),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          ' ${model.name}',
+          style: TextStyle(
+            fontSize: 18.0,
+            fontWeight: FontWeight.bold,
+            color: AppColors.primaryColor,
+          ),
         ),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.only(
-          bottom: 10.0,
-          left: 10,
-          right: 10,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        Stack(
+          alignment: AlignmentDirectional.bottomEnd,
           children: [
-            Text(
-              ' ${model.name}',
-              style: TextStyle(
-                fontSize: 18.0,
-                fontWeight: FontWeight.bold,
-                color: AppColors.primaryColor,
+            Center(
+              child: Container(
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(
+                    15.0,
+                  ),
+                  child: Image(
+                    fit: BoxFit.cover,
+                    height: 160,
+                    width: double.infinity,
+                    image: NetworkImage(
+                      '${imgs[index]}',
+                    ),
+                  ),
+                ),
               ),
             ),
-            Stack(
-              alignment: AlignmentDirectional.bottomEnd,
-              children: [
-                Center(
-                  child: Container(
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(
-                        15.0,
-                      ),
-                      child: Image(
-                        fit: BoxFit.cover,
-                        height: 160,
-                        width: double.infinity,
-                        image: NetworkImage(
-                          '${imgs[index]}',
-                        ),
-                      ),
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                vertical: 8.0,
+                horizontal: 13.0,
+              ),
+              child: InkWell(
+                onTap: () {
+                  navigateTo(
+                    widget: PlacesScreen(
+                      catIndex1: index,
+                      catName1: model.name,
+                    ),
+                    context: context,
+                  );
+                },
+                child: Container(
+                  height: 30,
+                  width: 120,
+                  decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(
+                      0.78,
+                    ),
+                    borderRadius: BorderRadius.circular(
+                      8,
+                    ),
+                  ),
+                  child: Text(
+                    'Discover Places',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        color: AppColors.primaryColor,
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.bold,
+                        height: 1.72
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 8.0,
-                    horizontal: 13.0,
-                  ),
-                  child: InkWell(
-                    onTap: () {
-                      navigateTo(
-                        widget: PlacesScreen(
-                          catIndex1: index,
-                          catName1: model.name,
-                        ),
-                        context: context,
-                      );
-                    },
-                    child: Container(
-                      height: 30,
-                      width: 120,
-                      decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(
-                          0.78,
-                        ),
-                        borderRadius: BorderRadius.circular(
-                          8,
-                        ),
-                      ),
-                      child: Text(
-                        'Discover Places',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: AppColors.primaryColor,
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.bold,
-                           height: 1.72
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
+              ),
             ),
           ],
         ),
-      ),
-    );
+      ],
+    ),
+  ),
+);

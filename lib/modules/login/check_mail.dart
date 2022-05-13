@@ -97,10 +97,10 @@ class CheckMail extends StatelessWidget {
                               backgroundColor: MaterialStateProperty.all<Color>(
                                   AppColors.primaryColor),
                               shape: MaterialStateProperty.all<
-                                      RoundedRectangleBorder>(
+                                  RoundedRectangleBorder>(
                                   RoundedRectangleBorder(
                                       borderRadius:
-                                          BorderRadius.circular(15.0)))),
+                                      BorderRadius.circular(15.0)))),
                         ),
                       ),
                     )

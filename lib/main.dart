@@ -1,10 +1,9 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smarttouristguide/layout/app_layout.dart';
 import 'package:smarttouristguide/layout/cubit/cubit.dart';
 import 'package:smarttouristguide/modules/cubit/cubit.dart';
+import 'package:smarttouristguide/modules/register/register_cubit/cubit.dart';
 import 'package:smarttouristguide/modules/welcome_screen/welcome_screen.dart';
 import 'package:smarttouristguide/modules/login/login_cubit/cubit.dart';
 import 'package:smarttouristguide/modules/on_boarding/on_boarding_screen.dart';
@@ -14,14 +13,12 @@ import 'package:smarttouristguide/shared/components/constants.dart';
 import 'package:smarttouristguide/shared/network/local/cache_helper.dart';
 import 'package:smarttouristguide/shared/network/remote/dio_helper.dart';
 import 'package:smarttouristguide/shared/styles/themes.dart';
-import 'modules/get_data_screen.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'modules/login/forget_password.dart';
-import 'modules/register/register_cubit/cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+
   DioHelper.init();
   await CacheHelper.init();
 
@@ -51,7 +48,6 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-
   final Widget startWidget;
 
   MyApp({
@@ -83,11 +79,11 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Smart Tourist guide',
-        // localizationsDelegates: AppLocalizations.localizationsDelegates,
-        // supportedLocales: AppLocalizations.supportedLocales,
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
         //locale: Locale("${changeLanguage()}"),
         theme: lightTheme,
-        home: BeachTourism(),
+        home: startWidget,
         // home: startWidget,
         routes: {
           Welcome.routeName: (context) => Welcome(),

@@ -1,399 +1,297 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
-import '../../../models/register_model.dart';
-import '../../../shared/components/components.dart';
-import '../login/login_screen.dart';
+import 'package:smarttouristguide/layout/app_layout.dart';
+import 'package:smarttouristguide/modules/login/login_cubit/states.dart';
+import 'package:smarttouristguide/modules/register/register_cubit/cubit.dart';
+import 'package:smarttouristguide/modules/register/register_cubit/states.dart';
+import 'package:smarttouristguide/shared/network/local/cache_helper.dart';
+import '../../shared/components/components.dart';
 
-
-class RegisterScreen extends StatefulWidget {
-  const RegisterScreen({Key? key}) : super(key: key);
-
-  @override
-  State<RegisterScreen> createState() => _RegisterScreenState();
-}
-
-class _RegisterScreenState extends State<RegisterScreen> {
-  TextEditingController firstnameController = TextEditingController();
-  TextEditingController lastnameController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  TextEditingController phonenumberController = TextEditingController();
-  TextEditingController dateofbirthController = TextEditingController();
-  TextEditingController genderController = TextEditingController();
-  TextEditingController countryController = TextEditingController();
-
-  final formKey = GlobalKey<FormState>();
-
-  bool isVisible = true;
-  bool isClicked = false;
+class RegisterScreen extends StatelessWidget {
+  bool hidePassword = true;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'Register',
-        ),
-      ),
-      body: Center(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Form(
-              key: formKey,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Align(
-                    alignment: Alignment.center,
-                    child: Image.asset(
-                      'assets/images/png_welcome_54270.png',
-                      width: MediaQuery.of(context).size.width / 3,
+    final TextEditingController email = TextEditingController(),
+        password = TextEditingController(),
+        firstName = TextEditingController(),
+        lastName = TextEditingController(),
+        ConfirmPassword = TextEditingController(),
+        phoneNumber = TextEditingController(),
+        DateOfBirth = TextEditingController(),
+        Gender = TextEditingController(),
+        Country = TextEditingController(),
+        userName = TextEditingController();
+
+    var cubit = AppRegisterCubit.get(context);
+
+    return BlocConsumer<AppRegisterCubit, AppRegisterStates>(
+      listener: (context, state) {
+        if (state is AppRegisterSuccessState) {
+          if (state.RegisterModel!.status!) {
+            CacheHelper.saveData(
+                    key: 'token', value: state.RegisterModel!.data!)
+                .then((value) {
+              navigateAndFinish(
+                context: context,
+                widget: AppLayout(),
+              );
+            });
+            Fluttertoast.showToast(
+              msg: "${state.RegisterModel!.message!}",
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.BOTTOM,
+              timeInSecForIosWeb: 5,
+              backgroundColor: Colors.green,
+              textColor: Colors.white,
+              fontSize: 16.0,
+            );
+          } else {
+            showToast(
+              message: "${state.RegisterModel!.message!}",
+              state: ToastStates.ERROR,
+            );
+          }
+        }
+      },
+      builder: (context, state) {
+        return Column(children: [
+          Expanded(
+            child: Container(
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(30),
+                    topLeft: Radius.circular(30),
+                  )),
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Form(
+                  key: cubit.formKey,
+                  child: ListView(children: [
+                    SizedBox(
+                      height: 15.0,
                     ),
-                  ),
-                  const SizedBox(
-                    height: 40.0,
-                  ),
-                  const Text(
-                    'Register now and discover app',
-                    style: TextStyle(
-                      fontSize: 24.0,
-                      fontWeight: FontWeight.w900,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 40.0,
-                  ),
-                  TextFormField(
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'FirstName must not be empty';
-                      }
-
-                      return null;
-                    },
-                    controller: firstnameController,
-                    keyboardType: TextInputType.name,
-                    decoration: InputDecoration(
-                      isDense: false,
-                      contentPadding: const EdgeInsets.symmetric(
-                        horizontal: 20.0,
-                      ),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(
-                          15.0,
-                        ),
-                      ),
-                      label: const Text(
-                        'Firstname',
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 20.0,
-                  ),
-                  TextFormField(
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'LastName must not be empty';
-                      }
-
-                      return null;
-                    },
-                    controller: lastnameController,
-                    keyboardType: TextInputType.name,
-                    decoration: InputDecoration(
-                      isDense: false,
-                      contentPadding: const EdgeInsets.symmetric(
-                        horizontal: 20.0,
-                      ),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(
-                          15.0,
-                        ),
-                      ),
-                      label: const Text(
-                        'Last Name',
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 20.0,
-                  ),
-                  TextFormField(
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Email Address must not be empty';
-                      }
-
-                      return null;
-                    },
-                    controller: emailController,
-                    keyboardType: TextInputType.emailAddress,
-                    decoration: InputDecoration(
-                      isDense: false,
-                      contentPadding: const EdgeInsets.symmetric(
-                        horizontal: 20.0,
-                      ),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(
-                          15.0,
-                        ),
-                      ),
-                      label: const Text(
-                        'Email Address',
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 20.0,
-                  ),
-                  TextFormField(
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'password is too short';
-                      }
-
-                      return null;
-                    },
-                    controller: passwordController,
-                    decoration: InputDecoration(
-                      isDense: false,
-                      contentPadding: const EdgeInsets.symmetric(
-                        horizontal: 20.0,
-                      ),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(
-                          15.0,
-                        ),
-                      ),
-                      label: const Text(
-                        'password',
-                      ),
-                      suffixIcon: IconButton(
-                        onPressed: () {
-                          setState(() {
-                            isVisible = !isVisible;
-                          });
-                        },
-                        icon: Icon(
-                          isVisible ? Icons.visibility : Icons.visibility_off,
-                        ),
-                      ),
-                    ),
-                    obscureText: isVisible,
-                    keyboardType: TextInputType.visiblePassword,
-                  ),
-                  const SizedBox(
-                    height: 20.0,
-                  ),
-                  TextFormField(
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Phone Number must not be empty';
-                      }
-
-                      return null;
-                    },
-                    controller: phonenumberController,
-                    keyboardType: TextInputType.phone,
-                    decoration: InputDecoration(
-                      isDense: false,
-                      contentPadding: const EdgeInsets.symmetric(
-                        horizontal: 20.0,
-                      ),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(
-                          15.0,
-                        ),
-                      ),
-                      label: const Text(
-                        'Phone Number',
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 20.0,
-                  ),
-                  TextFormField(
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Gender must not be empty';
-                      }
-
-                      return null;
-                    },
-                    controller: genderController,
-                    keyboardType: TextInputType.name,
-                    decoration: InputDecoration(
-                      isDense: false,
-                      contentPadding: const EdgeInsets.symmetric(
-                        horizontal: 20.0,
-                      ),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(
-                          15.0,
-                        ),
-                      ),
-                      label: const Text(
-                        'Gender',
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 20.0,
-                  ),
-                  TextFormField(
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Country must not be empty';
-                      }
-
-                      return null;
-                    },
-                    controller: countryController,
-                    keyboardType: TextInputType.name,
-                    decoration: InputDecoration(
-                      isDense: false,
-                      contentPadding: const EdgeInsets.symmetric(
-                        horizontal: 20.0,
-                      ),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(
-                          15.0,
-                        ),
-                      ),
-                      label: const Text(
-                        'Country Name',
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 20.0,
-                  ),
-                  TextFormField(
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Date Of Birth must not be empty';
-                      }
-
-                      return null;
-                    },
-                    controller: dateofbirthController,
-                    keyboardType: TextInputType.datetime,
-                    decoration: InputDecoration(
-                      isDense: false,
-                      contentPadding: const EdgeInsets.symmetric(
-                        horizontal: 20.0,
-                      ),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(
-                          15.0,
-                        ),
-                      ),
-                      label: const Text(
-                        'Date of birth',
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 40.0,
-                  ),
-                  // Firebase
-                  Container(
-                    height: 42.0,
-                    width: double.infinity,
-                    clipBehavior: Clip.antiAliasWithSaveLayer,
-                    decoration: BoxDecoration(
-                      color: Colors.teal,
-                      borderRadius: BorderRadius.circular(
-                        15.0,
-                      ),
-                    ),
-                    child: MaterialButton(
-                      height: 42.0,
-                      onPressed: () {
-                        if (formKey.currentState!.validate()) {
-                          setState(() {
-                            isClicked = true;
-                          });
-
-                          FirebaseAuth.instance
-                              .createUserWithEmailAndPassword(
-                              email: emailController.text,
-                              password: passwordController.text)
-                              .then((userData) {
-
-
-                            FirebaseMessaging.instance.getToken().then((value) {
-                              UserDataModel model = UserDataModel(
-                                email: emailController.text,
-                                password: passwordController.text,
-                                dateofbirth: dateofbirthController.text,
-                                country: countryController.text,
-                                img: null,
-                                firstname: firstnameController.text,
-                                lastname: lastnameController.text,
-                                gender: genderController.text,
-                                phonenumber: phonenumberController.text,
-                              );
-
-                              FirebaseFirestore.instance
-                                  .collection('users')
-                                  .doc(userData.user!.uid)
-                                  .set(model.toJson())
-                                  .then((value) {
-                                setState(() {
-                                  isClicked = false;
-                                });
-
-                                var userConst = userData.user;
-
-                                navigateAndFinish(
-                                  context: context,
-                                  widget: LoginScreen(),
-                                );
-                              }).catchError((error) {
-                                Fluttertoast.showToast(
-                                  msg: error.toString(),
-                                );
-                              });
-                            });
-                          }).catchError((error) {
-                            setState(() {
-                              isClicked = false;
-                            });
-
-                            Fluttertoast.showToast(
-                              msg: error.toString().split(']').last,
-                            );
-                          });
+                    defaultFormField(
+                      controller: firstName,
+                      type: TextInputType.emailAddress,
+                      validate: (String? value) {
+                        if (value != null && value.trim().length >= 3) {
+                          return null;
+                        } else {
+                          return "Please enter 3 characters at least.";
                         }
                       },
-                      child: isClicked
-                          ? const CupertinoActivityIndicator(
-                        color: Colors.white,
-                      )
-                          : const Text(
-                        'Register',
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
-                      ),
+                      label: 'First Name',
+                      radius: 10,
                     ),
-                  ),
-                ],
+                    SizedBox(
+                      height: 15,
+                    ),
+                    defaultFormField(
+                      controller: lastName,
+                      type: TextInputType.emailAddress,
+                      validate: (String? value) {
+                        if (value != null && value.trim().length >= 3) {
+                          return null;
+                        } else {
+                          return "Please enter 3 characters at least.";
+                        }
+                      },
+                      label: 'Last Name',
+                      radius: 10,
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    defaultFormField(
+                      controller: userName,
+                      type: TextInputType.emailAddress,
+                      validate: (String? value) {
+                        if (value != null && value.trim().length >= 3) {
+                          return null;
+                        } else {
+                          return "Please enter 3 characters at least.";
+                        }
+                      },
+                      label: 'User Name',
+                      radius: 10,
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    defaultFormField(
+                      controller: email,
+                      type: TextInputType.emailAddress,
+                      validate: (String? value) {
+                        if (value != null &&
+                            value.isNotEmpty &&
+                            EmailValidator.validate(value)) {
+                          return null;
+                        } else {
+                          return "Please enter valid email.";
+                        }
+                      },
+                      label: 'Email Address',
+                      radius: 10,
+                    ),
+                    SizedBox(
+                      height: 15.0,
+                    ),
+                    defaultFormField(
+                      controller: password,
+                      type: TextInputType.visiblePassword,
+                      isPassword: cubit.isPassword,
+                      validate: (String? value) {
+                        if (value != null && value.trim().length >= 6) {
+                          return null;
+                        } else {
+                          return "Please enter 6 characters at least.";
+                        }
+                      },
+                      label: 'Password',
+                      suffix: cubit.suffix,
+                      suffixPressed: () {
+                        cubit.changePasswordVisibility();
+                      },
+                      radius: 10,
+                    ),
+                    SizedBox(
+                      height: 15.0,
+                    ),
+                    defaultFormField(
+                      controller: ConfirmPassword,
+                      type: TextInputType.visiblePassword,
+                      isPassword: cubit.isPassword,
+                      validate: (String? value) {
+                        if (value != null && value.trim().length >= 6) {
+                          return null;
+                        } else {
+                          return "Please enter 6 characters at least.";
+                        }
+                      },
+                      label: 'Confirm Password',
+                      suffix: cubit.suffix,
+                      suffixPressed: () {
+                        cubit.changePasswordVisibility();
+                      },
+                      radius: 10,
+                    ),
+                    SizedBox(
+                      height: 15.0,
+                    ),
+                    defaultFormField(
+                      controller: phoneNumber,
+                      type: TextInputType.emailAddress,
+                      validate: (String? value) {
+                        if (value != null && value.trim().length == 11) {
+                          return null;
+                        } else {
+                          return "Please enter 11 number.";
+                        }
+                      },
+                      label: 'Phone Number',
+                      radius: 10,
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    defaultFormField(
+                      controller: DateOfBirth,
+                      type: TextInputType.emailAddress,
+                      validate: (String? value) {
+                        if (value != null) {
+                          return null;
+                        } else {
+                          return "Please enter your date of birth . ";
+                        }
+                      },
+                      label: 'Date Of Birth',
+                      radius: 10,
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    defaultFormField(
+                      controller: Gender,
+                      // type: TextInputType.emailAddress,
+                      validate: (String? value) {
+                        if (value != null) {
+                          return null;
+                        } else {
+                          return "please choice . ";
+                        }
+                      },
+                      label: 'Gender',
+
+                      radius: 10,
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    defaultFormField(
+                      controller: Country,
+                      type: TextInputType.text,
+                      validate: (String? value) {
+                        if (value != null) {
+                          return null;
+                        } else {
+                          return "please choice. ";
+                        }
+                      },
+                      label: 'Country',
+                      onSubmit: (value) {
+                        if (cubit.formKey.currentState!.validate()) {
+                          cubit.userRegister(
+                            userName: userName.text,
+                            firstname: firstName.text,
+                            lastName: lastName.text,
+                            email: email.text,
+                            password: password.text,
+                            phoneNumber: phoneNumber.text,
+                            DateOfBirth: DateOfBirth.text,
+                            Gender: Gender.text,
+                            country: Country.text,
+                          );
+                        }
+                      },
+                      radius: 10,
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    ConditionalBuilder(
+                      condition: state is! AppLoginLoadingState,
+                      builder: (context) => button(
+                        text: 'Submit',
+                        function: () {
+                          if (cubit.formKey.currentState!.validate()) {
+                            cubit.userRegister(
+                                userName: userName.text,
+                                firstname: firstName.text,
+                                lastName: lastName.text,
+                                email: email.text,
+                                password: password.text,
+                                phoneNumber: phoneNumber.text,
+                                DateOfBirth: DateOfBirth.text,
+                                Gender: Gender.text,
+                                country: Country.text);
+                          }
+                        },
+                      ),
+                      fallback: (context) =>
+                          Center(child: CircularProgressIndicator()),
+                    ),
+                  ]),
+                ),
               ),
             ),
-          ),
-        ),
-      ),
+          )
+        ]);
+      },
     );
   }
-
 }
