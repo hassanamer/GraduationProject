@@ -31,6 +31,38 @@ Widget defaultButton({
       ),
     );
 //default button (ex: Registration,Login, Submit)
+
+Widget button({
+  required VoidCallback? function,
+  required String text,
+  Color color = AppColors.primaryColor,
+  Color textColor = Colors.white,
+}) =>
+    Container(
+      margin: const EdgeInsets.symmetric(
+        vertical: 8,
+        horizontal: 80,
+      ),
+      width: double.infinity,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(16),
+        color: color,
+      ),
+      child: ElevatedButton(
+        style: ButtonStyle(
+          elevation: MaterialStateProperty.all(0),
+          backgroundColor: MaterialStateProperty.all(Colors.transparent),
+        ),
+        onPressed: function,
+        child: Text(
+          text,
+          style: TextStyle(
+            color: textColor,
+          ),
+        ),
+      ),
+    );
+
 Widget default_Button({
   required double width,
   required Color background,
@@ -283,3 +315,21 @@ Widget RateIconButton({
       padding: EdgeInsetsDirectional.all(0),
       onPressed: onPressed,
     );
+
+Widget login_register_button(context,Screen, text ) {
+  return button(function: (){ showModalBottomSheet(
+      isDismissible: false,
+      enableDrag: false,
+      backgroundColor: Colors.transparent,
+      context: context,
+      builder: (context) {
+        return Container(
+            height: double.infinity,
+            decoration: const BoxDecoration(
+                borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(20),
+                    topLeft: Radius.circular(20)),
+                color: Colors.white),
+            child: Screen);
+      });}, text: text);
+}

@@ -6,14 +6,14 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:smarttouristguide/layout/cubit/cubit.dart';
 import 'package:smarttouristguide/layout/cubit/states.dart';
 import 'package:smarttouristguide/models/home_model.dart';
-import 'package:smarttouristguide/modules/event_offer/OfferScreen.dart';
-import 'package:smarttouristguide/modules/event_offer/eventScreen.dart';
 import 'package:smarttouristguide/modules/place_details/place_details_screen.dart';
 import 'package:smarttouristguide/modules/search/search_screen.dart';
 import 'package:smarttouristguide/shared/styles/colors.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../shared/components/components.dart';
+import '../events/events_screen.dart';
+import '../offers/offer_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   static const routeName = 'Home';
@@ -115,7 +115,7 @@ class HomeScreen extends StatelessWidget {
                           MaterialButton(
                             onPressed: () {
                               navigateTo(
-                                widget: EventScreen(),
+                                widget: EventsScreen(),
                                 context: context,
                               );
                             },
@@ -127,7 +127,7 @@ class HomeScreen extends StatelessWidget {
                           MaterialButton(
                             onPressed: () {
                               navigateTo(
-                                widget: OfferScreen(),
+                                widget: OffersScreen(),
                                 context: context,
                               );
                             },

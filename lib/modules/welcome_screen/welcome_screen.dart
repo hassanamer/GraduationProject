@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smarttouristguide/modules/login/login_cubit/cubit.dart';
 import 'package:smarttouristguide/modules/login/login_cubit/states.dart';
-
-import '../login/login_and_signup/LoginAndSignUpButton.dart';
-import '../login/login_and_signup/login_screen.dart';
-import '../login/login_and_signup/register_screen.dart';
+import '../../shared/components/components.dart';
+import '../login/login_screen.dart';
+import '../register/register_screen.dart';
 
 class Welcome extends StatelessWidget {
   static const String routeName = 'Welcome';
@@ -40,9 +39,8 @@ class Welcome extends StatelessWidget {
                 'We Hope You Find A Destination\nMake You Happy',
                 textAlign: TextAlign.center,
               ),
-              LoginAndSignUpButton(RegisterScreen(),'SignUp'),
-              LoginAndSignUpButton(LoginScreen(),'Login'),
-
+              login_register_button(context, RegisterScreen(),'SignUp'),
+              login_register_button(context, LoginScreen(),'Login'),
             ],
           ),
         );

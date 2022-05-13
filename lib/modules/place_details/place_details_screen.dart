@@ -108,6 +108,9 @@ Widget PlaceDetailsScreenBuilder(Data model, context, catName) => Scaffold(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    SizedBox(
+                      height: 20.0,
+                    ),
                     Row(
                       children: [
                         InkWell(
@@ -131,6 +134,9 @@ Widget PlaceDetailsScreenBuilder(Data model, context, catName) => Scaffold(
                         ),
                       ],
                       mainAxisAlignment: MainAxisAlignment.start,
+                    ),
+                    SizedBox(
+                      height: 7.0,
                     ),
                     Row(
                       children: [
@@ -157,6 +163,9 @@ Widget PlaceDetailsScreenBuilder(Data model, context, catName) => Scaffold(
                             : Text(''),
                       ],
                     ),
+                    SizedBox(
+                      height: 4.0,
+                    ),
                     Container(
                       height: 180,
                       width: double.infinity,
@@ -174,7 +183,7 @@ Widget PlaceDetailsScreenBuilder(Data model, context, catName) => Scaffold(
                       height: 5.0,
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 7),
+                      padding: const EdgeInsets.symmetric(horizontal: 1),
                       child: Row(
                         children: [
                           RatingBarIndicator(
@@ -213,25 +222,27 @@ Widget PlaceDetailsScreenBuilder(Data model, context, catName) => Scaffold(
                         ],
                       ),
                     ),
+                    SizedBox(
+                      height: 8.0,
+                    ),
                     Row(
                       children: [
-                        IconButton(
-                          onPressed: () {
+                        InkWell(
+                          onTap: () {
                             AppCubit.get(context).changeFavorite(model.id);
                           },
-                          padding: EdgeInsets.all(0),
-                          iconSize: 26.0,
-                          icon: Icon(
+                          child: Icon(
                             Icons.favorite_outlined,
                             color: AppCubit.get(context).favorites[model.id]!
                                 ? AppColors.primaryColor
                                 : AppColors.disabledAndHintColor,
+                            size: 26.0,
                           ),
                         ),
                         Text(
                           AppCubit.get(context).favorites[model.id]!
-                              ? 'It\'s in your favorites list!'
-                              : 'Add this to your favorites list',
+                              ? '  It\'s in your favorites list!'
+                              : '  Add this to your favorites list',
                           style: TextStyle(
                             fontSize: 15.5,
                             color: Color(0xCA000000),

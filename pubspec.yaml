@@ -108,7 +108,7 @@ flutter:
         - asset: assets/fonts/Tajawal-ExtraLight.ttf
     - family: jannah
       fonts:
-        - asset: assets/fonts/jannah.ttf
+        - asset: assets/fonts/source.ttf
 
   #   - family: Trajan Pro
   #     fonts:
