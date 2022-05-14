@@ -66,10 +66,6 @@ email_validator
 2.12
 file:///C:/flutter/.pub-cache/hosted/pub.dartlang.org/email_validator-2.0.1/
 file:///C:/flutter/.pub-cache/hosted/pub.dartlang.org/email_validator-2.0.1/lib/
-fading_edge_scrollview
-2.12
-file:///C:/flutter/.pub-cache/hosted/pub.dartlang.org/fading_edge_scrollview-2.0.1/
-file:///C:/flutter/.pub-cache/hosted/pub.dartlang.org/fading_edge_scrollview-2.0.1/lib/
 fake_async
 2.12
 file:///C:/flutter/.pub-cache/hosted/pub.dartlang.org/fake_async-1.2.0/
@@ -110,10 +106,6 @@ grpc
 2.12
 file:///C:/flutter/.pub-cache/hosted/pub.dartlang.org/grpc-3.0.2/
 file:///C:/flutter/.pub-cache/hosted/pub.dartlang.org/grpc-3.0.2/lib/
-hexcolor
-2.15
-file:///C:/flutter/.pub-cache/hosted/pub.dartlang.org/hexcolor-2.0.7/
-file:///C:/flutter/.pub-cache/hosted/pub.dartlang.org/hexcolor-2.0.7/lib/
 http
 2.14
 file:///C:/flutter/.pub-cache/hosted/pub.dartlang.org/http-0.13.4/
@@ -134,10 +126,6 @@ js
 2.12
 file:///C:/flutter/.pub-cache/hosted/pub.dartlang.org/js-0.6.3/
 file:///C:/flutter/.pub-cache/hosted/pub.dartlang.org/js-0.6.3/lib/
-marquee
-2.12
-file:///C:/flutter/.pub-cache/hosted/pub.dartlang.org/marquee-2.2.1/
-file:///C:/flutter/.pub-cache/hosted/pub.dartlang.org/marquee-2.2.1/lib/
 matcher
 2.12
 file:///C:/flutter/.pub-cache/hosted/pub.dartlang.org/matcher-0.12.11/
@@ -206,10 +194,6 @@ remove_emoji
 2.12
 file:///C:/flutter/.pub-cache/hosted/pub.dartlang.org/remove_emoji-0.0.7/
 file:///C:/flutter/.pub-cache/hosted/pub.dartlang.org/remove_emoji-0.0.7/lib/
-responsive_framework
-2.12
-file:///C:/flutter/.pub-cache/hosted/pub.dartlang.org/responsive_framework-0.1.8/
-file:///C:/flutter/.pub-cache/hosted/pub.dartlang.org/responsive_framework-0.1.8/lib/
 rxdart
 2.12
 file:///C:/flutter/.pub-cache/hosted/pub.dartlang.org/rxdart-0.27.3/

@@ -27,13 +27,10 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
-  hexcolor: ^2.0.6
   http: ^0.13.4
   draggable_fab: ^0.1.1
   sentiment_dart: ^0.0.5
-  responsive_framework: ^0.1.8
   smooth_star_rating_null_safety: ^1.0.4+2
-  marquee: ^2.2.1
   flutter_rating_bar: ^4.0.0
   shared_preferences: ^2.0.11
   # flutter_ipfs: ^0.0.2

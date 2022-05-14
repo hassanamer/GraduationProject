@@ -78,7 +78,6 @@ class AppCubit extends Cubit<AppStates> {
       token: 'Token ${token}',
     ).then((value) {
       getFavoritesModel = GetFavoritesModel.fromJson(value.data);
-      print(value.data);
       emit(AppSuccessGetFavoritesState());
     }).catchError((error) {
       print(error.toString());
@@ -369,8 +368,8 @@ class AppCubit extends Cubit<AppStates> {
   void recommendation() {
     {
       recommended = [];
-
       int placeIndex= 0;
+
       for (var place in homeModel!.data.home_places) {
         for(var commentMap in homeModel!.data.home_places[placeIndex].comments)
         {
@@ -398,7 +397,6 @@ class AppCubit extends Cubit<AppStates> {
       }
     }
   }
-
 }
 
 // int placeIndex = 0;
