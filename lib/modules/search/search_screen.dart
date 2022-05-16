@@ -106,29 +106,43 @@ class SearchScreenState extends State<SearchScreen> {
   //The Card That Shows The List Of Events
   _listOfEvents(index){
     var image = _postsDisplay[index].img.toString();
-    return Card(
-      child: Padding(
-        padding:
-        const EdgeInsets.only(top: 32, bottom: 32, left: 16, right: 16),
-        child: Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children:
-            [
-              //path
-              Text(
-                '${_postsDisplay[index].category.toString() } >${ _postsDisplay[index].eventName.toString()}',
-                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
-              ),
-              //date
-              Text("Date :${ _postsDisplay[index].date.toString()}",
-                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 22),),
-              //image
-              Container(
-                padding: const EdgeInsets.only(top: 20, bottom: 20, left: 8, right: 8),
-                child: Image(image: NetworkImage(image),),
-              ),
-            ],
+    return ClipRRect(
+      borderRadius: BorderRadius.all(Radius.elliptical(100, 50.0)),
+      child: Card(
+        color: AppColors.backgroundColor,
+        margin: const EdgeInsets.all(10),
+        child: Padding(
+          padding:
+          const EdgeInsets.only(top: 32, bottom: 32, left: 16, right: 16),
+          child: Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children:
+              [
+                //path
+                Text(
+                  '${_postsDisplay[index].category.toString() } > ${ _postsDisplay[index].eventName.toString()}',
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 22.0,
+                    color: AppColors.primaryColor,
+                  ),
+                ),
+                //date
+                Text("Date :${ _postsDisplay[index].date.toString()}",
+                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 22),),
+                //image
+                ClipRRect(
+                    borderRadius: BorderRadius.circular(15.0),
+                    child: Image(
+                      image: NetworkImage(image),
+                      fit: BoxFit.cover,
+                    )),
+
+              ],
+            ),
           ),
         ),
       ),
