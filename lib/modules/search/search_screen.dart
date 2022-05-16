@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '../../models/post.dart';
 import '../../shared/network/remote/network.dart';
 import '../../shared/styles/colors.dart';
-import 'package:smooth_star_rating_null_safety/smooth_star_rating_null_safety.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 
