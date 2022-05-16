@@ -3,6 +3,8 @@ import '../../models/post.dart';
 import '../../shared/network/remote/network.dart';
 import '../../shared/styles/colors.dart';
 import 'package:smooth_star_rating_null_safety/smooth_star_rating_null_safety.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+
 
 
 class SearchScreen extends StatefulWidget {
@@ -136,77 +138,99 @@ class SearchScreenState extends State<SearchScreen> {
   //The Card That Shows The List Of Offers
   _listOfOffers(index){
     var image = _postsDisplay[index].img.toString();
-    return Card(
-      child: Padding(
-        padding:
-        const EdgeInsets.only(top: 32, bottom: 32, left: 16, right: 16),
-        child: Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children:
-            [
-              //path
-              Text(
-                '${_postsDisplay[index].category.toString() } > ${ _postsDisplay[index].offerName.toString()}',
-                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
-              ),
-              //price1
-              Text("Price1 :${ _postsDisplay[index].price1.toString()}",
-                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
-              ),
-              //price2
-              Text("Price2 :${ _postsDisplay[index].price2.toString()}",
-                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
-              ),
-              //image
-              Container(
-                padding: const EdgeInsets.only(top: 20, bottom: 20, left: 8, right: 8),
-                child: Image(image: NetworkImage(image),),
-              ),
-
-
-            ],
+    return ClipRRect(
+      borderRadius: BorderRadius.all(Radius.elliptical(100, 50.0)),
+      child: Card(
+        color: AppColors.backgroundColor,
+        margin: const EdgeInsets.all(10),
+        child: Padding(
+          padding:
+          const EdgeInsets.only(top: 32, bottom: 32, left: 16, right: 16),
+          child: Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children:
+              [
+                //path
+                Text(
+                  '${_postsDisplay[index].category.toString() } > ${ _postsDisplay[index].offerName.toString()}',
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 22.0,
+                    color: AppColors.primaryColor,
+                  ),
+                ),
+                Text("price :${ _postsDisplay[index].price1.toString()}",
+                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
+                ),
+                ClipRRect(
+                    borderRadius: BorderRadius.circular(15.0),
+                    child: Image(
+                      image: NetworkImage(image),
+                      fit: BoxFit.cover,
+                    )),
+              ],
+            ),
           ),
         ),
       ),
     );
   }
+
   //The Card That Shows The List Of Places
   _listOfPlcaes(index){
     var image = _postsDisplay[index].img.toString();
-    return Card(
-      child: Padding(
-        padding:
-        const EdgeInsets.only(top: 32, bottom: 32, left: 16, right: 16),
-        child: Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children:
-            [
-              //path
-              Text(
-                "${_postsDisplay[index].category.toString() } > ${_postsDisplay[index].placename.toString()} ",
-                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
-              ),
-              SmoothStarRating(
-                rating:  _postsDisplay[index].rate,
-                size: 40,
-                filledIconData: Icons.star,
-                halfFilledIconData: Icons.star_half,
-                defaultIconData: Icons.star_border,
-                starCount: 5,
-                allowHalfRating: true,
-                spacing: 2.0,
-              ),
-              Text("price :${ _postsDisplay[index].price.toString()}",
-                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
-              ),
-              // image
-              Container(
-                padding: const EdgeInsets.only(top: 20, bottom: 20, left: 8, right: 8),
-                child: Image(image: NetworkImage(image),),
-              ),
-            ],
+    return ClipRRect(
+      borderRadius: BorderRadius.all(Radius.elliptical(50.0, 50.0)),
+      child: Card(
+        color: AppColors.backgroundColor,
+        margin: const EdgeInsets.all(10),
+        child: Padding(
+          padding:
+          const EdgeInsets.only(top: 32, bottom: 32, left: 16, right: 16),
+          child: Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children:
+              [
+                //path
+                Text(
+                  '${_postsDisplay[index].category.toString() } > ${_postsDisplay[index].placename.toString()}',
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 22.0,
+                    color: AppColors.primaryColor,
+                  ),
+                ),
+                Text("price :${ _postsDisplay[index].price.toString()}",
+                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
+                ),
+                ClipRRect(
+                    borderRadius: BorderRadius.circular(15.0),
+                    child: Image(
+                      image: NetworkImage(image),
+                      fit: BoxFit.cover,
+                    )),
+                SizedBox(
+                  height: 10.0,),
+                Center(
+                  child: RatingBarIndicator(
+                    rating: _postsDisplay[index].rate,
+                    itemBuilder: (context, index) => Icon(
+                      Icons.star,
+                      color: AppColors.primaryColor,
+                    ),
+                    itemCount: 5,
+                    itemSize: 40,
+                    direction: Axis.horizontal,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
