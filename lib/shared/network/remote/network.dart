@@ -15,7 +15,7 @@ List<Post> parsePost(String responseBody)
 
 Future <List<Post>> fetchPost() async
 {
-  final  response = await http.get(Uri.parse('https://gist.githubusercontent.com/amrali500/f6f888bb859d96eb185aceea849cf127/raw/c542bef9f8e16a7f48055db01d41e8024eae51f4/STGapi.json'));
+  final  response = await http.get(Uri.parse('https://gist.githubusercontent.com/Ahmed29Ali/e5947e6ce7b856d966e6b51bbea1017c/raw/4f8da89916a5db493decd3a7f41f933892fe8512/STG%2520API.json'));
   if(response.statusCode   == 200)    {
     return compute(parsePost, response.body);
 
