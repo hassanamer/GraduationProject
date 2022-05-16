@@ -48,6 +48,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   bloc: ^8.0.1
   flutter_bloc: ^8.0.0
+  url_launcher: ^6.1.2
   smooth_page_indicator: ^1.0.0+2
   flutter_svg: ^1.0.3
   sound_stream: ^0.3.0

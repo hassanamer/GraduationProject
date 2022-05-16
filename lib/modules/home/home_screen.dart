@@ -58,6 +58,9 @@ class HomeScreen extends StatelessWidget {
                               color: AppColors.primaryColor,
                             ),
                           ),
+                          SizedBox(
+                            height: 10,
+                          ),
                           LinearProgressIndicator(
                             color: AppColors.primaryColor,
                             backgroundColor: AppColors.secondColor,
@@ -267,7 +270,7 @@ class HomeScreen extends StatelessWidget {
                                   height: 8,
                                 ),
                                 Text(
-                                  'Top Rated Places',
+                                  'Not Recommended by users',
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 16.0,
@@ -282,16 +285,14 @@ class HomeScreen extends StatelessWidget {
                                   width: double.infinity,
                                   child: ListView.separated(
                                     itemBuilder: (context, index) =>
-                                        buildHomeTopRatedItem(
-                                            cubit.homeModel!.data
-                                                .topRated[index],
+                                        buildNotRecommendedItem(
+                                            cubit.notRecommended[index],
                                             context),
                                     separatorBuilder: (context, index) =>
                                         SizedBox(
                                       width: 10.0,
                                     ),
-                                    itemCount:
-                                        cubit.homeModel!.data.topRated.length,
+                                    itemCount: cubit.notRecommended.length,
                                     scrollDirection: Axis.horizontal,
                                   ),
                                 ),
@@ -380,7 +381,7 @@ Widget buildHomePopularItem(PopularPlaces model, context) => InkWell(
       ),
     );
 
-Widget buildHomeTopRatedItem(TopRated model, context) => InkWell(
+Widget buildNotRecommendedItem(home_place model, context) => InkWell(
       onTap: () {
         AppCubit.get(context).getPlaceDetails(
           placeId: model.id,

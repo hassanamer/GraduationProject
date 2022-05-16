@@ -19,10 +19,10 @@ ThemeData lightTheme = ThemeData(
 ThemeData darkTheme = ThemeData(
   primarySwatch: Palette.primaryColor,
   fontFamily: 'Jannah',
-  scaffoldBackgroundColor: Colors.black54,
+  scaffoldBackgroundColor: Colors.blueGrey,
   appBarTheme: const AppBarTheme(
     systemOverlayStyle: SystemUiOverlayStyle(
-      statusBarColor: Colors.black54,
+      statusBarColor: Colors.blueGrey,
       statusBarIconBrightness: Brightness.light,
     ),
     backgroundColor: AppColors.backgroundColor,

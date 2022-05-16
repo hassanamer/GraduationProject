@@ -5,6 +5,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:smarttouristguide/layout/cubit/cubit.dart';
 import 'package:smarttouristguide/layout/cubit/states.dart';
+import 'package:smarttouristguide/models/home_model.dart';
 import 'package:smarttouristguide/modules/place_details/place_details_screen.dart';
 import 'package:smarttouristguide/shared/components/components.dart';
 import 'package:smarttouristguide/shared/styles/colors.dart';
@@ -37,11 +38,11 @@ class RecommendationScreen extends StatelessWidget {
             ),
           ),
           body: ListView.separated(
-            itemBuilder: (context, index) => buildRecommendationItem(context),
+            itemBuilder: (context, index) => buildRecommendationItem(context, AppCubit.get(context).recommended[index]),
             separatorBuilder: (context, index) => SizedBox(
               height: 10,
             ),
-            itemCount: 10,
+            itemCount: AppCubit.get(context).recommended.length,
           ),
         );
       },
@@ -52,7 +53,7 @@ class RecommendationScreen extends StatelessWidget {
 
 
 
-Widget buildRecommendationItem(context) => Container(
+Widget buildRecommendationItem(context, home_place model) => Container(
       height: MediaQuery.of(context).size.height * 0.4,
       width: double.infinity,
       decoration: BoxDecoration(
@@ -68,7 +69,7 @@ Widget buildRecommendationItem(context) => Container(
           children: [
 
             Text(
-              'Place Name',
+              '${model.placeName}',
               style: TextStyle(
                 fontSize: 24.0,
                 fontWeight: FontWeight.bold,
@@ -76,7 +77,7 @@ Widget buildRecommendationItem(context) => Container(
               ),
             ),
             Text(
-              'Place Description',
+              '${model.Description}',
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
@@ -89,13 +90,13 @@ Widget buildRecommendationItem(context) => Container(
               width: double.infinity,
               child: Image(
                 fit: BoxFit.cover,
-                image: AssetImage('assets/images/pcimg.jpg'),
+                image: NetworkImage('${model.image}'),
               ),
             ),
             Row(
               children: [
                 RatingBarIndicator(
-                  rating: 4.0,
+                  rating: model.rate.toDouble(),
                   itemBuilder: (context, index) => Icon(
                     Icons.star,
                     color: AppColors.primaryColor,

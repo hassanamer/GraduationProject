@@ -99,6 +99,7 @@ class AppCubit extends Cubit<AppStates> {
         favorites.addAll({element.id: element.inFavourite});
       });
       recommendation();
+      blacklist();
       emit(AppGetDataSuccessState());
     }).catchError((error) {
       emit(AppGetDataErrorState());
@@ -363,36 +364,66 @@ class AppCubit extends Cubit<AppStates> {
   }
 
   List<home_place> recommended = [];
-  List<String> placeComments = [];
+  List<String> placeComments1 = [];
 
   void recommendation() {
     {
       recommended = [];
-      int placeIndex= 0;
+      int placeIndex = 0;
 
       for (var place in homeModel!.data.home_places) {
-        for(var commentMap in homeModel!.data.home_places[placeIndex].comments)
-        {
-          placeComments.add(commentMap.comment);
+        for (var commentMap
+            in homeModel!.data.home_places[placeIndex].comments) {
+          placeComments1.add(commentMap.comment);
         }
-        if(placeComments.length >0) {
-          print('${placeComments}');
-          String sentimentText= placeComments.join(' ');
-          if(Sentiment.analysis(sentimentText).words.good.length > Sentiment.analysis(sentimentText).words.bad.length && place.rate > 3.7) {
-            if(recommended.contains(place)) {
-              print('already recommended');
-            } else {
-              recommended.add(place);
-              print('recommended');
-            }
+        if (placeComments1.length > 0) {
+          print('${placeComments1}');
+          String sentimentText = placeComments1.join(' ');
+          if (Sentiment.analysis(sentimentText).words.good.length >
+                  Sentiment.analysis(sentimentText).words.bad.length &&
+              place.rate > 3.7) {
+            recommended.add(place);
           } else {
             print('not recommended');
           }
         }
-        placeComments = [];
+        placeComments1 = [];
         placeIndex++;
       }
       for (var i in recommended) {
+        print(i.placeName);
+      }
+    }
+  }
+
+  List<home_place> notRecommended = [];
+  List<String> placeComments2 = [];
+
+  void blacklist() {
+    {
+      notRecommended = [];
+      int placeIndex = 0;
+
+      for (var place in homeModel!.data.home_places) {
+        for (var commentMap
+            in homeModel!.data.home_places[placeIndex].comments) {
+          placeComments2.add(commentMap.comment);
+        }
+        if (placeComments2.length > 0) {
+          print('${placeComments2}');
+          String sentimentText = placeComments2.join(' ');
+          if (Sentiment.analysis(sentimentText).words.bad.length >
+                  Sentiment.analysis(sentimentText).words.good.length &&
+              place.rate <= 2.5) {
+            notRecommended.add(place);
+          } else {
+            print('not recommended');
+          }
+        }
+        placeComments2 = [];
+        placeIndex++;
+      }
+      for (var i in notRecommended) {
         print(i.placeName);
       }
     }
