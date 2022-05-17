@@ -11,7 +11,7 @@ class AppRegisterCubit extends Cubit<AppRegisterStates> {
 
   static AppRegisterCubit get(context) => BlocProvider.of(context);
 
-  Register_model? registerModel;
+  RegisterModel? registerModel;
 
   void userRegister({
     required String email,
@@ -42,7 +42,7 @@ class AppRegisterCubit extends Cubit<AppRegisterStates> {
     ).then((value) {
       print(value.data);
 
-      registerModel = Register_model.fromJson(value.data);
+      registerModel = RegisterModel.fromJson(value.data);
 
       emit(AppRegisterSuccessState(registerModel));
     }).catchError((error) {
