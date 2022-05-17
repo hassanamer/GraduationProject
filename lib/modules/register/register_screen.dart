@@ -4,36 +4,40 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:smarttouristguide/layout/app_layout.dart';
-import 'package:smarttouristguide/modules/login/login_cubit/states.dart';
+import 'package:smarttouristguide/models/register_model.dart';
 import 'package:smarttouristguide/modules/register/register_cubit/cubit.dart';
+
 import 'package:smarttouristguide/modules/register/register_cubit/states.dart';
 import 'package:smarttouristguide/shared/network/local/cache_helper.dart';
+import '../../models/register_model.dart';
 import '../../shared/components/components.dart';
 
 class RegisterScreen extends StatelessWidget {
   bool hidePassword = true;
 
+
+
   @override
   Widget build(BuildContext context) {
     final TextEditingController email = TextEditingController(),
         password = TextEditingController(),
-        firstName = TextEditingController(),
-        lastName = TextEditingController(),
+        first_name = TextEditingController(),
+        last_name = TextEditingController(),
         ConfirmPassword = TextEditingController(),
-        phoneNumber = TextEditingController(),
-        DateOfBirth = TextEditingController(),
-        Gender = TextEditingController(),
-        Country = TextEditingController(),
-        userName = TextEditingController();
+        phone = TextEditingController(),
+        date_of_birth = TextEditingController(),
+        gender = TextEditingController(),
+        country = TextEditingController(),
+        username = TextEditingController();
 
     var cubit = AppRegisterCubit.get(context);
 
     return BlocConsumer<AppRegisterCubit, AppRegisterStates>(
       listener: (context, state) {
         if (state is AppRegisterSuccessState) {
-          if (state.RegisterModel!.status!) {
+          if (state.registerModel!.status!) {
             CacheHelper.saveData(
-                    key: 'token', value: state.RegisterModel!.data!)
+                    key: 'token', value: state.registerModel!.data!)
                 .then((value) {
               navigateAndFinish(
                 context: context,
@@ -41,7 +45,7 @@ class RegisterScreen extends StatelessWidget {
               );
             });
             Fluttertoast.showToast(
-              msg: "${state.RegisterModel!.message!}",
+              msg: "${state.registerModel!.message!}",
               toastLength: Toast.LENGTH_SHORT,
               gravity: ToastGravity.BOTTOM,
               timeInSecForIosWeb: 5,
@@ -51,7 +55,7 @@ class RegisterScreen extends StatelessWidget {
             );
           } else {
             showToast(
-              message: "${state.RegisterModel!.message!}",
+              message: "${state. registerModel!.message!}",
               state: ToastStates.ERROR,
             );
           }
@@ -76,7 +80,7 @@ class RegisterScreen extends StatelessWidget {
                       height: 15.0,
                     ),
                     defaultFormField(
-                      controller: firstName,
+                      controller: first_name,
                       type: TextInputType.emailAddress,
                       validate: (String? value) {
                         if (value != null && value.trim().length >= 3) {
@@ -92,7 +96,7 @@ class RegisterScreen extends StatelessWidget {
                       height: 15,
                     ),
                     defaultFormField(
-                      controller: lastName,
+                      controller: last_name,
                       type: TextInputType.emailAddress,
                       validate: (String? value) {
                         if (value != null && value.trim().length >= 3) {
@@ -108,7 +112,7 @@ class RegisterScreen extends StatelessWidget {
                       height: 15,
                     ),
                     defaultFormField(
-                      controller: userName,
+                      controller: username,
                       type: TextInputType.emailAddress,
                       validate: (String? value) {
                         if (value != null && value.trim().length >= 3) {
@@ -184,7 +188,7 @@ class RegisterScreen extends StatelessWidget {
                       height: 15.0,
                     ),
                     defaultFormField(
-                      controller: phoneNumber,
+                      controller: phone,
                       type: TextInputType.emailAddress,
                       validate: (String? value) {
                         if (value != null && value.trim().length == 11) {
@@ -200,7 +204,7 @@ class RegisterScreen extends StatelessWidget {
                       height: 15,
                     ),
                     defaultFormField(
-                      controller: DateOfBirth,
+                      controller: date_of_birth,
                       type: TextInputType.emailAddress,
                       validate: (String? value) {
                         if (value != null) {
@@ -216,7 +220,7 @@ class RegisterScreen extends StatelessWidget {
                       height: 15,
                     ),
                     defaultFormField(
-                      controller: Gender,
+                      controller: gender,
                       // type: TextInputType.emailAddress,
                       validate: (String? value) {
                         if (value != null) {
@@ -233,7 +237,7 @@ class RegisterScreen extends StatelessWidget {
                       height: 15,
                     ),
                     defaultFormField(
-                      controller: Country,
+                      controller: country,
                       type: TextInputType.text,
                       validate: (String? value) {
                         if (value != null) {
@@ -246,16 +250,15 @@ class RegisterScreen extends StatelessWidget {
                       onSubmit: (value) {
                         if (cubit.formKey.currentState!.validate()) {
                           cubit.userRegister(
-                            userName: userName.text,
-                            firstname: firstName.text,
-                            lastName: lastName.text,
-                            email: email.text,
-                            password: password.text,
-                            phoneNumber: phoneNumber.text,
-                            DateOfBirth: DateOfBirth.text,
-                            Gender: Gender.text,
-                            country: Country.text,
-                          );
+                              username: username.text,
+                              first_name: first_name.text,
+                              last_name: last_name.text,
+                              email: email.text,
+                              password: password.text,
+                              phone: phone.text,
+                              date_of_birth: date_of_birth.text,
+                              gender: gender.text,
+                              country: country.text);
                         }
                       },
                       radius: 10,
@@ -264,22 +267,24 @@ class RegisterScreen extends StatelessWidget {
                       height: 15,
                     ),
                     ConditionalBuilder(
-                      condition: state is! AppLoginLoadingState,
+                      condition: state is! AppRegisterLoadingState,
                       builder: (context) => button(
                         text: 'Submit',
                         function: () {
                           if (cubit.formKey.currentState!.validate()) {
+
                             cubit.userRegister(
-                                userName: userName.text,
-                                firstname: firstName.text,
-                                lastName: lastName.text,
+                                username: username.text,
+                          first_name: first_name.text,
+                          last_name: last_name.text,
                                 email: email.text,
                                 password: password.text,
-                                phoneNumber: phoneNumber.text,
-                                DateOfBirth: DateOfBirth.text,
-                                Gender: Gender.text,
-                                country: Country.text);
+                          phone: phone.text,
+                          date_of_birth: date_of_birth.text,
+                          gender: gender.text,
+                          country: country.text);
                           }
+
                         },
                       ),
                       fallback: (context) =>
