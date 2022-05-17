@@ -1,4 +1,6 @@
+
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -15,7 +17,7 @@ import '../../shared/components/components.dart';
 class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-
+    ;
     var cubit = AppLoginCubit.get(context);
     var emailController = TextEditingController();
     var passwordController = TextEditingController();
@@ -115,6 +117,34 @@ class LoginScreen extends StatelessWidget {
                       }
                     },
                   ),
+                  SizedBox(
+                    height: 15.0,
+                  ),
+                  Container(height: MediaQuery.of(context).size.height*0.09,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12),
+                        color: Colors.grey
+
+
+                          ),
+                    child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+
+                      Text('select your favourite category'),
+                      DropdownButton<String>(
+                       iconEnabledColor: Theme.of(context).primaryColor,
+                       // isExpanded: true,
+                        items: <String>['A', 'B', 'C', 'D'].map((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
+                        onChanged: (_) {},
+                      )
+
+                    ],),
+                  ),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
@@ -124,7 +154,8 @@ class LoginScreen extends StatelessWidget {
                             Navigator.pushReplacementNamed(
                                 context, ForgetPassword.routeName);
                           },
-                          child: textStyle.normal('Forget Password?', 13.5)
+
+                          child: textStyle.normal('Forget Password?', 13.5),
                       ),
                     ],
                   ),
@@ -145,6 +176,7 @@ class LoginScreen extends StatelessWidget {
                     fallback: (context) =>
                         Center(child: CircularProgressIndicator()),
                   ),
+
                 ],
               ),
             ),
