@@ -109,6 +109,9 @@ Widget buildCategoryItem(context, Category model, index) => Container(
                     ),
                     context: context,
                   );
+                  for (int i=AppCubit().clickNum ; i <= 1 ; i++) {
+                    print(AppCubit().clickNum+5);
+                  }
                 },
                 child: Container(
                   height: 30,

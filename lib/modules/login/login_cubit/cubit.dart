@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:smarttouristguide/layout/cubit/cubit.dart';
 import 'package:smarttouristguide/models/login_model.dart';
 import 'package:smarttouristguide/modules/login/login_screen.dart';
 import 'package:smarttouristguide/modules/register/register_screen.dart';
@@ -37,6 +38,9 @@ class AppLoginCubit extends Cubit<AppLoginStates> {
     ).then((value) {
       print(value.data);
       loginModel = LoginModel.fromJson(value.data);
+      AppCubit().getProfile();
+      AppCubit().getHomeData();
+      AppCubit().getFavorites();
       emit(AppLoginSuccessState(loginModel));
     }).catchError((error) {
       print('error is = ${error.toString()}');

@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:readmore/readmore.dart';
 import 'package:smarttouristguide/layout/cubit/cubit.dart';
 import 'package:smarttouristguide/layout/cubit/states.dart';
 import 'package:smarttouristguide/models/place_details_model.dart';
@@ -278,12 +279,15 @@ Widget PlaceDetailsScreenBuilder(Data model, context, catName) => Scaffold(
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    Text(
-                      '${model.Description}',
-                      style: TextStyle(
-                        color: AppColors.bodyDetailsColor,
-                      ),
-                    ),
+                    ReadMoreText('${model.Description}',
+                        style: TextStyle(
+                          color: AppColors.bodyDetailsColor,
+                        ),
+                        trimLines: 3,
+                        colorClickableText: AppColors.primaryColor,
+                        trimMode: TrimMode.Line,
+                        trimCollapsedText: 'More',
+                        trimExpandedText: 'Less '),
                     SizedBox(
                       height: 5.0,
                     ),
@@ -370,6 +374,9 @@ Widget commentBuilder(Comments commentModel) => Container(
               fontWeight: FontWeight.bold,
               fontSize: 16.0,
             ),
+          ),
+          SizedBox(
+            height: 2.0,
           ),
           Text(
             '${commentModel.comment}',

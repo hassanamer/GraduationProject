@@ -11,6 +11,7 @@ import 'package:smarttouristguide/modules/place_details/place_details_screen.dar
 import 'package:smarttouristguide/modules/search/search_screen.dart';
 import 'package:smarttouristguide/shared/styles/colors.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:smarttouristguide/test_screen.dart';
 
 import '../../shared/components/components.dart';
 import '../events/events_screen.dart';
@@ -149,11 +150,7 @@ class HomeScreen extends StatelessWidget {
                                 ),
                                 MaterialButton(
                                   onPressed: () {
-                                    print(
-                                      Sentiment.analysis(
-                                        'you are amazing but you are stupid so this is good person',
-                                      ),
-                                    );
+                                    navigateTo(context: context, widget: Test());
                                   },
                                   child: HomeRow(
                                     text: AppLocalizations.of(context)!.plan,
@@ -201,7 +198,7 @@ class HomeScreen extends StatelessWidget {
                                     itemBuilder: (context, index) =>
                                         buildHomePopularItem(
                                       cubit
-                                          .homeModel!.data.popularPlaces[index],
+                                          .genderPlaces[index],
                                       context,
                                     ),
                                     separatorBuilder: (context, index) =>
@@ -209,7 +206,7 @@ class HomeScreen extends StatelessWidget {
                                       width: 10.0,
                                     ),
                                     itemCount: cubit
-                                        .homeModel!.data.popularPlaces.length,
+                                        .genderPlaces.length,
                                     scrollDirection: Axis.horizontal,
                                   ),
                                 ),
@@ -315,7 +312,7 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-Widget buildHomePopularItem(PopularPlaces model, context) => InkWell(
+Widget buildHomePopularItem(model, context) => InkWell(
       onTap: () {
         AppCubit.get(context).getPlaceDetails(
           placeId: model.id,

@@ -98,6 +98,7 @@ class AppCubit extends Cubit<AppStates> {
       homeModel!.data.home_places.forEach((element) {
         favorites.addAll({element.id: element.inFavourite});
       });
+      gender();
       recommendation();
       blacklist();
       emit(AppGetDataSuccessState());
@@ -154,14 +155,6 @@ class AppCubit extends Cubit<AppStates> {
       token: 'Token ${token}',
     ).then((value) {
       getProfileModel = GetProfileModel.fromJson(value.data);
-
-      emailController!.text = getProfileModel!.data.email;
-      firstNameController!.text = getProfileModel!.data.firstName;
-      lastNameController!.text = getProfileModel!.data.lastName;
-      phoneController!.text = getProfileModel!.data.phone;
-      dateOfBirthController!.text = getProfileModel!.data.dateOfBirth;
-      genderController!.text = getProfileModel!.data.gender;
-      countryController!.text = getProfileModel!.data.country;
       emit(AppGetPorfileSuccessState());
     }).catchError((error) {
       emit(AppGetPorfileErrorState());
@@ -428,6 +421,31 @@ class AppCubit extends Cubit<AppStates> {
       }
     }
   }
+
+  List<home_place> genderPlaces = [];
+
+  void gender() {
+    genderPlaces =[];
+
+    if (getProfileModel!.data.gender == 'male') {
+      for(var place in homeModel!.data.home_places) {
+        if(place.city == 'Giza' || place.city == 'Alexandria') {
+          genderPlaces.add(place);
+        }
+      }
+    } else if (getProfileModel!.data.gender == 'female') {
+      for(var place in homeModel!.data.home_places) {
+        if(place.city == 'Cairo') {
+          genderPlaces.add(place);
+        }
+      }
+    }
+  }
+
+  void cubitTest() {print("it's ok");}
+
+  int clickNum =0;
+
 }
 
 // int placeIndex = 0;

@@ -167,8 +167,6 @@ Widget bottomNavBar(context) {
   );
 }
 
-
-
 Widget defaultFormField({
   required TextEditingController controller,
   TextInputType? type,
@@ -273,20 +271,26 @@ Widget RateIconButton({
       onPressed: onPressed,
     );
 
-Widget login_register_button(context,Screen, text ) {
-  return button(function: (){ showModalBottomSheet(
-      isDismissible: false,
-      enableDrag: false,
-      backgroundColor: Colors.transparent,
-      context: context,
-      builder: (context) {
-        return Container(
-            height: double.infinity,
-            decoration: const BoxDecoration(
-                borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(20),
-                    topLeft: Radius.circular(20)),
-                color: Colors.white),
-            child: Screen);
-      });}, text: text);
+Widget login_register_button(context, Screen, text) {
+  return button(
+      function: () {
+        showModalBottomSheet(
+            isDismissible: false,
+            enableDrag: false,
+            backgroundColor: Colors.transparent,
+            context: context,
+            builder: (context) {
+              return Container(
+                  height: double.infinity,
+                  decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(20),
+                          topLeft: Radius.circular(20)),
+                      color: Colors.white),
+                  child: Screen);
+            });
+      },
+      text: text);
 }
+
+Widget ratee() => Icon(Icons.star_rate);
