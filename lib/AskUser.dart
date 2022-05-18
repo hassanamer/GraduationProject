@@ -6,7 +6,8 @@ import 'modules/cubit/states.dart';
 
 class AskUser extends StatelessWidget {
   static const routeName = 'AskUser';
-  List<String> SelectCatItem = [];
+  List SelectCatItem = [];
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<ChangeColorCubit, ChangesStates>(
@@ -173,6 +174,8 @@ class AskUser extends StatelessWidget {
                           backgroundColor:
                               MaterialStateProperty.all(Colors.transparent)),
                       onPressed: () {
+                        CatItems();
+                        print(CatItems());
                         Navigator.pop(context);
                       },
                       child: Text('Continue'),
@@ -184,5 +187,9 @@ class AskUser extends StatelessWidget {
         );
       },
     );
+  }
+
+  List CatItems() {
+    return SelectCatItem;
   }
 }

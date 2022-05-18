@@ -87,7 +87,7 @@ class ChangeColorCubit extends Cubit<ChangesStates> {
     checkBox1 = isChecked
         ? Icons.check_box_rounded
         : Icons.check_box_outline_blank_rounded;
-    emit(AppChangeCheckBoxState());
+    emit(AppChangeCheckBoxState1());
   }
 
   bool isChecked2 = false;
@@ -98,7 +98,7 @@ class ChangeColorCubit extends Cubit<ChangesStates> {
     checkBox2 = isChecked
         ? Icons.check_box_rounded
         : Icons.check_box_outline_blank_rounded;
-    emit(AppChangeCheckBoxState());
+    emit(AppChangeCheckBoxState2());
   }
 
   bool isChecked3 = false;
@@ -109,7 +109,7 @@ class ChangeColorCubit extends Cubit<ChangesStates> {
     checkBox3 = isChecked
         ? Icons.check_box_rounded
         : Icons.check_box_outline_blank_rounded;
-    emit(AppChangeCheckBoxState());
+    emit(AppChangeCheckBoxState3());
   }
 
   bool isChecked4 = false;
@@ -120,7 +120,7 @@ class ChangeColorCubit extends Cubit<ChangesStates> {
     checkBox4 = isChecked
         ? Icons.check_box_rounded
         : Icons.check_box_outline_blank_rounded;
-    emit(AppChangeCheckBoxState());
+    emit(AppChangeCheckBoxState4());
   }
 
   bool isChecked5 = false;
@@ -131,7 +131,7 @@ class ChangeColorCubit extends Cubit<ChangesStates> {
     checkBox5 = isChecked
         ? Icons.check_box_rounded
         : Icons.check_box_outline_blank_rounded;
-    emit(AppChangeCheckBoxState());
+    emit(AppChangeCheckBoxState5());
   }
 
   bool isChecked6 = false;
@@ -142,7 +142,7 @@ class ChangeColorCubit extends Cubit<ChangesStates> {
     checkBox6 = isChecked
         ? Icons.check_box_rounded
         : Icons.check_box_outline_blank_rounded;
-    emit(AppChangeCheckBoxState());
+    emit(AppChangeCheckBoxState6());
   }
 
   bool isChecked7 = false;
@@ -153,7 +153,7 @@ class ChangeColorCubit extends Cubit<ChangesStates> {
     checkBox7 = isChecked
         ? Icons.check_box_rounded
         : Icons.check_box_outline_blank_rounded;
-    emit(AppChangeCheckBoxState());
+    emit(AppChangeCheckBoxState7());
   }
 }
 //

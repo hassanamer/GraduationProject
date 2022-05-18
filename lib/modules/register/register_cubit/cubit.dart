@@ -62,5 +62,4 @@ class AppRegisterCubit extends Cubit<AppRegisterStates> {
   }
 
   var formKey = GlobalKey<FormState>();
-
 }
