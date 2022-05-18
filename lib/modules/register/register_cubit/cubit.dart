@@ -11,38 +11,38 @@ class AppRegisterCubit extends Cubit<AppRegisterStates> {
 
   static AppRegisterCubit get(context) => BlocProvider.of(context);
 
-  Register_model? registerModel;
+  RegisterModel? registerModel;
 
   void userRegister({
     required String email,
     required String password,
-    required String firstname,
-    required String lastName,
-    required String phoneNumber,
-    required String DateOfBirth,
-    required String Gender,
+    required String first_name,
+    required String last_name,
+    required String phone,
+    required String date_of_birth,
+    required String gender,
     required String country,
-    required String userName,
+    required String username,
   }) {
     emit(AppRegisterLoadingState());
 
     DioHelper.postData(
       url: REGISTER,
       data: {
-        "username": userName,
-        'first_name': firstname,
-        'last_name': lastName,
+        "username": username,
+        'first_name': first_name,
+        'last_name': last_name,
         'email': email,
         'password': password,
-        'phone': phoneNumber,
-        'gender': Gender,
-        'date_of_birth': DateOfBirth,
+        'phone': phone,
+        'gender': gender,
+        'date_of_birth': date_of_birth,
         'country': country,
       },
     ).then((value) {
       print(value.data);
 
-      registerModel = Register_model.fromJson(value.data);
+      registerModel = RegisterModel.fromJson(value.data);
 
       emit(AppRegisterSuccessState(registerModel));
     }).catchError((error) {

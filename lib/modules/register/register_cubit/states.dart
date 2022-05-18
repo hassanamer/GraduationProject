@@ -8,9 +8,9 @@ class AppRegisterLoadingState extends AppRegisterStates {}
 
 class AppRegisterSuccessState extends AppRegisterStates
 {
-  final Register_model? RegisterModel;
+  final RegisterModel? registerModel;
 
-  AppRegisterSuccessState(this.RegisterModel) {
+  AppRegisterSuccessState(this.registerModel) {
 
   }
 }
