@@ -1,6 +1,8 @@
 import 'dart:ui';
 
 import 'package:bloc/bloc.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smarttouristguide/modules/cubit/states.dart';
 import 'package:smarttouristguide/shared/styles/colors.dart';
@@ -54,5 +56,15 @@ class ChangeColorCubit extends Cubit<ChangesStates> {
       changeMode = true;
     }
     emit(ChangeLanguage());
+  }
+
+  bool isCheckBox = true;
+  IconData CheckBoxIcon = Icons.check_box_outline_blank_sharp;
+  void ChangeCheckBoxa() {
+    isCheckBox = !isCheckBox;
+    CheckBoxIcon = isCheckBox
+        ? Icons.check_box_outline_blank_sharp
+        : Icons.check_box_outlined;
+    emit(ChangeCheckBox());
   }
 }

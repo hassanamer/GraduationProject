@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:smarttouristguide/AskUser.dart';
 import 'package:smarttouristguide/layout/app_layout.dart';
 import 'package:smarttouristguide/layout/cubit/cubit.dart';
 import 'package:smarttouristguide/modules/cubit/cubit.dart';
@@ -14,6 +15,7 @@ import 'package:smarttouristguide/shared/network/local/cache_helper.dart';
 import 'package:smarttouristguide/shared/network/remote/dio_helper.dart';
 import 'package:smarttouristguide/shared/styles/themes.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'modules/home/home_screen.dart';
 import 'modules/login/forget_password.dart';
 
 void main() async {
@@ -90,6 +92,8 @@ class MyApp extends StatelessWidget {
           UserProfile.routeName: (context) => UserProfile(),
           ForgetPassword.routeName: (context) => ForgetPassword(),
           PlaceDetailsScreen.routeName: (context) => PlaceDetailsScreen(),
+          HomeScreen.routeName: (context) => HomeScreen(),
+          AskUser.routeName: (context) => AskUser(),
         },
       ),
     );
