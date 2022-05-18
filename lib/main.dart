@@ -4,6 +4,8 @@ import 'package:smarttouristguide/AskUser.dart';
 import 'package:smarttouristguide/layout/app_layout.dart';
 import 'package:smarttouristguide/layout/cubit/cubit.dart';
 import 'package:smarttouristguide/modules/cubit/cubit.dart';
+import 'package:smarttouristguide/modules/home/home_screen.dart';
+import 'package:smarttouristguide/modules/login/forget_password.dart';
 import 'package:smarttouristguide/modules/register/register_cubit/cubit.dart';
 import 'package:smarttouristguide/modules/welcome_screen/welcome_screen.dart';
 import 'package:smarttouristguide/modules/login/login_cubit/cubit.dart';
@@ -15,8 +17,7 @@ import 'package:smarttouristguide/shared/network/local/cache_helper.dart';
 import 'package:smarttouristguide/shared/network/remote/dio_helper.dart';
 import 'package:smarttouristguide/shared/styles/themes.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'modules/home/home_screen.dart';
-import 'modules/login/forget_password.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
