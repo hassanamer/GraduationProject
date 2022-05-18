@@ -15,8 +15,7 @@ class AppLoginCubit extends Cubit<AppLoginStates> {
 
   static AppLoginCubit get(context) => BlocProvider.of(context);
 
-  void getToken()
-  {
+  void getToken() {
     token = CacheHelper.getData(key: 'token') ?? '';
     emit(AppGetTokenDoneState());
   }
@@ -54,7 +53,7 @@ class AppLoginCubit extends Cubit<AppLoginStates> {
   void changePasswordVisibility() {
     isPassword = !isPassword;
     suffix =
-    isPassword ? Icons.visibility_outlined : Icons.visibility_off_outlined;
+        isPassword ? Icons.visibility_outlined : Icons.visibility_off_outlined;
     emit(AppChangePasswordVisibilityState());
   }
 

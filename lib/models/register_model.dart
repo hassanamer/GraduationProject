@@ -1,48 +1,26 @@
 class RegisterModel {
-  bool? status;
-  String? message;
-  Data? data;
+  late final bool status;
+  late final String message;
+  late final Data data;
 
-  RegisterModel({this.status, this.message, this.data});
-
-  RegisterModel.fromJson(Map<String, dynamic> json) {
+  RegisterModel.fromJson(Map<String, dynamic> json){
     status = json['status'];
     message = json['message'];
-    data = json['data'] != null ? new Data.fromJson(json['data']) : null;
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['status'] = this.status;
-    data['message'] = this.message;
-    if (this.data != null) {
-      data['data'] = this.data!.toJson();
-    }
-    return data;
+    data = Data.fromJson(json['data']);
   }
 }
 
 class Data {
-  String? firstName;
-  String? lastName;
-  String? username;
-  String? email;
-  String? phone;
-  String? gender;
-  String? country;
-  String? dateOfBirth;
+  late final String firstName;
+  late final String lastName;
+  late final String username;
+  late final String email;
+  late final String phone;
+  late final String gender;
+  late final String country;
+  late final String dateOfBirth;
 
-  Data(
-      {this.firstName,
-        this.lastName,
-        this.username,
-        this.email,
-        this.phone,
-        this.gender,
-        this.country,
-        this.dateOfBirth});
-
-  Data.fromJson(Map<String, dynamic> json) {
+  Data.fromJson(Map<String, dynamic> json){
     firstName = json['first_name'];
     lastName = json['last_name'];
     username = json['username'];
@@ -51,18 +29,5 @@ class Data {
     gender = json['gender'];
     country = json['country'];
     dateOfBirth = json['date_of_birth'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['first_name'] = this.firstName;
-    data['last_name'] = this.lastName;
-    data['username'] = this.username;
-    data['email'] = this.email;
-    data['phone'] = this.phone;
-    data['gender'] = this.gender;
-    data['country'] = this.country;
-    data['date_of_birth'] = this.dateOfBirth;
-    return data;
   }
 }

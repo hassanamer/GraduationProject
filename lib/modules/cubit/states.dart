@@ -11,3 +11,5 @@ class ChangeLanguage extends ChangesStates {}
 class ChangeLanguage1 extends ChangesStates {}
 
 class ChangeCheckBox extends ChangesStates {}
+
+class AppChangeCheckBoxState extends ChangesStates {}

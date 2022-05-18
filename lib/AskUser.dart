@@ -12,6 +12,8 @@ class AskUser extends StatelessWidget {
     return BlocConsumer<ChangeColorCubit, ChangesStates>(
       listener: (context, state) {},
       builder: (context, state) {
+        var cubit = ChangeColorCubit.get(context);
+
         return Scaffold(
           body: Container(
               color: Colors.white,
@@ -35,10 +37,10 @@ class AskUser extends StatelessWidget {
                           ),
                           Spacer(),
                           IconButton(
-                            icon: Icon(ChangeColorCubit().CheckBoxIcon),
+                            icon: Icon(cubit.checkBox),
                             onPressed: () {
-                              ChangeColorCubit().ChangeCheckBoxa;
-                              print('${ChangeColorCubit().isCheckBox}');
+                              cubit.changePasswordVisibility();
+                              print('${cubit.checkBox}');
                             },
                           ),
                         ],
