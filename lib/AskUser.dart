@@ -38,10 +38,15 @@ class AskUser extends StatelessWidget {
                           ),
                           Spacer(),
                           IconButton(
-                            icon: Icon(cubit.checkBox),
+                            icon: Icon(
+                              cubit.checkBox,
+                              size: 32,
+                            ),
                             onPressed: () {
                               cubit.changePasswordVisibility();
-                              SelectCatItem.add('Safari');
+                              if (cubit.checkBox == cubit.SecondcheckBox) {
+                                SelectCatItem.add('Safari');
+                              }
                             },
                           ),
                         ],
@@ -54,10 +59,15 @@ class AskUser extends StatelessWidget {
                           ),
                           Spacer(),
                           IconButton(
-                            icon: Icon(cubit.checkBox1),
+                            icon: Icon(
+                              cubit.checkBox1,
+                              size: 32,
+                            ),
                             onPressed: () {
                               cubit.changePasswordVisibility1();
-                              SelectCatItem.add('Eco');
+                              if (cubit.checkBox1 == cubit.SecondcheckBox) {
+                                SelectCatItem.add('Eco');
+                              }
                             },
                           ),
                         ],
@@ -70,10 +80,15 @@ class AskUser extends StatelessWidget {
                           ),
                           Spacer(),
                           IconButton(
-                            icon: Icon(cubit.checkBox2),
+                            icon: Icon(
+                              cubit.checkBox2,
+                              size: 32,
+                            ),
                             onPressed: () {
                               cubit.changePasswordVisibility2();
-                              SelectCatItem.add('Islamic');
+                              if (cubit.checkBox2 == cubit.SecondcheckBox) {
+                                SelectCatItem.add('Islamic');
+                              }
                             },
                           ),
                         ],
@@ -86,10 +101,15 @@ class AskUser extends StatelessWidget {
                           ),
                           Spacer(),
                           IconButton(
-                            icon: Icon(cubit.checkBox3),
+                            icon: Icon(
+                              cubit.checkBox3,
+                              size: 32,
+                            ),
                             onPressed: () {
                               cubit.changePasswordVisibility3();
-                              SelectCatItem.add('Coptic');
+                              if (cubit.checkBox3 == cubit.SecondcheckBox) {
+                                SelectCatItem.add('Coptic');
+                              }
                             },
                           ),
                         ],
@@ -102,10 +122,15 @@ class AskUser extends StatelessWidget {
                           ),
                           Spacer(),
                           IconButton(
-                            icon: Icon(cubit.checkBox4),
+                            icon: Icon(
+                              cubit.checkBox4,
+                              size: 32,
+                            ),
                             onPressed: () {
                               cubit.changePasswordVisibility4();
-                              SelectCatItem.add('Cultural');
+                              if (cubit.checkBox4 == cubit.SecondcheckBox) {
+                                SelectCatItem.add('Cultural');
+                              }
                             },
                           ),
                         ],
@@ -118,10 +143,15 @@ class AskUser extends StatelessWidget {
                           ),
                           Spacer(),
                           IconButton(
-                            icon: Icon(cubit.checkBox5),
+                            icon: Icon(
+                              cubit.checkBox5,
+                              size: 32,
+                            ),
                             onPressed: () {
                               cubit.changePasswordVisibility5();
-                              SelectCatItem.add('Beach');
+                              if (cubit.checkBox5 == cubit.SecondcheckBox) {
+                                SelectCatItem.add('Beach');
+                              }
                             },
                           ),
                         ],
@@ -134,10 +164,15 @@ class AskUser extends StatelessWidget {
                           ),
                           Spacer(),
                           IconButton(
-                            icon: Icon(cubit.checkBox6),
+                            icon: Icon(
+                              cubit.checkBox6,
+                              size: 32,
+                            ),
                             onPressed: () {
                               cubit.changePasswordVisibility6();
-                              SelectCatItem.add('Leisure');
+                              if (cubit.checkBox6 == cubit.SecondcheckBox) {
+                                SelectCatItem.add('Leisure');
+                              }
                             },
                           ),
                         ],
@@ -150,10 +185,16 @@ class AskUser extends StatelessWidget {
                           ),
                           Spacer(),
                           IconButton(
-                            icon: Icon(cubit.checkBox7),
+                            icon: Icon(
+                              cubit.checkBox7,
+                              size: 32,
+                            ),
                             onPressed: () {
                               cubit.changePasswordVisibility7();
-                              SelectCatItem.add('Medical');
+                              if (cubit.checkBox7 == cubit.SecondcheckBox) {
+                                SelectCatItem.add('Medical');
+                              }
+                              ;
                             },
                           ),
                         ],
@@ -176,7 +217,6 @@ class AskUser extends StatelessWidget {
                       onPressed: () {
                         CatItems();
                         print(CatItems());
-                        print('object');
                         Navigator.pop(context);
                       },
                       child: Text('Continue'),
