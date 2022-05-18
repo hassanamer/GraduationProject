@@ -78,3 +78,4 @@ class ChangeColorCubit extends Cubit<ChangesStates> {
     emit(AppChangeCheckBoxState());
   }
 }
+//
