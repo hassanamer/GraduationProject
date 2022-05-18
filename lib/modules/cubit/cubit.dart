@@ -67,93 +67,93 @@ class ChangeColorCubit extends Cubit<ChangesStates> {
   //       : Icons.check_box_outlined;
   //   emit(ChangeCheckBox());
   // }
-
-  bool isChecked = false;
+  IconData insialcheckBox = Icons.check_box_outline_blank_rounded;
+  IconData SecondcheckBox = Icons.check_box_rounded;
   IconData checkBox = Icons.check_box_outline_blank_rounded;
 
   void changePasswordVisibility() {
-    isChecked = !isChecked;
-    checkBox = isChecked
-        ? Icons.check_box_rounded
-        : Icons.check_box_outline_blank_rounded;
+    if (checkBox == insialcheckBox) {
+      checkBox = SecondcheckBox;
+    } else {
+      checkBox = insialcheckBox;
+    }
     emit(AppChangeCheckBoxState());
   }
 
-  bool isChecked1 = false;
   IconData checkBox1 = Icons.check_box_outline_blank_rounded;
 
   void changePasswordVisibility1() {
-    isChecked1 = !isChecked1;
-    checkBox1 = isChecked
-        ? Icons.check_box_rounded
-        : Icons.check_box_outline_blank_rounded;
+    if (checkBox1 == insialcheckBox) {
+      checkBox1 = SecondcheckBox;
+    } else {
+      checkBox1 = insialcheckBox;
+    }
     emit(AppChangeCheckBoxState1());
   }
 
-  bool isChecked2 = false;
   IconData checkBox2 = Icons.check_box_outline_blank_rounded;
 
   void changePasswordVisibility2() {
-    isChecked2 = !isChecked2;
-    checkBox2 = isChecked
-        ? Icons.check_box_rounded
-        : Icons.check_box_outline_blank_rounded;
+    if (checkBox2 == insialcheckBox) {
+      checkBox2 = SecondcheckBox;
+    } else {
+      checkBox2 = insialcheckBox;
+    }
     emit(AppChangeCheckBoxState2());
   }
 
-  bool isChecked3 = false;
   IconData checkBox3 = Icons.check_box_outline_blank_rounded;
 
   void changePasswordVisibility3() {
-    isChecked3 = !isChecked3;
-    checkBox3 = isChecked
-        ? Icons.check_box_rounded
-        : Icons.check_box_outline_blank_rounded;
+    if (checkBox3 == insialcheckBox) {
+      checkBox3 = SecondcheckBox;
+    } else {
+      checkBox3 = insialcheckBox;
+    }
     emit(AppChangeCheckBoxState3());
   }
 
-  bool isChecked4 = false;
   IconData checkBox4 = Icons.check_box_outline_blank_rounded;
 
   void changePasswordVisibility4() {
-    isChecked4 = !isChecked4;
-    checkBox4 = isChecked
-        ? Icons.check_box_rounded
-        : Icons.check_box_outline_blank_rounded;
+    if (checkBox4 == insialcheckBox) {
+      checkBox4 = SecondcheckBox;
+    } else {
+      checkBox4 = insialcheckBox;
+    }
     emit(AppChangeCheckBoxState4());
   }
 
-  bool isChecked5 = false;
   IconData checkBox5 = Icons.check_box_outline_blank_rounded;
 
   void changePasswordVisibility5() {
-    isChecked5 = !isChecked5;
-    checkBox5 = isChecked
-        ? Icons.check_box_rounded
-        : Icons.check_box_outline_blank_rounded;
+    if (checkBox5 == insialcheckBox) {
+      checkBox5 = SecondcheckBox;
+    } else {
+      checkBox5 = insialcheckBox;
+    }
     emit(AppChangeCheckBoxState5());
   }
 
-  bool isChecked6 = false;
   IconData checkBox6 = Icons.check_box_outline_blank_rounded;
 
   void changePasswordVisibility6() {
-    isChecked6 = !isChecked6;
-    checkBox6 = isChecked
-        ? Icons.check_box_rounded
-        : Icons.check_box_outline_blank_rounded;
+    if (checkBox6 == insialcheckBox) {
+      checkBox6 = SecondcheckBox;
+    } else {
+      checkBox6 = insialcheckBox;
+    }
     emit(AppChangeCheckBoxState6());
   }
 
-  bool isChecked7 = false;
   IconData checkBox7 = Icons.check_box_outline_blank_rounded;
 
   void changePasswordVisibility7() {
-    isChecked7 = !isChecked7;
-    checkBox7 = isChecked
-        ? Icons.check_box_rounded
-        : Icons.check_box_outline_blank_rounded;
+    if (checkBox7 == insialcheckBox) {
+      checkBox7 = SecondcheckBox;
+    } else {
+      checkBox7 = insialcheckBox;
+    }
     emit(AppChangeCheckBoxState7());
   }
 }
-//
