@@ -176,6 +176,7 @@ class AskUser extends StatelessWidget {
                       onPressed: () {
                         CatItems();
                         print(CatItems());
+                        print('object');
                         Navigator.pop(context);
                       },
                       child: Text('Continue'),
