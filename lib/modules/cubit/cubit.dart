@@ -17,6 +17,7 @@ class ChangeColorCubit extends Cubit<ChangesStates> {
   String? y;
 
   static ChangeColorCubit get(context) => BlocProvider.of(context);
+
   void changeColorIcon() {
     if (iconColor == true) {
       x = AppColors.primaryColor;
@@ -58,14 +59,15 @@ class ChangeColorCubit extends Cubit<ChangesStates> {
     emit(ChangeLanguage());
   }
 
-  // bool isCheckBox = true;
-  // IconData CheckBoxIcon = Icons.check_box_outline_blank_sharp;
-  // void ChangeCheckBoxa() {
-  //   isCheckBox = !isCheckBox;
-  //   CheckBoxIcon = isCheckBox
-  //       ? Icons.check_box_outline_blank_sharp
-  //       : Icons.check_box_outlined;
-  //   emit(ChangeCheckBox());
+  // bool isChecked = false;
+  // IconData checkBox = Icons.check_box_outline_blank_rounded;
+
+  // void changePasswordVisibility() {
+  //   isChecked = !isChecked;
+  //   checkBox = isChecked
+  //       ? Icons.check_box_rounded
+  //       : Icons.check_box_outline_blank_rounded;
+  //   emit(AppChangeCheckBoxState());
   // }
 
   bool isChecked = false;
