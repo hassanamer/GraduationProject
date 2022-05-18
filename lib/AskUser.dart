@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:smarttouristguide/modules/cubit/cubit.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smarttouristguide/shared/styles/colors.dart';
 import 'modules/cubit/states.dart';
 
 class AskUser extends StatelessWidget {
   static const routeName = 'AskUser';
+  List<String> SelectCatItem = [];
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<ChangeColorCubit, ChangesStates>(
@@ -40,7 +40,7 @@ class AskUser extends StatelessWidget {
                             icon: Icon(cubit.checkBox),
                             onPressed: () {
                               cubit.changePasswordVisibility();
-                              print('${cubit.checkBox}');
+                              SelectCatItem.add('Safari');
                             },
                           ),
                         ],
@@ -53,8 +53,11 @@ class AskUser extends StatelessWidget {
                           ),
                           Spacer(),
                           IconButton(
-                            onPressed: () {},
-                            icon: Icon(Icons.check_box_outline_blank_sharp),
+                            icon: Icon(cubit.checkBox1),
+                            onPressed: () {
+                              cubit.changePasswordVisibility1();
+                              SelectCatItem.add('Eco');
+                            },
                           ),
                         ],
                       ),
@@ -66,8 +69,11 @@ class AskUser extends StatelessWidget {
                           ),
                           Spacer(),
                           IconButton(
-                            onPressed: () {},
-                            icon: Icon(Icons.check_box_outline_blank_sharp),
+                            icon: Icon(cubit.checkBox2),
+                            onPressed: () {
+                              cubit.changePasswordVisibility2();
+                              SelectCatItem.add('Islamic');
+                            },
                           ),
                         ],
                       ),
@@ -79,8 +85,11 @@ class AskUser extends StatelessWidget {
                           ),
                           Spacer(),
                           IconButton(
-                            onPressed: () {},
-                            icon: Icon(Icons.check_box_outline_blank_sharp),
+                            icon: Icon(cubit.checkBox3),
+                            onPressed: () {
+                              cubit.changePasswordVisibility3();
+                              SelectCatItem.add('Coptic');
+                            },
                           ),
                         ],
                       ),
@@ -92,8 +101,11 @@ class AskUser extends StatelessWidget {
                           ),
                           Spacer(),
                           IconButton(
-                            onPressed: () {},
-                            icon: Icon(Icons.check_box_outline_blank_sharp),
+                            icon: Icon(cubit.checkBox4),
+                            onPressed: () {
+                              cubit.changePasswordVisibility4();
+                              SelectCatItem.add('Cultural');
+                            },
                           ),
                         ],
                       ),
@@ -105,8 +117,11 @@ class AskUser extends StatelessWidget {
                           ),
                           Spacer(),
                           IconButton(
-                            onPressed: () {},
-                            icon: Icon(Icons.check_box_outline_blank_sharp),
+                            icon: Icon(cubit.checkBox5),
+                            onPressed: () {
+                              cubit.changePasswordVisibility5();
+                              SelectCatItem.add('Beach');
+                            },
                           ),
                         ],
                       ),
@@ -118,8 +133,11 @@ class AskUser extends StatelessWidget {
                           ),
                           Spacer(),
                           IconButton(
-                            onPressed: () {},
-                            icon: Icon(Icons.check_box_outline_blank_sharp),
+                            icon: Icon(cubit.checkBox6),
+                            onPressed: () {
+                              cubit.changePasswordVisibility6();
+                              SelectCatItem.add('Leisure');
+                            },
                           ),
                         ],
                       ),
@@ -131,8 +149,11 @@ class AskUser extends StatelessWidget {
                           ),
                           Spacer(),
                           IconButton(
-                            onPressed: () {},
-                            icon: Icon(Icons.check_box_outline_blank_sharp),
+                            icon: Icon(cubit.checkBox7),
+                            onPressed: () {
+                              cubit.changePasswordVisibility7();
+                              SelectCatItem.add('Medical');
+                            },
                           ),
                         ],
                       ),
@@ -165,10 +186,3 @@ class AskUser extends StatelessWidget {
     );
   }
 }
-// ElevatedButton(
-// onPressed: () {
-// Navigator.pushReplacementNamed(
-// context, HomeScreen.routeName);
-// },
-// child: Text('Continue'),
-// ),
