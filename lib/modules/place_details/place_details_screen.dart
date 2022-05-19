@@ -41,6 +41,7 @@ class PlaceDetailsScreen extends StatelessWidget {
         return ConditionalBuilder(
           condition: state is! AppLoadingGetPlaceDetails,
           builder: (context) => RefreshIndicator(
+
             onRefresh: () {
               return cubit.getPlaceDetails(
                   placeId: cubit.placeDetailsModel!.data.id);

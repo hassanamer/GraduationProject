@@ -141,7 +141,6 @@ class AppCubit extends Cubit<AppStates> {
 
   GetProfileModel? getProfileModel;
 
-
   void getProfile() {
     emit(AppLoadingGetProfileState());
     DioHelper.getData(
@@ -184,7 +183,6 @@ class AppCubit extends Cubit<AppStates> {
   //     },
   //   ).then((value) {};
   // }
-
 
   RateModel? rateModel;
 
@@ -239,156 +237,160 @@ class AppCubit extends Cubit<AppStates> {
     required placeId,
     required rate,
   }) {
-    showModalBottomSheet(
+    showModalBottomSheet<dynamic>(
+      isScrollControlled: true,
       context: context,
-      builder: (context) =>
-      (Container(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: (Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                child: Text(
-                  'Your experience helps us to analyze data and recommend better places.',
-                ),
-              ),
-              SizedBox(
-                height: 15.0,
-              ),
-              Text(
-                'Rate ${placeName}',
-                style: TextStyle(
-                  fontSize: 18.0,
-                  fontWeight: FontWeight.bold,
-                  color: AppColors.primaryColor,
-                ),
-              ),
-              SizedBox(
-                height: 5.0,
-              ),
-              Center(
-                child: Container(
-                  child: Row(
-                    children: [
-                      RatingBar.builder(
-                        itemBuilder: (context, _) =>
-                            Icon(
-                              Icons.star_rate_rounded,
-                              color: AppColors.primaryColor,
-                            ),
-                        glow: false,
-                        unratedColor: AppColors.disabledAndHintColor,
-                        onRatingUpdate: (rating) {
-                          print(rating.toInt());
-                          addUpdateRate(
-                            placeId: placeId,
-                            rate: rating,
-                          );
-                        },
-                        itemCount: 5,
-                        minRating: 1.0,
-                        maxRating: 5.0,
-                        itemSize: 35.0,
-                        direction: Axis.horizontal,
-                      )
-                    ],
-                    mainAxisAlignment: MainAxisAlignment.center,
-                  ),
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: AppColors.disabledAndHintColor,
-                    ),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  padding: EdgeInsets.all(0),
-                  margin: EdgeInsets.all(0),
-                  width: 250,
-                ),
-              ),
-              SizedBox(
-                height: 15.0,
-              ),
-              SizedBox(
-                child: Text(
-                  'Add Comment on ${placeName}',
+      builder: (context) => Wrap(
+        children: [
+          (Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: (Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Rate ${placeName}',
                   style: TextStyle(
-                    fontSize: 18.0,
+                    fontSize: 16.5,
                     fontWeight: FontWeight.bold,
                     color: AppColors.primaryColor,
                   ),
                 ),
-              ),
-              SizedBox(
-                height: 5.0,
-              ),
-              Center(
-                child: Container(
-                  width: 250,
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: AppColors.disabledAndHintColor,
+                SizedBox(
+                  height: 5.0,
+                ),
+                Center(
+                  child: Container(
+                    child: Row(
+                      children: [
+                        RatingBar.builder(
+                          itemBuilder: (context, _) => Icon(
+                            Icons.star_rate_rounded,
+                            color: AppColors.primaryColor,
+                          ),
+                          glow: false,
+                          unratedColor: AppColors.disabledAndHintColor,
+                          onRatingUpdate: (rating) {
+                            print(rating.toInt());
+                            addUpdateRate(
+                              placeId: placeId,
+                              rate: rating,
+                            );
+                          },
+                          itemCount: 5,
+                          minRating: 1.0,
+                          maxRating: 5.0,
+                          itemSize: 35.0,
+                          direction: Axis.horizontal,
+                        )
+                      ],
+                      mainAxisAlignment: MainAxisAlignment.center,
                     ),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: Form(
-                    key: commentmKey,
-                    child: TextField(
-                      controller: commentController,
-                      minLines: 2,
-                      maxLines: 2,
-                      decoration: InputDecoration(
-                        hintText: 'Type your comment here..',
-                        hintStyle: TextStyle(
-                          fontSize: 15.0,
-                        ),
-                        contentPadding: EdgeInsets.all(11),
-                        border: InputBorder.none,
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: AppColors.disabledAndHintColor,
                       ),
-                      onSubmitted: (value) {
-                        addComment(
-                          placeId: placeId,
-                          comment: commentController.text,
-                        ).then((value) {
-                          commentController.clear();
-                        });
-                      },
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    padding: EdgeInsets.all(0),
+                    margin: EdgeInsets.all(0),
+                    width: 250,
+                  ),
+                ),
+                SizedBox(
+                  height: 15.0,
+                ),
+                SizedBox(
+                  child: Text(
+                    'Add Comment on ${placeName}',
+                    style: TextStyle(
+                      fontSize: 16.5,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.primaryColor,
                     ),
                   ),
                 ),
-              ),
-              SizedBox(
-                width: 275,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    MaterialButton(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
+                SizedBox(
+                  height: 5.0,
+                ),
+                Center(
+                  child: Container(
+                    width: 250,
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: AppColors.disabledAndHintColor,
                       ),
-                      color: AppColors.primaryColor,
-                      textColor: Colors.white,
-                      child: Text(
-                        'Submit',
-                      ),
-                      onPressed: () {
-                        if (commentmKey.currentState!.validate()) {
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Form(
+                      key: commentmKey,
+                      child: TextField(
+                        controller: commentController,
+                        minLines: 2,
+                        maxLines: 2,
+                        decoration: InputDecoration(
+                          hintText: 'Type your comment here..',
+                          hintStyle: TextStyle(
+                            fontSize: 15.0,
+                          ),
+                          contentPadding: EdgeInsets.all(11),
+                          border: InputBorder.none,
+                        ),
+                        onSubmitted: (value) {
                           addComment(
                             placeId: placeId,
                             comment: commentController.text,
                           ).then((value) {
                             commentController.clear();
                           });
-                        }
-                      },
+                        },
+                      ),
                     ),
-                  ],
+                  ),
                 ),
-              )
-            ],
+                SizedBox(
+                  width: 275,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      MaterialButton(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        color: AppColors.primaryColor,
+                        textColor: Colors.white,
+                        child: Text(
+                          'Submit',
+                        ),
+                        onPressed: () {
+                          if (commentmKey.currentState!.validate()) {
+                            addComment(
+                              placeId: placeId,
+                              comment: commentController.text,
+                            ).then((value) {
+                              commentController.clear();
+                            });
+                          }
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 20.0,
+                ),
+                SizedBox(
+                  child: Text(
+                    'Sharing your experience helps us analyze data and recommend better places.',
+                  ),
+                ),
+                SizedBox(
+                  height: 20.0,
+                ),
+              ],
+            )),
           )),
-        ),
-      )),
+        ],
+      ),
     );
   }
 
@@ -402,22 +404,14 @@ class AppCubit extends Cubit<AppStates> {
 
       for (var place in homeModel!.data.home_places) {
         for (var commentMap
-        in homeModel!.data.home_places[placeIndex].comments) {
+            in homeModel!.data.home_places[placeIndex].comments) {
           placeComments1.add(commentMap.comment);
         }
         if (placeComments1.length > 0) {
           print('${placeComments1}');
           String sentimentText = placeComments1.join(' ');
-          if (Sentiment
-              .analysis(sentimentText)
-              .words
-              .good
-              .length >
-              Sentiment
-                  .analysis(sentimentText)
-                  .words
-                  .bad
-                  .length &&
+          if (Sentiment.analysis(sentimentText).words.good.length >
+                  Sentiment.analysis(sentimentText).words.bad.length &&
               place.rate > 3.7) {
             recommended.add(place);
           } else {
@@ -443,22 +437,14 @@ class AppCubit extends Cubit<AppStates> {
 
       for (var place in homeModel!.data.home_places) {
         for (var commentMap
-        in homeModel!.data.home_places[placeIndex].comments) {
+            in homeModel!.data.home_places[placeIndex].comments) {
           placeComments2.add(commentMap.comment);
         }
         if (placeComments2.length > 0) {
           print('${placeComments2}');
           String sentimentText = placeComments2.join(' ');
-          if (Sentiment
-              .analysis(sentimentText)
-              .words
-              .bad
-              .length >
-              Sentiment
-                  .analysis(sentimentText)
-                  .words
-                  .good
-                  .length &&
+          if (Sentiment.analysis(sentimentText).words.bad.length >
+                  Sentiment.analysis(sentimentText).words.good.length &&
               place.rate <= 2.5) {
             notRecommended.add(place);
           } else {
@@ -499,7 +485,6 @@ class AppCubit extends Cubit<AppStates> {
   }
 
   int clickNum = 0;
-
 }
 
 // int placeIndex = 0;
