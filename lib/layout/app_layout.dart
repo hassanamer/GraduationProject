@@ -5,9 +5,10 @@ import 'package:smarttouristguide/layout/cubit/cubit.dart';
 import 'package:smarttouristguide/layout/cubit/states.dart';
 import 'package:smarttouristguide/modules/chat_bot/chat_bot_screen.dart';
 import 'package:smarttouristguide/modules/home/menu_drawer.dart';
-import 'package:smarttouristguide/modules/user/user_screen.dart';
 import 'package:smarttouristguide/shared/components/components.dart';
 import 'package:smarttouristguide/shared/styles/colors.dart';
+
+import '../modules/profile/profile_screen.dart';
 
 class AppLayout extends StatelessWidget {
   @override
@@ -29,7 +30,7 @@ class AppLayout extends StatelessWidget {
                 onPressed: () {
                   navigateTo(
                     context: context,
-                    widget: UserProfile(),
+                    widget: ProfileScreen(),
                   );
                 },
               )

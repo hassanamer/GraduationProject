@@ -6,12 +6,12 @@ import 'package:smarttouristguide/layout/cubit/cubit.dart';
 import 'package:smarttouristguide/modules/cubit/cubit.dart';
 import 'package:smarttouristguide/modules/home/home_screen.dart';
 import 'package:smarttouristguide/modules/login/forget_password.dart';
+import 'package:smarttouristguide/modules/profile/profile_screen.dart';
 import 'package:smarttouristguide/modules/register/register_cubit/cubit.dart';
 import 'package:smarttouristguide/modules/welcome_screen/welcome_screen.dart';
 import 'package:smarttouristguide/modules/login/login_cubit/cubit.dart';
 import 'package:smarttouristguide/modules/on_boarding/on_boarding_screen.dart';
 import 'package:smarttouristguide/modules/place_details/place_details_screen.dart';
-import 'package:smarttouristguide/modules/user/user_screen.dart';
 import 'package:smarttouristguide/shared/components/constants.dart';
 import 'package:smarttouristguide/shared/network/local/cache_helper.dart';
 import 'package:smarttouristguide/shared/network/remote/dio_helper.dart';
@@ -90,7 +90,7 @@ class MyApp extends StatelessWidget {
         // home: startWidget,
         routes: {
           Welcome.routeName: (context) => Welcome(),
-          UserProfile.routeName: (context) => UserProfile(),
+          ProfileScreen.routeName: (context) => ProfileScreen(),
           ForgetPassword.routeName: (context) => ForgetPassword(),
           PlaceDetailsScreen.routeName: (context) => PlaceDetailsScreen(),
           HomeScreen.routeName: (context) => HomeScreen(),

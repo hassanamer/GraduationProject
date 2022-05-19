@@ -2,7 +2,6 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:smarttouristguide/modules/user/user_screen.dart';
 import 'package:smarttouristguide/shared/components/constants.dart';
 
 import '../../layout/cubit/cubit.dart';
@@ -10,6 +9,7 @@ import '../../models/get_profile_model.dart';
 import '../../shared/styles/colors.dart';
 import '../cubit/cubit.dart';
 import '../cubit/states.dart';
+import '../profile/profile_screen.dart';
 
 class MenuDrawer extends StatelessWidget {
   @override
@@ -94,7 +94,7 @@ Widget currentt(context, Data user) => Drawer(
                             IconButton(
                               onPressed: () {
                                 Navigator.of(context)
-                                    .pushNamed(UserProfile.routeName);
+                                    .pushNamed(ProfileScreen.routeName);
                               },
                               icon: const Icon(
                                 Icons.edit_outlined,

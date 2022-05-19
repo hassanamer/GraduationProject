@@ -5,6 +5,7 @@ import 'package:sentiment_dart/sentiment_dart.dart';
 import 'package:smarttouristguide/layout/cubit/states.dart';
 import 'package:smarttouristguide/models/cat_places_model.dart';
 import 'package:smarttouristguide/models/comment_model.dart';
+import 'package:smarttouristguide/models/edit_profile_model.dart';
 import 'package:smarttouristguide/models/favorites_data_model.dart';
 import 'package:smarttouristguide/models/get_profile_model.dart';
 import 'package:smarttouristguide/models/home_model.dart';
@@ -139,6 +140,21 @@ class AppCubit extends Cubit<AppStates> {
   }
 
   GetProfileModel? getProfileModel;
+
+
+  void getProfile() {
+    emit(AppLoadingGetProfileState());
+    DioHelper.getData(
+      url: PROFILE,
+      token: 'Token ${token}',
+    ).then((value) {
+      getProfileModel = GetProfileModel.fromJson(value.data);
+      emit(AppGetProfileSuccessState());
+    }).catchError((error) {
+      emit(AppGetProfileErrorState());
+    });
+  }
+
   TextEditingController? emailController;
   TextEditingController? firstNameController;
   TextEditingController? lastNameController;
@@ -146,20 +162,29 @@ class AppCubit extends Cubit<AppStates> {
   TextEditingController? dateOfBirthController;
   TextEditingController? genderController;
   TextEditingController? countryController;
+
   var editProfileKey = GlobalKey<FormState>();
 
-  void getProfile() {
-    emit(AppLoadingGetProfileState());
-    DioHelper.getData(
-      url: 'api/profile/',
-      token: 'Token ${token}',
-    ).then((value) {
-      getProfileModel = GetProfileModel.fromJson(value.data);
-      emit(AppGetPorfileSuccessState());
-    }).catchError((error) {
-      emit(AppGetPorfileErrorState());
-    });
-  }
+  EditProfileModel? editProfileModel;
+
+  // void editProfile() {
+  //   emit(AppEditProfileLoadingState());
+  //   DioHelper.postData(
+  //     url: REGISTER,
+  //     data: {
+  //       "username": username,
+  //       'first_name': first_name,
+  //       'last_name': last_name,
+  //       'email': email,
+  //       'password': password,
+  //       'phone': phone,
+  //       'gender': gender,
+  //       'date_of_birth': date_of_birth,
+  //       'country': country,
+  //     },
+  //   ).then((value) {};
+  // }
+
 
   RateModel? rateModel;
 
@@ -216,7 +241,8 @@ class AppCubit extends Cubit<AppStates> {
   }) {
     showModalBottomSheet(
       context: context,
-      builder: (context) => (Container(
+      builder: (context) =>
+      (Container(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: (Column(
@@ -224,7 +250,7 @@ class AppCubit extends Cubit<AppStates> {
             children: [
               SizedBox(
                 child: Text(
-                  'Your experience helps us to analyze data and recommend the best places for you. ♥',
+                  'Your experience helps us to analyze data and recommend better places.',
                 ),
               ),
               SizedBox(
@@ -246,10 +272,11 @@ class AppCubit extends Cubit<AppStates> {
                   child: Row(
                     children: [
                       RatingBar.builder(
-                        itemBuilder: (context, _) => Icon(
-                          Icons.star_rate_rounded,
-                          color: AppColors.primaryColor,
-                        ),
+                        itemBuilder: (context, _) =>
+                            Icon(
+                              Icons.star_rate_rounded,
+                              color: AppColors.primaryColor,
+                            ),
                         glow: false,
                         unratedColor: AppColors.disabledAndHintColor,
                         onRatingUpdate: (rating) {
@@ -262,7 +289,7 @@ class AppCubit extends Cubit<AppStates> {
                         itemCount: 5,
                         minRating: 1.0,
                         maxRating: 5.0,
-                        itemSize: 45.0,
+                        itemSize: 35.0,
                         direction: Axis.horizontal,
                       )
                     ],
@@ -270,8 +297,7 @@ class AppCubit extends Cubit<AppStates> {
                   ),
                   decoration: BoxDecoration(
                     border: Border.all(
-                      color: Color(0x5F005764),
-                      width: 1.5,
+                      color: AppColors.disabledAndHintColor,
                     ),
                     borderRadius: BorderRadius.circular(12),
                   ),
@@ -301,8 +327,7 @@ class AppCubit extends Cubit<AppStates> {
                   width: 250,
                   decoration: BoxDecoration(
                     border: Border.all(
-                      color: Color(0x5F005764),
-                      width: 1.5,
+                      color: AppColors.disabledAndHintColor,
                     ),
                     borderRadius: BorderRadius.circular(12),
                   ),
@@ -310,10 +335,10 @@ class AppCubit extends Cubit<AppStates> {
                     key: commentmKey,
                     child: TextField(
                       controller: commentController,
-                      minLines: 4,
-                      maxLines: 7,
+                      minLines: 2,
+                      maxLines: 2,
                       decoration: InputDecoration(
-                        hintText: 'Type your comment here',
+                        hintText: 'Type your comment here..',
                         hintStyle: TextStyle(
                           fontSize: 15.0,
                         ),
@@ -332,23 +357,34 @@ class AppCubit extends Cubit<AppStates> {
                   ),
                 ),
               ),
-              InkWell(
-                onTap: () {
-                  if (commentmKey.currentState!.validate()) {
-                    addComment(
-                      placeId: placeId,
-                      comment: commentController.text,
-                    ).then((value) {
-                      commentController.clear();
-                    });
-                  }
-                },
-                child: Container(
-                  child: Text(
-                    'Add Comment',
-                  ),
+              SizedBox(
+                width: 275,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    MaterialButton(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      color: AppColors.primaryColor,
+                      textColor: Colors.white,
+                      child: Text(
+                        'Submit',
+                      ),
+                      onPressed: () {
+                        if (commentmKey.currentState!.validate()) {
+                          addComment(
+                            placeId: placeId,
+                            comment: commentController.text,
+                          ).then((value) {
+                            commentController.clear();
+                          });
+                        }
+                      },
+                    ),
+                  ],
                 ),
-              ),
+              )
             ],
           )),
         ),
@@ -366,14 +402,22 @@ class AppCubit extends Cubit<AppStates> {
 
       for (var place in homeModel!.data.home_places) {
         for (var commentMap
-            in homeModel!.data.home_places[placeIndex].comments) {
+        in homeModel!.data.home_places[placeIndex].comments) {
           placeComments1.add(commentMap.comment);
         }
         if (placeComments1.length > 0) {
           print('${placeComments1}');
           String sentimentText = placeComments1.join(' ');
-          if (Sentiment.analysis(sentimentText).words.good.length >
-                  Sentiment.analysis(sentimentText).words.bad.length &&
+          if (Sentiment
+              .analysis(sentimentText)
+              .words
+              .good
+              .length >
+              Sentiment
+                  .analysis(sentimentText)
+                  .words
+                  .bad
+                  .length &&
               place.rate > 3.7) {
             recommended.add(place);
           } else {
@@ -399,14 +443,22 @@ class AppCubit extends Cubit<AppStates> {
 
       for (var place in homeModel!.data.home_places) {
         for (var commentMap
-            in homeModel!.data.home_places[placeIndex].comments) {
+        in homeModel!.data.home_places[placeIndex].comments) {
           placeComments2.add(commentMap.comment);
         }
         if (placeComments2.length > 0) {
           print('${placeComments2}');
           String sentimentText = placeComments2.join(' ');
-          if (Sentiment.analysis(sentimentText).words.bad.length >
-                  Sentiment.analysis(sentimentText).words.good.length &&
+          if (Sentiment
+              .analysis(sentimentText)
+              .words
+              .bad
+              .length >
+              Sentiment
+                  .analysis(sentimentText)
+                  .words
+                  .good
+                  .length &&
               place.rate <= 2.5) {
             notRecommended.add(place);
           } else {
@@ -425,26 +477,28 @@ class AppCubit extends Cubit<AppStates> {
   List<home_place> genderPlaces = [];
 
   void gender() {
-    genderPlaces =[];
+    genderPlaces = [];
 
     if (getProfileModel!.data.gender == 'male') {
-      for(var place in homeModel!.data.home_places) {
-        if(place.city == 'Giza' || place.city == 'Alexandria') {
+      for (var place in homeModel!.data.home_places) {
+        if (place.city == 'Giza' || place.city == 'Alexandria') {
           genderPlaces.add(place);
         }
       }
     } else if (getProfileModel!.data.gender == 'female') {
-      for(var place in homeModel!.data.home_places) {
-        if(place.city == 'Cairo') {
+      for (var place in homeModel!.data.home_places) {
+        if (place.city == 'Cairo') {
           genderPlaces.add(place);
         }
       }
     }
   }
 
-  void cubitTest() {print("it's ok");}
+  void cubitTest() {
+    print("it's ok");
+  }
 
-  int clickNum =0;
+  int clickNum = 0;
 
 }
 

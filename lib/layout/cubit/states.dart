@@ -43,9 +43,15 @@ class AppErrorGetFavoritesState extends AppStates {}
 
 class AppLoadingGetProfileState extends AppStates {}
 
-class AppGetPorfileSuccessState extends AppStates {}
+class AppGetProfileSuccessState extends AppStates {}
 
-class AppGetPorfileErrorState extends AppStates {}
+class AppGetProfileErrorState extends AppStates {}
+
+class AppEditProfileLoadingState extends AppStates {}
+
+class AppEditProfileSuccessState extends AppStates {}
+
+class AppEditProfileErrorState extends AppStates {}
 
 class LoadState extends AppStates {}
 

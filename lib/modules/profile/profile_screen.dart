@@ -8,16 +8,24 @@ import 'package:smarttouristguide/models/get_profile_model.dart';
 import 'package:smarttouristguide/shared/components/extensions.dart';
 import 'package:smarttouristguide/shared/styles/colors.dart';
 
-class UserProfile extends StatelessWidget {
+class ProfileScreen extends StatelessWidget {
+
+  TextEditingController nameController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
   static const String routeName = 'UserProfile';
 
   @override
   Widget build(BuildContext context) {
-    var cubit = AppCubit.get(context);
 
     return BlocConsumer<AppCubit, AppStates>(
       listener: (context, state) {},
       builder: (context, state) {
+        var cubit =  AppCubit.get(context);
+        var model = cubit.getProfileModel;
+        nameController.text = model!.data.username;
+        phoneController.text =model.data.phone;
+
         return ConditionalBuilder(
           condition: cubit.getProfileModel != null,
           builder: (context) => currentt(context, cubit.getProfileModel!.data),
@@ -33,6 +41,7 @@ class UserProfile extends StatelessWidget {
 }
 
 Widget currentt(context, Data user) {
+
 
   var cubit = AppCubit.get(context);
 
@@ -119,7 +128,7 @@ Widget currentt(context, Data user) {
           ),
         ),
         Positioned(
-          top: MediaQuery.of(context).size.height * 0.35,
+          top: MediaQuery.of(context).size.height * 0.322,
           left: 15,
           right: 15,
           child: Form(
@@ -127,6 +136,23 @@ Widget currentt(context, Data user) {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Row(
+                  children: [
+                    UserDataField(data: user.firstName.capitalize(), icon: Icons.person_rounded , width: 130),
+                    Spacer(),
+                    UserDataField(data: user.lastName.capitalize(), icon: Icons.person_rounded, width: 130),
+                  ],
+                ),
+                SizedBox(
+                  height: 5.0,
+                ),
+                UserDataField(
+                  data: user.username,
+                  icon: Icons.account_circle_rounded,
+                ),
+                SizedBox(
+                  height: 5.0,
+                ),
                 UserDataField(
                   data: user.dateOfBirth,
                   icon: Icons.cake_rounded,
@@ -180,9 +206,9 @@ Widget currentt(context, Data user) {
 }
 
 Widget UserDataField(
-        {required String data, required IconData icon,controller}) =>
+        {required String data, required IconData icon,controller, double width = double.infinity}) =>
     Container(
-      width: double.infinity,
+      width: width,
       height: 40,
       decoration: BoxDecoration(
         color: Colors.white,

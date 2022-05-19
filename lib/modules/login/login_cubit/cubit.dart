@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smarttouristguide/layout/cubit/cubit.dart';
 import 'package:smarttouristguide/models/login_model.dart';
+import 'package:smarttouristguide/models/reset_password_model.dart';
 import 'package:smarttouristguide/modules/login/login_screen.dart';
 import 'package:smarttouristguide/modules/register/register_screen.dart';
 import 'package:smarttouristguide/modules/login/login_cubit/states.dart';
@@ -76,5 +77,28 @@ class AppLoginCubit extends Cubit<AppLoginStates> {
     print(isLogin);
     print(BmSheet.toString());
     emit(AppLoginChangeBottomSheetState());
+  }
+
+  ResetPasswordModel? resetPasswordModel;
+  var resetPasswordKey = GlobalKey<FormState>();
+
+  void resetPassword({
+    required String email,
+  }) {
+    emit(AppResetPasswordLoadingState());
+
+    DioHelper.postData(
+      url: RESET_PASSWORD,
+      data: {
+        'email': email,
+      },
+    ).then((value) {
+      print(value.data);
+      resetPasswordModel = ResetPasswordModel.fromJson(value.data);
+      emit(AppResetPasswordSuccessState(resetPasswordModel));
+    }).catchError((error) {
+      print('error is = ${error.toString()}');
+      emit(AppResetPasswordErrorState(error.toString()));
+    });
   }
 }

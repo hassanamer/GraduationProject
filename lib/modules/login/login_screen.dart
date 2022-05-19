@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:smarttouristguide/layout/app_layout.dart';
+import 'package:smarttouristguide/layout/cubit/cubit.dart';
 import 'package:smarttouristguide/modules/login/forget_password.dart';
 import 'package:smarttouristguide/modules/login/login_cubit/cubit.dart';
 import 'package:smarttouristguide/modules/login/login_cubit/states.dart';
@@ -14,13 +15,12 @@ import 'package:smarttouristguide/shared/styles/textStyle.dart';
 import '../../AskUser.dart';
 import '../../shared/components/components.dart';
 import '../../shared/styles/colors.dart';
-import '../home/home_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    ;
     var cubit = AppLoginCubit.get(context);
+    var appCubit = AppCubit.get(context);
     var emailController = TextEditingController();
     var passwordController = TextEditingController();
 
@@ -33,6 +33,9 @@ class LoginScreen extends StatelessWidget {
               value: state.loginModel!.data.token,
             ).then((value) {
               cubit.getToken();
+              appCubit.getProfile();
+              appCubit.getHomeData();
+              appCubit.getFavorites();
               navigateAndFinish(
                 context: context,
                 widget: AppLayout(),
@@ -61,6 +64,7 @@ class LoginScreen extends StatelessWidget {
         }
       },
       builder: (context, state) {
+
         return Container(
           decoration: BoxDecoration(
               color: Colors.white,

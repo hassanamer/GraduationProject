@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:sentiment_dart/sentiment_dart.dart';
 import 'package:smarttouristguide/layout/cubit/cubit.dart';
 import 'package:smarttouristguide/layout/cubit/states.dart';
 import 'package:smarttouristguide/models/home_model.dart';
@@ -11,7 +10,6 @@ import 'package:smarttouristguide/modules/place_details/place_details_screen.dar
 import 'package:smarttouristguide/modules/search/search_screen.dart';
 import 'package:smarttouristguide/shared/styles/colors.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:smarttouristguide/test_screen.dart';
 
 import '../../shared/components/components.dart';
 import '../events/events_screen.dart';
@@ -146,15 +144,6 @@ class HomeScreen extends StatelessWidget {
                                   child: HomeRow(
                                     text: AppLocalizations.of(context)!.offers,
                                     iconPath: 'assets/icons/offers.svg',
-                                  ),
-                                ),
-                                MaterialButton(
-                                  onPressed: () {
-                                    navigateTo(context: context, widget: Test());
-                                  },
-                                  child: HomeRow(
-                                    text: AppLocalizations.of(context)!.plan,
-                                    iconPath: 'assets/icons/plan.svg',
                                   ),
                                 ),
                               ],
