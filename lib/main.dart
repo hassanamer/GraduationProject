@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 import 'package:smarttouristguide/AskUser.dart';
 import 'package:smarttouristguide/layout/app_layout.dart';
 import 'package:smarttouristguide/layout/cubit/cubit.dart';
@@ -17,7 +18,6 @@ import 'package:smarttouristguide/shared/network/local/cache_helper.dart';
 import 'package:smarttouristguide/shared/network/remote/dio_helper.dart';
 import 'package:smarttouristguide/shared/styles/themes.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -86,6 +86,17 @@ class MyApp extends StatelessWidget {
         supportedLocales: AppLocalizations.supportedLocales,
         //locale: Locale("${changeLanguage()}"),
         theme: lightTheme,
+        builder: (context, child) => ResponsiveWrapper.builder(
+          child,
+          maxWidth: 1200,
+          minWidth: 480,
+          defaultScale: true,
+          breakpoints: [
+            ResponsiveBreakpoint.resize(360, name: MOBILE),
+            ResponsiveBreakpoint.autoScale(800, name: TABLET),
+            ResponsiveBreakpoint.resize(1000, name: DESKTOP),
+          ],
+        ),
         home: startWidget,
         // home: startWidget,
         routes: {
