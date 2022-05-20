@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:smarttouristguide/layout/app_layout.dart';
 import 'package:smarttouristguide/layout/cubit/cubit.dart';
-import 'package:smarttouristguide/modules/interest_screen.dart';
 import 'package:smarttouristguide/modules/login/forget_password.dart';
 import 'package:smarttouristguide/modules/login/login_cubit/cubit.dart';
 import 'package:smarttouristguide/modules/login/login_cubit/states.dart';
@@ -13,7 +12,6 @@ import 'package:smarttouristguide/shared/network/local/cache_helper.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:smarttouristguide/shared/styles/textStyle.dart';
 import '../../shared/components/components.dart';
-import '../../shared/styles/colors.dart';
 
 class LoginScreen extends StatelessWidget {
   @override
@@ -32,9 +30,11 @@ class LoginScreen extends StatelessWidget {
               value: state.loginModel!.data.token,
             ).then((value) {
               cubit.getToken();
-              appCubit.getProfile();
               appCubit.getHomeData();
+              appCubit.getCategoriesPlacesData();
               appCubit.getFavorites();
+              appCubit.getInterests();
+              appCubit.getProfile();
               navigateAndFinish(
                 context: context,
                 widget: AppLayout(),
@@ -122,25 +122,25 @@ class LoginScreen extends StatelessWidget {
                       }
                     },
                   ),
-                  SizedBox(
-                    height: 15.0,
-                  ),
-                  Container(
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(25),
-                          color: AppColors.primaryColor),
-                      child: ElevatedButton(
-                        style: ButtonStyle(
-                            shadowColor:
-                                MaterialStateProperty.all(Colors.transparent),
-                            backgroundColor:
-                                MaterialStateProperty.all(Colors.transparent)),
-                        onPressed: () {
-                          navigateTo(context: context, widget: InterestsScreen());
-                        },
-                        child: Text('select your favourite category'),
-                      )),
+                  // SizedBox(
+                  //   height: 15.0,
+                  // ),
+                  // Container(
+                  //     width: double.infinity,
+                  //     decoration: BoxDecoration(
+                  //         borderRadius: BorderRadius.circular(25),
+                  //         color: AppColors.primaryColor),
+                  //     child: ElevatedButton(
+                  //       style: ButtonStyle(
+                  //           shadowColor:
+                  //               MaterialStateProperty.all(Colors.transparent),
+                  //           backgroundColor:
+                  //               MaterialStateProperty.all(Colors.transparent)),
+                  //       onPressed: () {
+                  //         navigateTo(context: context, widget: InterestsScreen());
+                  //       },
+                  //       child: Text('select your favourite category'),
+                  //     )),
                   // Container(
                   //   height: MediaQuery.of(context).size.height * 0.09,
                   //   decoration: BoxDecoration(

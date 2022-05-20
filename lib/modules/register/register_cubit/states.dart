@@ -24,4 +24,6 @@ class AppRegisterErrorState extends AppRegisterStates
 
 class AppChangePasswordVisibilityState extends AppRegisterStates {}
 
+class AppGetTokenDoneState extends AppRegisterStates {}
+
 

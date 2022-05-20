@@ -7,6 +7,9 @@ import 'package:smarttouristguide/layout/cubit/states.dart';
 import 'package:smarttouristguide/models/cat_places_model.dart';
 import 'package:smarttouristguide/shared/styles/colors.dart';
 
+import '../layout/app_layout.dart';
+import '../shared/components/components.dart';
+
 class InterestsScreen extends StatelessWidget {
   static const routeName = 'Interest';
 
@@ -18,6 +21,7 @@ class InterestsScreen extends StatelessWidget {
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(
+            leading: Text(''),
             systemOverlayStyle: SystemUiOverlayStyle(
                 statusBarColor: AppColors.primaryColor,
                 statusBarIconBrightness: Brightness.light),
@@ -34,7 +38,7 @@ class InterestsScreen extends StatelessWidget {
             ),
             centerTitle: true,
             title: Text(
-              'Places',
+              'Select your interests',
               style: TextStyle(
                 fontSize: 17.5,
               ),
@@ -54,13 +58,37 @@ class InterestsScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    ' What categories of tourism\n are you interested in?',
-                    textAlign: TextAlign.start,
-                    style: TextStyle(
-                        fontSize: 17.5,
-                        fontWeight: FontWeight.bold,
-                        color: AppColors.bodyDetailsColor),
+                  Row(
+                    children: [
+                      Text(
+                        ' What categories of tourism\n are you interested in?',
+                        textAlign: TextAlign.start,
+                        style: TextStyle(
+                            fontSize: 17.5,
+                            fontWeight: FontWeight.bold,
+                            color: AppColors.bodyDetailsColor),
+                      ),
+                      Spacer(),
+                      MaterialButton(
+                        child: Text(
+                          'Get Started',
+                        ),
+                        textColor: Colors.white,
+                        color: AppColors.primaryColor,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12)
+                        ),
+                        onPressed: () {
+                          cubit.getCategoriesPlacesData();
+                          cubit.getInterests();
+                          cubit.getHomeData();
+                          navigateTo(
+                            context: context,
+                            widget: AppLayout(),
+                          );
+                        },
+                      ),
+                    ],
                   ),
                   SizedBox(
                     height: 8.0,
@@ -111,12 +139,16 @@ class InterestsScreen extends StatelessWidget {
                   Spacer(),
                   IconButton(
                     icon: Icon(
-                      Icons.favorite,
+                      AppCubit.get(context).interests[category.id]!
+                          ? Icons.check_box_rounded
+                          : Icons.check_box_outline_blank_outlined,
                       size: 22.0,
-                      color: Colors.blue,
+                      color: AppCubit.get(context).interests[category.id]!
+                          ? AppColors.primaryColor
+                          : AppColors.disabledAndHintColor,
                     ),
                     onPressed: () {
-                      AppCubit.get(context).changeFavorite(8);
+                      AppCubit.get(context).changeInterest(category.id);
                     },
                   ),
                 ],

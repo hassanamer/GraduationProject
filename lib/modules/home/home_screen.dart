@@ -51,7 +51,7 @@ class HomeScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            'Updating Home Data',
+                            'Updating Data',
                             style: TextStyle(
                               fontSize: 20.0,
                               fontWeight: FontWeight.bold,
@@ -171,6 +171,63 @@ class HomeScreen extends StatelessWidget {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
+                                cubit.CatRecommended.isNotEmpty ? Column(
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Text(
+                                          'Suggested for your interests',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 17.5,
+                                          ),
+                                        ),
+                                        // Spacer(),
+                                        // InkWell(
+                                        //   child: Row(
+                                        //     children: [
+                                        //       Icon(
+                                        //         Icons.more_horiz_rounded,
+                                        //         color: AppColors.primaryColor,
+                                        //       ),
+                                        //       Text(
+                                        //         AppLocalizations.of(context)!.more,
+                                        //         style: TextStyle(
+                                        //           color: AppColors.primaryColor,
+                                        //         ),
+                                        //       ),
+                                        //     ],
+                                        //   ),
+                                        //   onTap: () {
+                                        //     navigateTo(
+                                        //       context: context,
+                                        //       widget: RecommendationScreen(),
+                                        //     );
+                                        //   },
+                                        // ),
+                                      ],
+                                    ),
+                                    Container(
+                                      height: 173.0,
+                                      width: double.infinity,
+                                      child: ListView.separated(
+                                        itemBuilder: (context, index) =>
+                                            buildHomeItem(
+                                                cubit.CatRecommended[index],
+                                                context),
+                                        separatorBuilder: (context, index) =>
+                                            SizedBox(
+                                          width: 10.0,
+                                        ),
+                                        itemCount: cubit.CatRecommended.length,
+                                        scrollDirection: Axis.horizontal,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 8,
+                                    ),
+                                  ],
+                                ): SizedBox(),
                                 Text(
                                   'Suggested for your age',
                                   style: TextStyle(
@@ -186,17 +243,15 @@ class HomeScreen extends StatelessWidget {
                                   width: double.infinity,
                                   child: ListView.separated(
                                     itemBuilder: (context, index) =>
-                                        buildHomePopularItem(
-                                      cubit
-                                          .ageRecommended[index],
+                                        buildHomeItem(
+                                      cubit.ageRecommended[index],
                                       context,
                                     ),
                                     separatorBuilder: (context, index) =>
                                         SizedBox(
                                       width: 10.0,
                                     ),
-                                    itemCount: cubit
-                                        .ageRecommended.length,
+                                    itemCount: cubit.ageRecommended.length,
                                     scrollDirection: Axis.horizontal,
                                   ),
                                 ),
@@ -242,7 +297,7 @@ class HomeScreen extends StatelessWidget {
                                   width: double.infinity,
                                   child: ListView.separated(
                                     itemBuilder: (context, index) =>
-                                        buildHomeRecommendationItem(
+                                        buildHomeItem(
                                             cubit.recommended[index], context),
                                     separatorBuilder: (context, index) =>
                                         SizedBox(
@@ -270,7 +325,7 @@ class HomeScreen extends StatelessWidget {
                                   width: double.infinity,
                                   child: ListView.separated(
                                     itemBuilder: (context, index) =>
-                                        buildNotRecommendedItem(
+                                        buildHomeItem(
                                             cubit.notRecommended[index],
                                             context),
                                     separatorBuilder: (context, index) =>
@@ -300,7 +355,8 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-Widget buildHomePopularItem(model, context) => InkWell(
+
+Widget buildHomeItem(HomePlaces model, context) => InkWell(
       onTap: () {
         AppCubit.get(context).getPlaceDetails(
           placeId: model.id,
@@ -325,146 +381,20 @@ Widget buildHomePopularItem(model, context) => InkWell(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Center(
-                  child: SizedBox(
-                height: 106.5,
-                child: Image(
-                  fit: BoxFit.fill,
-                  image: NetworkImage('${model.image}'),
+                child: Container(
+                  height: 112.5,
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: NetworkImage('${model.image}'),
+                        fit: BoxFit.cover,
+                      )),
+                  child: Image(
+                    fit: BoxFit.cover,
+                    image: NetworkImage('${model.image}'),
+                  ),
                 ),
-              )),
-              SizedBox(
-                height: 5.0,
-              ),
-              Text(
-                '${model.placeName}',
-                maxLines: 1,
-                style: TextStyle(fontSize: 13.0, fontWeight: FontWeight.w600),
               ),
               Spacer(),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  RatingBarIndicator(
-                    rating: model.rate.toDouble(),
-                    itemBuilder: (context, index) => Icon(
-                      Icons.star,
-                      color: AppColors.primaryColor,
-                    ),
-                    itemCount: 5,
-                    itemSize: 18,
-                    direction: Axis.horizontal,
-                  ),
-                  Spacer(),
-                  SvgPicture.asset(
-                    'assets/icons/goto.svg',
-                  )
-                ],
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-
-Widget buildNotRecommendedItem(HomePlaces model, context) => InkWell(
-      onTap: () {
-        AppCubit.get(context).getPlaceDetails(
-          placeId: model.id,
-        );
-        navigateTo(
-          context: context,
-          widget: PlaceDetailsScreen(),
-        );
-      },
-      child: Container(
-        height: 178.0,
-        width: 148.0,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(
-            16.0,
-          ),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Center(
-                  child: SizedBox(
-                height: 106.5,
-                child: Image(
-                  fit: BoxFit.cover,
-                  image: NetworkImage('${model.image}'),
-                ),
-              )),
-              SizedBox(
-                height: 5.0,
-              ),
-              Text(
-                '${model.placeName}',
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: TextStyle(fontSize: 13.0, fontWeight: FontWeight.w600),
-              ),
-              Spacer(),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  RatingBarIndicator(
-                    rating: model.rate.toDouble(),
-                    itemBuilder: (context, index) => Icon(
-                      Icons.star,
-                      color: AppColors.primaryColor,
-                    ),
-                    itemCount: 5,
-                    itemSize: 18,
-                    direction: Axis.horizontal,
-                  ),
-                  Spacer(),
-                  SvgPicture.asset(
-                    'assets/icons/goto.svg',
-                  )
-                ],
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-
-Widget buildHomeRecommendationItem(HomePlaces model, context) => InkWell(
-      onTap: () {
-        AppCubit.get(context).getPlaceDetails(
-          placeId: model.id,
-        );
-        navigateTo(
-          context: context,
-          widget: PlaceDetailsScreen(),
-        );
-      },
-      child: Container(
-        height: 178.0,
-        width: 148.0,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(
-            16.0,
-          ),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Center(
-                  child: SizedBox(
-                height: 106.5,
-                child: Image(
-                  fit: BoxFit.cover,
-                  image: NetworkImage('${model.image}'),
-                ),
-              )),
               Text(
                 '${model.placeName}',
                 maxLines: 1,

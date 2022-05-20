@@ -17,7 +17,7 @@ class FavoritesScreen extends StatelessWidget {
       listener: (context, state) {},
       builder: (context, state) {
         return ConditionalBuilder(
-          condition: cubit.homeModel != null,
+          condition: cubit.getFavoritesModel != null,
           builder: (context) => ListView.separated(
             itemBuilder: (context, index) => buildFavItem(
                 cubit.getFavoritesModel!.data.places[index], context),

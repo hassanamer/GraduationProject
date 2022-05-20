@@ -22,12 +22,14 @@ class Category {
   late final dynamic id;
   late final String name;
   late final String catImage;
+  late final bool inFavourite;
   late final Info info;
 
   Category.fromJson(Map<String, dynamic> json){
     id = json['id'];
     name = json['name'];
     catImage = json['cat_image'];
+    inFavourite = json['in_favourite'];
     info = Info.fromJson(json['info']);
   }
 }
@@ -43,11 +45,11 @@ class Info {
 class Places {
   late final dynamic id;
   late final String placeName;
-  late final String type;
-  late final String ageCategory;
+  late final dynamic type;
+  late final dynamic ageCategory;
   late final String Description;
-  late final String city;
-  late final String priceClass;
+  late final dynamic city;
+  late final dynamic priceClass;
   late final String location;
   late final String image;
   late final bool isActive;

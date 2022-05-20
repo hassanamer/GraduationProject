@@ -1,3 +1,5 @@
+import 'package:smarttouristguide/models/cat_interest_model.dart';
+
 import '../../models/change_favorites_model.dart';
 
 abstract class AppStates {}
@@ -32,6 +34,8 @@ class AppSuccessChangeFavoritesState extends AppStates
 
   AppSuccessChangeFavoritesState(this.model);
 }
+
+
 
 class AppErrorChangeFavoritesState extends AppStates {}
 
@@ -74,3 +78,20 @@ class LightState extends AppStates {}
 class LightLoadingState extends AppStates {}
 
 class AppChangePasswordVisibilityState extends AppStates {}
+
+class AppChangeInterestsState extends AppStates {}
+
+class AppSuccessChangeInterestsState extends AppStates
+{
+  final ChangeInterestModel model;
+
+  AppSuccessChangeInterestsState(this.model);
+}
+
+class AppErrorChangeInterestsState extends AppStates {}
+
+class AppLoadingGetInterestsState extends AppStates {}
+
+class AppSuccessGetInterestsState extends AppStates {}
+
+class AppErrorGetInterestsState extends AppStates {}

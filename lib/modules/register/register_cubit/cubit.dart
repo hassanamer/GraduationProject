@@ -5,11 +5,18 @@ import 'package:smarttouristguide/modules/register/register_cubit/states.dart';
 import '../../../../models/register_model.dart';
 import '../../../../shared/network/end_points.dart';
 import '../../../../shared/network/remote/dio_helper.dart';
+import '../../../shared/components/constants.dart';
+import '../../../shared/network/local/cache_helper.dart';
 
 class AppRegisterCubit extends Cubit<AppRegisterStates> {
   AppRegisterCubit() : super(AppRegisterInitialState());
 
   static AppRegisterCubit get(context) => BlocProvider.of(context);
+
+  void getToken() {
+    token = CacheHelper.getData(key: 'token') ?? '';
+    emit(AppGetTokenDoneState());
+  }
 
   RegisterModel? registerModel;
 

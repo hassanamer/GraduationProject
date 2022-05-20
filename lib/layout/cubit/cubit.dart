@@ -88,10 +88,11 @@ class AppCubit extends Cubit<AppStates> {
     });
   }
 
-
   HomeModel? homeModel;
   Map<dynamic, bool?> favorites = {};
   Map<dynamic, bool?> interests = {};
+  List<String> favCats = [];
+  List<HomePlaces> CatRecommended= [];
 
   Future getHomeData() async {
     emit(AppLoadingDataState());
@@ -106,6 +107,8 @@ class AppCubit extends Cubit<AppStates> {
       ageRecommend();
       recommendation();
       blacklist();
+      catRecommend();
+
       emit(AppGetDataSuccessState());
     }).catchError((error) {
       emit(AppGetDataErrorState());
@@ -113,7 +116,6 @@ class AppCubit extends Cubit<AppStates> {
   }
 
   CpModel? cpModel;
-
   void getCategoriesPlacesData() {
     emit(AppLoadingDataState());
     DioHelper.getData(
@@ -121,6 +123,10 @@ class AppCubit extends Cubit<AppStates> {
       token: 'Token ${token}',
     ).then((value) {
       cpModel = CpModel.fromJson(value.data);
+      cpModel!.data.category.forEach((element) {
+        interests.addAll({element.id: element.inFavourite});
+      });
+
       emit(AppGetDataSuccessState());
     }).catchError((error) {
       emit(AppGetDataErrorState());
@@ -474,7 +480,8 @@ class AppCubit extends Cubit<AppStates> {
 
     int day = int.parse('${date_of_birth[0]}${date_of_birth[1]}');
     int month = int.parse('${date_of_birth[3]}${date_of_birth[4]}');
-    int year = int.parse('${date_of_birth[6]}${date_of_birth[7]}${date_of_birth[8]}${date_of_birth[9]}');
+    int year = int.parse(
+        '${date_of_birth[6]}${date_of_birth[7]}${date_of_birth[8]}${date_of_birth[9]}');
     DateTime birthday = DateTime(year, month, day);
     var age = AgeCalculator.age(birthday).years;
 
@@ -501,7 +508,7 @@ class AppCubit extends Cubit<AppStates> {
 
   void changeInterest(dynamic categoryId) {
     interests[categoryId] = !interests[categoryId]!;
-    emit(AppChangeFavoritesState());
+    emit(AppChangeInterestsState());
 
     DioHelper.postData(
       url: INTERESTS,
@@ -513,37 +520,55 @@ class AppCubit extends Cubit<AppStates> {
       changeInterestModel = ChangeInterestModel.fromJson(value.data);
       print(value.data);
 
-      if (!changeFavoritesModel!.status) {
+      if (!changeInterestModel!.status) {
         interests[categoryId] = !interests[categoryId]!;
       } else {
         getInterests();
       }
-      emit(AppSuccessChangeFavoritesState(changeFavoritesModel!));
+      emit(AppSuccessChangeInterestsState(changeInterestModel!));
     }).catchError((error) {
       print(error.toString());
       interests[categoryId] = !interests[categoryId]!;
-      emit(AppErrorChangeFavoritesState());
+      emit(AppErrorChangeInterestsState());
     });
   }
 
   GetInterestsModel? getInterestsModel;
 
   void getInterests() {
-    emit(AppLoadingGetFavoritesState());
+    emit(AppLoadingGetInterestsState());
 
     DioHelper.getData(
       url: INTERESTS,
       token: 'Token ${token}',
     ).then((value) {
       getInterestsModel = GetInterestsModel.fromJson(value.data);
-      emit(AppSuccessGetFavoritesState());
+      emit(AppSuccessGetInterestsState());
     }).catchError((error) {
       print(error.toString());
-      emit(AppErrorGetFavoritesState());
+      emit(AppErrorGetInterestsState());
     });
   }
 
+  void catRecommend() {
+    favCats = [];
+    CatRecommended = [];
+    getCategoriesPlacesData();
 
+    for(var cat in cpModel!.data.category) {
+      if(cat.inFavourite) {
+        favCats.add(cat.name);
+      }
+    }
+    for(var place in homeModel!.data.home_places) {
+      if(favCats.contains(place.type)) {
+        CatRecommended.add(place);
+      }
+    }
+    for(var place in CatRecommended) {
+      print('place name: ${place.placeName}\nplace category: ${place.type}');
+    }
+  }
 }
 
 // int placeIndex = 0;

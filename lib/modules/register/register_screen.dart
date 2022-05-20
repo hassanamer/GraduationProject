@@ -3,11 +3,8 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:smarttouristguide/layout/app_layout.dart';
 import 'package:smarttouristguide/modules/register/register_cubit/cubit.dart';
-
 import 'package:smarttouristguide/modules/register/register_cubit/states.dart';
-import 'package:smarttouristguide/shared/network/local/cache_helper.dart';
 import '../../shared/components/components.dart';
 
 class RegisterScreen extends StatelessWidget {
@@ -32,14 +29,6 @@ class RegisterScreen extends StatelessWidget {
       listener: (context, state) {
         if (state is AppRegisterSuccessState) {
           if (state.registerModel!.status) {
-            CacheHelper.saveData(
-                    key: 'token', value: state.registerModel!.data)
-                .then((value) {
-              navigateAndFinish(
-                context: context,
-                widget: AppLayout(),
-              );
-            });
             Fluttertoast.showToast(
               msg: "${state.registerModel!.message}",
               toastLength: Toast.LENGTH_SHORT,
