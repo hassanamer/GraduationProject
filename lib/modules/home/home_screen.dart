@@ -108,8 +108,7 @@ class HomeScreen extends StatelessWidget {
                                           width: 17.0,
                                         ),
                                         Text(
-                                          AppLocalizations.of(context)!
-                                              .where_to_go,
+                                          'Where to go?',
                                           style: TextStyle(
                                             color:
                                                 AppColors.disabledAndHintColor,
@@ -160,20 +159,10 @@ class HomeScreen extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Special Places',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 21.0,
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 8.0,
-                                ),
-                                Text(
                                   'Popular Places in Egypt',
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 16.0,
+                                    fontSize: 17.6,
                                   ),
                                 ),
                                 SizedBox(
@@ -207,7 +196,7 @@ class HomeScreen extends StatelessWidget {
                                       'Recommended by users',
                                       style: TextStyle(
                                         fontWeight: FontWeight.bold,
-                                        fontSize: 16.0,
+                                        fontSize: 17.5,
                                       ),
                                     ),
                                     Spacer(),
@@ -254,10 +243,10 @@ class HomeScreen extends StatelessWidget {
                                   height: 8,
                                 ),
                                 Text(
-                                  'Not Recommended by users',
+                                  'Not recommended by users',
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 16.0,
+                                    fontSize: 17.5,
                                   ),
                                 ),
                                 SizedBox(
