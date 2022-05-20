@@ -267,8 +267,7 @@ class SearchScreenState extends State<SearchScreen> {
                         rating: AppCubit.get(context)
                             .homeModel!
                             .data
-                            .home_places[index]
-                            .rate,
+                            .home_places[index].rate,
                         itemBuilder: (context, index) => Icon(
                           Icons.star,
                           color: AppColors.primaryColor,

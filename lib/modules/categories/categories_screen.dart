@@ -7,7 +7,6 @@ import 'package:smarttouristguide/models/cat_places_model.dart';
 import 'package:smarttouristguide/modules/places_screen/places_screen.dart';
 import 'package:smarttouristguide/shared/components/components.dart';
 import 'package:smarttouristguide/shared/styles/colors.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CategoriesScreen extends StatelessWidget {
   @override
@@ -38,17 +37,6 @@ class CategoriesScreen extends StatelessWidget {
   }
 }
 
-List<String> imgs = [
-  'https://d3rr2gvhjw0wwy.cloudfront.net/uploads/activity_headers/281608/900x600-1-50-c5a716e2a72b1087ab9bc2e11e52a16e.jpg',
-  'https://invest-gate.me/wp-content/uploads/2016/08/egypt_siwa_adrere_amellal.jpg',
-  'https://live.staticflickr.com/1822/28327211697_59fac6f2f9_b.jpg',
-  'https://www.globetrove.com/wp-content/uploads/2018/06/IMG_20180601_134802.jpg',
-  'https://identity-mag.com/wp-content/uploads/2018/11/Singe.jpg',
-  'https://www.touropia.com/gfx/d/best-beaches-in-egypt/mahmya_island.jpg',
-  'https://en.amwalalghad.com/wp-content/uploads/2018/05/Amusement-park.jpg',
-  'https://cdn.statically.io/img/egyptunitedtours.com/f=auto%2Cq=50/wp-content/uploads/2021/02/springs3.jpg',
-];
-
 Widget buildCategoryItem(context, Category model, index) => Container(
   height: 205.0,
   width: double.infinity,
@@ -67,6 +55,9 @@ Widget buildCategoryItem(context, Category model, index) => Container(
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        SizedBox(
+          height: 7.0,
+        ),
         Text(
           ' ${model.name}',
           style: TextStyle(
@@ -89,7 +80,7 @@ Widget buildCategoryItem(context, Category model, index) => Container(
                     height: 160,
                     width: double.infinity,
                     image: NetworkImage(
-                      '${imgs[index]}',
+                      '${model.catImage}',
                     ),
                   ),
                 ),
@@ -109,9 +100,6 @@ Widget buildCategoryItem(context, Category model, index) => Container(
                     ),
                     context: context,
                   );
-                  for (int i=AppCubit().clickNum ; i <= 1 ; i++) {
-                    print(AppCubit().clickNum+5);
-                  }
                 },
                 child: Container(
                   height: 30,

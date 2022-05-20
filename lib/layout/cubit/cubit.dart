@@ -1,3 +1,4 @@
+import 'package:age_calculator/age_calculator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -19,7 +20,6 @@ import 'package:smarttouristguide/shared/components/constants.dart';
 import 'package:smarttouristguide/shared/network/end_points.dart';
 import 'package:smarttouristguide/shared/network/remote/dio_helper.dart';
 import 'package:smarttouristguide/shared/styles/colors.dart';
-
 import '../../models/change_favorites_model.dart';
 
 class AppCubit extends Cubit<AppStates> {
@@ -99,7 +99,7 @@ class AppCubit extends Cubit<AppStates> {
       homeModel!.data.home_places.forEach((element) {
         favorites.addAll({element.id: element.inFavourite});
       });
-      gender();
+      ageRecommend();
       recommendation();
       blacklist();
       emit(AppGetDataSuccessState());
@@ -394,7 +394,7 @@ class AppCubit extends Cubit<AppStates> {
     );
   }
 
-  List<home_place> recommended = [];
+  List<HomePlaces> recommended = [];
   List<String> placeComments1 = [];
 
   void recommendation() {
@@ -427,7 +427,7 @@ class AppCubit extends Cubit<AppStates> {
     }
   }
 
-  List<home_place> notRecommended = [];
+  List<HomePlaces> notRecommended = [];
   List<String> placeComments2 = [];
 
   void blacklist() {
@@ -460,21 +460,30 @@ class AppCubit extends Cubit<AppStates> {
     }
   }
 
-  List<home_place> genderPlaces = [];
+  List<HomePlaces> ageRecommended = [];
 
-  void gender() {
-    genderPlaces = [];
+  void ageRecommend() {
+    ageRecommended = [];
+    var user = getProfileModel!.data;
+    String date_of_birth = user.dateOfBirth;
+    var places = homeModel!.data.home_places;
 
-    if (getProfileModel!.data.gender == 'male') {
-      for (var place in homeModel!.data.home_places) {
-        if (place.city == 'Giza' || place.city == 'Alexandria') {
-          genderPlaces.add(place);
+    int day = int.parse('${date_of_birth[0]}${date_of_birth[1]}');
+    int month = int.parse('${date_of_birth[3]}${date_of_birth[4]}');
+    int year = int.parse('${date_of_birth[6]}${date_of_birth[7]}${date_of_birth[8]}${date_of_birth[9]}');
+    DateTime birthday = DateTime(year, month, day);
+    var age = AgeCalculator.age(birthday).years;
+
+    if (age < 35) {
+      for (var place in places) {
+        if (place.ageCategory == 'Youths') {
+          ageRecommended.add(place);
         }
       }
-    } else if (getProfileModel!.data.gender == 'female') {
-      for (var place in homeModel!.data.home_places) {
-        if (place.city == 'Cairo') {
-          genderPlaces.add(place);
+    } else if (age >= 35) {
+      for (var place in places) {
+        if (place.ageCategory == 'Adults') {
+          ageRecommended.add(place);
         }
       }
     }
@@ -483,8 +492,6 @@ class AppCubit extends Cubit<AppStates> {
   void cubitTest() {
     print("it's ok");
   }
-
-  int clickNum = 0;
 }
 
 // int placeIndex = 0;

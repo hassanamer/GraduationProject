@@ -15,7 +15,7 @@ class Data {
   late final String lastName;
   late final String username;
   late final String country;
-  late final String dateOfBirth;
+  late final dynamic dateOfBirth;
   late final String gender;
   late final String email;
   late final String phone;

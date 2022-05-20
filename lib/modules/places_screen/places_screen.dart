@@ -67,15 +67,20 @@ class PlacesScreen extends StatelessWidget {
           body: ConditionalBuilder(
             condition: cubit.cpModel != null,
             builder: (context) => ListView.separated(
-              itemBuilder: (context, index) => buildPlacesItem(
-                  context,
-                  cubit.cpModel!.data.category[catIndex].info
-                      .places[index], catName),
-              separatorBuilder: (context, index) => SizedBox(
-                height: 10.0,
+              itemBuilder: (context, index) => Column(
+                children: [
+                  SizedBox(height: 5.0),
+                  buildPlacesItem(
+                      context,
+                      cubit.cpModel!.data.category[catIndex].info.places[index],
+                      catName),
+                ],
               ),
-              itemCount: cubit
-                  .cpModel!.data.category[catIndex].info.places.length,
+              separatorBuilder: (context, index) => SizedBox(
+                height: 5.0,
+              ),
+              itemCount:
+                  cubit.cpModel!.data.category[catIndex].info.places.length,
             ),
             fallback: (context) => Center(
               child: CircularProgressIndicator(
@@ -90,7 +95,7 @@ class PlacesScreen extends StatelessWidget {
 }
 
 Widget buildPlacesItem(context, Places model, catName) => Container(
-      height: MediaQuery.of(context).size.height * 0.4,
+      height: 250.0,
       width: double.infinity,
       decoration: BoxDecoration(
         color: Colors.white,
@@ -99,77 +104,81 @@ Widget buildPlacesItem(context, Places model, catName) => Container(
       child: Padding(
         padding: const EdgeInsets.symmetric(
           horizontal: 13.0,
+          vertical: 10.0,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              '${model.placeName}',
-              style: TextStyle(
-                fontSize: 24.0,
-                fontWeight: FontWeight.bold,
-                color: AppColors.primaryColor,
-              ),
-            ),
-            Text(
-              '${model.Description}',
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(
-                fontSize: 16.0,
-                color: Colors.blueGrey[600],
-              ),
-            ),
             Container(
-              height: MediaQuery.of(context).size.height * 0.25,
+              height: 170.0,
               width: double.infinity,
-              child: Image(
-                fit: BoxFit.cover,
-                image: NetworkImage('${model.image}'),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(12.0),
+                child: Image(
+                  fit: BoxFit.cover,
+                  image: NetworkImage('${model.image}'),
+                ),
               ),
             ),
-            SizedBox(height: 7.0,),
-            Row(
-              children: [
-                RatingBarIndicator(
-                  rating: model.rate.toDouble(),
-                  itemBuilder: (context, index) => Icon(
-                    Icons.star,
-                    color: AppColors.primaryColor,
+            SizedBox(
+              height: 5.0,
+            ),
+            Text(
+              ' ${model.placeName}',
+              style: TextStyle(
+                fontSize: 21.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(
+              height: 4.0,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: Row(
+                children: [
+                  RatingBarIndicator(
+                    rating: model.rate.toDouble(),
+                    itemBuilder: (context, index) => Icon(
+                      Icons.star,
+                      color: AppColors.secondColor,
+                    ),
+                    itemCount: 5,
+                    itemSize: 20,
+                    direction: Axis.horizontal,
                   ),
-                  itemCount: 5,
-                  itemSize: 19 ,
-                  direction: Axis.horizontal,
-                ),
-                Spacer(),
-                InkWell(
-                  onTap: () {
-                    AppCubit.get(context).getPlaceDetails(
-                      placeId: model.id,
-                    );
-                    navigateTo(
-                      context: context,
-                      widget: PlaceDetailsScreen(
-                        catName1: catName,
-                      ),
-                    );
-                  },
-                  child: Row(
-                    children: [
-                      SvgPicture.asset(
-                        'assets/icons/active_navigate.svg',
-                      ),
-                      Text(
-                        ' See Details',
-                        style: TextStyle(
-                          color: AppColors.primaryColor,
-                          fontSize: 14.0,
+                  Spacer(),
+                  InkWell(
+                    onTap: () {
+                      AppCubit.get(context).getPlaceDetails(
+                        placeId: model.id,
+                      );
+                      navigateTo(
+                        context: context,
+                        widget: PlaceDetailsScreen(
+                          catName1: catName,
                         ),
-                      ),
-                    ],
+                      );
+                    },
+                    child: Row(
+                      children: [
+                        SvgPicture.asset(
+                          'assets/icons/active_navigate.svg',
+                          height: 19,
+                          width: 19,
+                        ),
+                        Text(
+                          ' Details',
+                          style: TextStyle(
+                            color: AppColors.primaryColor,
+                            fontSize: 16.0,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ],
         ),

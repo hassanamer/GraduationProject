@@ -4,34 +4,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:smarttouristguide/shared/styles/colors.dart';
 import '../../layout/cubit/cubit.dart';
 
-Widget defaultButton({
-  double width = double.infinity,
-  Color background = Colors.blue,
-  bool isUpperCase = true,
-  double radius = 0,
-  required String text,
-  required VoidCallback function,
-}) =>
-    Container(
-      width: width,
-      decoration: BoxDecoration(
-        color: background,
-        borderRadius: BorderRadius.circular(
-          radius,
-        ),
-      ),
-      child: MaterialButton(
-        onPressed: function,
-        child: Text(
-          isUpperCase ? text.toUpperCase() : text,
-          style: const TextStyle(
-            color: Colors.white,
-          ),
-        ),
-      ),
-    );
-//default button (ex: Registration,Login, Submit)
-
 Widget button({
   required VoidCallback? function,
   required String text,
@@ -63,24 +35,6 @@ Widget button({
       ),
     );
 
-Widget default_Button({
-  required double width,
-  required Color background,
-  required Function function,
-  required String text,
-  required ButtonStyle buttonStyle,
-}) =>
-    Container(
-      width: width,
-      color: background,
-      child: MaterialButton(
-        onPressed: function(),
-        child: Text(
-          text.toUpperCase(),
-          style: const TextStyle(color: AppColors.buttonTextColor),
-        ),
-      ),
-    );
 
 void navigateTo({
   required context,
@@ -254,43 +208,29 @@ Widget divider({double width = double.infinity}) => Padding(
       ),
     );
 
-Widget RateIconButton({
-  context,
-  VoidCallback? onPressed,
-  placeId,
-  rate,
-  color,
-}) =>
-    IconButton(
-      icon: Icon(
-        Icons.star_rate_rounded,
-        color: color,
-      ),
-      iconSize: 42.0,
-      padding: EdgeInsetsDirectional.all(0),
-      onPressed: onPressed,
-    );
 
 Widget login_register_button(context, Screen, text) {
   return button(
       function: () {
         showModalBottomSheet(
-            isDismissible: false,
-            enableDrag: false,
-            backgroundColor: Colors.transparent,
-            context: context,
-            builder: (context) {
-              return Container(
-                  height: double.infinity,
-                  decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                          topRight: Radius.circular(20),
-                          topLeft: Radius.circular(20)),
-                      color: Colors.white),
-                  child: Screen);
-            });
+          isDismissible: false,
+          enableDrag: false,
+          backgroundColor: Colors.transparent,
+          context: context,
+          builder: (context) {
+            return Container(
+              height: double.infinity,
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(20),
+                  topLeft: Radius.circular(20),
+                ),
+                color: Colors.white,
+              ),
+              child: Screen,
+            );
+          },
+        );
       },
       text: text);
 }
-
-Widget ratee() => Icon(Icons.star_rate);

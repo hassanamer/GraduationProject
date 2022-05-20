@@ -5,14 +5,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:smarttouristguide/layout/app_layout.dart';
 import 'package:smarttouristguide/layout/cubit/cubit.dart';
+import 'package:smarttouristguide/modules/interest_screen.dart';
 import 'package:smarttouristguide/modules/login/forget_password.dart';
 import 'package:smarttouristguide/modules/login/login_cubit/cubit.dart';
 import 'package:smarttouristguide/modules/login/login_cubit/states.dart';
 import 'package:smarttouristguide/shared/network/local/cache_helper.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:smarttouristguide/shared/styles/textStyle.dart';
-
-import '../../AskUser.dart';
 import '../../shared/components/components.dart';
 import '../../shared/styles/colors.dart';
 
@@ -138,7 +137,7 @@ class LoginScreen extends StatelessWidget {
                             backgroundColor:
                                 MaterialStateProperty.all(Colors.transparent)),
                         onPressed: () {
-                          Navigator.pushNamed(context, AskUser.routeName);
+                          navigateTo(context: context, widget: InterestsScreen());
                         },
                         child: Text('select your favourite category'),
                       )),

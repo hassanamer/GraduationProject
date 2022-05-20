@@ -15,22 +15,26 @@ class Data {
   late final List<TopRated> topRated;
   late final List<Offers> offers;
   late final List<Events> events;
-  late final List<home_place> home_places;
+  late final List<HomePlaces> home_places;
 
   Data.fromJson(Map<String, dynamic> json){
     popularPlaces = List.from(json['popular_places']).map((e)=>PopularPlaces.fromJson(e)).toList();
     topRated = List.from(json['Top_Rated']).map((e)=>TopRated.fromJson(e)).toList();
     offers = List.from(json['offers']).map((e)=>Offers.fromJson(e)).toList();
     events = List.from(json['events']).map((e)=>Events.fromJson(e)).toList();
-    home_places = List.from(json['places']).map((e)=>home_place.fromJson(e)).toList();
+    home_places = List.from(json['places']).map((e)=>HomePlaces.fromJson(e)).toList();
   }
+
 }
 
 class PopularPlaces {
   late final dynamic id;
   late final String placeName;
+  late final dynamic type;
+  late final dynamic ageCategory;
   late final String Description;
   late final dynamic city;
+  late final String priceClass;
   late final String location;
   late final String image;
   late final bool isActive;
@@ -40,8 +44,11 @@ class PopularPlaces {
   PopularPlaces.fromJson(Map<String, dynamic> json){
     id = json['id'];
     placeName = json['place_name'];
+    type = json['type'];
+    ageCategory = json['age_category'];
     Description = json['Description'];
     city = json['city'];
+    priceClass = json['price_class'];
     location = json['location'];
     image = json['image'];
     isActive = json['is_active'];
@@ -53,8 +60,11 @@ class PopularPlaces {
 class TopRated {
   late final dynamic id;
   late final String placeName;
+  late final dynamic type;
+  late final String ageCategory;
   late final String Description;
   late final dynamic city;
+  late final String priceClass;
   late final String location;
   late final String image;
   late final bool isActive;
@@ -64,8 +74,11 @@ class TopRated {
   TopRated.fromJson(Map<String, dynamic> json){
     id = json['id'];
     placeName = json['place_name'];
+    type = json['type'];
+    ageCategory = json['age_category'];
     Description = json['Description'];
     city = json['city'];
+    priceClass = json['price_class'];
     location = json['location'];
     image = json['image'];
     isActive = json['is_active'];
@@ -77,8 +90,8 @@ class TopRated {
 class Offers {
   late final dynamic id;
   late final String offerName;
-  late final int oldPrice;
-  late final int newPrice;
+  late final dynamic oldPrice;
+  late final dynamic newPrice;
   late final Place place;
 
   Offers.fromJson(Map<String, dynamic> json){
@@ -96,9 +109,10 @@ class Place {
   late final String Description;
   late final String location;
   late final String priceClass;
+  late final dynamic ageCategory;
   late final String image;
   late final bool isActive;
-  late final int type;
+  late final dynamic type;
   late final dynamic city;
   late final List<dynamic> favouritePlace;
 
@@ -108,6 +122,7 @@ class Place {
     Description = json['Description'];
     location = json['location'];
     priceClass = json['price_class'];
+    ageCategory = json['age_category'];
     image = json['image'];
     isActive = json['is_active'];
     type = json['type'];
@@ -134,11 +149,14 @@ class Events {
   }
 }
 
-class home_place {
+class HomePlaces {
   late final dynamic id;
   late final String placeName;
+  late final dynamic type;
+  late final dynamic ageCategory;
   late final String Description;
   late final dynamic city;
+  late final dynamic priceClass;
   late final String location;
   late final String image;
   late final bool isActive;
@@ -146,11 +164,14 @@ class home_place {
   late final bool inFavourite;
   late final List<Comments> comments;
 
-  home_place.fromJson(Map<String, dynamic> json){
+  HomePlaces.fromJson(Map<String, dynamic> json){
     id = json['id'];
     placeName = json['place_name'];
+    type = json['type'];
+    ageCategory = json['age_category'];
     Description = json['Description'];
     city = json['city'];
+    priceClass = json['price_class'];
     location = json['location'];
     image = json['image'];
     isActive = json['is_active'];
@@ -161,7 +182,7 @@ class home_place {
 }
 
 class Comments {
-  late final dynamic id;
+  late final int id;
   late final String user;
   late final String comment;
 
@@ -170,4 +191,5 @@ class Comments {
     user = json['user'];
     comment = json['comment'];
   }
+
 }

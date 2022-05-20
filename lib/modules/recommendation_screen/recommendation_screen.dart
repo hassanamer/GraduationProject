@@ -53,7 +53,7 @@ class RecommendationScreen extends StatelessWidget {
 
 
 
-Widget buildRecommendationItem(context, home_place model) => Container(
+Widget buildRecommendationItem(context, HomePlaces model) => Container(
       height: MediaQuery.of(context).size.height * 0.4,
       width: double.infinity,
       decoration: BoxDecoration(

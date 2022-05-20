@@ -159,7 +159,7 @@ class HomeScreen extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Popular Places in Egypt',
+                                  'Suggested for your age',
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 17.6,
@@ -175,7 +175,7 @@ class HomeScreen extends StatelessWidget {
                                     itemBuilder: (context, index) =>
                                         buildHomePopularItem(
                                       cubit
-                                          .genderPlaces[index],
+                                          .ageRecommended[index],
                                       context,
                                     ),
                                     separatorBuilder: (context, index) =>
@@ -183,7 +183,7 @@ class HomeScreen extends StatelessWidget {
                                       width: 10.0,
                                     ),
                                     itemCount: cubit
-                                        .genderPlaces.length,
+                                        .ageRecommended.length,
                                     scrollDirection: Axis.horizontal,
                                   ),
                                 ),
@@ -353,7 +353,7 @@ Widget buildHomePopularItem(model, context) => InkWell(
       ),
     );
 
-Widget buildNotRecommendedItem(home_place model, context) => InkWell(
+Widget buildNotRecommendedItem(HomePlaces model, context) => InkWell(
       onTap: () {
         AppCubit.get(context).getPlaceDetails(
           placeId: model.id,
@@ -420,7 +420,7 @@ Widget buildNotRecommendedItem(home_place model, context) => InkWell(
       ),
     );
 
-Widget buildHomeRecommendationItem(home_place model, context) => InkWell(
+Widget buildHomeRecommendationItem(HomePlaces model, context) => InkWell(
       onTap: () {
         AppCubit.get(context).getPlaceDetails(
           placeId: model.id,
