@@ -20,7 +20,9 @@ import 'package:smarttouristguide/shared/components/constants.dart';
 import 'package:smarttouristguide/shared/network/end_points.dart';
 import 'package:smarttouristguide/shared/network/remote/dio_helper.dart';
 import 'package:smarttouristguide/shared/styles/colors.dart';
+import '../../models/cat_interest_model.dart';
 import '../../models/change_favorites_model.dart';
+import '../../models/get_interests_model.dart';
 
 class AppCubit extends Cubit<AppStates> {
   AppCubit() : super(AppInitialState());
@@ -86,8 +88,10 @@ class AppCubit extends Cubit<AppStates> {
     });
   }
 
+
   HomeModel? homeModel;
   Map<dynamic, bool?> favorites = {};
+  Map<dynamic, bool?> interests = {};
 
   Future getHomeData() async {
     emit(AppLoadingDataState());
@@ -492,6 +496,54 @@ class AppCubit extends Cubit<AppStates> {
   void cubitTest() {
     print("it's ok");
   }
+
+  ChangeInterestModel? changeInterestModel;
+
+  void changeInterest(dynamic categoryId) {
+    interests[categoryId] = !interests[categoryId]!;
+    emit(AppChangeFavoritesState());
+
+    DioHelper.postData(
+      url: INTERESTS,
+      data: {
+        'category_id': categoryId,
+      },
+      token: 'Token ${token}',
+    ).then((value) {
+      changeInterestModel = ChangeInterestModel.fromJson(value.data);
+      print(value.data);
+
+      if (!changeFavoritesModel!.status) {
+        interests[categoryId] = !interests[categoryId]!;
+      } else {
+        getInterests();
+      }
+      emit(AppSuccessChangeFavoritesState(changeFavoritesModel!));
+    }).catchError((error) {
+      print(error.toString());
+      interests[categoryId] = !interests[categoryId]!;
+      emit(AppErrorChangeFavoritesState());
+    });
+  }
+
+  GetInterestsModel? getInterestsModel;
+
+  void getInterests() {
+    emit(AppLoadingGetFavoritesState());
+
+    DioHelper.getData(
+      url: INTERESTS,
+      token: 'Token ${token}',
+    ).then((value) {
+      getInterestsModel = GetInterestsModel.fromJson(value.data);
+      emit(AppSuccessGetFavoritesState());
+    }).catchError((error) {
+      print(error.toString());
+      emit(AppErrorGetFavoritesState());
+    });
+  }
+
+
 }
 
 // int placeIndex = 0;

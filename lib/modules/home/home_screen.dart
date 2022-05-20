@@ -6,6 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:smarttouristguide/layout/cubit/cubit.dart';
 import 'package:smarttouristguide/layout/cubit/states.dart';
 import 'package:smarttouristguide/models/home_model.dart';
+import 'package:smarttouristguide/modules/interest_screen.dart';
 import 'package:smarttouristguide/modules/place_details/place_details_screen.dart';
 import 'package:smarttouristguide/modules/search/search_screen.dart';
 import 'package:smarttouristguide/shared/styles/colors.dart';
@@ -137,6 +138,18 @@ class HomeScreen extends StatelessWidget {
                                   onPressed: () {
                                     navigateTo(
                                       widget: OffersScreen(),
+                                      context: context,
+                                    );
+                                  },
+                                  child: HomeRow(
+                                    text: AppLocalizations.of(context)!.offers,
+                                    iconPath: 'assets/icons/offers.svg',
+                                  ),
+                                ),
+                                MaterialButton(
+                                  onPressed: () {
+                                    navigateTo(
+                                      widget: InterestsScreen(),
                                       context: context,
                                     );
                                   },

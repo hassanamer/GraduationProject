@@ -12,5 +12,7 @@ const ADD_COMMENT = 'home/comment/';
 
 const FAVORITES = 'home/favouriteplace/';
 
+const INTERESTS = 'home/interrest/';
+
 const PROFILE = 'api/profile/';
 
