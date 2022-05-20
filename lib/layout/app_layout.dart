@@ -18,7 +18,7 @@ class AppLayout extends StatelessWidget {
       builder: (context, state) {
         var cubit = AppCubit.get(context);
         return Scaffold(
-          drawer: MenuDrawer(),
+          drawer: MenuDrawerScreen(),
           appBar: AppBar(
             foregroundColor: AppColors.primaryColor,
             actions: [

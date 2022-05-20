@@ -13,7 +13,7 @@ class ProfileScreen extends StatelessWidget {
   TextEditingController nameController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  static const String routeName = 'UserProfile';
+  static const String routeName = 'ProfileScreen';
 
   @override
   Widget build(BuildContext context) {

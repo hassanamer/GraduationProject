@@ -2,16 +2,18 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:smarttouristguide/modules/interest_screen.dart';
 import 'package:smarttouristguide/shared/components/constants.dart';
+import 'package:smarttouristguide/shared/components/extensions.dart';
 
 import '../../layout/cubit/cubit.dart';
 import '../../models/get_profile_model.dart';
+import '../../shared/components/components.dart';
 import '../../shared/styles/colors.dart';
 import '../cubit/cubit.dart';
 import '../cubit/states.dart';
-import '../profile/profile_screen.dart';
 
-class MenuDrawer extends StatelessWidget {
+class MenuDrawerScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var cubit = AppCubit.get(context);
@@ -37,132 +39,136 @@ class MenuDrawer extends StatelessWidget {
   }
 }
 
-Widget currentt(context, Data user) => Drawer(
-      child: Column(
-        children: [
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.35,
-            child: DrawerHeader(
-              decoration: BoxDecoration(
-                color: AppColors.primaryColor,
-              ),
-              child: Column(
-                children: [
-                  Row(
+Widget currentt(context, Data user) => Container(
+      width: MediaQuery.of(context).size.width * 0.78,
+      child: Drawer(
+        backgroundColor: AppColors.backgroundColor,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            bottomRight: Radius.circular(
+              18,
+            ),
+            topRight: Radius.circular(
+              18,
+            ),
+          ),
+        ),
+        child: Column(
+          children: [
+            SizedBox(
+              height: 230.0,
+              child: InkWell(
+                onTap: () {
+                  Navigator.pushNamed(
+                    context,
+                    'ProfileScreen',
+                  );
+                },
+                child: DrawerHeader(
+                  decoration: BoxDecoration(
+                    color: AppColors.primaryColor,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Container(
-                        color: Colors.transparent,
-                        width: MediaQuery.of(context).size.width * 0.08,
-                      ),
-                      Container(
-                        width: MediaQuery.of(context).size.width * 0.46,
-                        child: Column(
-                          children: [
-                            CircleAvatar(
-                              radius: 40,
-                              backgroundColor: Colors.white,
-                              child: CircleAvatar(
-                                radius: 55.0,
-                                backgroundImage: user.gender == 'male'
-                                    ? AssetImage(
-                                        'assets/images/male.png',
-                                      )
-                                    : AssetImage(
-                                        'assets/images/female.png',
-                                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Column(
+                            children: [
+                              SizedBox(
+                                height: 10,
                               ),
-                            ),
-                            const SizedBox(
-                              height: 16,
-                            ),
-                            Text(
-                              '${user.username}',
-                              style:
-                                  TextStyle(fontSize: 24, color: Colors.white),
-                            ),
-                            Text(
-                              '${user.email}',
-                              style: TextStyle(color: Colors.white),
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.2,
-                        child: Column(
-                          children: [
-                            IconButton(
-                              onPressed: () {
-                                Navigator.of(context)
-                                    .pushNamed(ProfileScreen.routeName);
-                              },
-                              icon: const Icon(
-                                Icons.edit_outlined,
-                                color: Colors.white,
+                              CircleAvatar(
+                                radius: 40,
+                                child: CircleAvatar(
+                                  radius: 55.0,
+                                  backgroundImage: user.gender == 'male'
+                                      ? AssetImage(
+                                          'assets/images/male.png',
+                                        )
+                                      : AssetImage(
+                                          'assets/images/female.png',
+                                        ),
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
-                      )
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Text(
+                                '${user.firstName.capitalize()} ${user.lastName.capitalize()}',
+                                textAlign: TextAlign.start,
+                                style: TextStyle(
+                                  fontSize: 22,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              Text(
+                                '${user.email}',
+                                textAlign: TextAlign.start,
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.grey[350],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ],
                   ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 25.0),
+              child: Row(
+                children: [
+                  Text(
+                    'Interests',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 17.5,
+                    ),
+                  ),
+                  Spacer(),
+                  IconButton(
+                    icon: Icon(
+                      Icons.arrow_forward_ios_rounded,
+                      color: AppColors.primaryColor,
+                      size: 17.5,
+                    ),
+                    onPressed: () {
+                      navigateTo(
+                        context: context,
+                        widget: InterestsScreen(),
+                      );
+                    },
+                  )
                 ],
               ),
             ),
-          ),
-          ListTile(
-            title: Text(
-              AppLocalizations.of(context)!.mood,
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: AppColors.primaryColor,
-                  fontSize: 18),
-            ),
-            horizontalTitleGap: 80,
-            leading: Switch(
-              activeColor: AppColors.primaryColor,
-              value: ChangeColorCubit.get(context).changeMode,
-              onChanged: (value) {
-                ChangeColorCubit.get(context).togaleMode();
-              },
-            ),
-          ),
-          ListTile(
-              title: Text(
-                AppLocalizations.of(context)!.language,
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.primaryColor,
-                    fontSize: 18),
+            const Spacer(),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                  color: AppColors.primaryColor),
+              child: ElevatedButton(
+                style: ButtonStyle(
+                    elevation: MaterialStateProperty.all(0),
+                    backgroundColor:
+                        MaterialStateProperty.all(Colors.transparent)),
+                onPressed: () {
+                  signOut(context);
+                },
+                child: Text(AppLocalizations.of(context)!.log_out),
               ),
-              horizontalTitleGap: 80,
-              leading: Switch(
-                  activeColor: AppColors.primaryColor,
-                  value: ChangeColorCubit.get(context).changeLanguage,
-                  onChanged: (value) {
-                    ChangeColorCubit.get(context).togaleLanguage();
-                    print(ChangeColorCubit().changeLanguage);
-                  })),
-          const Spacer(),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12),
-                color: AppColors.primaryColor),
-            child: ElevatedButton(
-              style: ButtonStyle(
-                  elevation: MaterialStateProperty.all(0),
-                  backgroundColor:
-                      MaterialStateProperty.all(Colors.transparent)),
-              onPressed: () {
-                signOut(context);
-              },
-              child: Text(AppLocalizations.of(context)!.log_out),
             ),
-          ),
-          const SizedBox(
-            height: 12,
-          )
-        ],
+            const SizedBox(
+              height: 12,
+            )
+          ],
+        ),
       ),
     );

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_framework/responsive_framework.dart';
-import 'package:smarttouristguide/AskUser.dart';
 import 'package:smarttouristguide/layout/app_layout.dart';
 import 'package:smarttouristguide/layout/cubit/cubit.dart';
 import 'package:smarttouristguide/modules/cubit/cubit.dart';
@@ -105,7 +104,6 @@ class MyApp extends StatelessWidget {
           ForgetPassword.routeName: (context) => ForgetPassword(),
           PlaceDetailsScreen.routeName: (context) => PlaceDetailsScreen(),
           HomeScreen.routeName: (context) => HomeScreen(),
-          AskUser.routeName: (context) => AskUser(),
         },
       ),
     );
