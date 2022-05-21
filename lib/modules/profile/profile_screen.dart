@@ -49,7 +49,7 @@ class ProfileScreen extends StatelessWidget {
     genderController.text = user.gender;
     phoneController.text = user.phone;
     countryController.text = user.country;
-    emailController.text = user.country;
+    emailController.text = user.email;
 
     return Scaffold(
       appBar: AppBar(
@@ -218,7 +218,16 @@ class ProfileScreen extends StatelessWidget {
                       color: AppColors.primaryColor,
                       child: Text('Update'),
                       onPressed: () {
-
+                        AppCubit.get(context).updateProfile(
+                          firstName: firstNameController.text,
+                          lastName: lastNameController.text,
+                          userName: nameController.text,
+                          birthday: dateOfBirthController.text,
+                          gender: genderController.text,
+                          phone: phoneController.text,
+                          country: countryController.text,
+                          email: emailController.text,
+                        );
                       },
                     ),
                   ],

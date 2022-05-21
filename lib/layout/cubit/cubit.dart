@@ -6,6 +6,7 @@ import 'package:sentiment_dart/sentiment_dart.dart';
 import 'package:smarttouristguide/layout/cubit/states.dart';
 import 'package:smarttouristguide/models/cat_places_model.dart';
 import 'package:smarttouristguide/models/comment_model.dart';
+import 'package:smarttouristguide/models/edit_profile_model.dart';
 import 'package:smarttouristguide/models/favorites_data_model.dart';
 import 'package:smarttouristguide/models/get_profile_model.dart';
 import 'package:smarttouristguide/models/home_model.dart';
@@ -163,6 +164,39 @@ class AppCubit extends Cubit<AppStates> {
     });
   }
 
+  EditProfileModel? editProfileModel;
+  void updateProfile({
+    required String firstName,
+    required String lastName,
+    required String userName,
+    required String birthday,
+    required String gender,
+    required String phone,
+    required String country,
+    required String email,
+  }) {
+    emit(AppUpdateProfileLoadingState());
+    DioHelper.putData(
+      url: PROFILE,
+      token: 'Token ${token}',
+      data: {
+        'first_name': firstName,
+        'last_name': lastName,
+        'username': userName,
+        'country': country,
+        'date_of_birth': birthday,
+        'gender': gender,
+      },
+    ).then((value) {
+      print(value.data);
+      editProfileModel = EditProfileModel.fromJson(value.data);
+      getProfile();
+      emit(AppUpdateProfileSuccessState());
+    }).catchError((error) {
+      print('error is = ${error.toString()}');
+      emit(AppUpdateProfileErrorState());
+    });
+  }
 
   // void editProfile() {
   //   emit(AppEditProfileLoadingState());

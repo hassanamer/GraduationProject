@@ -95,3 +95,9 @@ class AppLoadingGetInterestsState extends AppStates {}
 class AppSuccessGetInterestsState extends AppStates {}
 
 class AppErrorGetInterestsState extends AppStates {}
+
+class AppUpdateProfileLoadingState extends AppStates {}
+
+class AppUpdateProfileSuccessState extends AppStates {}
+
+class AppUpdateProfileErrorState extends AppStates {}

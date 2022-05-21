@@ -1,3 +1,4 @@
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -51,58 +52,17 @@ class InterestsScreen extends StatelessWidget {
               ),
             ],
           ),
-          body: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      Text(
-                        ' What categories of tourism\n are you visited in Egypt?',
-                        textAlign: TextAlign.start,
-                        style: TextStyle(
-                            fontSize: 17.5,
-                            fontWeight: FontWeight.bold,
-                            color: AppColors.bodyDetailsColor),
-                      ),
-                      Spacer(),
-                      MaterialButton(
-                        child: Text(
-                          'Get Started',
-                        ),
-                        textColor: Colors.white,
-                        color: AppColors.primaryColor,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12)
-                        ),
-                        onPressed: () {
-                          cubit.getCategoriesPlacesData();
-                          cubit.getInterests();
-                          cubit.getHomeData();
-                          navigateTo(
-                            context: context,
-                            widget: AppLayout(),
-                          );
-                        },
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 8.0,
-                  ),
-                  ListView.separated(
-                    itemBuilder: (context, index) => buildInterestCategoryItem(
-                        context, cubit.cpModel!.data.category[index]),
-                    separatorBuilder: (context, index) => SizedBox(
-                      height: 8.0,
-                    ),
-                    itemCount: cubit.cpModel!.data.category.length,
-                    shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
-                  ),
-                ],
+          body: ConditionalBuilder(
+            condition: cubit.getInterestsModel != null && cubit.cpModel != null,
+            builder: (context) => History(context, cubit),
+            fallback: (context) => Container(
+              height: double.infinity,
+              width: double.infinity,
+              color: AppColors.backgroundColor,
+              child: Center(
+                child: CircularProgressIndicator(
+                  color: AppColors.primaryColor,
+                ),
               ),
             ),
           ),
@@ -110,6 +70,61 @@ class InterestsScreen extends StatelessWidget {
       },
     );
   }
+
+  Widget History(context, cubit) => SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Text(
+                    ' What categories of tourism\n are you visited in Egypt?',
+                    textAlign: TextAlign.start,
+                    style: TextStyle(
+                        fontSize: 17.5,
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.bodyDetailsColor),
+                  ),
+                  Spacer(),
+                  MaterialButton(
+                    child: Text(
+                      'Get Started',
+                    ),
+                    textColor: Colors.white,
+                    color: AppColors.primaryColor,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12)),
+                    onPressed: () {
+                      cubit.getCategoriesPlacesData();
+                      cubit.getInterests();
+                      cubit.getHomeData();
+                      navigateTo(
+                        context: context,
+                        widget: AppLayout(),
+                      );
+                    },
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 8.0,
+              ),
+              ListView.separated(
+                itemBuilder: (context, index) => buildInterestCategoryItem(
+                    context, cubit.cpModel!.data.category[index]),
+                separatorBuilder: (context, index) => SizedBox(
+                  height: 8.0,
+                ),
+                itemCount: cubit.cpModel!.data.category.length,
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+              ),
+            ],
+          ),
+        ),
+      );
 
   Widget buildInterestCategoryItem(context, Category category) => Container(
         decoration: BoxDecoration(
