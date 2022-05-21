@@ -6,7 +6,6 @@ import 'package:sentiment_dart/sentiment_dart.dart';
 import 'package:smarttouristguide/layout/cubit/states.dart';
 import 'package:smarttouristguide/models/cat_places_model.dart';
 import 'package:smarttouristguide/models/comment_model.dart';
-import 'package:smarttouristguide/models/edit_profile_model.dart';
 import 'package:smarttouristguide/models/favorites_data_model.dart';
 import 'package:smarttouristguide/models/get_profile_model.dart';
 import 'package:smarttouristguide/models/home_model.dart';
@@ -164,17 +163,6 @@ class AppCubit extends Cubit<AppStates> {
     });
   }
 
-  TextEditingController? emailController;
-  TextEditingController? firstNameController;
-  TextEditingController? lastNameController;
-  TextEditingController? phoneController;
-  TextEditingController? dateOfBirthController;
-  TextEditingController? genderController;
-  TextEditingController? countryController;
-
-  var editProfileKey = GlobalKey<FormState>();
-
-  EditProfileModel? editProfileModel;
 
   // void editProfile() {
   //   emit(AppEditProfileLoadingState());
@@ -471,6 +459,7 @@ class AppCubit extends Cubit<AppStates> {
   }
 
   List<HomePlaces> ageRecommended = [];
+  var age;
 
   void ageRecommend() {
     ageRecommended = [];
@@ -480,10 +469,9 @@ class AppCubit extends Cubit<AppStates> {
 
     int day = int.parse('${date_of_birth[0]}${date_of_birth[1]}');
     int month = int.parse('${date_of_birth[3]}${date_of_birth[4]}');
-    int year = int.parse(
-        '${date_of_birth[6]}${date_of_birth[7]}${date_of_birth[8]}${date_of_birth[9]}');
+    int year = int.parse('${date_of_birth[6]}${date_of_birth[7]}${date_of_birth[8]}${date_of_birth[9]}');
     DateTime birthday = DateTime(year, month, day);
-    var age = AgeCalculator.age(birthday).years;
+    age = AgeCalculator.age(birthday).years;
 
     if (age < 35) {
       for (var place in places) {

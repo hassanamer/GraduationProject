@@ -3,8 +3,11 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:smarttouristguide/layout/cubit/cubit.dart';
+import 'package:smarttouristguide/modules/interest_screen.dart';
 import 'package:smarttouristguide/modules/register/register_cubit/cubit.dart';
 import 'package:smarttouristguide/modules/register/register_cubit/states.dart';
+import 'package:smarttouristguide/shared/network/local/cache_helper.dart';
 import '../../shared/components/components.dart';
 
 class RegisterScreen extends StatelessWidget {
@@ -24,11 +27,27 @@ class RegisterScreen extends StatelessWidget {
         username = TextEditingController();
 
     var cubit = AppRegisterCubit.get(context);
+    var appCubit = AppCubit.get(context);
 
     return BlocConsumer<AppRegisterCubit, AppRegisterStates>(
       listener: (context, state) {
         if (state is AppRegisterSuccessState) {
           if (state.registerModel!.status) {
+            CacheHelper.saveData(
+              key: 'token',
+              value: state.registerModel!.data.token,
+            ).then((value) {
+              cubit.getToken();
+              appCubit.getProfile();
+              appCubit.getHomeData();
+              appCubit.getCategoriesPlacesData();
+              appCubit.getFavorites();
+              appCubit.getInterests();
+              navigateAndFinish(
+                context: context,
+                widget: InterestsScreen(),
+              );
+            });
             Fluttertoast.showToast(
               msg: "${state.registerModel!.message}",
               toastLength: Toast.LENGTH_SHORT,

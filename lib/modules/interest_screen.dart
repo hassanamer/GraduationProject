@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -38,7 +37,7 @@ class InterestsScreen extends StatelessWidget {
             ),
             centerTitle: true,
             title: Text(
-              'Select your interests',
+              'Tourism History',
               style: TextStyle(
                 fontSize: 17.5,
               ),
@@ -61,7 +60,7 @@ class InterestsScreen extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        ' What categories of tourism\n are you interested in?',
+                        ' What categories of tourism\n are you visited in Egypt?',
                         textAlign: TextAlign.start,
                         style: TextStyle(
                             fontSize: 17.5,

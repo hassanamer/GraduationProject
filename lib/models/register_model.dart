@@ -8,6 +8,7 @@ class RegisterModel {
     message = json['message'];
     data = Data.fromJson(json['data']);
   }
+
 }
 
 class Data {
@@ -19,6 +20,7 @@ class Data {
   late final String gender;
   late final String country;
   late final String dateOfBirth;
+  late final String token;
 
   Data.fromJson(Map<String, dynamic> json){
     firstName = json['first_name'];
@@ -29,5 +31,7 @@ class Data {
     gender = json['gender'];
     country = json['country'];
     dateOfBirth = json['date_of_birth'];
+    token = json['token'];
   }
+
 }

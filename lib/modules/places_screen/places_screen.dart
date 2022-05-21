@@ -141,10 +141,10 @@ Widget buildPlacesItem(context, Places model, catName) => Container(
                     rating: model.rate.toDouble(),
                     itemBuilder: (context, index) => Icon(
                       Icons.star,
-                      color: AppColors.secondColor,
+                      color: AppColors.primaryColor,
                     ),
                     itemCount: 5,
-                    itemSize: 20,
+                    itemSize: 22,
                     direction: Axis.horizontal,
                   ),
                   Spacer(),

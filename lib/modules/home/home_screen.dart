@@ -163,7 +163,7 @@ class HomeScreen extends StatelessWidget {
                                     Row(
                                       children: [
                                         Text(
-                                          'Suggested for your interests',
+                                          'Suggested from your history',
                                           style: TextStyle(
                                             fontWeight: FontWeight.bold,
                                             fontSize: 17.5,
