@@ -92,7 +92,7 @@ class AppCubit extends Cubit<AppStates> {
   Map<dynamic, bool?> favorites = {};
   Map<dynamic, bool?> interests = {};
   List<String> favCats = [];
-  List<HomePlaces> CatRecommended= [];
+  List<HomePlaces> CatRecommended = [];
 
   Future getHomeData() async {
     emit(AppLoadingDataState());
@@ -116,6 +116,7 @@ class AppCubit extends Cubit<AppStates> {
   }
 
   CpModel? cpModel;
+
   void getCategoriesPlacesData() {
     emit(AppLoadingDataState());
     DioHelper.getData(
@@ -165,6 +166,7 @@ class AppCubit extends Cubit<AppStates> {
   }
 
   EditProfileModel? editProfileModel;
+
   void updateProfile({
     required String firstName,
     required String lastName,
@@ -244,11 +246,32 @@ class AppCubit extends Cubit<AppStates> {
   }) async {
     emit(AppCommentLoading());
     DioHelper.postData(
-      url: ADD_COMMENT,
+      url: COMMENT,
       token: 'Token ${token}',
       data: {
         'place_id': placeId,
         'comment': comment,
+      },
+    ).then((value) {
+      commentModel = CommentModel.fromJson(value.data);
+      showToast(message: commentModel!.message);
+      emit(AppCommentSuccess());
+    }).catchError((error) {
+      print('error when adding updating rate \n ${error.toString()}');
+      emit(AppCommentError());
+    });
+  }
+
+  Future deleteComment({
+    dynamic commentId,
+  }) async {
+    emit(AppCommentLoading());
+    DioHelper.putData(
+      url: COMMENT,
+      token: 'Token ${token}',
+      data: {
+        'comment_id': commentId,
+        'comment': '',
       },
     ).then((value) {
       commentModel = CommentModel.fromJson(value.data);
@@ -408,7 +431,7 @@ class AppCubit extends Cubit<AppStates> {
                   ),
                 ),
                 SizedBox(
-                  height: 20.0,
+                  height: 10.0,
                 ),
                 SizedBox(
                   child: Text(
@@ -428,6 +451,8 @@ class AppCubit extends Cubit<AppStates> {
 
   List<HomePlaces> recommended = [];
   List<String> placeComments1 = [];
+  int goodIndex = 0;
+  int badIndex = 0;
 
   void recommendation() {
     {
@@ -435,26 +460,29 @@ class AppCubit extends Cubit<AppStates> {
       int placeIndex = 0;
 
       for (var place in homeModel!.data.home_places) {
-        for (var commentMap
-            in homeModel!.data.home_places[placeIndex].comments) {
-          placeComments1.add(commentMap.comment);
-        }
-        if (placeComments1.length > 0) {
-          print('${placeComments1}');
-          String sentimentText = placeComments1.join(' ');
-          if (Sentiment.analysis(sentimentText).words.good.length >
-                  Sentiment.analysis(sentimentText).words.bad.length &&
-              place.rate > 3.7) {
+        if (place.comments.isNotEmpty) {
+          for (var commentMap
+              in homeModel!.data.home_places[placeIndex].comments) {
+            placeComments1.add(
+              commentMap.comment,
+            );
+          }
+          for (String comment in placeComments1) {
+            goodIndex += Sentiment.analysis(comment).words.good.length;
+            badIndex += Sentiment.analysis(comment).words.bad.length;
+          }
+          print(
+              'place name: ${place.placeName}\ngood = ${goodIndex}\nbad = ${badIndex}');
+          if (goodIndex > badIndex &&
+              place.rate > 3.5 &&
+              !recommended.contains(place)) {
             recommended.add(place);
-          } else {
-            print('not recommended');
           }
         }
+        goodIndex = 0;
+        badIndex = 0;
         placeComments1 = [];
         placeIndex++;
-      }
-      for (var i in recommended) {
-        print(i.placeName);
       }
     }
   }
@@ -473,21 +501,15 @@ class AppCubit extends Cubit<AppStates> {
           placeComments2.add(commentMap.comment);
         }
         if (placeComments2.length > 0) {
-          print('${placeComments2}');
           String sentimentText = placeComments2.join(' ');
           if (Sentiment.analysis(sentimentText).words.bad.length >
                   Sentiment.analysis(sentimentText).words.good.length &&
               place.rate <= 2.5) {
             notRecommended.add(place);
-          } else {
-            print('not recommended');
-          }
+          } else {}
         }
         placeComments2 = [];
         placeIndex++;
-      }
-      for (var i in notRecommended) {
-        print(i.placeName);
       }
     }
   }
@@ -503,7 +525,8 @@ class AppCubit extends Cubit<AppStates> {
 
     int day = int.parse('${date_of_birth[0]}${date_of_birth[1]}');
     int month = int.parse('${date_of_birth[3]}${date_of_birth[4]}');
-    int year = int.parse('${date_of_birth[6]}${date_of_birth[7]}${date_of_birth[8]}${date_of_birth[9]}');
+    int year = int.parse(
+        '${date_of_birth[6]}${date_of_birth[7]}${date_of_birth[8]}${date_of_birth[9]}');
     DateTime birthday = DateTime(year, month, day);
     age = AgeCalculator.age(birthday).years;
 
@@ -577,26 +600,18 @@ class AppCubit extends Cubit<AppStates> {
     CatRecommended = [];
     getCategoriesPlacesData();
 
-    for(var cat in cpModel!.data.category) {
-      if(cat.inFavourite) {
+    for (var cat in cpModel!.data.category) {
+      if (cat.inFavourite) {
         favCats.add(cat.name);
       }
     }
-    for(var place in homeModel!.data.home_places) {
-      if(favCats.contains(place.type)) {
+    for (var place in homeModel!.data.home_places) {
+      if (favCats.contains(place.type)) {
         CatRecommended.add(place);
       }
     }
-    for(var place in CatRecommended) {
-      print('place name: ${place.placeName}\nplace category: ${place.type}');
-    }
+    // for (var place in CatRecommended) {
+    //  print('place name: ${place.placeName}\nplace category: ${place.type}');
+    // }
   }
 }
-
-// int placeIndex = 0;
-// for (var place in homeModel!.data.places[0].) {
-//   int commentIndex= 0;
-//   for (var comment in place.comments) {
-//     placeComments.add(comment.comment);
-//     print(placeComments);
-//   }

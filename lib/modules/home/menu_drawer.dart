@@ -1,7 +1,6 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:smarttouristguide/modules/interest_screen.dart';
 import 'package:smarttouristguide/shared/components/constants.dart';
 import 'package:smarttouristguide/shared/components/extensions.dart';
@@ -162,7 +161,7 @@ Widget currentt(context, Data user) => Container(
                 onPressed: () {
                   signOut(context);
                 },
-                child: Text(AppLocalizations.of(context)!.log_out),
+                child: Text('logout'),
               ),
             ),
             const SizedBox(

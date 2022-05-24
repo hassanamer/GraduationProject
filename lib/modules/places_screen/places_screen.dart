@@ -48,7 +48,6 @@ class PlacesScreen extends StatelessWidget {
                 ),
               ),
             ),
-            centerTitle: true,
             title: Text(
               '${catName} Places',
               style: TextStyle(
@@ -70,7 +69,7 @@ class PlacesScreen extends StatelessWidget {
               itemBuilder: (context, index) => Column(
                 children: [
                   SizedBox(height: 5.0),
-                  buildPlacesItem(
+                  buildPlace(
                       context,
                       cubit.cpModel!.data.category[catIndex].info.places[index],
                       catName),
@@ -94,7 +93,7 @@ class PlacesScreen extends StatelessWidget {
   }
 }
 
-Widget buildPlacesItem(context, Places model, catName) => Container(
+Widget buildPlace(context, Places model, catName) => Container(
       height: 250.0,
       width: double.infinity,
       decoration: BoxDecoration(
@@ -155,9 +154,7 @@ Widget buildPlacesItem(context, Places model, catName) => Container(
                       );
                       navigateTo(
                         context: context,
-                        widget: PlaceDetailsScreen(
-                          catName1: catName,
-                        ),
+                        widget: PlaceDetailsScreen(),
                       );
                     },
                     child: Row(

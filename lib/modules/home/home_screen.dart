@@ -9,12 +9,10 @@ import 'package:smarttouristguide/models/home_model.dart';
 import 'package:smarttouristguide/modules/place_details/place_details_screen.dart';
 import 'package:smarttouristguide/modules/search/search_screen.dart';
 import 'package:smarttouristguide/shared/styles/colors.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../shared/components/components.dart';
 import '../events/events_screen.dart';
 import '../offers/offer_screen.dart';
-import '../recommendation_screen/recommendation_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   static const routeName = 'Home';
@@ -69,12 +67,25 @@ class HomeScreen extends StatelessWidget {
                     ),
                   )
                 : SingleChildScrollView(
+                    physics: const AlwaysScrollableScrollPhysics(),
                     scrollDirection: Axis.vertical,
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 15.0),
+                            child: Text(
+                              'Hi ${cubit.getProfileModel!.data.firstName},\nWelcome To Egypt!',
+                              style: TextStyle(
+                                  fontSize: 22.0, fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 8.0,
+                          ),
                           Center(
                             child: Column(
                               children: [
@@ -128,8 +139,8 @@ class HomeScreen extends StatelessWidget {
                                       context: context,
                                     );
                                   },
-                                  child: HomeRow(
-                                    text: AppLocalizations.of(context)!.events,
+                                  child: HomeButton(
+                                    text: 'EVENTS',
                                     iconPath: 'assets/icons/events.svg',
                                   ),
                                 ),
@@ -140,189 +151,170 @@ class HomeScreen extends StatelessWidget {
                                       context: context,
                                     );
                                   },
-                                  child: HomeRow(
-                                    text: AppLocalizations.of(context)!.offers,
+                                  child: HomeButton(
+                                    text: 'OFFERS',
                                     iconPath: 'assets/icons/offers.svg',
                                   ),
                                 ),
                               ],
                             ),
                           ),
-                          SizedBox(
-                            height: 15.0,
-                          ),
                           Padding(
-                            padding: const EdgeInsets.only(
-                              left: 15,
-                            ),
+                            padding: const EdgeInsets.only(left: 15, right: 10),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                cubit.CatRecommended.isNotEmpty ? Column(
-                                  children: [
-                                    Row(
-                                      children: [
-                                        Text(
-                                          'Suggested from your history',
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 17.5,
-                                          ),
-                                        ),
-                                        // Spacer(),
-                                        // InkWell(
-                                        //   child: Row(
-                                        //     children: [
-                                        //       Icon(
-                                        //         Icons.more_horiz_rounded,
-                                        //         color: AppColors.primaryColor,
-                                        //       ),
-                                        //       Text(
-                                        //         AppLocalizations.of(context)!.more,
-                                        //         style: TextStyle(
-                                        //           color: AppColors.primaryColor,
-                                        //         ),
-                                        //       ),
-                                        //     ],
-                                        //   ),
-                                        //   onTap: () {
-                                        //     navigateTo(
-                                        //       context: context,
-                                        //       widget: RecommendationScreen(),
-                                        //     );
-                                        //   },
-                                        // ),
-                                      ],
-                                    ),
-                                    Container(
-                                      height: 173.0,
-                                      width: double.infinity,
-                                      child: ListView.separated(
-                                        itemBuilder: (context, index) =>
-                                            buildHomeItem(
-                                                cubit.CatRecommended[index],
-                                                context),
-                                        separatorBuilder: (context, index) =>
-                                            SizedBox(
-                                          width: 10.0,
-                                        ),
-                                        itemCount: cubit.CatRecommended.length,
-                                        scrollDirection: Axis.horizontal,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 8,
-                                    ),
-                                  ],
-                                ): SizedBox(),
-                                Text(
-                                  'Suggested for your age',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 17.6,
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 5.0,
-                                ),
-                                Container(
-                                  height: 173.0,
-                                  width: double.infinity,
-                                  child: ListView.separated(
-                                    itemBuilder: (context, index) =>
-                                        buildHomeItem(
-                                      cubit.ageRecommended[index],
-                                      context,
-                                    ),
-                                    separatorBuilder: (context, index) =>
-                                        SizedBox(
-                                      width: 10.0,
-                                    ),
-                                    itemCount: cubit.ageRecommended.length,
-                                    scrollDirection: Axis.horizontal,
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 8,
-                                ),
-                                Row(
-                                  children: [
-                                    Text(
-                                      'Recommended by users',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 17.5,
-                                      ),
-                                    ),
-                                    Spacer(),
-                                    InkWell(
-                                      child: Row(
-                                        children: [
-                                          Icon(
-                                            Icons.more_horiz_rounded,
-                                            color: AppColors.primaryColor,
-                                          ),
-                                          Text(
-                                            AppLocalizations.of(context)!.more,
+                                cubit.CatRecommended.isNotEmpty
+                                    ? Theme(
+                                        data: Theme.of(context).copyWith(
+                                            dividerColor: Colors.transparent),
+                                        child: ExpansionTile(
+                                          title: Text(
+                                            'Suggested from your history',
                                             style: TextStyle(
-                                              color: AppColors.primaryColor,
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 17.5,
                                             ),
                                           ),
-                                        ],
+                                          children: [
+                                            Container(
+                                              height: 173.0,
+                                              width: double.infinity,
+                                              child: ListView.separated(
+                                                itemBuilder: (context, index) =>
+                                                    buildHomeItem(
+                                                        cubit.CatRecommended[
+                                                            index],
+                                                        context),
+                                                separatorBuilder:
+                                                    (context, index) =>
+                                                        SizedBox(
+                                                  width: 10.0,
+                                                ),
+                                                itemCount:
+                                                    cubit.CatRecommended.length,
+                                                scrollDirection:
+                                                    Axis.horizontal,
+                                              ),
+                                            ),
+                                          ],
+                                          initiallyExpanded: true,
+                                          tilePadding: EdgeInsets.zero,
+                                        ),
+                                      )
+                                    : SizedBox(),
+                                Theme(
+                                  data: Theme.of(context).copyWith(
+                                      dividerColor: Colors.transparent),
+                                  child: ExpansionTile(
+                                    title: Text(
+                                      'Suggested for your age',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 17.6,
                                       ),
-                                      onTap: () {
-                                        navigateTo(
-                                          context: context,
-                                          widget: RecommendationScreen(),
-                                        );
-                                      },
                                     ),
-                                  ],
-                                ),
-                                Container(
-                                  height: 173.0,
-                                  width: double.infinity,
-                                  child: ListView.separated(
-                                    itemBuilder: (context, index) =>
-                                        buildHomeItem(
-                                            cubit.recommended[index], context),
-                                    separatorBuilder: (context, index) =>
-                                        SizedBox(
-                                      width: 10.0,
-                                    ),
-                                    itemCount: cubit.recommended.length,
-                                    scrollDirection: Axis.horizontal,
+                                    children: [
+                                      Container(
+                                        height: 173.0,
+                                        width: double.infinity,
+                                        child: ListView.separated(
+                                          itemBuilder: (context, index) =>
+                                              buildHomeItem(
+                                            cubit.ageRecommended[index],
+                                            context,
+                                          ),
+                                          separatorBuilder: (context, index) =>
+                                              SizedBox(
+                                            width: 10.0,
+                                          ),
+                                          itemCount:
+                                              cubit.ageRecommended.length,
+                                          scrollDirection: Axis.horizontal,
+                                        ),
+                                      ),
+                                    ],
+                                    initiallyExpanded:
+                                        cubit.CatRecommended.isNotEmpty
+                                            ? false
+                                            : true,
+                                    tilePadding: EdgeInsets.zero,
                                   ),
                                 ),
-                                SizedBox(
-                                  height: 8,
-                                ),
-                                Text(
-                                  'Not recommended by users',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 17.5,
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 5.0,
-                                ),
-                                Container(
-                                  height: 173.0,
-                                  width: double.infinity,
-                                  child: ListView.separated(
-                                    itemBuilder: (context, index) =>
-                                        buildHomeItem(
-                                            cubit.notRecommended[index],
-                                            context),
-                                    separatorBuilder: (context, index) =>
-                                        SizedBox(
-                                      width: 10.0,
-                                    ),
-                                    itemCount: cubit.notRecommended.length,
-                                    scrollDirection: Axis.horizontal,
-                                  ),
-                                ),
+                                cubit.recommended.isNotEmpty
+                                    ? Theme(
+                                        data: Theme.of(context).copyWith(
+                                            dividerColor: Colors.transparent),
+                                        child: ExpansionTile(
+                                          tilePadding: EdgeInsets.zero,
+                                          title: Text(
+                                            'Recommended by users',
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 17.5,
+                                            ),
+                                          ),
+                                          children: [
+                                            Container(
+                                              height: 173.0,
+                                              width: double.infinity,
+                                              child: ListView.separated(
+                                                itemBuilder: (context, index) =>
+                                                    buildHomeItem(
+                                                        cubit
+                                                            .recommended[index],
+                                                        context),
+                                                separatorBuilder:
+                                                    (context, index) =>
+                                                        SizedBox(
+                                                  width: 10.0,
+                                                ),
+                                                itemCount:
+                                                    cubit.recommended.length,
+                                                scrollDirection:
+                                                    Axis.horizontal,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      )
+                                    : SizedBox(),
+                                cubit.notRecommended.isNotEmpty
+                                    ? Theme(data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
+                                        child: ExpansionTile(
+                                          title: Text(
+                                            'Not recommended by users',
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 17.5,
+                                            ),
+                                          ),
+                                          children: [
+                                            Container(
+                                              height: 173.0,
+                                              width: double.infinity,
+                                              child: ListView.separated(
+                                                itemBuilder: (context, index) =>
+                                                    buildHomeItem(
+                                                        cubit.notRecommended[
+                                                            index],
+                                                        context),
+                                                separatorBuilder:
+                                                    (context, index) =>
+                                                        SizedBox(
+                                                  width: 10.0,
+                                                ),
+                                                itemCount:
+                                                    cubit.notRecommended.length,
+                                                scrollDirection:
+                                                    Axis.horizontal,
+                                              ),
+                                            ),
+                                          ],
+                                          tilePadding: EdgeInsets.zero,
+                                        ),
+                                      )
+                                    : SizedBox(),
                               ],
                             ),
                           ),
@@ -341,7 +333,6 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
-
 
 Widget buildHomeItem(HomePlaces model, context) => InkWell(
       onTap: () {
@@ -372,9 +363,9 @@ Widget buildHomeItem(HomePlaces model, context) => InkWell(
                   height: 112.5,
                   decoration: BoxDecoration(
                       image: DecorationImage(
-                        image: NetworkImage('${model.image}'),
-                        fit: BoxFit.cover,
-                      )),
+                    image: NetworkImage('${model.image}'),
+                    fit: BoxFit.cover,
+                  )),
                   child: Image(
                     fit: BoxFit.cover,
                     image: NetworkImage('${model.image}'),
@@ -414,7 +405,7 @@ Widget buildHomeItem(HomePlaces model, context) => InkWell(
       ),
     );
 
-Widget HomeRow({
+Widget HomeButton({
   required String text,
   required String iconPath,
 }) =>

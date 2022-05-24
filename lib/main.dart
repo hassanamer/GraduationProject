@@ -16,7 +16,6 @@ import 'package:smarttouristguide/shared/components/constants.dart';
 import 'package:smarttouristguide/shared/network/local/cache_helper.dart';
 import 'package:smarttouristguide/shared/network/remote/dio_helper.dart';
 import 'package:smarttouristguide/shared/styles/themes.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -72,7 +71,8 @@ class MyApp extends StatelessWidget {
             ..getHomeData()
             ..getCategoriesPlacesData()
             ..getFavorites()
-            ..getProfile(),
+            ..getProfile()
+            ..getInterests(),
         ),
         BlocProvider(
           create: (BuildContext context) => ChangeColorCubit(),
@@ -81,8 +81,6 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Smart Tourist guide',
-        localizationsDelegates: AppLocalizations.localizationsDelegates,
-        supportedLocales: AppLocalizations.supportedLocales,
         //locale: Locale("${changeLanguage()}"),
         theme: lightTheme,
         builder: (context, child) => ResponsiveWrapper.builder(

@@ -9,7 +9,6 @@ import 'package:smarttouristguide/modules/login/forget_password.dart';
 import 'package:smarttouristguide/modules/login/login_cubit/cubit.dart';
 import 'package:smarttouristguide/modules/login/login_cubit/states.dart';
 import 'package:smarttouristguide/shared/network/local/cache_helper.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:smarttouristguide/shared/styles/textStyle.dart';
 import '../../shared/components/components.dart';
 
@@ -33,8 +32,8 @@ class LoginScreen extends StatelessWidget {
               appCubit.getHomeData();
               appCubit.getCategoriesPlacesData();
               appCubit.getFavorites();
-              appCubit.getInterests();
               appCubit.getProfile();
+              appCubit.getInterests();
               navigateAndFinish(
                 context: context,
                 widget: AppLayout(),
@@ -51,13 +50,13 @@ class LoginScreen extends StatelessWidget {
             );
           } else {
             showToast(
-              message: AppLocalizations.of(context)!.login_success,
+              message: 'Logged in successfully',
               state: ToastStates.ERROR,
             );
           }
         } else if (state is AppLoginErrorState) {
           showToast(
-            message: AppLocalizations.of(context)!.login_error,
+            message: 'Please enter correct data!',
             state: ToastStates.ERROR,
           );
         }

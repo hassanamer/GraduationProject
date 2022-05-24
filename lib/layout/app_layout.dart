@@ -26,6 +26,7 @@ class AppLayout extends StatelessWidget {
                 icon: Icon(
                   Icons.account_circle_rounded,
                   color: AppColors.primaryColor,
+                  size: 25.5,
                 ),
                 onPressed: () {
                   navigateTo(
@@ -42,16 +43,18 @@ class AppLayout extends StatelessWidget {
           ),
           floatingActionButton: DraggableFab(
             child: FloatingActionButton(
-              backgroundColor: AppColors.primaryColor,
-              child: Icon(
-                Icons.contact_page_rounded,
-              ),
               onPressed: () {
                 navigateTo(
                   context: context,
                   widget: ChatBot(),
                 );
               },
+              backgroundColor: AppColors.primaryColor,
+              child: Image(
+                width: 30.0,
+                height: 30.0,
+                image: AssetImage('assets/icons/chatbot.png'),
+              ),
             ),
           ),
         );

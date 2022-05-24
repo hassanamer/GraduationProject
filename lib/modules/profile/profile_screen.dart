@@ -144,14 +144,12 @@ class ProfileScreen extends StatelessWidget {
                   children: [
                     UserDataField(
                       controller: firstNameController,
-                      data: user.firstName.capitalize(),
                       icon: Icons.person_rounded,
                       width: 150,
                     ),
                     Spacer(),
                     UserDataField(
                       controller: lastNameController,
-                      data: user.lastName.capitalize(),
                       icon: Icons.person_rounded,
                       width: 150,
                     ),
@@ -162,14 +160,12 @@ class ProfileScreen extends StatelessWidget {
                 ),
                 UserDataField(
                   controller: nameController,
-                  data: 'hhhhh',
                   icon: Icons.account_circle_rounded,
                 ),
                 SizedBox(
                   height: 5.0,
                 ),
                 UserDataField(
-                  data: user.dateOfBirth,
                   icon: Icons.cake_rounded,
                   controller: dateOfBirthController,
                 ),
@@ -177,7 +173,6 @@ class ProfileScreen extends StatelessWidget {
                   height: 5.0,
                 ),
                 UserDataField(
-                  data: user.gender.capitalize(),
                   icon: Icons.male_rounded,
                   controller: genderController,
                 ),
@@ -185,7 +180,6 @@ class ProfileScreen extends StatelessWidget {
                   height: 5.0,
                 ),
                 UserDataField(
-                  data: user.phone,
                   icon: Icons.phone_rounded,
                   controller: phoneController,
                 ),
@@ -193,7 +187,6 @@ class ProfileScreen extends StatelessWidget {
                   height: 5.0,
                 ),
                 UserDataField(
-                  data: user.country,
                   icon: Icons.language_rounded,
                   controller: countryController,
                 ),
@@ -202,7 +195,6 @@ class ProfileScreen extends StatelessWidget {
                 ),
                 UserDataField(
                   controller: emailController,
-                  data: user.email,
                   icon: Icons.email_rounded,
                 ),
                 SizedBox(
@@ -241,8 +233,7 @@ class ProfileScreen extends StatelessWidget {
   }
 
   Widget UserDataField(
-          {String data = 'hint',
-          required IconData icon,
+          {required IconData icon,
           controller,
           double width = double.infinity}) =>
       Container(
@@ -255,7 +246,6 @@ class ProfileScreen extends StatelessWidget {
         child: TextField(
           controller: controller,
           decoration: InputDecoration(
-            hintText: 'hhhhhhh',
             contentPadding: EdgeInsets.all(10),
             border: InputBorder.none,
             prefixIcon: Icon(

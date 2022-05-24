@@ -160,6 +160,7 @@ Widget defaultFormField({
             borderRadius: BorderRadius.circular(
           radius,
         )),
+        contentPadding: EdgeInsets.all(17),
       ),
     );
 

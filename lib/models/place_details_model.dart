@@ -13,8 +13,11 @@ class PlaceDetailsModel {
 class Data {
   late final dynamic id;
   late final String placeName;
+  late final dynamic type;
+  late final String ageCategory;
   late final String Description;
   late final dynamic city;
+  late final String priceClass;
   late final String location;
   late final String image;
   late final bool isActive;
@@ -25,8 +28,11 @@ class Data {
   Data.fromJson(Map<String, dynamic> json){
     id = json['id'];
     placeName = json['place_name'];
+    type = json['type'];
+    ageCategory = json['age_category'];
     Description = json['Description'];
     city = json['city'];
+    priceClass = json['price_class'];
     location = json['location'];
     image = json['image'];
     isActive = json['is_active'];
@@ -46,4 +52,5 @@ class Comments {
     user = json['user'];
     comment = json['comment'];
   }
+
 }

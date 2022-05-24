@@ -1,15 +1,10 @@
-import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:smarttouristguide/layout/cubit/cubit.dart';
 import 'package:smarttouristguide/layout/cubit/states.dart';
 import 'package:smarttouristguide/models/home_model.dart';
-import 'package:smarttouristguide/modules/place_details/place_details_screen.dart';
-import '../../models/home_model.dart';
-import '../../shared/styles/colors.dart';
-import '../../shared/styles/textStyle.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:smarttouristguide/shared/components/extensions.dart';
+import 'package:smarttouristguide/shared/styles/colors.dart';
 
 class OfferBody extends StatelessWidget {
   @override
@@ -18,97 +13,120 @@ class OfferBody extends StatelessWidget {
     return BlocConsumer<AppCubit, AppStates>(
         listener: (context, state) {},
         builder: (context, state) {
-          return ConditionalBuilder(
-            condition: cubit.homeModel != null,
-            builder: (context) => SingleChildScrollView(
-              child: Container(
-                height: MediaQuery.of(context).size.height * 5,
-                width: double.infinity,
-                color: Colors.white,
-                child: Padding(
-                  padding: const EdgeInsets.all(18),
-                  child: ListView.separated(
-                    itemBuilder: (context, index) => buildOfferItem(
-                        context, cubit.homeModel!.data.offers[index]),
-                    separatorBuilder: (context, index) => SizedBox(
-                      height: 12,
-                    ),
-                    itemCount: cubit.homeModel!.data.offers.length,
-                  ),
-                ),
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ListView.separated(
+              itemBuilder: (context, index) =>
+                  buildOffer(context, cubit.homeModel!.data.offers[index]),
+              separatorBuilder: (context, index) => SizedBox(
+                height: 2.0,
               ),
-            ),
-            fallback: (BuildContext context) => Center(
-              child: CircularProgressIndicator(
-                color: AppColors.primaryColor,
-              ),
+              itemCount: cubit.homeModel!.data.offers.length,
             ),
           );
         });
   }
 }
 
-Widget buildOfferItem(BuildContext context, Offers model) => Column(
-      children: [
-        Row(
+Widget buildOffer(BuildContext context, Offers model) => Card(
+  elevation: 1.0,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 16.0,
+          vertical: 13.0,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(
-              width: 20,
-            ),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: textStyle(
-                model.place.placeName,
-                22,
-                FontWeight.bold,
+            Text(
+              '${model.place.placeName.capitalize()}',
+              style: TextStyle(
+                fontSize: 21.0,
+                fontWeight: FontWeight.bold,
               ),
             ),
+            SizedBox(
+              height: 5.0,
+            ),
+            Row(
+              children: [
+                Text(
+                  'Price: ',
+                  style: TextStyle(
+                    fontSize: 16.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  '${model.newPrice} L.E',
+                  style: TextStyle(
+                    color: AppColors.primaryColor,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 15.0,
+                  ),
+                ),
+                SizedBox(
+                  width: 4.0,
+                ),
+                Text(
+                  '${model.oldPrice.round()}',
+                  style: const TextStyle(
+                    fontSize: 13.0,
+                    color: Colors.red,
+                    decoration: TextDecoration.lineThrough,
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 10.0,
+            ),
+            SizedBox(
+              height: 200,
+              width: double.infinity,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(8.0),
+                child: Image(
+                  fit: BoxFit.fill,
+                  image: NetworkImage('${model.place.image}'),
+                ),
+              ),
+            ),
+            Theme(
+              data:
+                  Theme.of(context).copyWith(dividerColor: Colors.transparent),
+              child: ExpansionTile(
+                childrenPadding: EdgeInsets.zero,
+                title: Row(
+                  children: [
+                    Icon(
+                      Icons.info_rounded,
+                      color: AppColors.primaryColor,
+                    ),
+                    SizedBox(
+                      width: 4.0,
+                    ),
+                    Text(
+                      'Details',
+                      style: TextStyle(
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+                tilePadding: EdgeInsets.zero,
+                children: [
+                  Text(
+                    '${model.offerName}',
+                    style: TextStyle(
+                      fontSize: 15.0,
+                    ),
+                  ),
+                ],
+              ),
+            )
           ],
         ),
-        Row(
-          children: [
-            Container(
-              height: MediaQuery.of(context).size.height * 0.08,
-              width: MediaQuery.of(context).size.width * 0.9,
-              child: SingleChildScrollView(
-                child: textStyle.normal(
-                    "the old price is ${model.oldPrice} LE for you we can make it ${model.newPrice} LE",
-                    16),
-              ),
-            ),
-          ],
-        ),
-        const SizedBox(
-          width: 40,
-        ),
-        Container(
-          margin: const EdgeInsets.all(8),
-          child: Image(
-            fit: BoxFit.fill,
-            image: NetworkImage('${model.place.image}'),
-          ),
-        ),
-        Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-          InkWell(
-              child: SvgPicture.asset(
-                'assets/icons/active_navigate.svg',
-              ),
-              onTap: () {
-                Navigator.of(context).pushNamed(PlaceDetailsScreen.routeName);
-              }),
-          const SizedBox(
-            width: 5,
-          ),
-          InkWell(
-            child:
-                textStyle.normal(AppLocalizations.of(context)!.see_details, 14),
-            onTap: () {
-              Navigator.of(context).pushNamed(PlaceDetailsScreen.routeName);
-            },
-          ),
-          const SizedBox(
-            width: 30,
-          )
-        ]),
-      ],
+      ),
     );

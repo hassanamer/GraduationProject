@@ -1,108 +1,153 @@
-import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:smarttouristguide/layout/cubit/cubit.dart';
 import 'package:smarttouristguide/layout/cubit/states.dart';
 import 'package:smarttouristguide/models/home_model.dart';
-import 'package:smarttouristguide/modules/place_details/place_details_screen.dart';
-import '../../models/home_model.dart';
-import '../../shared/styles/colors.dart';
-import '../../shared/styles/textStyle.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:smarttouristguide/shared/components/extensions.dart';
+import 'package:smarttouristguide/shared/styles/colors.dart';
 
 class EventBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var cubit = AppCubit.get(context);
     return BlocConsumer<AppCubit, AppStates>(
-        listener: (context, state) {},
-        builder: (context, state) {
-          return ConditionalBuilder(
-            condition: cubit.homeModel != null,
-            builder: (context) => SingleChildScrollView(
-              child: Container(
-                height: MediaQuery.of(context).size.height * 5,
-                width: double.infinity,
-                color: Colors.white,
-                child: Padding(
-                  padding: const EdgeInsets.all(18),
-                  child: ListView.separated(
-                    itemBuilder: (context, index) => buildOfferItem(
-                        context, cubit.homeModel!.data.events[index]),
-                    separatorBuilder: (context, index) => SizedBox(
-                      height: 12,
-                    ),
-                    itemCount: cubit.homeModel!.data.events.length,
-                  ),
-                ),
-              ),
-            ),
-            fallback: (BuildContext context) => Center(
-              child: CircularProgressIndicator(
-                color: AppColors.primaryColor,
-              ),
-            ),
-          );
-        });
+      listener: (context, state) {},
+      builder: (context, state) {
+        return ListView.separated(
+          itemBuilder: (context, index) => buildEvent(
+            context,
+            cubit.homeModel!.data.events[index],
+          ),
+          separatorBuilder: (context, index) => SizedBox(
+            height: 12,
+          ),
+          itemCount: cubit.homeModel!.data.events.length,
+        );
+      },
+    );
   }
 }
 
-Widget buildOfferItem(BuildContext context, Events model) => Column(
-      children: [
-        Row(
+Widget buildEvent(BuildContext context, Events model) => Container(
+      width: double.infinity,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 16.0,
+          vertical: 13.0,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(
-              width: 20,
-            ),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: textStyle(
-                model.eventName,
-                22,
-                FontWeight.bold,
+            Text(
+              '${model.eventName.capitalize()}',
+              style: TextStyle(
+                fontSize: 21.0,
+                fontWeight: FontWeight.bold,
               ),
             ),
+            SizedBox(
+              height: 5.0,
+            ),
+            Row(
+              children: [
+                Icon(
+                  Icons.date_range_rounded,
+                  color: AppColors.primaryColor,
+                ),
+                SizedBox(
+                  width: 4.0,
+                ),
+                Text(
+                  'From: ',
+                  style: TextStyle(
+                    fontSize: 16.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  '${model.dateFrom.substring(0, 12)}',
+                  style: TextStyle(
+                    fontSize: 15.0,
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                Icon(
+                  Icons.date_range_rounded,
+                  color: AppColors.primaryColor,
+                ),
+                SizedBox(
+                  width: 4.0,
+                ),
+                Text(
+                  'To: ',
+                  style: TextStyle(
+                    fontSize: 16.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  '${model.dateTo.substring(0, 12)}',
+                  style: TextStyle(
+                    fontSize: 15.0,
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 10.0,
+            ),
+            SizedBox(
+              height: 200,
+              width: double.infinity,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(8.0),
+                child: Image(
+                  fit: BoxFit.fill,
+                  image: NetworkImage('${model.eventImage}'),
+                ),
+              ),
+            ),
+            Theme(
+              data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
+              child: ExpansionTile(
+                childrenPadding: EdgeInsets.zero,
+                title: Row(
+                  children: [
+                    Icon(
+                      Icons.info_rounded,
+                      color: AppColors.primaryColor,
+                    ),
+                    SizedBox(
+                      width: 4.0,
+                    ),
+                    Text(
+                      'Details',
+                      style: TextStyle(
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+                tilePadding: EdgeInsets.zero,
+                children: [
+                  Text(
+                    '${model.discription}',
+                    style: TextStyle(
+                      fontSize: 15.0,
+                    ),
+                  ),
+                ],
+              ),
+            )
           ],
         ),
-        Container(
-          height: MediaQuery.of(context).size.height * 0.08,
-          child: SingleChildScrollView(
-            child: textStyle.normal(
-                "this event is available from ${model.dateFrom} to ${model.dateTo}",
-                16),
-          ),
-        ),
-        const SizedBox(
-          width: 40,
-        ),
-        Container(
-          margin: const EdgeInsets.all(8),
-          child: Image(
-            fit: BoxFit.fill,
-            image: NetworkImage('${model.eventImage}'),
-          ),
-        ),
-        Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-          InkWell(
-              child: SvgPicture.asset(
-                'assets/icons/active_navigate.svg',
-              ),
-              onTap: () {
-                Navigator.of(context).pushNamed(PlaceDetailsScreen.routeName);
-              }),
-          const SizedBox(
-            width: 5,
-          ),
-          InkWell(
-              child: textStyle.normal(
-                  AppLocalizations.of(context)!.see_details, 14),
-              onTap: () {
-                Navigator.of(context).pushNamed(PlaceDetailsScreen.routeName);
-              }),
-          const SizedBox(
-            width: 30,
-          )
-        ]),
-      ],
+      ),
     );

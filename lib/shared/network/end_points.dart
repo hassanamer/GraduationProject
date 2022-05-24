@@ -8,7 +8,7 @@ const PLACE_DETAILS = 'home/details/';
 
 const ADD_UPDATE_RATE = 'home/rate/';
 
-const ADD_COMMENT = 'home/comment/';
+const COMMENT = 'home/comment/';
 
 const FAVORITES = 'home/favouriteplace/';
 
