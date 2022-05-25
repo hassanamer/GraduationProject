@@ -242,7 +242,7 @@ class RegisterScreen extends StatelessWidget {
                             onTap: () {
                               showDatePicker(
                                 context: context,
-                                initialDate: DateTime(2006),
+                                initialDate: DateTime(2000),
                                 firstDate: DateTime(1950),
                                 lastDate: DateTime.now(),
                               ).then(

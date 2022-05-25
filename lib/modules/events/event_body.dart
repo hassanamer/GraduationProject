@@ -139,7 +139,7 @@ Widget buildEvent(BuildContext context, Events model) => Container(
                 tilePadding: EdgeInsets.zero,
                 children: [
                   Text(
-                    '${model.discription}',
+                    '${model.description}',
                     style: TextStyle(
                       fontSize: 15.0,
                     ),

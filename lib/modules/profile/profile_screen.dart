@@ -5,6 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smarttouristguide/layout/cubit/cubit.dart';
 import 'package:smarttouristguide/layout/cubit/states.dart';
 import 'package:smarttouristguide/models/get_profile_model.dart';
+import 'package:smarttouristguide/modules/profile/change_password.dart';
+import 'package:smarttouristguide/shared/components/components.dart';
 import 'package:smarttouristguide/shared/components/extensions.dart';
 import 'package:smarttouristguide/shared/styles/colors.dart';
 
@@ -86,7 +88,7 @@ class ProfileScreen extends StatelessWidget {
             ],
           ),
           Positioned(
-            top: MediaQuery.of(context).size.height * 0.02,
+            top: 41.0,
             left: 20.0,
             right: 20.0,
             child: Card(
@@ -196,6 +198,7 @@ class ProfileScreen extends StatelessWidget {
                 UserDataField(
                   controller: emailController,
                   icon: Icons.email_rounded,
+                  readOnly: true,
                 ),
                 SizedBox(
                   height: 5.0,
@@ -203,6 +206,33 @@ class ProfileScreen extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
+                    MaterialButton(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12)),
+                      textColor: Colors.white,
+                      color: AppColors.primaryColor,
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.lock_rounded,
+                            size: 19.5,
+                          ),
+                          SizedBox(
+                            width: 3.0,
+                          ),
+                          Text(
+                            'Change Password',
+                          ),
+                        ],
+                      ),
+                      onPressed: () {
+                        navigateTo(
+                          context: context,
+                          widget: ChangePassword(),
+                        );
+                      },
+                    ),
+                    Spacer(),
                     MaterialButton(
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12)),
@@ -223,7 +253,7 @@ class ProfileScreen extends StatelessWidget {
                       },
                     ),
                   ],
-                )
+                ),
               ],
             ),
           ),
@@ -232,10 +262,12 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 
-  Widget UserDataField(
-          {required IconData icon,
-          controller,
-          double width = double.infinity}) =>
+  Widget UserDataField({
+    required IconData icon,
+    controller,
+    double width = double.infinity,
+    bool readOnly = false,
+  }) =>
       Container(
         width: width,
         height: 40,
@@ -244,6 +276,7 @@ class ProfileScreen extends StatelessWidget {
           borderRadius: BorderRadius.circular(12),
         ),
         child: TextField(
+          readOnly: readOnly,
           controller: controller,
           decoration: InputDecoration(
             contentPadding: EdgeInsets.all(10),

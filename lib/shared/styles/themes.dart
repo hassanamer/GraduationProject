@@ -8,11 +8,18 @@ ThemeData lightTheme = ThemeData(
   scaffoldBackgroundColor: AppColors.backgroundColor,
   appBarTheme: const AppBarTheme(
     systemOverlayStyle: SystemUiOverlayStyle(
-    statusBarColor: AppColors.backgroundColor,
-    statusBarIconBrightness: Brightness.dark,
-  ),
+      statusBarColor: AppColors.backgroundColor,
+      statusBarIconBrightness: Brightness.dark,
+    ),
     backgroundColor: AppColors.backgroundColor,
     elevation: 0.0,
+  ),
+  dialogTheme: const DialogTheme(
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.all(
+        Radius.circular(14),
+      ),
+    ),
   ),
 );
 
@@ -28,5 +35,4 @@ ThemeData darkTheme = ThemeData(
     backgroundColor: AppColors.backgroundColor,
     elevation: 0.0,
   ),
-
 );

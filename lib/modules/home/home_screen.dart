@@ -7,7 +7,7 @@ import 'package:smarttouristguide/layout/cubit/cubit.dart';
 import 'package:smarttouristguide/layout/cubit/states.dart';
 import 'package:smarttouristguide/models/home_model.dart';
 import 'package:smarttouristguide/modules/place_details/place_details_screen.dart';
-import 'package:smarttouristguide/modules/search/search_screen.dart';
+import 'package:smarttouristguide/modules/search/city_search.dart';
 import 'package:smarttouristguide/shared/styles/colors.dart';
 
 import '../../shared/components/components.dart';
@@ -103,7 +103,9 @@ class HomeScreen extends StatelessWidget {
                                   child: InkWell(
                                     onTap: () {
                                       navigateTo(
-                                        widget: SearchScreen(),
+                                        widget: CitySearchScreen(
+                                          cubit
+                                        ),
                                         context: context,
                                       );
                                     },
@@ -203,9 +205,7 @@ class HomeScreen extends StatelessWidget {
                                         ),
                                       )
                                     : SizedBox(),
-                                Theme(
-                                  data: Theme.of(context).copyWith(
-                                      dividerColor: Colors.transparent),
+                                Theme(data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
                                   child: ExpansionTile(
                                     title: Text(
                                       'Suggested for your age',
@@ -235,9 +235,9 @@ class HomeScreen extends StatelessWidget {
                                       ),
                                     ],
                                     initiallyExpanded:
-                                        cubit.CatRecommended.isNotEmpty
-                                            ? false
-                                            : true,
+                                        cubit.CatRecommended.isEmpty
+                                            ? true
+                                            : false,
                                     tilePadding: EdgeInsets.zero,
                                   ),
                                 ),

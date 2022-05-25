@@ -24,14 +24,13 @@ class Data {
     events = List.from(json['events']).map((e)=>Events.fromJson(e)).toList();
     home_places = List.from(json['places']).map((e)=>HomePlaces.fromJson(e)).toList();
   }
-
 }
 
 class PopularPlaces {
   late final dynamic id;
   late final String placeName;
   late final dynamic type;
-  late final dynamic ageCategory;
+  late final String ageCategory;
   late final String Description;
   late final dynamic city;
   late final String priceClass;
@@ -63,7 +62,7 @@ class TopRated {
   late final dynamic type;
   late final String ageCategory;
   late final String Description;
-  late final dynamic city;
+  late final String city;
   late final String priceClass;
   late final String location;
   late final String image;
@@ -90,6 +89,8 @@ class TopRated {
 class Offers {
   late final dynamic id;
   late final String offerName;
+  late final String offerDescription;
+  late final String offerImage;
   late final dynamic oldPrice;
   late final dynamic newPrice;
   late final Place place;
@@ -97,6 +98,8 @@ class Offers {
   Offers.fromJson(Map<String, dynamic> json){
     id = json['id'];
     offerName = json['offer_name'];
+    offerDescription = json['offer_description'];
+    offerImage = json['offer_image'];
     oldPrice = json['old_price'];
     newPrice = json['new_price'];
     place = Place.fromJson(json['place']);
@@ -109,12 +112,12 @@ class Place {
   late final String Description;
   late final String location;
   late final String priceClass;
-  late final dynamic ageCategory;
+  late final String ageCategory;
   late final String image;
   late final bool isActive;
   late final dynamic type;
   late final dynamic city;
-  late final List<dynamic> favouritePlace;
+  late final List<int> favouritePlace;
 
   Place.fromJson(Map<String, dynamic> json){
     id = json['id'];
@@ -127,7 +130,7 @@ class Place {
     isActive = json['is_active'];
     type = json['type'];
     city = json['city'];
-    favouritePlace = List.castFrom<dynamic, dynamic>(json['favourite_place']);
+    favouritePlace = List.castFrom<dynamic, int>(json['favourite_place']);
   }
 }
 
@@ -136,16 +139,16 @@ class Events {
   late final String eventImage;
   late final String dateFrom;
   late final String dateTo;
-  late final Place place;
-  late final String discription;
+  late final String city;
+  late final String description;
 
   Events.fromJson(Map<String, dynamic> json){
     eventName = json['event_name'];
     eventImage = json['event_image'];
     dateFrom = json['date_from'];
     dateTo = json['date_to'];
-    place = Place.fromJson(json['place']);
-    discription = json['discription'];
+    city = json['city'];
+    description = json['description'];
   }
 }
 
@@ -153,10 +156,10 @@ class HomePlaces {
   late final dynamic id;
   late final String placeName;
   late final dynamic type;
-  late final dynamic ageCategory;
+  late final String ageCategory;
   late final String Description;
-  late final dynamic city;
-  late final dynamic priceClass;
+  late final String city;
+  late final String priceClass;
   late final String location;
   late final String image;
   late final bool isActive;
@@ -182,7 +185,7 @@ class HomePlaces {
 }
 
 class Comments {
-  late final int id;
+  late final dynamic id;
   late final String user;
   late final String comment;
 

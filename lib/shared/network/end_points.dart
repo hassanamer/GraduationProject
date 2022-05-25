@@ -16,3 +16,5 @@ const INTERESTS = 'home/interrest/';
 
 const PROFILE = 'api/profile/';
 
+const SEARCH = 'home/searchcity/';
+

@@ -104,6 +104,7 @@ class AppCubit extends Cubit<AppStates> {
       homeModel!.data.home_places.forEach((element) {
         favorites.addAll({element.id: element.inFavourite});
       });
+      print('model is ${value.data}');
       ageRecommend();
       recommendation();
       blacklist();
@@ -111,6 +112,7 @@ class AppCubit extends Cubit<AppStates> {
 
       emit(AppGetDataSuccessState());
     }).catchError((error) {
+      print('error is ${error.toString()}');
       emit(AppGetDataErrorState());
     });
   }
