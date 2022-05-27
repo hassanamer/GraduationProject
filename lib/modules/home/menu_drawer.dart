@@ -124,7 +124,7 @@ Widget currentt(context, Data user) => Container(
               child: Row(
                 children: [
                   Text(
-                    'Interests',
+                    'Tourism History',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 17.5,

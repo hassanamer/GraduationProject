@@ -32,8 +32,8 @@ Widget buildOffer(BuildContext context, Offers model) => Card(
   elevation: 1.0,
       child: Padding(
         padding: const EdgeInsets.symmetric(
-          horizontal: 16.0,
-          vertical: 13.0,
+          horizontal: 14.0,
+          vertical: 11.0,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -118,7 +118,7 @@ Widget buildOffer(BuildContext context, Offers model) => Card(
                 tilePadding: EdgeInsets.zero,
                 children: [
                   Text(
-                    '${model.offerName}',
+                    '${model.offerDescription}',
                     style: TextStyle(
                       fontSize: 15.0,
                     ),

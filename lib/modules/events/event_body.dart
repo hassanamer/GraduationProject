@@ -52,6 +52,24 @@ Widget buildEvent(BuildContext context, Events model) => Container(
             SizedBox(
               height: 5.0,
             ),
+            // Row(
+            //   children: [
+            //     Icon(
+            //       Icons.location_on_rounded,
+            //       color: AppColors.primaryColor,
+            //     ),
+            //     SizedBox(
+            //       width: 4.0,
+            //     ),
+            //     Text(
+            //       '${model.city}',
+            //       style: TextStyle(
+            //         fontSize: 16.0,
+            //         fontWeight: FontWeight.bold,
+            //       ),
+            //     ),
+            //   ],
+            // ),
             Row(
               children: [
                 Icon(

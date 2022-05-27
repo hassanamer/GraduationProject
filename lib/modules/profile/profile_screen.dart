@@ -241,8 +241,8 @@ class ProfileScreen extends StatelessWidget {
                       child: Text('Update'),
                       onPressed: () {
                         AppCubit.get(context).updateProfile(
-                          firstName: firstNameController.text,
-                          lastName: lastNameController.text,
+                          firstName: firstNameController.text.capitalize(),
+                          lastName: lastNameController.text.capitalize(),
                           userName: nameController.text,
                           birthday: dateOfBirthController.text,
                           gender: genderController.text,

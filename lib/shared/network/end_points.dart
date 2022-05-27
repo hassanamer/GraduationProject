@@ -16,5 +16,7 @@ const INTERESTS = 'home/interrest/';
 
 const PROFILE = 'api/profile/';
 
+const CHANGE_PASSWORD = 'api/change-password/';
+
 const SEARCH = 'home/searchcity/';
 

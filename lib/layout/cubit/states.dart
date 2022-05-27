@@ -1,4 +1,5 @@
 import 'package:smarttouristguide/models/cat_interest_model.dart';
+import 'package:smarttouristguide/models/change_password_model.dart';
 
 import '../../models/change_favorites_model.dart';
 
@@ -101,3 +102,12 @@ class AppUpdateProfileLoadingState extends AppStates {}
 class AppUpdateProfileSuccessState extends AppStates {}
 
 class AppUpdateProfileErrorState extends AppStates {}
+
+class AppChangePasswordLoadingState extends AppStates {}
+
+class AppChangePasswordSuccessState extends AppStates {
+  ChangePasswordModel? changePasswordModel;
+  AppChangePasswordSuccessState(this.changePasswordModel);
+}
+
+class AppChangePasswordErrorState extends AppStates {}
