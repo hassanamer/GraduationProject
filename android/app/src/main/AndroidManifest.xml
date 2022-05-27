@@ -1,6 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.grad.project.smarttouristguide">
-
    <application
         android:label="Smart Tourist Guide"
         android:name="${applicationName}"
@@ -32,5 +31,4 @@
             android:name="flutterEmbedding"
             android:value="2" />
     </application>
-    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>
