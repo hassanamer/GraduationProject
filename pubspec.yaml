@@ -30,7 +30,6 @@ dependencies:
   draggable_fab: ^0.1.4
   sentiment_dart: ^0.0.5
   country_picker: ^2.0.15
-  smooth_star_rating_null_safety: ^1.0.4+2
   flutter_rating_bar: ^4.0.0
   shared_preferences: ^2.0.11
   # flutter_ipfs: ^0.0.2
@@ -57,10 +56,6 @@ dependencies:
   dialogflow_grpc: ^0.2.9
   rxdart: ^0.27.1
   readmore: ^2.1.0
-
-  flutter_localizations:
-    sdk: flutter
-
   intl: ^0.17.0
 dev_dependencies:
   flutter_test:

@@ -174,11 +174,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "8.0.1"
-  flutter_localizations:
-    dependency: "direct main"
-    description: flutter
-    source: sdk
-    version: "0.0.0"
   flutter_rating_bar:
     dependency: "direct main"
     description:
@@ -474,13 +469,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.0+2"
-  smooth_star_rating_null_safety:
-    dependency: "direct main"
-    description:
-      name: smooth_star_rating_null_safety
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.4+2"
   sound_stream:
     dependency: "direct main"
     description:
