@@ -107,7 +107,7 @@ class AppCubit extends Cubit<AppStates> {
       });
       print('model is ${value.data}');
       ageRecommend();
-      recommendation();
+      placeRecommendation();
       blacklist();
       catRecommend();
 
@@ -298,194 +298,178 @@ class AppCubit extends Cubit<AppStates> {
     showModalBottomSheet<dynamic>(
       isScrollControlled: true,
       context: context,
-      builder: (context) =>
-          Wrap(
-            children: [
-              Padding(
-                padding: EdgeInsets.only(
-                    bottom: MediaQuery.of(context).viewInsets.bottom),
-                child: (Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: (Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Rate ${placeName}',
-                        style: TextStyle(
-                          fontSize: 19.0,
-                          fontWeight: FontWeight.bold,
-                          color: AppColors.primaryColor,
+      builder: (context) => Wrap(
+        children: [
+          Padding(
+            padding: EdgeInsets.only(
+                bottom: MediaQuery.of(context).viewInsets.bottom),
+            child: (Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: (Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Rate ${placeName}',
+                    style: TextStyle(
+                      fontSize: 19.0,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.primaryColor,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 5.0,
+                  ),
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: 30.0),
+                    child: RatingBar.builder(
+                      itemBuilder: (context, _) => Icon(
+                        Icons.star_rate_rounded,
+                        color: AppColors.primaryColor,
+                      ),
+                      glow: false,
+                      unratedColor: AppColors.disabledAndHintColor,
+                      onRatingUpdate: (rating) {
+                        print(rating.toInt());
+                        addUpdateRate(
+                          placeId: placeId,
+                          rate: rating,
+                        );
+                      },
+                      itemCount: 5,
+                      minRating: 1.0,
+                      maxRating: 5.0,
+                      itemSize: 38.0,
+                      direction: Axis.horizontal,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 15.0,
+                  ),
+                  SizedBox(
+                    child: Text(
+                      'Comment on ${placeName}',
+                      style: TextStyle(
+                        fontSize: 19.0,
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.primaryColor,
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 5.0,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 30.0),
+                    child: Container(
+                      width: 250,
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: AppColors.disabledAndHintColor,
                         ),
+                        borderRadius: BorderRadius.circular(12),
                       ),
-                      SizedBox(
-                        height: 5.0,
-                      ),
-                      Container(
-                        padding: EdgeInsets.symmetric(horizontal: 30.0),
-                        child: RatingBar.builder(
-                          itemBuilder: (context, _) =>
-                              Icon(
-                                Icons.star_rate_rounded,
-                                color: AppColors.primaryColor,
-                              ),
-                          glow: false,
-                          unratedColor: AppColors.disabledAndHintColor,
-                          onRatingUpdate: (rating) {
-                            print(rating.toInt());
-                            addUpdateRate(
-                              placeId: placeId,
-                              rate: rating,
-                            );
-                          },
-                          itemCount: 5,
-                          minRating: 1.0,
-                          maxRating: 5.0,
-                          itemSize: 38.0,
-                          direction: Axis.horizontal,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 15.0,
-                      ),
-                      SizedBox(
-                        child: Text(
-                          'Comment on ${placeName}',
-                          style: TextStyle(
-                            fontSize: 19.0,
-                            fontWeight: FontWeight.bold,
-                            color: AppColors.primaryColor,
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 5.0,
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 30.0),
-                        child: Container(
-                          width: 250,
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: AppColors.disabledAndHintColor,
+                      child: Form(
+                        key: commentmKey,
+                        child: TextField(
+                          controller: commentController,
+                          minLines: 2,
+                          maxLines: 2,
+                          decoration: InputDecoration(
+                            hintText: 'Type your comment here..',
+                            hintStyle: TextStyle(
+                              fontSize: 15.0,
                             ),
+                            contentPadding: EdgeInsets.all(11),
+                            border: InputBorder.none,
+                          ),
+                          onSubmitted: (value) {
+                            addComment(
+                              placeId: placeId,
+                              comment: commentController.text,
+                            ).then((value) {
+                              commentController.clear();
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 275,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        MaterialButton(
+                          shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12),
                           ),
-                          child: Form(
-                            key: commentmKey,
-                            child: TextField(
-                              controller: commentController,
-                              minLines: 2,
-                              maxLines: 2,
-                              decoration: InputDecoration(
-                                hintText: 'Type your comment here..',
-                                hintStyle: TextStyle(
-                                  fontSize: 15.0,
-                                ),
-                                contentPadding: EdgeInsets.all(11),
-                                border: InputBorder.none,
-                              ),
-                              onSubmitted: (value) {
-                                addComment(
-                                  placeId: placeId,
-                                  comment: commentController.text,
-                                ).then((value) {
-                                  commentController.clear();
-                                });
-                              },
-                            ),
+                          color: AppColors.primaryColor,
+                          textColor: Colors.white,
+                          child: Text(
+                            'Submit',
                           ),
+                          onPressed: () {
+                            if (commentmKey.currentState!.validate()) {
+                              addComment(
+                                placeId: placeId,
+                                comment: commentController.text,
+                              ).then((value) {
+                                commentController.clear();
+                              });
+                            }
+                          },
                         ),
-                      ),
-                      SizedBox(
-                        width: 275,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            MaterialButton(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                              color: AppColors.primaryColor,
-                              textColor: Colors.white,
-                              child: Text(
-                                'Submit',
-                              ),
-                              onPressed: () {
-                                if (commentmKey.currentState!.validate()) {
-                                  addComment(
-                                    placeId: placeId,
-                                    comment: commentController.text,
-                                  ).then((value) {
-                                    commentController.clear();
-                                  });
-                                }
-                              },
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        height: 10.0,
-                      ),
-                      SizedBox(
-                        child: Text(
-                          'Sharing your experience helps us analyze data and recommend better places.',
-                        ),
-                      ),
-                      SizedBox(
-                        height: 20.0,
-                      ),
-                    ],
-                  )),
-                )),
-              ),
-            ],
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10.0,
+                  ),
+                  SizedBox(
+                    child: Text(
+                      'Sharing your experience helps us analyze data and recommend better places.',
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20.0,
+                  ),
+                ],
+              )),
+            )),
           ),
+        ],
+      ),
     );
   }
 
   List<HomePlaces> recommended = [];
-  List<String> placeComments1 = [];
-  int goodIndex = 0;
-  int badIndex = 0;
+  List<String> placeComments = [];
+  int goodWords = 0;
+  int badWords = 0;
 
-  void recommendation() {
+  void placeRecommendation() {
     {
       recommended = [];
       int placeIndex = 0;
 
       for (var place in homeModel!.data.home_places) {
         if (place.comments.isNotEmpty) {
-          for (var commentMap
-          in homeModel!.data.home_places[placeIndex].comments) {
-            placeComments1.add(
+          for (var commentMap in homeModel!.data.home_places[placeIndex].comments) {
+            placeComments.add(
               commentMap.comment,
             );
           }
-          for (String comment in placeComments1) {
-            goodIndex += Sentiment
-                .analysis(comment)
-                .words
-                .good
-                .length;
-            badIndex += Sentiment
-                .analysis(comment)
-                .words
-                .bad
-                .length;
+          for (String comment in placeComments) {
+            goodWords += Sentiment.analysis(comment).words.good.length;
+            badWords += Sentiment.analysis(comment).words.bad.length;
           }
-          print(
-              'place name: ${place
-                  .placeName}\ngood = ${goodIndex}\nbad = ${badIndex}');
-          if (goodIndex > badIndex &&
-              place.rate > 3.5 &&
-              !recommended.contains(place)) {
+          if (goodWords > badWords && place.rate > 3.5 && !recommended.contains(place)) {
             recommended.add(place);
           }
         }
-        goodIndex = 0;
-        badIndex = 0;
-        placeComments1 = [];
+        goodWords = 0;
+        badWords = 0;
+        placeComments = [];
         placeIndex++;
       }
     }
@@ -501,21 +485,13 @@ class AppCubit extends Cubit<AppStates> {
 
       for (var place in homeModel!.data.home_places) {
         for (var commentMap
-        in homeModel!.data.home_places[placeIndex].comments) {
+            in homeModel!.data.home_places[placeIndex].comments) {
           placeComments2.add(commentMap.comment);
         }
         if (placeComments2.length > 0) {
           String sentimentText = placeComments2.join(' ');
-          if (Sentiment
-              .analysis(sentimentText)
-              .words
-              .bad
-              .length >
-              Sentiment
-                  .analysis(sentimentText)
-                  .words
-                  .good
-                  .length &&
+          if (Sentiment.analysis(sentimentText).words.bad.length >
+                  Sentiment.analysis(sentimentText).words.good.length &&
               place.rate <= 2.5) {
             notRecommended.add(place);
           } else {}
@@ -540,27 +516,21 @@ class AppCubit extends Cubit<AppStates> {
     int year = int.parse(
         '${date_of_birth[6]}${date_of_birth[7]}${date_of_birth[8]}${date_of_birth[9]}');
     DateTime birthday = DateTime(year, month, day);
-    age = AgeCalculator
-        .age(birthday)
-        .years;
+    age = AgeCalculator.age(birthday).years;
 
-    if (age < 35) {
+    if (age < 30) {
       for (var place in places) {
         if (place.ageCategory == 'Youths') {
           ageRecommended.add(place);
         }
       }
-    } else if (age >= 35) {
+    } else if (age >= 30) {
       for (var place in places) {
         if (place.ageCategory == 'Adults') {
           ageRecommended.add(place);
         }
       }
     }
-  }
-
-  void cubitTest() {
-    print("it's ok");
   }
 
   ChangeInterestModel? changeInterestModel;
@@ -577,7 +547,6 @@ class AppCubit extends Cubit<AppStates> {
       token: 'Token ${token}',
     ).then((value) {
       changeInterestModel = ChangeInterestModel.fromJson(value.data);
-      print(value.data);
 
       if (!changeInterestModel!.status) {
         interests[categoryId] = !interests[categoryId]!;
@@ -586,7 +555,6 @@ class AppCubit extends Cubit<AppStates> {
       }
       emit(AppSuccessChangeInterestsState(changeInterestModel!));
     }).catchError((error) {
-      print(error.toString());
       interests[categoryId] = !interests[categoryId]!;
       emit(AppErrorChangeInterestsState());
     });
@@ -604,7 +572,6 @@ class AppCubit extends Cubit<AppStates> {
       getInterestsModel = GetInterestsModel.fromJson(value.data);
       emit(AppSuccessGetInterestsState());
     }).catchError((error) {
-      print(error.toString());
       emit(AppErrorGetInterestsState());
     });
   }
@@ -624,9 +591,6 @@ class AppCubit extends Cubit<AppStates> {
         CatRecommended.add(place);
       }
     }
-    // for (var place in CatRecommended) {
-    //  print('place name: ${place.placeName}\nplace category: ${place.type}');
-    // }
   }
 
   bool isPassword = true;
@@ -635,7 +599,7 @@ class AppCubit extends Cubit<AppStates> {
   void changePasswordVisibility() {
     isPassword = !isPassword;
     suffix =
-    isPassword ? Icons.visibility_outlined : Icons.visibility_off_outlined;
+        isPassword ? Icons.visibility_outlined : Icons.visibility_off_outlined;
     emit(AppChangePasswordVisibilityState());
   }
 
@@ -659,14 +623,12 @@ class AppCubit extends Cubit<AppStates> {
         'new_password': newPasswordConfirmation,
       },
     ).then((value) {
-      print(value.data);
       changePasswordModel = ChangePasswordModel.fromJson(value.data);
       AppCubit().getProfile();
       AppCubit().getHomeData();
       AppCubit().getFavorites();
       emit(AppChangePasswordSuccessState(changePasswordModel!));
     }).catchError((error) {
-      print('errorr is = ${error.toString()}');
       emit(AppChangePasswordErrorState());
     });
   }

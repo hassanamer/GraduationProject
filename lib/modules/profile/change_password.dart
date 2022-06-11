@@ -4,8 +4,6 @@ import 'package:smarttouristguide/layout/cubit/cubit.dart';
 import 'package:smarttouristguide/shared/components/components.dart';
 import '../../layout/cubit/states.dart';
 import '../../shared/styles/colors.dart';
-import '../login/login_cubit/cubit.dart';
-import '../login/login_cubit/states.dart';
 
 class ChangePassword extends StatelessWidget {
   var oldPasswordController = TextEditingController();
@@ -139,7 +137,9 @@ class ChangePassword extends StatelessWidget {
                             validator: (String? value) {
                               if (value != null && value.trim().length >= 6) {
                                 return null;
-                              } else if(value != newPasswordController.text) {return "Password don't match!"; } else {
+                              } else if (value != newPasswordController.text) {
+                                return "Password don't match!";
+                              } else {
                                 return "Please enter 6 characters at least.";
                               }
                             },
@@ -181,11 +181,13 @@ class ChangePassword extends StatelessWidget {
                           style: TextStyle(fontSize: 14.5),
                         ),
                         onPressed: () {
-                          if (cubit.changePasswordKey.currentState!.validate()) {
+                          if (cubit.changePasswordKey.currentState!
+                              .validate()) {
                             cubit.changePassword(
                               oldPassword: oldPasswordController.text,
                               newPassword: newPasswordController.text,
-                              newPasswordConfirmation: confirmPasswordController.text,
+                              newPasswordConfirmation:
+                                  confirmPasswordController.text,
                             );
                           }
                         },

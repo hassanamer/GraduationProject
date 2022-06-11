@@ -15,6 +15,7 @@ import 'package:smarttouristguide/shared/network/local/cache_helper.dart';
 import 'package:smarttouristguide/shared/styles/colors.dart';
 import '../../shared/components/components.dart';
 
+// ignore: must_be_immutable
 class RegisterScreen extends StatelessWidget {
   bool hidePassword = true;
 
@@ -77,7 +78,6 @@ class RegisterScreen extends StatelessWidget {
         ];
 
         String? selectedValue;
-
         return Column(
           children: [
             Expanded(
@@ -200,6 +200,7 @@ class RegisterScreen extends StatelessWidget {
                               } else if (value != password.text) {
                                 return 'Password Don\'t Match';
                               }
+                              return null;
                             },
                             label: 'Confirm Password',
                             suffix: cubit.suffix,

@@ -1,106 +1,104 @@
-
-
-abstract class ShopStates {}
+abstract class SearchStates {}
 
 ///General States
-class InitialState extends ShopStates{}
-class ChangeModeState extends ShopStates{}
-class ChangeBottomNavState extends ShopStates{}
-class ChangeSuffixIconState extends ShopStates{}
-class GetTokenSuccessState extends ShopStates{}
-class EditPressedState extends ShopStates{}
-class CloseTopSheet extends ShopStates{}
-class RefreshPage extends ShopStates{}
+class InitialState extends SearchStates{}
+class ChangeModeState extends SearchStates{}
+class ChangeBottomNavState extends SearchStates{}
+class ChangeSuffixIconState extends SearchStates{}
+class GetTokenSuccessState extends SearchStates{}
+class EditPressedState extends SearchStates{}
+class CloseTopSheet extends SearchStates{}
+class RefreshPage extends SearchStates{}
 ///End of General states
 
-class FCMErrorState extends ShopStates{}
+class FCMErrorState extends SearchStates{}
 ///End of FCM State
 
-class LogOutErrorState extends ShopStates{}
+class LogOutErrorState extends SearchStates{}
 ///End of LogOut State
 
 ///Home State
-class HomeLoadingState extends ShopStates{}
-class HomeSuccessState extends ShopStates{}
-class HomeErrorState extends ShopStates{}
+class HomeLoadingState extends SearchStates{}
+class HomeSuccessState extends SearchStates{}
+class HomeErrorState extends SearchStates{}
 ///End of Home State
 
 
 ///Product State
-class ProductLoadingState extends ShopStates{}
-class ProductSuccessState extends ShopStates{}
-class ProductErrorState extends ShopStates{}
+class ProductLoadingState extends SearchStates{}
+class ProductSuccessState extends SearchStates{}
+class ProductErrorState extends SearchStates{}
 ///End of Product State
 
 ///Categories State
-class CategoriesLoadingState extends ShopStates{}
-class CategoriesSuccessState extends ShopStates{}
-class CategoriesErrorState extends ShopStates{}
+class CategoriesLoadingState extends SearchStates{}
+class CategoriesSuccessState extends SearchStates{}
+class CategoriesErrorState extends SearchStates{}
 ///End of Categories State
 
 
 ///CategoriesDetails State
-class CategoryDetailsLoadingState extends ShopStates{}
-class CategoryDetailsSuccessState extends ShopStates{}
-class CategoryDetailsErrorState extends ShopStates{}
+class CategoryDetailsLoadingState extends SearchStates{}
+class CategoryDetailsSuccessState extends SearchStates{}
+class CategoryDetailsErrorState extends SearchStates{}
 ///End of CategoriesDetails State
 
 
 ///Search State
-class SearchLoadingState extends ShopStates{}
-class SearchSuccessState extends ShopStates{}
-class SearchErrorState extends ShopStates{}
+class SearchLoadingState extends SearchStates{}
+class SearchSuccessState extends SearchStates{}
+class SearchErrorState extends SearchStates{}
 ///End of Search State
 
 ///ChangeFavorites State
-class ChangeFavoritesLoadingState extends ShopStates{}
-class ChangeFavoritesManuallySuccessState extends ShopStates{}
-class ChangeFavoritesErrorState extends ShopStates{}
+class ChangeFavoritesLoadingState extends SearchStates{}
+class ChangeFavoritesManuallySuccessState extends SearchStates{}
+class ChangeFavoritesErrorState extends SearchStates{}
 ///End of ChangeFavorites State
 
 
 
 ///Favorites State
-class FavoritesLoadingState extends ShopStates{}
-class FavoritesSuccessState extends ShopStates {}
-class FavoritesErrorState extends ShopStates{}
+class FavoritesLoadingState extends SearchStates{}
+class FavoritesSuccessState extends SearchStates {}
+class FavoritesErrorState extends SearchStates{}
 ///End of Favorites State
 
 ///Cart State
-class CartLoadingState extends ShopStates{}
-class CartSuccessState extends ShopStates {}
-class CartErrorState extends ShopStates{}
+class CartLoadingState extends SearchStates{}
+class CartSuccessState extends SearchStates {}
+class CartErrorState extends SearchStates{}
 ///End of Cart State
 
 ///Cart State
-class UpdateCartLoadingState extends ShopStates{}
-class UpdateCartSuccessState extends ShopStates {}
-class UpdateCartErrorState extends ShopStates{}
-class MinusCartItemState extends ShopStates{}
-class PlusCartItemState extends ShopStates{}
+class UpdateCartLoadingState extends SearchStates{}
+class UpdateCartSuccessState extends SearchStates {}
+class UpdateCartErrorState extends SearchStates{}
+class MinusCartItemState extends SearchStates{}
+class PlusCartItemState extends SearchStates{}
 
 ///Add Delete Address State
-class DeleteAddressLoadingState extends ShopStates{}
-class DeleteAddressSuccessState extends ShopStates {}
-class DeleteAddressErrorState extends ShopStates{}
+class DeleteAddressLoadingState extends SearchStates{}
+class DeleteAddressSuccessState extends SearchStates {}
+class DeleteAddressErrorState extends SearchStates{}
 ///End of delete Address State
 
 ///Addresses State
-class AddressesLoadingState extends ShopStates{}
-class AddressesSuccessState extends ShopStates {}
-class AddressesErrorState extends ShopStates{}
+class AddressesLoadingState extends SearchStates{}
+class AddressesSuccessState extends SearchStates {}
+class AddressesErrorState extends SearchStates{}
 ///End of Addresses State
 
 ///FAQs State
-class FAQsLoadingState extends ShopStates{}
-class FAQsSuccessState extends ShopStates {}
-class FAQsErrorState extends ShopStates{}
+class FAQsLoadingState extends SearchStates{}
+class FAQsSuccessState extends SearchStates {}
+class FAQsErrorState extends SearchStates{}
 ///End of FAQs State
 
 ///Profile State
-class ProfileLoadingState extends ShopStates{}
-class ProfileSuccessState extends ShopStates {}
-class ProfileErrorState extends ShopStates{}
+class ProfileLoadingState extends SearchStates{}
+class ProfileSuccessState extends SearchStates {}
+class ProfileErrorState extends SearchStates{}
 ///End of Profile State
 
 

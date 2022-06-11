@@ -6,24 +6,21 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:smarttouristguide/layout/app_layout.dart';
 import 'package:smarttouristguide/layout/cubit/cubit.dart';
-import 'package:smarttouristguide/models/home_model.dart';
 import 'package:smarttouristguide/modules/cubit/cubit.dart';
 import 'package:smarttouristguide/modules/home/home_screen.dart';
 import 'package:smarttouristguide/modules/login/forget_password.dart';
-import 'package:smarttouristguide/modules/offers/offer_screen.dart';
-import 'package:smarttouristguide/modules/place_details/location.dart';
 import 'package:smarttouristguide/modules/profile/profile_screen.dart';
 import 'package:smarttouristguide/modules/register/register_cubit/cubit.dart';
 import 'package:smarttouristguide/modules/welcome_screen/welcome_screen.dart';
 import 'package:smarttouristguide/modules/login/login_cubit/cubit.dart';
 import 'package:smarttouristguide/modules/on_boarding/on_boarding_screen.dart';
 import 'package:smarttouristguide/modules/place_details/place_details_screen.dart';
+import 'package:smarttouristguide/shared/block_observer.dart';
 import 'package:smarttouristguide/shared/components/constants.dart';
 import 'package:smarttouristguide/shared/network/local/cache_helper.dart';
 import 'package:smarttouristguide/shared/network/remote/dio_helper.dart';
 import 'package:smarttouristguide/shared/styles/themes.dart';
 
-import 'modules/place_details/lo.dart';
 
 void main() async {
   if (Platform.isAndroid ) {
@@ -52,10 +49,15 @@ void main() async {
     widget = OnBoardingScreen();
   }
 
-  runApp(
-    MyApp(
-      startWidget: widget,
-    ),
+  BlocOverrides.runZoned(
+        () {
+          runApp(
+            MyApp(
+              startWidget: widget,
+            ),
+          );
+    },
+    blocObserver: MyBlocObserver(),
   );
 }
 
@@ -100,12 +102,12 @@ class MyApp extends StatelessWidget {
           minWidth: 480,
           defaultScale: true,
           breakpoints: [
-            ResponsiveBreakpoint.autoScale(375, name: MOBILE),
+            ResponsiveBreakpoint.autoScale(400, name: MOBILE),
             ResponsiveBreakpoint.autoScale(800, name: TABLET),
             ResponsiveBreakpoint.resize(1000, name: DESKTOP),
           ],
         ),
-        home: location(),
+        home: startWidget,
         // home: startWidget,
         routes: {
           Welcome.routeName: (context) => Welcome(),

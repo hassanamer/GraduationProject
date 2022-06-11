@@ -1,5 +1,4 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -9,7 +8,6 @@ import 'package:smarttouristguide/modules/login/forget_password.dart';
 import 'package:smarttouristguide/modules/login/login_cubit/cubit.dart';
 import 'package:smarttouristguide/modules/login/login_cubit/states.dart';
 import 'package:smarttouristguide/shared/network/local/cache_helper.dart';
-import 'package:smarttouristguide/shared/styles/textStyle.dart';
 import '../../shared/components/components.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -62,7 +60,6 @@ class LoginScreen extends StatelessWidget {
         }
       },
       builder: (context, state) {
-
         return Container(
           decoration: BoxDecoration(
               color: Colors.white,
@@ -173,7 +170,12 @@ class LoginScreen extends StatelessWidget {
                           Navigator.pushReplacementNamed(
                               context, ForgetPassword.routeName);
                         },
-                        child: textStyle.normal('Forget Password?', 13.5),
+                        child: Text(
+                          'Forget Password?',
+                          style: TextStyle(
+                            fontSize: 13.5,
+                          ),
+                        ),
                       ),
                     ],
                   ),
