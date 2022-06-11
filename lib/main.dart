@@ -1,11 +1,17 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:smarttouristguide/layout/app_layout.dart';
 import 'package:smarttouristguide/layout/cubit/cubit.dart';
+import 'package:smarttouristguide/models/home_model.dart';
 import 'package:smarttouristguide/modules/cubit/cubit.dart';
 import 'package:smarttouristguide/modules/home/home_screen.dart';
 import 'package:smarttouristguide/modules/login/forget_password.dart';
+import 'package:smarttouristguide/modules/offers/offer_screen.dart';
+import 'package:smarttouristguide/modules/place_details/location.dart';
 import 'package:smarttouristguide/modules/profile/profile_screen.dart';
 import 'package:smarttouristguide/modules/register/register_cubit/cubit.dart';
 import 'package:smarttouristguide/modules/welcome_screen/welcome_screen.dart';
@@ -17,7 +23,12 @@ import 'package:smarttouristguide/shared/network/local/cache_helper.dart';
 import 'package:smarttouristguide/shared/network/remote/dio_helper.dart';
 import 'package:smarttouristguide/shared/styles/themes.dart';
 
+import 'modules/place_details/lo.dart';
+
 void main() async {
+  if (Platform.isAndroid ) {
+    AndroidGoogleMapsFlutter.useAndroidViewSurface = true;
+  }
   WidgetsFlutterBinding.ensureInitialized();
 
   DioHelper.init();
@@ -94,7 +105,7 @@ class MyApp extends StatelessWidget {
             ResponsiveBreakpoint.resize(1000, name: DESKTOP),
           ],
         ),
-        home: startWidget,
+        home: location(),
         // home: startWidget,
         routes: {
           Welcome.routeName: (context) => Welcome(),

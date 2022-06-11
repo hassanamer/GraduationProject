@@ -4,6 +4,9 @@
         android:label="Smart Tourist Guide"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+
+       <meta-data android:name="com.google.android.geo.API_KEY"
+           android:value="AIzaSyBy0nWYa8x6lHp244Uv1Yhee0iouLy6ilY"/>
        <activity
             android:name=".MainActivity"
             android:exported="true"

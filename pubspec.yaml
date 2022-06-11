@@ -57,6 +57,7 @@ dependencies:
   rxdart: ^0.27.1
   readmore: ^2.1.0
   intl: ^0.17.0
+  google_maps_flutter: ^2.1.7
 dev_dependencies:
   flutter_test:
     sdk: flutter
