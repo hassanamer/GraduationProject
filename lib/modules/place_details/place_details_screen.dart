@@ -1,3 +1,4 @@
+
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:draggable_fab/draggable_fab.dart';
 import 'package:flutter/material.dart';
@@ -11,11 +12,14 @@ import 'package:smarttouristguide/layout/cubit/states.dart';
 import 'package:smarttouristguide/models/place_details_model.dart';
 import 'package:smarttouristguide/shared/components/components.dart';
 import 'package:smarttouristguide/shared/styles/colors.dart';
+import 'package:url_launcher/url_launcher.dart';
+
 
 class PlaceDetailsScreen extends StatelessWidget {
   static const String routeName = 'PlaceDetailsScreen';
 
   Widget build(BuildContext context) {
+
     var cubit = AppCubit.get(context);
 
     return BlocConsumer<AppCubit, AppStates>(
@@ -79,7 +83,10 @@ class PlaceDetailsScreen extends StatelessWidget {
       },
     );
   }
+
 }
+
+
 
 Widget PlaceDetailsScreenBuilder(Data model, context) => Scaffold(
       appBar: AppBar(
@@ -192,8 +199,18 @@ Widget PlaceDetailsScreenBuilder(Data model, context) => Scaffold(
                             direction: Axis.horizontal,
                           ),
                           Spacer(),
-                          InkWell(
-                            onTap: () {},
+                          InkWell(onTap:()async{
+                            String link = '${model.location}';
+                            if (await canLaunch(link )) {
+                              await launch(
+                                link
+                                ,
+                              );
+                            } else {
+                              throw 'Could not launch $link'
+                                  ;
+                            }
+                          },
                             child: Row(
                               children: [
                                 SvgPicture.asset(
@@ -340,10 +357,12 @@ Widget PlaceDetailsScreenBuilder(Data model, context) => Scaffold(
                                         SizedBox(
                                           height: 5.0,
                                         ),
+
                                       ],
                                     ),
                                     itemCount: model.comments.length,
                                     physics: AlwaysScrollableScrollPhysics(),
+
                                   ),
                                 ),
                               ],
@@ -370,6 +389,7 @@ Widget PlaceDetailsScreenBuilder(Data model, context) => Scaffold(
       ),
     );
 
+
 Widget commentBuilder(Comments commentModel) => Container(
       color: Colors.white,
       width: double.infinity,
@@ -390,6 +410,7 @@ Widget commentBuilder(Comments commentModel) => Container(
           Text(
             '${commentModel.comment}',
           ),
+
         ],
       ),
     );

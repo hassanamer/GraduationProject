@@ -105,7 +105,7 @@ class MyApp extends StatelessWidget {
             ResponsiveBreakpoint.resize(1000, name: DESKTOP),
           ],
         ),
-        home: location(),
+        home: startWidget,
         // home: startWidget,
         routes: {
           Welcome.routeName: (context) => Welcome(),
