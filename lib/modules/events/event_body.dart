@@ -53,6 +53,25 @@ Widget buildEvent(BuildContext context, Events model) => Container(
               height: 5.0,
             ),
             Row(
+  children: [
+    Icon(
+      Icons.location_on_rounded,
+      color: AppColors.primaryColor,
+      size: 23.0,
+    ),
+    SizedBox(
+      width: 4.0,
+    ),
+    Text(
+      '${model.city}',
+      style: TextStyle(
+        fontSize: 16.0,
+        fontWeight: FontWeight.bold,
+      ),
+    ),
+  ],
+),
+            Row(
               children: [
                 Icon(
                   Icons.date_range_rounded,
@@ -152,22 +171,3 @@ Widget buildEvent(BuildContext context, Events model) => Container(
         ),
       ),
     );
-
-// Row(
-//   children: [
-//     Icon(
-//       Icons.location_on_rounded,
-//       color: AppColors.primaryColor,
-//     ),
-//     SizedBox(
-//       width: 4.0,
-//     ),
-//     Text(
-//       '${model.city}',
-//       style: TextStyle(
-//         fontSize: 16.0,
-//         fontWeight: FontWeight.bold,
-//       ),
-//     ),
-//   ],
-// ),

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:smarttouristguide/layout/cubit/cubit.dart';
 import 'package:smarttouristguide/models/city_search_model.dart';
 import 'package:smarttouristguide/modules/place_details/place_details_screen.dart';
@@ -22,7 +21,7 @@ class CitySearchScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => SearchCubit(),
-      child: BlocConsumer<SearchCubit, ShopStates>(
+      child: BlocConsumer<SearchCubit, SearchStates>(
         listener: (context, state) {},
         builder: (context, state) {
           var cubit = SearchCubit.get(context);
@@ -59,13 +58,14 @@ class CitySearchScreen extends StatelessWidget {
                     ),
                     Spacer(),
                     TextButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        child: Text(
-                          'cancel',
-                          style: TextStyle(color: Colors.black),
-                        )),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: Text(
+                        'cancel',
+                        style: TextStyle(color: Colors.black),
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -74,7 +74,9 @@ class CitySearchScreen extends StatelessWidget {
                 ? Center(child: CircularProgressIndicator())
                 : cubit.citySearchModel != null
                     ? searchController.text.isEmpty
-                        ? Container()
+                        ? Center(
+                            child: Text('search to show places'),
+                          )
                         : ListView.separated(
                             physics: BouncingScrollPhysics(),
                             itemBuilder: (context, index) => buildPlace(
@@ -86,7 +88,9 @@ class CitySearchScreen extends StatelessWidget {
                             itemCount:
                                 cubit.citySearchModel?.data.places.length ?? 10,
                           )
-                    : Container(),
+                    : Center(
+                        child: Text('search to show places'),
+                      ),
           );
         },
       ),

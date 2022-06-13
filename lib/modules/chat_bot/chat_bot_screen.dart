@@ -7,10 +7,8 @@ import 'package:dialogflow_grpc/dialogflow_grpc.dart';
 import 'package:dialogflow_grpc/generated/google/cloud/dialogflow/v2beta1/session.pb.dart';
 import '../../shared/styles/colors.dart';
 
-
 class ChatBot extends StatefulWidget {
   ChatBot({Key? key}) : super(key: key);
-
 
   @override
   _ChatBotState createState() => _ChatBotState();
@@ -21,18 +19,15 @@ class _ChatBotState extends State<ChatBot> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor:  AppColors.primaryColor,
+          backgroundColor: AppColors.primaryColor,
           title: Text('Chat Bot'),
           centerTitle: true,
         ),
-        body: Center(
-            child: ChatBot_Screen())
-    );
+        body: Center(child: ChatBot_Screen()));
   }
 }
-// TODO import Dialogflow
-DialogflowGrpcV2Beta1? dialogflow;
 
+DialogflowGrpcV2Beta1? dialogflow;
 
 class ChatBot_Screen extends StatefulWidget {
   ChatBot_Screen({Key? key}) : super(key: key);
@@ -52,19 +47,19 @@ class ChatBot_ScreenState extends State<ChatBot_Screen> {
   StreamSubscription<List<int>>? _audioStreamSubscription;
   BehaviorSubject<List<int>>? _audioStream;
 
-  // TODO DialogflowGrpc class instance
-
   @override
   void initState() {
     super.initState();
     initPlugin();
   }
+
   @override
   void dispose() {
     _recorderStatus?.cancel();
     _audioStreamSubscription?.cancel();
     super.dispose();
   }
+
   Future<void> initPlugin() async {
     _recorderStatus = _recorder.status.listen((status) {
       if (mounted)
@@ -73,15 +68,11 @@ class ChatBot_ScreenState extends State<ChatBot_Screen> {
         });
     });
 
-    await Future.wait([
-      _recorder.initialize()
-    ]);
+    await Future.wait([_recorder.initialize()]);
 
-    // TODO Get a Service account
     final serviceAccount = ServiceAccount.fromString(
         '${(await rootBundle.loadString('assets/credentials.json'))}');
     dialogflow = DialogflowGrpcV2Beta1.viaServiceAccount(serviceAccount);
-
   }
 
   void stopStream() async {
@@ -94,7 +85,6 @@ class ChatBot_ScreenState extends State<ChatBot_Screen> {
     print(text);
     _textController.clear();
 
-    //TODO Dialogflow Code
     ChatMessage message = ChatMessage(
       text: text,
       name: "You",
@@ -106,7 +96,7 @@ class ChatBot_ScreenState extends State<ChatBot_Screen> {
 
     DetectIntentResponse data = await dialogflow!.detectIntent(text, 'en-US');
     String fulfillmentText = data.queryResult.fulfillmentText;
-    if(fulfillmentText.isNotEmpty) {
+    if (fulfillmentText.isNotEmpty) {
       ChatMessage botMessage = ChatMessage(
         text: fulfillmentText,
         name: "Bot",
@@ -117,7 +107,6 @@ class ChatBot_ScreenState extends State<ChatBot_Screen> {
         _messages.insert(0, botMessage);
       });
     }
-
   }
 
   void handleStream() async {
@@ -129,43 +118,29 @@ class ChatBot_ScreenState extends State<ChatBot_Screen> {
       _audioStream!.add(data);
     });
 
+    var biasList = SpeechContextV2Beta1(phrases: [
+      'Dialogflow CX',
+      'Dialogflow Essentials',
+      'Action Builder',
+      'HIPAA'
+    ], boost: 20.0);
 
-    // TODO Create SpeechContexts
-    // Create an audio InputConfig
-    var biasList = SpeechContextV2Beta1(
-        phrases: [
-          'Dialogflow CX',
-          'Dialogflow Essentials',
-          'Action Builder',
-          'HIPAA'
-        ],
-        boost: 20.0
-    );
-
-    // See: https://cloud.google.com/dialogflow/es/docs/reference/rpc/google.cloud.dialogflow.v2#google.cloud.dialogflow.v2.InputAudioConfig
     var config = InputConfigV2beta1(
         encoding: 'AUDIO_ENCODING_LINEAR_16',
         languageCode: 'en-US',
         sampleRateHertz: 16000,
         singleUtterance: false,
-        speechContexts: [biasList]
-    );
+        speechContexts: [biasList]);
 
-    // TODO Make the streamingDetectIntent call, with the InputConfig and the audioStream
-    // TODO Get the transcript and detectedIntent and show on screen
-
-    final responseStream = dialogflow!.streamingDetectIntent(config, _audioStream!);
-    // Get the transcript and detectedIntent and show on screen
+    final responseStream =
+        dialogflow!.streamingDetectIntent(config, _audioStream!);
     responseStream.listen((data) {
-      //print('----');
       setState(() {
-        //print(data);
         String transcript = data.recognitionResult.transcript;
         String queryText = data.queryResult.queryText;
         String fulfillmentText = data.queryResult.fulfillmentText;
 
-        if(fulfillmentText.isNotEmpty) {
-
+        if (fulfillmentText.isNotEmpty) {
           ChatMessage message = new ChatMessage(
             text: queryText,
             name: "You",
@@ -181,19 +156,12 @@ class ChatBot_ScreenState extends State<ChatBot_Screen> {
           _messages.insert(0, message);
           _textController.clear();
           _messages.insert(0, botMessage);
-
         }
-        if(transcript.isNotEmpty) {
+        if (transcript.isNotEmpty) {
           _textController.text = transcript;
         }
-
       });
-    },onError: (e){
-      //print(e);
-    },onDone: () {
-      //print('done');
-    });
-
+    }, onError: (e) {}, onDone: () {});
   }
 
   // The chat interface
@@ -202,11 +170,11 @@ class ChatBot_ScreenState extends State<ChatBot_Screen> {
     return Column(children: <Widget>[
       Flexible(
           child: ListView.builder(
-            padding: EdgeInsets.all(8.0),
-            reverse: true,
-            itemBuilder: (_, int index) => _messages[index],
-            itemCount: _messages.length,
-          )),
+        padding: EdgeInsets.all(8.0),
+        reverse: true,
+        itemBuilder: (_, int index) => _messages[index],
+        itemCount: _messages.length,
+      )),
       Divider(height: 1.0),
       Container(
           decoration: BoxDecoration(color: Theme.of(context).cardColor),
@@ -220,7 +188,8 @@ class ChatBot_ScreenState extends State<ChatBot_Screen> {
                     child: TextField(
                       controller: _textController,
                       onSubmitted: handleSubmitted,
-                      decoration: InputDecoration.collapsed(hintText: "Send a message"),
+                      decoration:
+                          InputDecoration.collapsed(hintText: "Send a message"),
                     ),
                   ),
                   Container(
@@ -240,11 +209,11 @@ class ChatBot_ScreenState extends State<ChatBot_Screen> {
                 ],
               ),
             ),
-          )
-      ),
+          )),
     ]);
   }
 }
+
 //------------------------------------------------------------------------------------
 // The chat message balloon
 //------------------------------------------------------------------------------------
@@ -260,16 +229,18 @@ class ChatMessage extends StatelessWidget {
       new Container(
         margin: const EdgeInsets.only(right: 16.0),
         child: CircleAvatar(
-          child: new Icon(Icons.adb_outlined,color: Colors.white,),
-          backgroundColor:AppColors.primaryColor ,
+          child: new Icon(
+            Icons.adb_outlined,
+            color: Colors.white,
+          ),
+          backgroundColor: AppColors.primaryColor,
         ),
       ),
       new Expanded(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text(this.name,
-                style: TextStyle(fontWeight: FontWeight.bold)),
+            Text(this.name, style: TextStyle(fontWeight: FontWeight.bold)),
             Container(
               margin: const EdgeInsets.only(top: 5.0),
               child: Text(text),
@@ -297,10 +268,11 @@ class ChatMessage extends StatelessWidget {
       Container(
         margin: const EdgeInsets.only(left: 16.0),
         child: CircleAvatar(
-          backgroundColor: AppColors.primaryColor,
+            backgroundColor: AppColors.primaryColor,
             child: Text(
               this.name[0],
-              style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white),
+              style:
+                  TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
             )),
       ),
     ];
