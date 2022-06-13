@@ -23,9 +23,7 @@ import 'package:smarttouristguide/shared/styles/themes.dart';
 
 
 void main() async {
-  if (Platform.isAndroid ) {
-    AndroidGoogleMapsFlutter.useAndroidViewSurface = true;
-  }
+
   WidgetsFlutterBinding.ensureInitialized();
 
   DioHelper.init();
