@@ -8,7 +8,6 @@ class RegisterModel {
     message = json['message'];
     data = Data.fromJson(json['data']);
   }
-
 }
 
 class Data {

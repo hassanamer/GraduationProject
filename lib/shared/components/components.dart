@@ -9,6 +9,7 @@ Widget button({
   required String text,
   Color color = AppColors.primaryColor,
   Color textColor = Colors.white,
+  double? textSize,
 }) =>
     Container(
       margin: const EdgeInsets.symmetric(
@@ -30,11 +31,11 @@ Widget button({
           text,
           style: TextStyle(
             color: textColor,
+            fontSize: textSize,
           ),
         ),
       ),
     );
-
 
 void navigateTo({
   required context,
@@ -209,29 +210,30 @@ Widget divider({double width = double.infinity}) => Padding(
       ),
     );
 
-
-Widget login_register_button(context, Screen, text) {
+Widget login_register_button(context, Screen, text, color) {
   return button(
-      function: () {
-        showModalBottomSheet(
-          isDismissible: false,
-          enableDrag: false,
-          backgroundColor: Colors.transparent,
-          context: context,
-          builder: (context) {
-            return Container(
-              height: double.infinity,
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(20),
-                  topLeft: Radius.circular(20),
-                ),
-                color: Colors.white,
+    function: () {
+      showModalBottomSheet(
+        isDismissible: false,
+        enableDrag: false,
+        backgroundColor: Colors.transparent,
+        context: context,
+        builder: (context) {
+          return Container(
+            height: double.infinity,
+            decoration: const BoxDecoration(
+              borderRadius: BorderRadius.only(
+                topRight: Radius.circular(20),
+                topLeft: Radius.circular(20),
               ),
-              child: Screen,
-            );
-          },
-        );
-      },
-      text: text);
+              color: Colors.white,
+            ),
+            child: Screen,
+          );
+        },
+      );
+    },
+    text: text,
+    color: color,
+  );
 }

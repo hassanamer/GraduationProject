@@ -54,14 +54,6 @@ class PlacesScreen extends StatelessWidget {
                 fontSize: 17.5,
               ),
             ),
-            actions: [
-              IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  Icons.search,
-                ),
-              ),
-            ],
           ),
           body: ConditionalBuilder(
             condition: cubit.cpModel != null,

@@ -39,7 +39,7 @@ class FavoritesScreen extends StatelessWidget {
           borderRadius: BorderRadius.circular(12),
           color: Colors.white,
         ),
-        height: 80,
+        height: 120,
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: InkWell(
@@ -61,7 +61,7 @@ class FavoritesScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(12),
                     child: Image(
                       image: NetworkImage('${model.image}'),
-                      fit: BoxFit.fill,
+                      fit: BoxFit.cover,
                     ),
                   ),
                 ),

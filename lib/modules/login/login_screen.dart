@@ -118,53 +118,9 @@ class LoginScreen extends StatelessWidget {
                       }
                     },
                   ),
-                  // SizedBox(
-                  //   height: 15.0,
-                  // ),
-                  // Container(
-                  //     width: double.infinity,
-                  //     decoration: BoxDecoration(
-                  //         borderRadius: BorderRadius.circular(25),
-                  //         color: AppColors.primaryColor),
-                  //     child: ElevatedButton(
-                  //       style: ButtonStyle(
-                  //           shadowColor:
-                  //               MaterialStateProperty.all(Colors.transparent),
-                  //           backgroundColor:
-                  //               MaterialStateProperty.all(Colors.transparent)),
-                  //       onPressed: () {
-                  //         navigateTo(context: context, widget: InterestsScreen());
-                  //       },
-                  //       child: Text('select your favourite category'),
-                  //     )),
-                  // Container(
-                  //   height: MediaQuery.of(context).size.height * 0.09,
-                  //   decoration: BoxDecoration(
-                  //       borderRadius: BorderRadius.circular(12),
-                  //       color: Colors.grey),
-                  //   child: Row(
-                  //     mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  //     children: [
-                  //       Text('select your favourite category'),
-                  //       DropdownButton<String>(
-                  //         iconEnabledColor: Theme.of(context).primaryColor,
-                  //         // isExpanded: true,
-                  //         items:
-                  //             <String>['A', 'B', 'C', 'D'].map((String value) {
-                  //           return DropdownMenuItem<String>(
-                  //             value: value,
-                  //             child: Text(value),
-                  //           );
-                  //         }).toList(),
-                  //         onChanged: (_) {},
-                  //       )
-                  //     ],
-                  //   ),
-                  // ),
                   Row(
-                    crossAxisAlignment: CrossAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Spacer(),
                       TextButton(
                         onPressed: () {
                           Navigator.pushReplacementNamed(
@@ -173,7 +129,8 @@ class LoginScreen extends StatelessWidget {
                         child: Text(
                           'Forget Password?',
                           style: TextStyle(
-                            fontSize: 13.5,
+                            fontSize: 13.0,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),
@@ -183,7 +140,8 @@ class LoginScreen extends StatelessWidget {
                   ConditionalBuilder(
                     condition: state is! AppLoginLoadingState,
                     builder: (context) => button(
-                      text: 'login',
+                      text: 'Login',
+                      textSize: 16.0,
                       function: () {
                         if (cubit.formKey.currentState!.validate()) {
                           cubit.userLogin(
@@ -194,7 +152,7 @@ class LoginScreen extends StatelessWidget {
                       },
                     ),
                     fallback: (context) =>
-                        Center(child: CircularProgressIndicator()),
+                        Center(child: CircularProgressIndicator(),),
                   ),
                 ],
               ),

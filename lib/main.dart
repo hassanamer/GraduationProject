@@ -1,8 +1,5 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:smarttouristguide/layout/app_layout.dart';
 import 'package:smarttouristguide/layout/cubit/cubit.dart';
@@ -21,11 +18,8 @@ import 'package:smarttouristguide/shared/network/local/cache_helper.dart';
 import 'package:smarttouristguide/shared/network/remote/dio_helper.dart';
 import 'package:smarttouristguide/shared/styles/themes.dart';
 
-
 void main() async {
-
   WidgetsFlutterBinding.ensureInitialized();
-
   DioHelper.init();
   await CacheHelper.init();
 
@@ -34,8 +28,6 @@ void main() async {
   dynamic onBoarding = CacheHelper.getData(key: 'OnBoarding');
 
   token = CacheHelper.getData(key: 'token') ?? '';
-
-  print(token);
 
   if (onBoarding != null) {
     if (token != '') {
@@ -48,12 +40,12 @@ void main() async {
   }
 
   BlocOverrides.runZoned(
-        () {
-          runApp(
-            MyApp(
-              startWidget: widget,
-            ),
-          );
+    () {
+      runApp(
+        MyApp(
+          startWidget: widget,
+        ),
+      );
     },
     blocObserver: MyBlocObserver(),
   );

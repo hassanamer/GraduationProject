@@ -33,17 +33,17 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
 
   List<BoardingModel> boarding = [
     BoardingModel(
-      image: 'assets/images/logo2.png',
+      image: 'assets/images/logo.png',
       title: 'onBoarding 1 title',
       body: 'onBoarding 1 body',
     ),
     BoardingModel(
-      image: 'assets/images/logo2.png',
+      image: 'assets/images/logo.png',
       title: 'onBoarding 2 title',
       body: 'onBoarding 2 body',
     ),
     BoardingModel(
-      image: 'assets/images/logo2.png',
+      image: 'assets/images/logo.png',
       title: 'onBoarding 3 title',
       body: 'onBoarding 3 body',
     ),
@@ -56,7 +56,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
         actions: [
           TextButton(
             child: Text(
-              'SKIP تخطي',
+              'SKIP',
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
             onPressed: () {

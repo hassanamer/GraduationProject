@@ -19,9 +19,26 @@ class _ChatBotState extends State<ChatBot> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          systemOverlayStyle: SystemUiOverlayStyle(
+              statusBarColor: AppColors.primaryColor,
+              statusBarIconBrightness: Brightness.light),
           backgroundColor: AppColors.primaryColor,
-          title: Text('Chat Bot'),
-          centerTitle: true,
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(
+                18,
+              ),
+              bottomRight: Radius.circular(
+                18,
+              ),
+            ),
+          ),
+          title: Text(
+            'ChatBot',
+            style: TextStyle(
+              fontSize: 17.5,
+            ),
+          ),
         ),
         body: Center(child: ChatBot_Screen()));
   }

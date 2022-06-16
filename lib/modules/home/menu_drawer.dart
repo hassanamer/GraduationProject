@@ -161,7 +161,12 @@ Widget currentt(context, Data user) => Container(
                 onPressed: () {
                   signOut(context);
                 },
-                child: Text('logout'),
+                child: Text(
+                  'Logout',
+                  style: TextStyle(
+                    fontSize: 16.0,
+                  ),
+                ),
               ),
             ),
             const SizedBox(
